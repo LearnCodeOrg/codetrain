@@ -31,8 +31,9 @@ const srcDoc = `
 
 export default function Canvas() {
   return (
-    <div>
+    <div className={styles.container}>
       <iframe
+        className={styles.frame}
         title="canvas"
         sandbox="allow-scripts"
         srcDoc={srcDoc}

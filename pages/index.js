@@ -8,7 +8,7 @@ const Editor = dynamic(import('../components/Editor.js'), { ssr: false });
 
 export default function Index() {
   return (
-    <div>
+    <div className={styles.container}>
       <Editor />
       <Canvas />
     </div>
