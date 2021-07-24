@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "file-loader": "^6.2.0",
     "firebase": "^8.8.0",
     "next": "11.0.1",
     "react": "17.0.2",
