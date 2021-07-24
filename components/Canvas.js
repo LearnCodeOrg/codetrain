@@ -7,9 +7,25 @@ const height = 512;
 // iframe source
 const srcDoc = `
 <html>
-  <body></body>
-  <style></style>
-  <script></script>
+  <body>
+    <canvas
+      id="canvas"
+      width=${width}
+      height=${height}
+    />
+  </body>
+  <style>
+    body {
+      background: #fff;
+      margin: 0;
+      overflow: hidden;
+    }
+  </style>
+  <script>
+    // initialize canvas
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+  </script>
 </html>
 `;
 
