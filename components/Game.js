@@ -1,6 +1,6 @@
-import styles from '../styles/Canvas.module.css';
+import styles from '../styles/Game.module.css';
 
-export default function Canvas() {
+export default function Game() {
   return (
     <div className={styles.container}>
       <canvas
