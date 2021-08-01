@@ -12,7 +12,7 @@ export default function Sprites() {
   const [currSprite, setCurrSprite] = useState(0);
 
   return (
-    <div>
+    <div className={styles.container}>
       <div>
         <h1>Colors</h1>
         <div className={styles.tilegrid}>
