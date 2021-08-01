@@ -33,6 +33,26 @@ export default function Sprites() {
     setColors(newColors);
   }
 
+  // draws current sprite
+  function draw() {
+    // get current sprite
+    const sprite = sprites[currSprite];
+    // for each pixel
+    for (let y = 0; y < spriteSize; y++) {
+      for (let x = 0; x < spriteSize; x++) {
+        // set fill color
+        const colorIndex = y * spriteSize + x;
+        const color = colors[sprite[colorIndex]];
+        spriteCtx.fillStyle = color;
+        // set fill position and size
+        const xPos = x * pixelPixels;
+        const yPos = y * pixelPixels;
+        // fill sprite
+        spriteCtx.fillRect(xPos, yPos, pixelPixels, pixelPixels);
+      }
+    }
+  }
+
   // sketches sprite with given mouse event data
   function sketch(e) {
     // get x and y on canvas
@@ -58,6 +78,12 @@ export default function Sprites() {
     spriteCanvas = document.getElementById('sprite-canvas');
     spriteCtx = spriteCanvas.getContext('2d');
   }, []);
+
+  // draw sprite when colors or sprites change
+  useEffect(() => {
+    draw();
+  }, [colors, sprites, currSprite]);
+
   return (
     <div className={styles.container}>
       <div>
