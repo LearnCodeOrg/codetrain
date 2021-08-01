@@ -1,12 +1,27 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { palettes } from '../data/palettes.js';
 
 import styles from '../styles/Sprites.module.css';
 
+// units
+const spriteCount = 16;
+const spriteSize = 8;
+const pixelPixels = 16;
+const spritePixels = spriteSize * pixelPixels;
+
+let spriteCanvas, spriteCtx;
+
+let sketching = false;
+
 export default function Sprites() {
-  const [colors, setColors] = useState(palettes[0].colors);
+  const defaultColors = palettes[0].colors;
+  const [colors, setColors] = useState(defaultColors);
   const [currColor, setCurrColor] = useState(0);
-  const [sprites, setSprites] = useState(Array(16).fill(Array(64).fill(0)));
+
+  const defaultSprites = Array(spriteCount).fill(
+    Array(spriteSize * spriteSize).fill(0)
+  );
+  const [sprites, setSprites] = useState(defaultSprites);
   const [currSprite, setCurrSprite] = useState(0);
 
   const [palette, setPalette] = useState(0);
@@ -18,6 +33,12 @@ export default function Sprites() {
     setColors(newColors);
   }
 
+
+  // get canvas contexts on start
+  useEffect(() => {
+    spriteCanvas = document.getElementById('sprite-canvas');
+    spriteCtx = spriteCanvas.getContext('2d');
+  }, []);
   return (
     <div className={styles.container}>
       <div>
@@ -79,6 +100,11 @@ export default function Sprites() {
             )
           }
         </div>
+        <canvas
+          id="sprite-canvas"
+          width={spritePixels}
+          height={spritePixels}
+        />
       </div>
     </div>
   );
