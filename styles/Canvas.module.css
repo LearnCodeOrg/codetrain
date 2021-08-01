@@ -1,0 +1,15 @@
+.container {
+  width: 320px;
+  height: 512px;
+  border: 4px solid #000;
+  background: #ddd;
+  border-radius: 8px;
+  margin: 20px;
+}
+
+.screen {
+  border: 4px solid #000;
+  margin: 24px;
+  background: #202020;
+  border-radius: 4px;
+}
