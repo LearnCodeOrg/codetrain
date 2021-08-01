@@ -1,15 +1,15 @@
 import { useState } from 'react';
+import { palettes } from '../data/palettes.js';
 
 import styles from '../styles/Sprites.module.css';
 
-const defaultColors = ['#dfdfdf', '#9f9f9f', '#606060', '#202020'];
-const defaultSprites = Array(16).fill(Array(64).fill(0));
-
 export default function Sprites() {
-  const [colors, setColors] = useState(defaultColors);
+  const [colors, setColors] = useState(palettes[0].colors);
   const [currColor, setCurrColor] = useState(0);
-  const [sprites, setSprites] = useState(defaultSprites);
+  const [sprites, setSprites] = useState(Array(16).fill(Array(64).fill(0)));
   const [currSprite, setCurrSprite] = useState(0);
+
+  const [palette, setPalette] = useState(0);
 
   // updates current color with given value
   function updateColor(val) {
@@ -45,6 +45,20 @@ export default function Sprites() {
           className={styles.colorinput}
           onChange={e => updateColor(e.target.value)}
         />
+        <select
+          value={palette}
+          onChange={e => {
+            const newPalette = e.target.value;
+            setPalette(newPalette);
+            setColors(palettes[newPalette].colors);
+          }}
+        >
+        {
+          palettes.map((pal, i) =>
+            <option value={i} key={i}>{pal.name}</option>
+          )
+        }
+        </select>
       </div>
       <div>
         <h1>Sprites</h1>
