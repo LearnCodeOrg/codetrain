@@ -11,6 +11,7 @@ export default function Index() {
   return (
     <div className={styles.container}>
       <Sprites />
+      <Editor />
     </div>
   );
 }
