@@ -2,7 +2,7 @@
   width: 320px;
   height: 512px;
   border: 4px solid #000;
-  background: #ddd;
+  background: #efefef;
   border-radius: 8px;
   margin: 20px;
 }
@@ -12,4 +12,12 @@
   margin: 24px;
   background: #202020;
   border-radius: 4px;
+}
+
+.button {
+  font-weight: bold!important;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%!important;
+  min-width: 0!important;
 }
