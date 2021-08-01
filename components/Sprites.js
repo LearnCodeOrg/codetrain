@@ -33,6 +33,25 @@ export default function Sprites() {
     setColors(newColors);
   }
 
+  // sketches sprite with given mouse event data
+  function sketch(e) {
+    // get x and y on canvas
+    const currX = e.clientX - spriteCanvas.offsetLeft + window.scrollX;
+    const currY = e.clientY - spriteCanvas.offsetTop + window.scrollY;
+    // get x and y in pixel units
+    const pixelX = Math.floor(currX / pixelPixels);
+    const pixelY = Math.floor(currY / pixelPixels);
+    // get sprite
+    const spriteIndex = pixelY * spriteSize + pixelX;
+    const newSprites = sprites.slice();
+    const newSprite = newSprites[currSprite].slice();
+    // return if unchanged
+    if (newSprite[spriteIndex] === currColor) return;
+    // set sprite
+    newSprite.splice(spriteIndex, 1, currColor);
+    newSprites.splice(currSprite, 1, newSprite);
+    setSprites(newSprites);
+  }
 
   // get canvas contexts on start
   useEffect(() => {
@@ -104,6 +123,10 @@ export default function Sprites() {
           id="sprite-canvas"
           width={spritePixels}
           height={spritePixels}
+          onMouseDown={e => { sketching = true; sketch(e); }}
+          onMouseMove={e => { if (sketching) sketch(e); }}
+          onMouseUp={e => { sketching = false; }}
+          onMouseLeave={e => { sketching = false; }}
         />
       </div>
     </div>
