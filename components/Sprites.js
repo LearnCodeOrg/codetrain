@@ -11,6 +11,13 @@ export default function Sprites() {
   const [sprites, setSprites] = useState(defaultSprites);
   const [currSprite, setCurrSprite] = useState(0);
 
+  // updates current color with given value
+  function updateColor(val) {
+    const newColors = colors.slice();
+    newColors.splice(currColor, 1, val);
+    setColors(newColors);
+  }
+
   return (
     <div className={styles.container}>
       <div>
@@ -32,6 +39,12 @@ export default function Sprites() {
             )
           }
         </div>
+        <input
+          type="color"
+          value={colors[currColor]}
+          className={styles.colorinput}
+          onChange={e => updateColor(e.target.value)}
+        />
       </div>
       <div>
         <h1>Sprites</h1>

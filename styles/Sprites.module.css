@@ -23,3 +23,9 @@
   outline: 4px solid #fff;
   z-index: 1;
 }
+
+.colorinput {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
