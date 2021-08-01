@@ -12,6 +12,7 @@ export default function Index() {
     <div className={styles.container}>
       <Sprites />
       <Editor />
+      <Canvas />
     </div>
   );
 }
