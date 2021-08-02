@@ -5,6 +5,11 @@
   background: #efefef;
   border-radius: 8px;
   margin: 20px;
+  position: relative;
+}
+
+.powerbutton {
+  position: absolute!important;
 }
 
 .screen {
