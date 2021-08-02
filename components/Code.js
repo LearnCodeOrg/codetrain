@@ -4,15 +4,14 @@ import { useState } from 'react';
 
 import 'ace-builds/src-noconflict/mode-javascript.js';
 import 'ace-builds/src-noconflict/theme-monokai.js';
-import styles from '../styles/Editor.module.css';
+import styles from '../styles/Code.module.css';
 
-export default function Editor() {
+export default function Code() {
   const [code, setCode] = useState('');
 
   return (
     <div>
       <AceEditor
-        name="start-editor"
         value={code}
         onChange={val => setCode(val)}
         mode="javascript"

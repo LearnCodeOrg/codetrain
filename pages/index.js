@@ -6,13 +6,13 @@ import dynamic from 'next/dynamic';
 
 import styles from '../styles/Index.module.css';
 
-const Editor = dynamic(import('../components/Editor.js'), { ssr: false });
+const Code = dynamic(import('../components/Code.js'), { ssr: false });
 
 export default function Index() {
   return (
     <div className={styles.container}>
       <Guide />
-      <Editor />
+      <Code />
       <Sprites />
       <Game />
     </div>
