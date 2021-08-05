@@ -8,8 +8,17 @@ import styles from '../styles/Game.module.css';
 
 const keys = {};
 
+const buttonProps = {
+  className: styles.button,
+  variant: 'contained'
+}
+
 export default function Game() {
   const [playing, setPlaying] = useState(false);
+
+  function input(key) {
+    console.log(key);
+  }
 
   // on start
   useEffect(() => {
@@ -18,12 +27,12 @@ export default function Game() {
       const keyCode = e.keyCode;
       if (!keys[keyCode]) {
         keys[keyCode] = true;
-        if (keyCode === 37) console.log('left');
-        else if (keyCode === 38) console.log('up');
-        else if (keyCode === 39) console.log('right');
-        else if (keyCode === 40) console.log('down');
-        else if (keyCode === 65) console.log('a');
-        else if (keyCode === 66) console.log('b');
+        if (keyCode === 37) input('left');
+        else if (keyCode === 38) input('up');
+        else if (keyCode === 39) input('right');
+        else if (keyCode === 40) input('down');
+        else if (keyCode === 65) input('a');
+        else if (keyCode === 66) input('b');
       }
     }
     window.onkeyup = e => keys[e.keyCode] = false;
@@ -45,19 +54,19 @@ export default function Game() {
       />
       <div className={styles.controls}>
         <div className={styles.arrows}>
-          <Button className={styles.button} variant="contained">▲</Button>
+          <Button onClick={() => input('up')} { ...buttonProps }>▲</Button>
           <div>
-            <Button className={styles.button} variant="contained">◀</Button>
+            <Button onClick={() => input('left')} { ...buttonProps }>◀</Button>
             <div style={{ display: 'inline-block', width: '32px' }} />
-            <Button className={styles.button} variant="contained">▶</Button>
+            <Button onClick={() => input('right')} { ...buttonProps }>▶</Button>
           </div>
-          <Button className={styles.button} variant="contained">▼</Button>
+          <Button onClick={() => input('down')} { ...buttonProps }>▼</Button>
         </div>
         <div style={{ display: 'inline-block', width: '32px' }} />
         <div className={styles.buttons}>
-          <Button className={styles.button} variant="contained">A</Button>
+          <Button onClick={() => input('a')} { ...buttonProps }>A</Button>
           <div style={{ display: 'inline-block', width: '8px' }} />
-          <Button className={styles.button} variant="contained">B</Button>
+          <Button onClick={() => input('b')} { ...buttonProps }>B</Button>
         </div>
       </div>
     </div>
