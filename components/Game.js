@@ -23,12 +23,23 @@ export default function Game() {
         width={256}
         height={256}
       />
-      <Button className={styles.button} variant="contained">▲</Button>
-      <Button className={styles.button} variant="contained">▼</Button>
-      <Button className={styles.button} variant="contained">▶</Button>
-      <Button className={styles.button} variant="contained">◀</Button>
-      <Button className={styles.button} variant="contained">A</Button>
-      <Button className={styles.button} variant="contained">B</Button>
+      <div className={styles.controls}>
+        <div className={styles.arrows}>
+          <Button className={styles.button} variant="contained">▲</Button>
+          <div>
+            <Button className={styles.button} variant="contained">◀</Button>
+            <div style={{ display: 'inline-block', width: '32px' }} />
+            <Button className={styles.button} variant="contained">▶</Button>
+          </div>
+          <Button className={styles.button} variant="contained">▼</Button>
+        </div>
+        <div style={{ display: 'inline-block', width: '32px' }} />
+        <div className={styles.buttons}>
+          <Button className={styles.button} variant="contained">A</Button>
+          <div style={{ display: 'inline-block', width: '8px' }} />
+          <Button className={styles.button} variant="contained">B</Button>
+        </div>
+      </div>
     </div>
   );
 }
