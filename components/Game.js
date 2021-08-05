@@ -2,12 +2,32 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import StopIcon from '@material-ui/icons/Stop';
 import Button from '@material-ui/core/Button';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import styles from '../styles/Game.module.css';
 
+const keys = {};
+
 export default function Game() {
   const [playing, setPlaying] = useState(false);
+
+  // on start
+  useEffect(() => {
+    // set up key listeners
+    window.onkeydown = e => {
+      const keyCode = e.keyCode;
+      if (!keys[keyCode]) {
+        keys[keyCode] = true;
+        if (keyCode === 37) console.log('left');
+        else if (keyCode === 38) console.log('up');
+        else if (keyCode === 39) console.log('right');
+        else if (keyCode === 40) console.log('down');
+        else if (keyCode === 65) console.log('a');
+        else if (keyCode === 66) console.log('b');
+      }
+    }
+    window.onkeyup = e => keys[e.keyCode] = false;
+  }, []);
 
   return (
     <div className={styles.container}>
