@@ -14,7 +14,7 @@ const buttonProps = {
 };
 
 const mapPixels = 256;
-const mapSize = 16;
+const mapSize = 8;
 const spritePixels = Math.floor(mapPixels / mapSize);
 
 let canvas, ctx;
@@ -107,7 +107,7 @@ export default function Game(props) {
   return (
     <div className={styles.container}>
       <Button
-        className={`${styles.button} ${styles.powerbutton}`}
+        className={styles.button}
         variant="contained"
         onClick={() => setPlaying(!playing)}
       >

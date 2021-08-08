@@ -26,7 +26,6 @@ export default function Index() {
 
   return (
     <div className={styles.container}>
-      <Guide />
       <Code currSprite={currSprite} spriteCount={spriteCount} />
       <Sprites
         colors={colors}
