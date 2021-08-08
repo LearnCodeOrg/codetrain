@@ -5,13 +5,10 @@
   background: #efefef;
   border-radius: 8px;
   margin: 20px;
-  position: relative;
 }
 
 .powerbutton {
   position: absolute!important;
-  left: 8px;
-  bottom: 8px;
 }
 
 .screen {
@@ -27,24 +24,4 @@
   height: 32px;
   border-radius: 50%!important;
   min-width: 0!important;
-}
-
-.controls {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.arrows {
-  text-align: center;
-}
-
-.dummy {
-  display: inline-block;
-  width: 32px;
-}
-
-.dummysmall {
-  display: inline-block;
-  width: 8px;
 }
