@@ -33,6 +33,33 @@ export default function Game(props) {
     console.log(key);
   }
 
+  // draws game canvas
+  function draw() {
+    if (!sprites || !colors) return;
+    // for each tile
+    for (let y = 0; y < mapSize; y++) {
+      for (let x = 0; x < mapSize; x++) {
+        // get tile
+        const spriteIndex = y * mapSize + x;
+        const sprite = sprites[map[spriteIndex]];
+        // for each pixel
+        for (let yp = 0; yp < spriteSize; yp++) {
+          for (let xp = 0; xp < spriteSize; xp++) {
+            // set fill color
+            const colorIndex = yp * spriteSize + xp;
+            const color = colors[sprite[colorIndex]];
+            ctx.fillStyle = color;
+            // get fill position
+            let xm = x * spritePixels + xp * pixelPixels;
+            let ym = y * spritePixels + yp * pixelPixels;
+            // fill pixel
+            ctx.fillRect(xm, ym, pixelPixels, pixelPixels);
+          }
+        }
+      }
+    }
+  }
+
   // sketches map with given mouse event data
   function sketchMap(e) {
     // get x and y on canvas
@@ -71,6 +98,11 @@ export default function Game(props) {
     }
     window.onkeyup = e => keys[e.keyCode] = false;
   }, []);
+
+  // draw map when any elements change
+  useEffect(() => {
+    draw();
+  }, [colors, sprites, map]);
 
   return (
     <div className={styles.container}>
