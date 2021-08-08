@@ -33,6 +33,24 @@ export default function Game(props) {
     console.log(key);
   }
 
+  // sketches map with given mouse event data
+  function sketchMap(e) {
+    // get x and y on canvas
+    const currX = e.clientX - canvas.offsetLeft + window.scrollX;
+    const currY = e.clientY - canvas.offsetTop + window.scrollY;
+    // get x and y in map units
+    const tileX = Math.floor(currX / spritePixels);
+    const tileY = Math.floor(currY / spritePixels);
+    // get map and map index
+    const mapIndex = tileY * mapSize + tileX;
+    const newMap = map.slice();
+    // return if unchanged
+    if (newMap[mapIndex] === currSprite) return;
+    // set map
+    newMap.splice(mapIndex, 1, currSprite);
+    setMap(newMap);
+  }
+
   // on start
   useEffect(() => {
     // get canvas
@@ -66,6 +84,10 @@ export default function Game(props) {
       <canvas
         ref={canvasRef}
         className={styles.screen}
+        onMouseDown={e => { sketching = true; sketchMap(e); }}
+        onMouseMove={e => { if (sketching) sketchMap(e); }}
+        onMouseUp={e => { sketching = false; }}
+        onMouseLeave={e => { sketching = false; }}
         width={mapPixels}
         height={mapPixels}
       />
