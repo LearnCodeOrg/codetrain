@@ -2,7 +2,7 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import StopIcon from '@material-ui/icons/Stop';
 import Button from '@material-ui/core/Button';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import styles from '../styles/Game.module.css';
 
@@ -13,8 +13,21 @@ const buttonProps = {
   variant: 'contained'
 };
 
-export default function Game() {
+const mapPixels = 256;
+const mapSize = 16;
+const spritePixels = Math.floor(mapPixels / mapSize);
+
+let canvas, ctx;
+let sketching = false;
+
+export default function Game(props) {
+  const { sprites, colors, spriteSize, currSprite } = props;
+  const pixelPixels = Math.floor(spritePixels / spriteSize);
+
   const [playing, setPlaying] = useState(false);
+  const [map, setMap] = useState(Array(mapSize * mapSize).fill(0));
+
+  const canvasRef = useRef();
 
   function input(key) {
     console.log(key);
@@ -22,6 +35,9 @@ export default function Game() {
 
   // on start
   useEffect(() => {
+    // get canvas
+    canvas = canvasRef.current;
+    ctx = canvas.getContext('2d');
     // set up key listeners
     window.onkeydown = e => {
       const keyCode = e.keyCode;
@@ -48,9 +64,10 @@ export default function Game() {
         {playing ? <StopIcon /> : <PlayArrowIcon />}
       </Button>
       <canvas
+        ref={canvasRef}
         className={styles.screen}
-        width={256}
-        height={256}
+        width={mapPixels}
+        height={mapPixels}
       />
       <div className={styles.controls}>
         <div className={styles.arrows}>
