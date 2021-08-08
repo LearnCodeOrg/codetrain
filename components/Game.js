@@ -11,7 +11,7 @@ const keys = {};
 const buttonProps = {
   className: styles.button,
   variant: 'contained'
-}
+};
 
 export default function Game() {
   const [playing, setPlaying] = useState(false);

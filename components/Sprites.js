@@ -4,7 +4,6 @@ import { palettes } from '../data/palettes.js';
 import styles from '../styles/Sprites.module.css';
 
 // units
-const spriteCount = 16;
 const spriteSize = 8;
 const pixelPixels = 16;
 const spritePixels = spriteSize * pixelPixels;
@@ -14,6 +13,8 @@ let spriteCanvas, spriteCtx;
 let sketching = false;
 
 export default function Sprites(props) {
+  const { spriteCount } = props;
+
   const defaultColors = palettes[0].colors;
   const [colors, setColors] = useState(defaultColors);
   const [currColor, setCurrColor] = useState(0);
@@ -58,6 +59,10 @@ export default function Sprites(props) {
     // get x and y on canvas
     const currX = e.clientX - spriteCanvas.offsetLeft + window.scrollX;
     const currY = e.clientY - spriteCanvas.offsetTop + window.scrollY;
+    // return if out of bounds
+    if (
+      currX < 0 || currX >= spritePixels || currY < 0 || currY >= spritePixels
+    ) return;
     // get x and y in pixel units
     const pixelX = Math.floor(currX / pixelPixels);
     const pixelY = Math.floor(currY / pixelPixels);

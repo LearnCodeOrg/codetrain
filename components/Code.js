@@ -7,9 +7,9 @@ import 'ace-builds/src-noconflict/theme-monokai.js';
 import styles from '../styles/Code.module.css';
 
 export default function Code(props) {
-  const [codes, setCodes] = useState(Array(16).fill(''));
+  const { spriteCount, currSprite } = props;
 
-  const currSprite = props.currSprite;
+  const [codes, setCodes] = useState(Array(spriteCount).fill(''));
 
   // updates current color with given value
   function updateCode(val) {
