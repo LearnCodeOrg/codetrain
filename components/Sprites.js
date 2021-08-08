@@ -3,27 +3,20 @@ import { palettes } from '../data/palettes.js';
 
 import styles from '../styles/Sprites.module.css';
 
-// units
-const spriteSize = 8;
 const pixelPixels = 16;
-const spritePixels = spriteSize * pixelPixels;
 
 let spriteCanvas, spriteCtx;
 
 let sketching = false;
 
 export default function Sprites(props) {
-  const { spriteCount } = props;
+  const {
+    sprites, setSprites, colors, setColors,
+    spriteCount, currSprite, setCurrSprite, spriteSize
+  } = props;
+  const spritePixels = spriteSize * pixelPixels;
 
-  const defaultColors = palettes[0].colors;
-  const [colors, setColors] = useState(defaultColors);
   const [currColor, setCurrColor] = useState(0);
-
-  const defaultSprites = Array(spriteCount).fill(
-    Array(spriteSize * spriteSize).fill(0)
-  );
-  const [sprites, setSprites] = useState(defaultSprites);
-  const currSprite = props.currSprite;
 
   const [palette, setPalette] = useState(0);
 
@@ -137,7 +130,7 @@ export default function Sprites(props) {
           {
             sprites.map((sprite, i) =>
               <div
-                onClick={() => props.setCurrSprite(i)}
+                onClick={() => setCurrSprite(i)}
                 className={
                   currSprite === i ?
                   `${styles.tile} ${styles.selected}` :
