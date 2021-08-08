@@ -13,7 +13,7 @@ let spriteCanvas, spriteCtx;
 
 let sketching = false;
 
-export default function Sprites() {
+export default function Sprites(props) {
   const defaultColors = palettes[0].colors;
   const [colors, setColors] = useState(defaultColors);
   const [currColor, setCurrColor] = useState(0);
@@ -22,7 +22,7 @@ export default function Sprites() {
     Array(spriteSize * spriteSize).fill(0)
   );
   const [sprites, setSprites] = useState(defaultSprites);
-  const [currSprite, setCurrSprite] = useState(0);
+  const currSprite = props.currSprite;
 
   const [palette, setPalette] = useState(0);
 
@@ -132,7 +132,7 @@ export default function Sprites() {
           {
             sprites.map((sprite, i) =>
               <div
-                onClick={() => setCurrSprite(i)}
+                onClick={() => props.setCurrSprite(i)}
                 className={
                   currSprite === i ?
                   `${styles.tile} ${styles.selected}` :
