@@ -34,6 +34,9 @@ export default function Sprites(props) {
 
   // draws select canvas
   function drawSelect() {
+    // draw outline
+    selectCtx.fillStyle = '#000';
+    selectCtx.fillRect(0, 0, fullSelectPixels, fullSelectPixels);
     // for each sprite
     for (let x = 0; x < sqrtSpriteCount; x++) {
       for (let y = 0; y < sqrtSpriteCount; y++) {
@@ -52,12 +55,38 @@ export default function Sprites(props) {
             const yPos = y * selectSpritePixels + yp * selectPixelPixels;
             // fill sprite
             selectCtx.fillRect(
-              xPos, yPos, selectPixelPixels, selectPixelPixels
+              xPos + selectBorder, yPos + selectBorder,
+              selectPixelPixels, selectPixelPixels
             );
           }
         }
       }
     }
+    // get outline coordinates
+    const xo = currSprite % 4;
+    const yo = Math.floor(currSprite / 4);
+    // draw outer outline
+    selectCtx.fillStyle = '#fff';
+    const outLeft = xo * selectSpritePixels;
+    const outRight = outLeft + selectSpritePixels + selectBorder;
+    const outTop = yo * selectSpritePixels;
+    const outBottom = outTop + selectSpritePixels + selectBorder;
+    const outLength = selectBorder * 2 + selectSpritePixels;
+    selectCtx.fillRect(outLeft, outTop, outLength, selectBorder);
+    selectCtx.fillRect(outLeft, outTop, selectBorder, outLength);
+    selectCtx.fillRect(outLeft, outBottom, outLength, selectBorder);
+    selectCtx.fillRect(outRight, outTop, selectBorder, outLength);
+    // draw inner outline
+    selectCtx.fillStyle = '#000';
+    const inLeft = outLeft + selectBorder;
+    const inRight = outLeft + selectSpritePixels;
+    const inTop = outTop + selectBorder;
+    const inBottom = outTop + selectSpritePixels;
+    const inLength = selectSpritePixels;
+    selectCtx.fillRect(inLeft, inTop, inLength, selectBorder);
+    selectCtx.fillRect(inLeft, inTop, selectBorder, inLength);
+    selectCtx.fillRect(inLeft, inBottom, inLength, selectBorder);
+    selectCtx.fillRect(inRight, inTop, selectBorder, inLength);
   }
 
   // selects sprite with given mouse event data
