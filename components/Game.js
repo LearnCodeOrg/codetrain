@@ -23,11 +23,14 @@ let canvas, ctx;
 let sketching = false;
 
 export default function Game(props) {
-  const { sprites, colors, spriteSize, currSprite } = props;
+  const { sprites, colors, spriteSize, currSprite, spriteTypes } = props;
   const pixelPixels = Math.floor(spritePixels / spriteSize);
 
   const [playing, setPlaying] = useState(false);
-  const [map, setMap] = useState(Array(mapSize * mapSize).fill(0));
+  const [background, setBackground] = useState(
+    Array(mapSize * mapSize).fill(0)
+  );
+  const [objects, setObjects] = useState(Array(mapSize * mapSize).fill(-1));
 
   const canvasRef = useRef();
 
@@ -53,6 +56,10 @@ export default function Game(props) {
             ctx.fillRect(xm, ym, pixelPixels, pixelPixels);
           }
         }
+        const sprite = objects[spriteIndex] === -1 ?
+        sprites[background[spriteIndex]]: sprites[objects[spriteIndex]];
+        // draw sprite
+        drawSprite(sprite, x, y);
       }
     }
   }
@@ -65,14 +72,22 @@ export default function Game(props) {
     // get x and y in map units
     const tileX = Math.floor(currX / spritePixels);
     const tileY = Math.floor(currY / spritePixels);
-    // get map and map index
+    // get sprite type and map index
+    const spriteType = spriteTypes[currSprite];
     const mapIndex = tileY * mapSize + tileX;
-    const newMap = map.slice();
-    // return if unchanged
-    if (newMap[mapIndex] === currSprite) return;
-    // set map
-    newMap.splice(mapIndex, 1, currSprite);
-    setMap(newMap);
+    // update background
+    if (spriteType === 'background') {
+      if (background[mapIndex] === currSprite) return;
+      const newBackground = background.slice();
+      newBackground.splice(mapIndex, 1, currSprite);
+      setBackground(newBackground);
+    // update objects
+    } else if (spriteTypes[currSprite] === 'object') {
+      if (objects[mapIndex] === currSprite) return;
+      const newObjects = objects.slice();
+      newObjects.splice(mapIndex, 1, currSprite);
+      setObjects(newObjects);
+    }
   }
 
   // on start
