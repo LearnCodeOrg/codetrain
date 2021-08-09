@@ -22,7 +22,9 @@ export default function Index() {
   const defaultSprites = Array(spriteCount).fill(
     Array(spriteSize * spriteSize).fill(0)
   );
+  const defaultSpriteTypes = Array(spriteCount).fill('background');
   const [sprites, setSprites] = useState(defaultSprites);
+  const [spriteTypes, setSpriteTypes] = useState(defaultSpriteTypes);
 
   return (
     <div className={styles.container}>
@@ -32,7 +34,8 @@ export default function Index() {
         setColors={setColors}
         sprites={sprites}
         setSprites={setSprites}
-        setColors={setColors}
+        spriteTypes={spriteTypes}
+        setSpriteTypes={setSpriteTypes}
         currSprite={currSprite}
         setCurrSprite={setCurrSprite}
         spriteCount={spriteCount}

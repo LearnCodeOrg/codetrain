@@ -11,8 +11,8 @@ let sketching = false;
 
 export default function Sprites(props) {
   const {
-    sprites, setSprites, colors, setColors,
-    spriteCount, currSprite, setCurrSprite, spriteSize
+    colors, setColors, sprites, setSprites, spriteTypes, setSpriteTypes,
+    currSprite, setCurrSprite, spriteCount, spriteSize
   } = props;
   const spritePixels = spriteSize * pixelPixels;
 
@@ -152,6 +152,19 @@ export default function Sprites(props) {
           onMouseUp={e => { sketching = false; }}
           onMouseLeave={e => { sketching = false; }}
         />
+        <select
+          value={spriteTypes[currSprite]}
+          onChange={e => {
+            const newType = e.target.value;
+            const newSpriteTypes = spriteTypes.slice();
+            newSpriteTypes.splice(currSprite, 1, newType);
+            setSpriteTypes(newSpriteTypes);
+          }}
+        >
+          <option value="background">Background</option>
+          <option value="object">Object</option>
+          <option value="item">Item</option>
+        </select>
       </div>
     </div>
   );
