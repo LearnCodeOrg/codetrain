@@ -5,6 +5,7 @@ import styles from '../styles/Sprites.module.css';
 
 const pixelPixels = 16;
 const selectPixels = 128;
+const selectBorder = 4;
 
 let selectCanvas, selectCtx;
 let drawCanvas, drawCtx;
@@ -20,6 +21,7 @@ export default function Sprites(props) {
   const sqrtSpriteCount = Math.round(Math.sqrt(spriteCount));
   const selectSpritePixels = Math.floor(selectPixels / sqrtSpriteCount);
   const selectPixelPixels = Math.floor(selectSpritePixels / spriteSize);
+  const fullSelectPixels = selectBorder * 2 + selectPixels;
 
   const [currColor, setCurrColor] = useState(0);
 
@@ -92,20 +94,23 @@ export default function Sprites(props) {
   // selects sprite with given mouse event data
   function select(e) {
     // get x and y on canvas
-    const currX = e.clientX - selectCanvas.offsetLeft + window.scrollX;
-    const currY = e.clientY - selectCanvas.offsetTop + window.scrollY;
-    // return if out of bounds
-    if (
-      currX < 0 || currX >= selectPixels || currY < 0 || currY >= selectPixels
-    ) return;
+    const currX =
+    e.clientX - selectCanvas.offsetLeft + window.scrollX - selectBorder;
+    const currY =
+    e.clientY - selectCanvas.offsetTop + window.scrollY - selectBorder;
     // get x and y in grid units
-    const gridX = Math.floor(currX / selectGridPixels);
-    const gridY = Math.floor(currY / selectGridPixels);
+    const gridX = Math.max(
+      0, Math.min(Math.floor(currX / selectSpritePixels), sqrtSpriteCount - 1)
+    );
+    const gridY = Math.max(
+      0, Math.min(Math.floor(currY / selectSpritePixels), sqrtSpriteCount - 1)
+    );
     // select sprite
     const spriteIndex = gridY * sqrtSpriteCount + gridX;
     if (spriteIndex === currSprite) return;
     setCurrSprite(spriteIndex);
-    console.log({spriteIndex});
+    // draw select canvas
+    drawSelect();
   }
 
   // draws current sprite
@@ -113,8 +118,8 @@ export default function Sprites(props) {
     // get current sprite
     const sprite = sprites[currSprite];
     // for each pixel
-    for (let y = 0; y < spriteSize; y++) {
-      for (let x = 0; x < spriteSize; x++) {
+    for (let x = 0; x < spriteSize; x++) {
+      for (let y = 0; y < spriteSize; y++) {
         // set fill color
         const colorIndex = y * spriteSize + x;
         const color = colors[sprite[colorIndex]];
@@ -126,6 +131,8 @@ export default function Sprites(props) {
         drawCtx.fillRect(xPos, yPos, pixelPixels, pixelPixels);
       }
     }
+    // update select canvas
+    drawSelect();
   }
 
   // sketches sprite with given mouse event data
@@ -133,13 +140,13 @@ export default function Sprites(props) {
     // get x and y on canvas
     const currX = e.clientX - drawCanvas.offsetLeft + window.scrollX;
     const currY = e.clientY - drawCanvas.offsetTop + window.scrollY;
-    // return if out of bounds
-    if (
-      currX < 0 || currX >= spritePixels || currY < 0 || currY >= spritePixels
-    ) return;
     // get x and y in pixel units
-    const pixelX = Math.floor(currX / pixelPixels);
-    const pixelY = Math.floor(currY / pixelPixels);
+    const pixelX = Math.max(
+      0, Math.min(Math.floor(currX / pixelPixels), spriteSize - 1)
+    );
+    const pixelY = Math.max(
+      0, Math.min(Math.floor(currY / pixelPixels), spriteSize - 1)
+    );
     // get sprite
     const spriteIndex = pixelY * spriteSize + pixelX;
     const newSprites = sprites.slice();
@@ -211,28 +218,11 @@ export default function Sprites(props) {
         <h1>Sprites</h1>
         <canvas
           id="sprite-select"
-          width={selectPixels}
-          height={selectPixels}
+          width={fullSelectPixels}
+          height={fullSelectPixels}
           className={styles.selectcanvas}
           onMouseDown={select}
         />
-        <div className={styles.tilegrid}>
-          {
-            sprites.map((sprite, i) =>
-              <div
-                onClick={() => setCurrSprite(i)}
-                className={
-                  currSprite === i ?
-                  `${styles.tile} ${styles.selected}` :
-                  styles.tile
-                }
-                key={i}
-                style={{ background: colors[sprite[0]] }}
-              >
-              </div>
-            )
-          }
-        </div>
         <canvas
           id="sprite-draw"
           width={spritePixels}

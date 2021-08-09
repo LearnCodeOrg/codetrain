@@ -3,6 +3,12 @@
   text-align: center;
 }
 
+.selectcanvas {
+  cursor: pointer;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
 .tilegrid {
   display: flex;
   flex-wrap: wrap;
