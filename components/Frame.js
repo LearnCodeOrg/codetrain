@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import styles from '../styles/Frame.module.css';
 
 export default function Frame(props) {
@@ -45,13 +43,11 @@ export default function Frame(props) {
 </html>
 `;
 
-  const [frameSrc, setFrameSrc] = useState(gameSrc);
-
   return (
     <iframe
       title="game"
       sandbox="allow-scripts"
-      srcDoc={frameSrc}
+      srcDoc={gameSrc}
       width={mapPixels}
       height={mapPixels}
       frameBorder="0"

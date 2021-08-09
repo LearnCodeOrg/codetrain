@@ -33,7 +33,6 @@ export default function Game(props) {
 
   // draws game canvas
   function draw() {
-    if (!sprites || !colors) return;
     // for each tile
     for (let y = 0; y < mapSize; y++) {
       for (let x = 0; x < mapSize; x++) {
@@ -98,10 +97,13 @@ export default function Game(props) {
         {playing ? <StopIcon /> : <PlayArrowIcon />}
       </Button>
       {
-        playing ? <Frame mapPixels={mapPixels} /> :
+        playing && <Frame mapPixels={mapPixels} />
+      }
+      {
         <canvas
           ref={canvasRef}
           className={styles.screen}
+          style={playing ? { display: 'none' } : {}}
           onMouseDown={e => { sketching = true; sketchMap(e); }}
           onMouseMove={e => { if (sketching) sketchMap(e); }}
           onMouseUp={e => { sketching = false; }}
