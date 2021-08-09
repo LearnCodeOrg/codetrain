@@ -32,6 +32,8 @@ export default function Game(props) {
   );
   const [objects, setObjects] = useState(Array(mapSize * mapSize).fill(-1));
 
+  const [showObjects, setShowObjects] = useState(true);
+
   const canvasRef = useRef();
 
   // draws given sprite at given position
@@ -59,7 +61,7 @@ export default function Game(props) {
       for (let x = 0; x < mapSize; x++) {
         // get sprite
         const spriteIndex = y * mapSize + x;
-        const sprite = objects[spriteIndex] === -1 ?
+        const sprite = (objects[spriteIndex] === -1 || !showObjects) ?
         sprites[background[spriteIndex]]: sprites[objects[spriteIndex]];
         // draw sprite
         drawSprite(sprite, x, y);
@@ -86,10 +88,11 @@ export default function Game(props) {
       setBackground(newBackground);
     // update objects
     } else if (spriteTypes[currSprite] === 'object') {
-      if (objects[mapIndex] === currSprite) return;
+      const newSprite = objects[mapIndex] === currSprite ? -1 : currSprite;
       const newObjects = objects.slice();
-      newObjects.splice(mapIndex, 1, currSprite);
+      newObjects.splice(mapIndex, 1, newSprite);
       setObjects(newObjects);
+      sketching = false;
     }
   }
 
@@ -103,7 +106,7 @@ export default function Game(props) {
   // draw map when any elements change
   useEffect(() => {
     draw();
-  }, [colors, sprites, background, objects]);
+  }, [colors, sprites, background, objects, showObjects]);
 
   return (
     <div className={styles.container}>
@@ -128,6 +131,12 @@ export default function Game(props) {
           height={mapPixels}
         />
       }
+      <label>Objects</label>
+      <input
+        type="checkbox"
+        checked={showObjects}
+        onChange={e => setShowObjects(e.target.checked)}
+      />
     </div>
   );
 }
