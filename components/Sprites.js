@@ -17,6 +17,8 @@ export default function Sprites(props) {
     currSprite, setCurrSprite, spriteCount, spriteSize
   } = props;
   const spritePixels = spriteSize * pixelPixels;
+  const sqrtSpriteCount = Math.round(Math.sqrt(spriteCount));
+  const selectGridPixels = Math.floor(selectPixels / sqrtSpriteCount);
 
   const [currColor, setCurrColor] = useState(0);
 
@@ -27,6 +29,25 @@ export default function Sprites(props) {
     const newColors = colors.slice();
     newColors.splice(currColor, 1, val);
     setColors(newColors);
+  }
+
+  // selects sprite with given mouse event data
+  function select(e) {
+    // get x and y on canvas
+    const currX = e.clientX - selectCanvas.offsetLeft + window.scrollX;
+    const currY = e.clientY - selectCanvas.offsetTop + window.scrollY;
+    // return if out of bounds
+    if (
+      currX < 0 || currX >= selectPixels || currY < 0 || currY >= selectPixels
+    ) return;
+    // get x and y in grid units
+    const gridX = Math.floor(currX / selectGridPixels);
+    const gridY = Math.floor(currY / selectGridPixels);
+    // select sprite
+    const spriteIndex = gridY * sqrtSpriteCount + gridX;
+    if (spriteIndex === currSprite) return;
+    setCurrSprite(spriteIndex);
+    console.log({spriteIndex});
   }
 
   // draws current sprite
