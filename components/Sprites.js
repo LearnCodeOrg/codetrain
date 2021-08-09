@@ -18,7 +18,8 @@ export default function Sprites(props) {
   } = props;
   const spritePixels = spriteSize * pixelPixels;
   const sqrtSpriteCount = Math.round(Math.sqrt(spriteCount));
-  const selectGridPixels = Math.floor(selectPixels / sqrtSpriteCount);
+  const selectSpritePixels = Math.floor(selectPixels / sqrtSpriteCount);
+  const selectPixelPixels = Math.floor(selectSpritePixels / spriteSize);
 
   const [currColor, setCurrColor] = useState(0);
 
@@ -29,6 +30,34 @@ export default function Sprites(props) {
     const newColors = colors.slice();
     newColors.splice(currColor, 1, val);
     setColors(newColors);
+  }
+
+  // draws select canvas
+  function drawSelect() {
+    // for each sprite
+    for (let x = 0; x < sqrtSpriteCount; x++) {
+      for (let y = 0; y < sqrtSpriteCount; y++) {
+        // get sprite
+        const spriteIndex = y * sqrtSpriteCount + x;
+        const sprite = sprites[spriteIndex];
+        // for each pixel
+        for (let xp = 0; xp < spriteSize; xp++) {
+          for (let yp = 0; yp < spriteSize; yp++) {
+            // set fill color
+            const colorIndex = yp * spriteSize + xp;
+            const color = colors[sprite[colorIndex]];
+            selectCtx.fillStyle = color;
+            // set fill position and size
+            const xPos = x * selectSpritePixels + xp * selectPixelPixels;
+            const yPos = y * selectSpritePixels + yp * selectPixelPixels;
+            // fill sprite
+            selectCtx.fillRect(
+              xPos, yPos, selectPixelPixels, selectPixelPixels
+            );
+          }
+        }
+      }
+    }
   }
 
   // selects sprite with given mouse event data
