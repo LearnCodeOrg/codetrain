@@ -4,8 +4,10 @@ import { palettes } from '../data/palettes.js';
 import styles from '../styles/Sprites.module.css';
 
 const pixelPixels = 16;
+const selectPixels = 128;
 
-let spriteCanvas, spriteCtx;
+let selectCanvas, selectCtx;
+let drawCanvas, drawCtx;
 
 let sketching = false;
 
@@ -37,12 +39,12 @@ export default function Sprites(props) {
         // set fill color
         const colorIndex = y * spriteSize + x;
         const color = colors[sprite[colorIndex]];
-        spriteCtx.fillStyle = color;
+        drawCtx.fillStyle = color;
         // set fill position and size
         const xPos = x * pixelPixels;
         const yPos = y * pixelPixels;
         // fill sprite
-        spriteCtx.fillRect(xPos, yPos, pixelPixels, pixelPixels);
+        drawCtx.fillRect(xPos, yPos, pixelPixels, pixelPixels);
       }
     }
   }
@@ -50,8 +52,8 @@ export default function Sprites(props) {
   // sketches sprite with given mouse event data
   function sketch(e) {
     // get x and y on canvas
-    const currX = e.clientX - spriteCanvas.offsetLeft + window.scrollX;
-    const currY = e.clientY - spriteCanvas.offsetTop + window.scrollY;
+    const currX = e.clientX - drawCanvas.offsetLeft + window.scrollX;
+    const currY = e.clientY - drawCanvas.offsetTop + window.scrollY;
     // return if out of bounds
     if (
       currX < 0 || currX >= spritePixels || currY < 0 || currY >= spritePixels
@@ -73,8 +75,10 @@ export default function Sprites(props) {
 
   // get canvas contexts on start
   useEffect(() => {
-    spriteCanvas = document.getElementById('sprite-canvas');
-    spriteCtx = spriteCanvas.getContext('2d');
+    selectCanvas = document.getElementById('sprite-select');
+    selectCtx = selectCanvas.getContext('2d');
+    drawCanvas = document.getElementById('sprite-draw');
+    drawCtx = drawCanvas.getContext('2d');
   }, []);
 
   // draw sprite when colors or sprites change
@@ -126,6 +130,13 @@ export default function Sprites(props) {
       </div>
       <div>
         <h1>Sprites</h1>
+        <canvas
+          id="sprite-select"
+          width={selectPixels}
+          height={selectPixels}
+          className={styles.selectcanvas}
+          onMouseDown={select}
+        />
         <div className={styles.tilegrid}>
           {
             sprites.map((sprite, i) =>
@@ -144,7 +155,7 @@ export default function Sprites(props) {
           }
         </div>
         <canvas
-          id="sprite-canvas"
+          id="sprite-draw"
           width={spritePixels}
           height={spritePixels}
           onMouseDown={e => { sketching = true; sketch(e); }}
