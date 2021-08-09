@@ -1,6 +1,7 @@
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import StopIcon from '@material-ui/icons/Stop';
 import Button from '@material-ui/core/Button';
+import Frame from '../components/Frame.js';
 
 import { useEffect, useRef, useState } from 'react';
 
@@ -13,6 +14,7 @@ const buttonProps = {
   variant: 'contained'
 };
 
+// units
 const mapPixels = 256;
 const mapSize = 8;
 const spritePixels = Math.floor(mapPixels / mapSize);
@@ -28,10 +30,6 @@ export default function Game(props) {
   const [map, setMap] = useState(Array(mapSize * mapSize).fill(0));
 
   const canvasRef = useRef();
-
-  function input(key) {
-    console.log(key);
-  }
 
   // draws game canvas
   function draw() {
@@ -83,20 +81,6 @@ export default function Game(props) {
     // get canvas
     canvas = canvasRef.current;
     ctx = canvas.getContext('2d');
-    // set up key listeners
-    window.onkeydown = e => {
-      const keyCode = e.keyCode;
-      if (!keys[keyCode]) {
-        keys[keyCode] = true;
-        if (keyCode === 37) input('left');
-        else if (keyCode === 38) input('up');
-        else if (keyCode === 39) input('right');
-        else if (keyCode === 40) input('down');
-        else if (keyCode === 65) input('a');
-        else if (keyCode === 66) input('b');
-      }
-    }
-    window.onkeyup = e => keys[e.keyCode] = false;
   }, []);
 
   // draw map when any elements change
@@ -113,16 +97,19 @@ export default function Game(props) {
       >
         {playing ? <StopIcon /> : <PlayArrowIcon />}
       </Button>
-      <canvas
-        ref={canvasRef}
-        className={styles.screen}
-        onMouseDown={e => { sketching = true; sketchMap(e); }}
-        onMouseMove={e => { if (sketching) sketchMap(e); }}
-        onMouseUp={e => { sketching = false; }}
-        onMouseLeave={e => { sketching = false; }}
-        width={mapPixels}
-        height={mapPixels}
-      />
+      {
+        playing ? <Frame mapPixels={mapPixels} /> :
+        <canvas
+          ref={canvasRef}
+          className={styles.screen}
+          onMouseDown={e => { sketching = true; sketchMap(e); }}
+          onMouseMove={e => { if (sketching) sketchMap(e); }}
+          onMouseUp={e => { sketching = false; }}
+          onMouseLeave={e => { sketching = false; }}
+          width={mapPixels}
+          height={mapPixels}
+        />
+      }
     </div>
   );
 }
