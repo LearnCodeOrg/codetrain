@@ -30,14 +30,10 @@ export default function Index() {
     <div className={styles.container}>
       <Code currSprite={currSprite} spriteCount={spriteCount} />
       <Sprites
-        colors={colors}
-        setColors={setColors}
-        sprites={sprites}
-        setSprites={setSprites}
-        spriteTypes={spriteTypes}
-        setSpriteTypes={setSpriteTypes}
-        currSprite={currSprite}
-        setCurrSprite={setCurrSprite}
+        colors={colors} setColors={setColors}
+        sprites={sprites} setSprites={setSprites}
+        spriteTypes={spriteTypes} setSpriteTypes={setSpriteTypes}
+        currSprite={currSprite} setCurrSprite={setCurrSprite}
         spriteCount={spriteCount}
         spriteSize={spriteSize}
       />
@@ -46,6 +42,7 @@ export default function Index() {
         colors={colors}
         spriteSize={spriteSize}
         currSprite={currSprite}
+        spriteTypes={spriteTypes}
       />
     </div>
   );

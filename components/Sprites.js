@@ -243,7 +243,6 @@ export default function Sprites(props) {
         >
           <option value="background">Background</option>
           <option value="object">Object</option>
-          <option value="item">Item</option>
         </select>
       </div>
     </div>

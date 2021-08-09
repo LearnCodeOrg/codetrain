@@ -34,28 +34,31 @@ export default function Game(props) {
 
   const canvasRef = useRef();
 
+  // draws given sprite at given position
+  function drawSprite(sprite, x, y) {
+    // for each pixel
+    for (let yp = 0; yp < spriteSize; yp++) {
+      for (let xp = 0; xp < spriteSize; xp++) {
+        // set fill color
+        const colorIndex = yp * spriteSize + xp;
+        const color = colors[sprite[colorIndex]];
+        ctx.fillStyle = color;
+        // get fill position
+        let xm = x * spritePixels + xp * pixelPixels;
+        let ym = y * spritePixels + yp * pixelPixels;
+        // fill pixel
+        ctx.fillRect(xm, ym, pixelPixels, pixelPixels);
+      }
+    }
+  }
+
   // draws game canvas
   function draw() {
     // for each tile
     for (let y = 0; y < mapSize; y++) {
       for (let x = 0; x < mapSize; x++) {
-        // get tile
+        // get sprite
         const spriteIndex = y * mapSize + x;
-        const sprite = sprites[map[spriteIndex]];
-        // for each pixel
-        for (let yp = 0; yp < spriteSize; yp++) {
-          for (let xp = 0; xp < spriteSize; xp++) {
-            // set fill color
-            const colorIndex = yp * spriteSize + xp;
-            const color = colors[sprite[colorIndex]];
-            ctx.fillStyle = color;
-            // get fill position
-            let xm = x * spritePixels + xp * pixelPixels;
-            let ym = y * spritePixels + yp * pixelPixels;
-            // fill pixel
-            ctx.fillRect(xm, ym, pixelPixels, pixelPixels);
-          }
-        }
         const sprite = objects[spriteIndex] === -1 ?
         sprites[background[spriteIndex]]: sprites[objects[spriteIndex]];
         // draw sprite
@@ -100,7 +103,7 @@ export default function Game(props) {
   // draw map when any elements change
   useEffect(() => {
     draw();
-  }, [colors, sprites, map]);
+  }, [colors, sprites, background, objects]);
 
   return (
     <div className={styles.container}>
@@ -111,9 +114,7 @@ export default function Game(props) {
       >
         {playing ? <StopIcon /> : <PlayArrowIcon />}
       </Button>
-      {
-        playing && <Frame mapPixels={mapPixels} />
-      }
+      {playing && <Frame mapPixels={mapPixels} />}
       {
         <canvas
           ref={canvasRef}
