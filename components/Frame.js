@@ -2,20 +2,9 @@ import { useState } from 'react';
 
 import styles from '../styles/Frame.module.css';
 
-const emptySrc =
-`<html>
-  <body></body>
-  <style>
-    body {
-      margin: 0;
-      overflow: hidden;
-      background: #fff;
-    }
-  </style>
-</html>
-`;
+export default function Frame(props) {
+  const { mapPixels } = props;
 
-export default function Frame() {
   const gameSrc =
 `<html>
   <body onload="_start()">
@@ -35,25 +24,36 @@ export default function Frame() {
   <script>
     // canvas functions
     let _canvas, _ctx;
+    // game loop
+    const _gameLoop = time => {
+      // call update
+      if (typeof update === 'function') update();
+      // continue loop
+      requestAnimationFrame(_gameLoop);
+    }
     // runs after body has loaded
     const _start = () => {
       // get canvas and context
       _canvas = document.getElementById('canvas-game');
       _ctx = _canvas.getContext('2d');
+      // run start function
+      if (typeof start === 'function') start();
+      // start game loop
+      requestAnimationFrame(_gameLoop);
     }
   </script>
 </html>
 `;
 
-  const [frameSrc, setFrameSrc] = useState(emptySrc);
+  const [frameSrc, setFrameSrc] = useState(gameSrc);
 
   return (
     <iframe
       title="game"
       sandbox="allow-scripts"
       srcDoc={frameSrc}
-      width="256"
-      height="256"
+      width={mapPixels}
+      height={mapPixels}
       frameBorder="0"
     />
   );
