@@ -16,6 +16,35 @@ const emptySrc =
 `;
 
 export default function Frame() {
+  const gameSrc =
+`<html>
+  <body onload="_start()">
+    <canvas
+      id="canvas-game"
+      width=${mapPixels}
+      height=${mapPixels}
+    />
+  </body>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: #fff;
+    }
+  </style>
+  <script>
+    // canvas functions
+    let _canvas, _ctx;
+    // runs after body has loaded
+    const _start = () => {
+      // get canvas and context
+      _canvas = document.getElementById('canvas-game');
+      _ctx = _canvas.getContext('2d');
+    }
+  </script>
+</html>
+`;
+
   const [frameSrc, setFrameSrc] = useState(emptySrc);
 
   return (
