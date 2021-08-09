@@ -242,7 +242,7 @@ export default function Sprites(props) {
           }}
         >
           <option value="background">Background</option>
-          <option value="object">Object</option>
+          {currSprite !== 0 && <option value="object">Object</option>}
         </select>
       </div>
     </div>

@@ -108,6 +108,32 @@ export default function Game(props) {
     draw();
   }, [colors, sprites, background, objects, showObjects]);
 
+  // update map on sprite types change
+  useEffect(() => {
+    // slice map
+    const newBackground = background.slice();
+    const newObjects = objects.slice();
+    // background to object
+    for (let i = 0; i < background.length; i++) {
+      const sprite = background[i];
+      if (spriteTypes[sprite] === 'object') {
+        newBackground.splice(i, 1, 0);
+        newObjects.splice(i, 1, sprite);
+      }
+    }
+    // object to background
+    for (let i = 0; i < objects.length; i++) {
+      const sprite = objects[i];
+      if (spriteTypes[sprite] === 'background') {
+        newBackground.splice(i, 1, sprite);
+        newObjects.splice(i, 1, -1);
+      }
+    }
+    // update map
+    setBackground(newBackground);
+    setObjects(newObjects);
+  }, [spriteTypes]);
+
   return (
     <div className={styles.container}>
       <Button
