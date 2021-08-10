@@ -15,12 +15,12 @@ const spriteSize = 8;
 
 const defaultCode =
 `// called once when the game starts
-function start() {
+function start(mapIndex) {
 
 }
 
 // called every frame
-function update() {
+function update(mapIndex) {
 
 }
 `;

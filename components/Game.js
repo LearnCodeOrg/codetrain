@@ -86,13 +86,13 @@ export default function Game(props) {
     if (spriteType === 'background') {
       if (background[mapIndex] === currSprite) return;
       const newBackground = background.slice();
-      newBackground.splice(mapIndex, 1, currSprite);
+      newBackground[mapIndex] = currSprite;
       setBackground(newBackground);
     // update objects
     } else if (spriteTypes[currSprite] === 'object') {
       const newSprite = objects[mapIndex] === currSprite ? -1 : currSprite;
       const newObjects = objects.slice();
-      newObjects.splice(mapIndex, 1, newSprite);
+      newObjects[mapIndex] = newSprite;
       setObjects(newObjects);
       sketching = false;
     }
@@ -119,16 +119,16 @@ export default function Game(props) {
     for (let i = 0; i < background.length; i++) {
       const sprite = background[i];
       if (spriteTypes[sprite] === 'object') {
-        newBackground.splice(i, 1, 0);
-        newObjects.splice(i, 1, sprite);
+        newBackground[i] = 0;
+        newObjects[i] = sprite;
       }
     }
     // object to background
     for (let i = 0; i < objects.length; i++) {
       const sprite = objects[i];
       if (spriteTypes[sprite] === 'background') {
-        newBackground.splice(i, 1, sprite);
-        newObjects.splice(i, 1, -1);
+        newBackground[i] = sprite;
+        newObjects[i] = -1;
       }
     }
     // update map

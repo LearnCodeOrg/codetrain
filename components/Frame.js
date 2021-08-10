@@ -10,7 +10,7 @@ export default function Frame(props) {
   } = props;
 
   // returns function definition for given code
-  function getCodeFunction(code, i) {
+  function getCodeFunction(code, spriteIndex) {
     return (
 `(function() {
   ${code}
@@ -38,11 +38,7 @@ export default function Frame(props) {
     }
   </style>
   <script>
-    // sprites
-    const spriteCodes = [
-      ${codes.map((code, i) => getCodeFunction(code, i)).join(',\n')}
-    ];
-    // canvas functions
+    // variable declarations
     let canvas, ctx;
     const spriteSize = ${spriteSize};
     const mapSize = ${mapSize};
@@ -84,6 +80,11 @@ export default function Frame(props) {
         objects[mapIndex] = -1;
       }
     }
+    // sprite codes
+    const spriteCodes = [
+      ${codes.map((code, i) => getCodeFunction(code, i)).join(',\n')}
+    ];
+    // canvas functions
     function drawSprite(sprite, x, y) {
       // for each pixel
       for (let yp = 0; yp < spriteSize; yp++) {
@@ -116,9 +117,11 @@ export default function Frame(props) {
     // game loop
     function gameLoop(time) {
       // run update functions
-      background.forEach(sprite => spriteCodes[sprite].update());
-      objects.forEach(sprite => {
-        if (sprite !== -1) spriteCodes[sprite].update();
+      background.forEach((sprite, mapIndex) => {
+        spriteCodes[sprite].update(mapIndex);
+      });
+      objects.forEach((sprite, mapIndex) => {
+        if (sprite !== -1) spriteCodes[sprite].update(mapIndex);
       });
       // draw
       draw();
@@ -131,9 +134,11 @@ export default function Frame(props) {
       canvas = document.getElementById('canvas-game');
       ctx = canvas.getContext('2d');
       // run start functions
-      background.forEach(sprite => spriteCodes[sprite].start());
-      objects.forEach(sprite => {
-        if (sprite !== -1) spriteCodes[sprite].start()
+      background.forEach((sprite, mapIndex) => {
+        spriteCodes[sprite].start(mapIndex);
+      });
+      objects.forEach((sprite, mapIndex) => {
+        if (sprite !== -1) spriteCodes[sprite].start(mapIndex)
       });
       // start game loop
       requestAnimationFrame(gameLoop);

@@ -12,7 +12,7 @@ export default function Code(props) {
   // updates current color with given value
   function updateCode(val) {
     const newCodes = codes.slice();
-    newCodes.splice(currSprite, 1, val);
+    newCodes[currSprite] = val;
     setCodes(newCodes);
   }
 

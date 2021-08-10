@@ -30,7 +30,7 @@ export default function Sprites(props) {
   // updates current color with given value
   function updateColor(val) {
     const newColors = colors.slice();
-    newColors.splice(currColor, 1, val);
+    newColors[currColor] = val;
     setColors(newColors);
   }
 
@@ -154,8 +154,8 @@ export default function Sprites(props) {
     // return if unchanged
     if (newSprite[spriteIndex] === currColor) return;
     // set sprite
-    newSprite.splice(spriteIndex, 1, currColor);
-    newSprites.splice(currSprite, 1, newSprite);
+    newSprite[spriteIndex] = currColor;
+    newSprites[currSprite] = newSprite;
     setSprites(newSprites);
   }
 
@@ -237,7 +237,7 @@ export default function Sprites(props) {
           onChange={e => {
             const newType = e.target.value;
             const newSpriteTypes = spriteTypes.slice();
-            newSpriteTypes.splice(currSprite, 1, newType);
+            newSpriteTypes[currSprite] = newType;
             setSpriteTypes(newSpriteTypes);
           }}
         >
