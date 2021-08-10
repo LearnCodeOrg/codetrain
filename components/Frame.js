@@ -23,7 +23,7 @@ export default function Frame(props) {
 
   const gameSrc =
 `<html>
-  <body onload="gameStart()">
+  <body onload="__start__()">
     <canvas
       id="canvas-game"
       width=${mapPixels}
@@ -39,15 +39,12 @@ export default function Frame(props) {
   </style>
   <script>
     // variable declarations
-    let canvas, ctx;
-    const spriteSize = ${spriteSize};
     const mapSize = ${mapSize};
-    const spritePixels = ${spritePixels};
-    const pixelPixels = ${pixelPixels};
     const colors = ${JSON.stringify(colors)};
     const sprites = ${JSON.stringify(sprites)};
     const background = ${JSON.stringify(background)};
     const objects = ${JSON.stringify(objects)};
+    // sprite functions
     function move(mapIndex, dir) {
       const spriteIndex = objects[mapIndex];
       if (spriteIndex === -1) return;
@@ -84,52 +81,57 @@ export default function Frame(props) {
     const spriteCodes = [
       ${codes.map((code, i) => getCodeFunction(code, i)).join(',\n')}
     ];
-    // canvas functions
-    function drawSprite(sprite, x, y) {
-      // for each pixel
-      for (let yp = 0; yp < spriteSize; yp++) {
-        for (let xp = 0; xp < spriteSize; xp++) {
-          // set fill color
-          const colorIndex = yp * spriteSize + xp;
-          const color = colors[sprite[colorIndex]];
-          ctx.fillStyle = color;
-          // get fill position
-          let xm = x * spritePixels + xp * pixelPixels;
-          let ym = y * spritePixels + yp * pixelPixels;
-          // fill pixel
-          ctx.fillRect(xm, ym, pixelPixels, pixelPixels);
-        }
-      }
-    }
-    function draw() {
-      // for each tile
-      for (let y = 0; y < mapSize; y++) {
-        for (let x = 0; x < mapSize; x++) {
-          // get sprite
-          const spriteIndex = y * mapSize + x;
-          const sprite = objects[spriteIndex] === -1 ?
-          sprites[background[spriteIndex]] : sprites[objects[spriteIndex]];
-          // draw sprite
-          drawSprite(sprite, x, y);
-        }
-      }
-    }
-    // game loop
-    function gameLoop(time) {
-      // run update functions
-      background.forEach((sprite, mapIndex) => {
-        spriteCodes[sprite].update(mapIndex);
-      });
-      objects.forEach((sprite, mapIndex) => {
-        if (sprite !== -1) spriteCodes[sprite].update(mapIndex);
-      });
-      // draw
-      draw();
-      // continue loop
-      requestAnimationFrame(gameLoop);
-    }
     // runs after body has loaded
-    function gameStart() {
+    function __start__() {
+      // variable declarations
+      let canvas, ctx;
+      const spriteSize = ${spriteSize};
+      const spritePixels = ${spritePixels};
+      const pixelPixels = ${pixelPixels};
+      // canvas functions
+      function drawSprite(sprite, x, y) {
+        // for each pixel
+        for (let yp = 0; yp < spriteSize; yp++) {
+          for (let xp = 0; xp < spriteSize; xp++) {
+            // set fill color
+            const colorIndex = yp * spriteSize + xp;
+            const color = colors[sprite[colorIndex]];
+            ctx.fillStyle = color;
+            // get fill position
+            let xm = x * spritePixels + xp * pixelPixels;
+            let ym = y * spritePixels + yp * pixelPixels;
+            // fill pixel
+            ctx.fillRect(xm, ym, pixelPixels, pixelPixels);
+          }
+        }
+      }
+      function draw() {
+        // for each tile
+        for (let y = 0; y < mapSize; y++) {
+          for (let x = 0; x < mapSize; x++) {
+            // get sprite
+            const spriteIndex = y * mapSize + x;
+            const sprite = objects[spriteIndex] === -1 ?
+            sprites[background[spriteIndex]] : sprites[objects[spriteIndex]];
+            // draw sprite
+            drawSprite(sprite, x, y);
+          }
+        }
+      }
+      // game loop
+      function gameLoop(time) {
+        // run update functions
+        background.forEach((sprite, mapIndex) => {
+          spriteCodes[sprite].update(mapIndex);
+        });
+        objects.forEach((sprite, mapIndex) => {
+          if (sprite !== -1) spriteCodes[sprite].update(mapIndex);
+        });
+        // draw
+        draw();
+        // continue loop
+        requestAnimationFrame(gameLoop);
+      }
       // get canvas and context
       canvas = document.getElementById('canvas-game');
       ctx = canvas.getContext('2d');
