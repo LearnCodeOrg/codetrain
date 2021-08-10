@@ -44,6 +44,14 @@ export default function Frame(props) {
     ];
     // canvas functions
     let canvas, ctx;
+    const spriteSize = ${spriteSize};
+    const mapSize = ${mapSize};
+    const spritePixels = ${spritePixels};
+    const pixelPixels = ${pixelPixels};
+    const colors = ${JSON.stringify(colors)};
+    const sprites = ${JSON.stringify(sprites)};
+    const background = ${JSON.stringify(background)};
+    const objects = ${JSON.stringify(objects)};
     function drawSprite(sprite, x, y) {
       // for each pixel
       for (let yp = 0; yp < spriteSize; yp++) {
@@ -60,10 +68,25 @@ export default function Frame(props) {
         }
       }
     }
+    function draw() {
+      // for each tile
+      for (let y = 0; y < mapSize; y++) {
+        for (let x = 0; x < mapSize; x++) {
+          // get sprite
+          const spriteIndex = y * mapSize + x;
+          const sprite = objects[spriteIndex] === -1 ?
+          sprites[background[spriteIndex]] : sprites[objects[spriteIndex]];
+          // draw sprite
+          drawSprite(sprite, x, y);
+        }
+      }
+    }
     // game loop
     function gameLoop(time) {
       // run update functions
       sprites.forEach(sprite => sprite.update());
+      // draw
+      draw();
       // continue loop
       requestAnimationFrame(gameLoop);
     }
