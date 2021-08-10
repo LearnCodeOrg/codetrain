@@ -43,40 +43,49 @@ export default function Frame(props) {
     const colors = ${JSON.stringify(colors)};
     const sprites = ${JSON.stringify(sprites)};
     const background = ${JSON.stringify(background)};
-    const objects = ${JSON.stringify(objects)};
+    const objects = ${JSON.stringify(
+      objects.map(obj => ({ set: true, index: obj }))
+    )};
     let lastPressedKeys = {};
     const pressedKeys = {};
     // sprite functions
     function move(mapIndex, dir) {
-      const spriteIndex = objects[mapIndex];
+      // get object
+      const object = objects[mapIndex];
+      if (!object.set || object.index === -1) return;
+      const spriteIndex = object.index;
       if (spriteIndex === -1) return;
+      // move up
       if (dir === 'up') {
         if (mapIndex < mapSize) return;
         const newIndex = mapIndex - mapSize;
-        if (objects[newIndex] !== -1) return;
-        objects[newIndex] = spriteIndex;
-        objects[mapIndex] = -1;
+        if (objects[newIndex].index !== -1) return;
+        objects[newIndex] = { set: false, index: spriteIndex };
+        objects[mapIndex] = { set: true, index: -1 };
       }
+      // move down
       else if (dir === 'down') {
         if (mapIndex >= mapSize * mapSize - mapSize) return;
         const newIndex = mapIndex + mapSize;
-        if (objects[newIndex] !== -1) return;
-        objects[newIndex] = spriteIndex;
-        objects[mapIndex] = -1;
+        if (objects[newIndex].index !== -1) return;
+        objects[newIndex] = { set: false, index: spriteIndex };
+        objects[mapIndex] = { set: true, index: -1 };
       }
+      // move right
       else if (dir === 'right') {
         if (mapIndex % mapSize === mapSize - 1) return;
         const newIndex = mapIndex + 1;
-        if (objects[newIndex] !== -1) return;
-        objects[newIndex] = spriteIndex;
-        objects[mapIndex] = -1;
+        if (objects[newIndex].index !== -1) return;
+        objects[newIndex] = { set: false, index: spriteIndex };
+        objects[mapIndex] = { set: true, index: -1 };
       }
+      // move left
       else if (dir === 'left') {
         if (mapIndex % mapSize === 0) return;
         const newIndex = mapIndex - 1;
-        if (objects[newIndex] !== -1) return;
-        objects[newIndex] = spriteIndex;
-        objects[mapIndex] = -1;
+        if (objects[newIndex].index !== -1) return;
+        objects[newIndex] = { set: false, index: spriteIndex };
+        objects[mapIndex] = { set: true, index: -1 };
       }
     }
     // set up key listeners
@@ -129,9 +138,10 @@ export default function Frame(props) {
         for (let y = 0; y < mapSize; y++) {
           for (let x = 0; x < mapSize; x++) {
             // get sprite
-            const spriteIndex = y * mapSize + x;
-            const sprite = objects[spriteIndex] === -1 ?
-            sprites[background[spriteIndex]] : sprites[objects[spriteIndex]];
+            const mapIndex = y * mapSize + x;
+            const objectIndex = objects[mapIndex].index;
+            const sprite = objectIndex === -1 ?
+            sprites[background[mapIndex]] : sprites[objectIndex];
             // draw sprite
             drawSprite(sprite, x, y);
           }
@@ -140,12 +150,15 @@ export default function Frame(props) {
       // game loop
       function gameLoop(time) {
         // run update functions
-        background.forEach((sprite, mapIndex) => {
-          spriteCodes[sprite].update(mapIndex);
+        background.forEach((spriteIndex, mapIndex) => {
+          spriteCodes[spriteIndex].update(mapIndex);
         });
-        objects.forEach((sprite, mapIndex) => {
-          if (sprite !== -1) spriteCodes[sprite].update(mapIndex);
+        objects.forEach((object, mapIndex) => {
+          const spriteIndex = object.index;
+          if (spriteIndex !== -1) spriteCodes[spriteIndex].update(mapIndex);
         });
+        // update objects
+        objects.forEach(object => object.set = true);
         // draw
         draw();
         // update keys
@@ -157,11 +170,12 @@ export default function Frame(props) {
       canvas = document.getElementById('canvas-game');
       ctx = canvas.getContext('2d');
       // run start functions
-      background.forEach((sprite, mapIndex) => {
-        spriteCodes[sprite].start(mapIndex);
+      background.forEach((spriteIndex, mapIndex) => {
+        spriteCodes[spriteIndex].start(mapIndex);
       });
-      objects.forEach((sprite, mapIndex) => {
-        if (sprite !== -1) spriteCodes[sprite].start(mapIndex)
+      objects.forEach((object, mapIndex) => {
+        const spriteIndex = object.index;
+        if (spriteIndex !== -1) spriteCodes[spriteIndex].start(mapIndex);
       });
       // start game loop
       requestAnimationFrame(gameLoop);
