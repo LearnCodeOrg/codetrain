@@ -64,7 +64,7 @@ export default function Game(props) {
         // get sprite
         const spriteIndex = y * mapSize + x;
         const sprite = (objects[spriteIndex] === -1 || !showObjects) ?
-        sprites[background[spriteIndex]]: sprites[objects[spriteIndex]];
+        sprites[background[spriteIndex]] : sprites[objects[spriteIndex]];
         // draw sprite
         drawSprite(sprite, x, y);
       }
@@ -145,12 +145,25 @@ export default function Game(props) {
       >
         {playing ? <StopIcon /> : <PlayArrowIcon />}
       </Button>
-      {playing && <Frame mapPixels={mapPixels} codes={codes} />}
       {
+        playing &&
+        <Frame
+          mapPixels={mapPixels}
+          spritePixels={spritePixels}
+          pixelPixels={pixelPixels}
+          codes={codes}
+          colors={colors}
+          sprites={sprites}
+          background={background}
+          objects={objects}
+          spriteSize={spriteSize}
+          mapSize={mapSize}
+        />
+      }
+      <div style={ playing ? { display: 'none' } : {}}>
         <canvas
           ref={canvasRef}
           className={styles.screen}
-          style={playing ? { display: 'none' } : {}}
           onMouseDown={e => { sketching = true; sketchMap(e); }}
           onMouseMove={e => { if (sketching) sketchMap(e); }}
           onMouseUp={e => { sketching = false; }}
@@ -158,14 +171,14 @@ export default function Game(props) {
           width={mapPixels}
           height={mapPixels}
         />
-      }
-      <label htmlFor="showobjects-checkbox">Objects</label>
-      <input
-        id="showobjects-checkbox"
-        type="checkbox"
-        checked={showObjects}
-        onChange={e => setShowObjects(e.target.checked)}
-      />
+        <label htmlFor="showobjects-checkbox">Objects</label>
+        <input
+          id="showobjects-checkbox"
+          type="checkbox"
+          checked={showObjects}
+          onChange={e => setShowObjects(e.target.checked)}
+        />
+      </div>
     </div>
   );
 }
