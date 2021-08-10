@@ -23,7 +23,9 @@ let canvas, ctx;
 let sketching = false;
 
 export default function Game(props) {
-  const { sprites, colors, spriteSize, currSprite, spriteTypes } = props;
+  const {
+    sprites, colors, spriteSize, currSprite, spriteTypes, codes
+  } = props;
   const pixelPixels = Math.floor(spritePixels / spriteSize);
 
   const [playing, setPlaying] = useState(false);
@@ -143,7 +145,7 @@ export default function Game(props) {
       >
         {playing ? <StopIcon /> : <PlayArrowIcon />}
       </Button>
-      {playing && <Frame mapPixels={mapPixels} />}
+      {playing && <Frame mapPixels={mapPixels} codes={codes} />}
       {
         <canvas
           ref={canvasRef}
@@ -157,8 +159,9 @@ export default function Game(props) {
           height={mapPixels}
         />
       }
-      <label>Objects</label>
+      <label htmlFor="showobjects-checkbox">Objects</label>
       <input
+        id="showobjects-checkbox"
         type="checkbox"
         checked={showObjects}
         onChange={e => setShowObjects(e.target.checked)}

@@ -13,7 +13,21 @@ const Code = dynamic(import('../components/Code.js'), { ssr: false });
 const spriteCount = 16;
 const spriteSize = 8;
 
+const defaultCode =
+`// called once when the game starts
+function start() {
+
+}
+
+// called every frame
+function update() {
+
+}
+`;
+
 export default function Index() {
+  const [codes, setCodes] = useState(Array(spriteCount).fill(defaultCode));
+
   const [currSprite, setCurrSprite] = useState(0);
 
   const defaultColors = palettes[0].colors;
@@ -28,7 +42,12 @@ export default function Index() {
 
   return (
     <div className={styles.container}>
-      <Code currSprite={currSprite} spriteCount={spriteCount} />
+      <Code
+        currSprite={currSprite}
+        spriteCount={spriteCount}
+        codes={codes}
+        setCodes={setCodes}
+      />
       <Sprites
         colors={colors} setColors={setColors}
         sprites={sprites} setSprites={setSprites}
@@ -43,6 +62,7 @@ export default function Index() {
         spriteSize={spriteSize}
         currSprite={currSprite}
         spriteTypes={spriteTypes}
+        codes={codes}
       />
     </div>
   );
