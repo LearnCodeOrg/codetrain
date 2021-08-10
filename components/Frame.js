@@ -23,7 +23,7 @@ export default function Frame(props) {
 
   const gameSrc =
 `<html>
-  <body onload="start()">
+  <body onload="gameStart()">
     <canvas
       id="canvas-game"
       width=${mapPixels}
@@ -39,7 +39,7 @@ export default function Frame(props) {
   </style>
   <script>
     // sprites
-    const sprites = [
+    const spriteCodes = [
       ${codes.map((code, i) => getCodeFunction(code, i)).join(',\n')}
     ];
     // canvas functions
@@ -84,19 +84,25 @@ export default function Frame(props) {
     // game loop
     function gameLoop(time) {
       // run update functions
-      sprites.forEach(sprite => sprite.update());
+      background.forEach(sprite => spriteCodes[sprite].update());
+      objects.forEach(sprite => {
+        if (sprite !== -1) spriteCodes[sprite].update();
+      });
       // draw
       draw();
       // continue loop
       requestAnimationFrame(gameLoop);
     }
     // runs after body has loaded
-    function start() {
+    function gameStart() {
       // get canvas and context
       canvas = document.getElementById('canvas-game');
       ctx = canvas.getContext('2d');
       // run start functions
-      sprites.forEach(sprite => sprite.start());
+      background.forEach(sprite => spriteCodes[sprite].start());
+      objects.forEach(sprite => {
+        if (sprite !== -1) spriteCodes[sprite].start()
+      });
       // start game loop
       requestAnimationFrame(gameLoop);
     }
