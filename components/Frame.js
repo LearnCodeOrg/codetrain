@@ -44,6 +44,8 @@ export default function Frame(props) {
     const sprites = ${JSON.stringify(sprites)};
     const background = ${JSON.stringify(background)};
     const objects = ${JSON.stringify(objects)};
+    let lastPressedKeys = {};
+    const pressedKeys = {};
     // sprite functions
     function move(mapIndex, dir) {
       const spriteIndex = objects[mapIndex];
@@ -76,6 +78,23 @@ export default function Frame(props) {
         objects[newIndex] = spriteIndex;
         objects[mapIndex] = -1;
       }
+    }
+    // set up key listeners
+    window.onkeydown = e => pressedKeys[e.keyCode] = true;
+    window.onkeyup = e => pressedKeys[e.keyCode] = false;
+    function isKeyDown(key) {
+      // handle invalid key
+      if (typeof key !== 'string' || !key.length) return undefined;
+      // handle key code
+      const keyCode = key.toUpperCase().charCodeAt(0);
+      return pressedKeys[keyCode];
+    }
+    function isKey(key) {
+      // handle invalid key
+      if (typeof key !== 'string' || !key.length) return undefined;
+      // handle key code
+      const keyCode = key.toUpperCase().charCodeAt(0);
+      return pressedKeys[keyCode] && !lastPressedKeys[keyCode];
     }
     // sprite codes
     const spriteCodes = [
@@ -129,6 +148,8 @@ export default function Frame(props) {
         });
         // draw
         draw();
+        // update keys
+        lastPressedKeys = Object.assign({}, pressedKeys);
         // continue loop
         requestAnimationFrame(gameLoop);
       }
