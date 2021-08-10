@@ -4,7 +4,10 @@ import Button from '@material-ui/core/Button';
 import styles from '../styles/Frame.module.css';
 
 export default function Frame(props) {
-  const { mapPixels, codes } = props;
+  const {
+    mapPixels, spriteSize, spritePixels, pixelPixels,
+    mapSize, codes, colors, sprites, background, objects
+  } = props;
 
   // returns function definition for given code
   function getCodeFunction(code, i) {
@@ -41,6 +44,22 @@ export default function Frame(props) {
     ];
     // canvas functions
     let canvas, ctx;
+    function drawSprite(sprite, x, y) {
+      // for each pixel
+      for (let yp = 0; yp < spriteSize; yp++) {
+        for (let xp = 0; xp < spriteSize; xp++) {
+          // set fill color
+          const colorIndex = yp * spriteSize + xp;
+          const color = colors[sprite[colorIndex]];
+          ctx.fillStyle = color;
+          // get fill position
+          let xm = x * spritePixels + xp * pixelPixels;
+          let ym = y * spritePixels + yp * pixelPixels;
+          // fill pixel
+          ctx.fillRect(xm, ym, pixelPixels, pixelPixels);
+        }
+      }
+    }
     // game loop
     function gameLoop(time) {
       // run update functions
