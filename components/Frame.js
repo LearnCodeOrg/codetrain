@@ -1,3 +1,6 @@
+import GetAppIcon from '@material-ui/icons/GetApp';
+import Button from '@material-ui/core/Button';
+
 import styles from '../styles/Frame.module.css';
 
 export default function Frame(props) {
@@ -59,14 +62,30 @@ export default function Frame(props) {
 </html>
 `;
 
+  // downloads game as an html file
+  function downloadGame() {
+    const link = document.createElement('a');
+    link.download = 'game.html';
+    link.href = `data:text/html;charset=utf-8,${encodeURIComponent(gameSrc)}`;
+    link.click();
+  }
+
   return (
-    <iframe
-      title="game"
-      sandbox="allow-scripts"
-      srcDoc={gameSrc}
-      width={mapPixels}
-      height={mapPixels}
-      frameBorder="0"
-    />
+    <>
+      <Button
+        variant="contained"
+        onClick={downloadGame}
+      >
+        <GetAppIcon />
+      </Button>
+      <iframe
+        title="game"
+        sandbox="allow-scripts"
+        srcDoc={gameSrc}
+        width={mapPixels}
+        height={mapPixels}
+        frameBorder="0"
+      />
+    </>
   );
 }
