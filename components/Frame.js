@@ -52,6 +52,38 @@ export default function Frame(props) {
     const sprites = ${JSON.stringify(sprites)};
     const background = ${JSON.stringify(background)};
     const objects = ${JSON.stringify(objects)};
+    function move(mapIndex, dir) {
+      const spriteIndex = objects[mapIndex];
+      if (spriteIndex === -1) return;
+      if (dir === 'up') {
+        if (mapIndex < mapSize) return;
+        const newIndex = mapIndex - mapSize;
+        if (objects[newIndex] !== -1) return;
+        objects[newIndex] = spriteIndex;
+        objects[mapIndex] = -1;
+      }
+      else if (dir === 'down') {
+        if (mapIndex >= mapSize * mapSize - mapSize) return;
+        const newIndex = mapIndex + mapSize;
+        if (objects[newIndex] !== -1) return;
+        objects[newIndex] = spriteIndex;
+        objects[mapIndex] = -1;
+      }
+      else if (dir === 'right') {
+        if (mapIndex % mapSize === mapSize - 1) return;
+        const newIndex = mapIndex + 1;
+        if (objects[newIndex] !== -1) return;
+        objects[newIndex] = spriteIndex;
+        objects[mapIndex] = -1;
+      }
+      else if (dir === 'left') {
+        if (mapIndex % mapSize === 0) return;
+        const newIndex = mapIndex - 1;
+        if (objects[newIndex] !== -1) return;
+        objects[newIndex] = spriteIndex;
+        objects[mapIndex] = -1;
+      }
+    }
     function drawSprite(sprite, x, y) {
       // for each pixel
       for (let yp = 0; yp < spriteSize; yp++) {
