@@ -1,7 +1,5 @@
 import AceEditor from 'react-ace';
 
-import { useState } from 'react';
-
 import 'ace-builds/src-noconflict/mode-javascript.js';
 import 'ace-builds/src-noconflict/theme-monokai.js';
 import styles from '../styles/Code.module.css';

@@ -10,17 +10,18 @@ import styles from '../styles/Index.module.css';
 
 const Code = dynamic(import('../components/Code.js'), { ssr: false });
 
+// units
 const spriteCount = 16;
 const spriteSize = 8;
 
 const defaultCode =
 `// called once when the game starts
-function start(mapIndex) {
+function start() {
 
 }
 
 // called every frame
-function update(mapIndex) {
+function update() {
 
 }
 `;

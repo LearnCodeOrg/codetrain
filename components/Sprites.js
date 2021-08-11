@@ -1,4 +1,3 @@
-import EditIcon from '@material-ui/icons/Edit';
 import { useEffect, useState } from 'react';
 import { palettes } from '../data/palettes.js';
 
@@ -65,7 +64,6 @@ export default function Sprites(props) {
         }
       }
     }
-    if (currSprite === -1) return;
     // get outline coordinates
     const xo = currSprite % 4;
     const yo = Math.floor(currSprite / 4);
@@ -117,10 +115,7 @@ export default function Sprites(props) {
 
   // draws current sprite
   function draw() {
-    // update select canvas
-    drawSelect();
     // get current sprite
-    if (currSprite === -1) return;
     const sprite = sprites[currSprite];
     // for each pixel
     for (let x = 0; x < spriteSize; x++) {
@@ -136,6 +131,8 @@ export default function Sprites(props) {
         drawCtx.fillRect(xPos, yPos, pixelPixels, pixelPixels);
       }
     }
+    // update select canvas
+    drawSelect();
   }
 
   // sketches sprite with given mouse event data
@@ -219,15 +216,6 @@ export default function Sprites(props) {
       </div>
       <div>
         <h1>Sprites</h1>
-        <button
-          className={
-            currSprite === -1 ? `${styles.editbutton} ${styles.selected}` :
-            styles.editbutton
-          }
-          onClick={() => setCurrSprite(-1)}
-        >
-          <EditIcon />
-        </button>
         <canvas
           id="sprite-select"
           width={fullSelectPixels}
@@ -235,29 +223,27 @@ export default function Sprites(props) {
           className={styles.selectcanvas}
           onMouseDown={select}
         />
-        <div style={currSprite === -1 ? { display: 'none' } : {}}>
-          <canvas
-            id="sprite-draw"
-            width={spritePixels}
-            height={spritePixels}
-            onMouseDown={e => { sketching = true; sketch(e); }}
-            onMouseMove={e => { if (sketching) sketch(e); }}
-            onMouseUp={e => { sketching = false; }}
-            onMouseLeave={e => { sketching = false; }}
-          />
-          <select
-            value={spriteTypes[currSprite]}
-            onChange={e => {
-              const newType = e.target.value;
-              const newSpriteTypes = spriteTypes.slice();
-              newSpriteTypes[currSprite] = newType;
-              setSpriteTypes(newSpriteTypes);
-            }}
-          >
-            <option value="background">Background</option>
-            {currSprite !== 0 && <option value="object">Object</option>}
-          </select>
-        </div>
+        <canvas
+          id="sprite-draw"
+          width={spritePixels}
+          height={spritePixels}
+          onMouseDown={e => { sketching = true; sketch(e); }}
+          onMouseMove={e => { if (sketching) sketch(e); }}
+          onMouseUp={e => { sketching = false; }}
+          onMouseLeave={e => { sketching = false; }}
+        />
+        <select
+          value={spriteTypes[currSprite]}
+          onChange={e => {
+            const newType = e.target.value;
+            const newSpriteTypes = spriteTypes.slice();
+            newSpriteTypes[currSprite] = newType;
+            setSpriteTypes(newSpriteTypes);
+          }}
+        >
+          <option value="background">Background</option>
+          {currSprite !== 0 && <option value="object">Object</option>}
+        </select>
       </div>
     </div>
   );
