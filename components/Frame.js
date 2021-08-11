@@ -9,8 +9,10 @@ export default function Frame(props) {
     mapSize, codes, colors, sprites, background, objects
   } = props;
 
-  // returns function definition for given code
-  function getCodeFunction(code, spriteIndex) {
+  // returns function definition for given object
+  function getCodeFunction(spriteIndex, mapIndex) {
+    // return empty if no object
+    if (spriteIndex === -1) return '';
     return (
 `(function() {
   ${code}
@@ -18,7 +20,7 @@ export default function Frame(props) {
     start: typeof start === 'function' ? start : () => {},
     update: typeof update === 'function' ? update : () => {}
   };
-})()`);
+})(),`);
   }
 
   const gameSrc =
@@ -43,9 +45,7 @@ export default function Frame(props) {
     const colors = ${JSON.stringify(colors)};
     const sprites = ${JSON.stringify(sprites)};
     const background = ${JSON.stringify(background)};
-    const objects = ${JSON.stringify(
-      objects.map(obj => ({ set: true, index: obj }))
-    )};
+    const objects = ${JSON.stringify(objects)};
     let lastPressedKeys = {};
     const pressedKeys = {};
     // sprite functions
@@ -107,7 +107,9 @@ export default function Frame(props) {
     }
     // sprite codes
     const spriteCodes = [
-      ${codes.map((code, i) => getCodeFunction(code, i)).join(',\n')}
+      ${objects.map((object, mapIndex) =>
+        getCodeFunction(object, mapIndex)
+      ).join('')}
     ];
     // runs after body has loaded
     function __start__() {
@@ -139,9 +141,8 @@ export default function Frame(props) {
           for (let x = 0; x < mapSize; x++) {
             // get sprite
             const mapIndex = y * mapSize + x;
-            const objectIndex = objects[mapIndex].index;
-            const sprite = objectIndex === -1 ?
-            sprites[background[mapIndex]] : sprites[objectIndex];
+            const sprite = objects[mapIndex] === -1 ?
+            sprites[background[mapIndex]] : sprites[objects[mapIndex]];
             // draw sprite
             drawSprite(sprite, x, y);
           }
@@ -150,15 +151,7 @@ export default function Frame(props) {
       // game loop
       function gameLoop(time) {
         // run update functions
-        background.forEach((spriteIndex, mapIndex) => {
-          spriteCodes[spriteIndex].update(mapIndex);
-        });
-        objects.forEach((object, mapIndex) => {
-          const spriteIndex = object.index;
-          if (spriteIndex !== -1) spriteCodes[spriteIndex].update(mapIndex);
-        });
-        // update objects
-        objects.forEach(object => object.set = true);
+        spriteCodes.forEach(code => code.update());
         // draw
         draw();
         // update keys
@@ -170,13 +163,7 @@ export default function Frame(props) {
       canvas = document.getElementById('canvas-game');
       ctx = canvas.getContext('2d');
       // run start functions
-      background.forEach((spriteIndex, mapIndex) => {
-        spriteCodes[spriteIndex].start(mapIndex);
-      });
-      objects.forEach((object, mapIndex) => {
-        const spriteIndex = object.index;
-        if (spriteIndex !== -1) spriteCodes[spriteIndex].start(mapIndex);
-      });
+      spriteCodes.forEach(code => code.start());
       // start game loop
       requestAnimationFrame(gameLoop);
     }
