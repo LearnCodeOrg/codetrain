@@ -18,35 +18,8 @@ export default function Frame(props) {
   let mapIndex = ${mapIndex};
   const spriteIndex = ${spriteIndex};
   function move(dir) {
-    if (dir === 'left') {
-      if (mapIndex % mapSize === 0) return;
-      const newIndex = mapIndex - 1;
-      if (objects[newIndex] !== -1) return;
-      objects[newIndex] = spriteIndex;
-      objects[mapIndex] = -1;
-      mapIndex = newIndex;
-    } else if (dir === 'right') {
-      if (mapIndex % mapSize === mapSize - 1) return;
-      const newIndex = mapIndex + 1;
-      if (objects[newIndex] !== -1) return;
-      objects[newIndex] = spriteIndex;
-      objects[mapIndex] = -1;
-      mapIndex = newIndex;
-    } else if (dir === 'up') {
-      if (mapIndex < mapSize) return;
-      const newIndex = mapIndex - mapSize;
-      if (objects[newIndex] !== -1) return;
-      objects[newIndex] = spriteIndex;
-      objects[mapIndex] = -1;
-      mapIndex = newIndex;
-    } else if (dir === 'down') {
-      if (mapIndex >= mapSize * mapSize - mapSize) return;
-      const newIndex = mapIndex + mapSize;
-      if (objects[newIndex] !== -1) return;
-      objects[newIndex] = spriteIndex;
-      objects[mapIndex] = -1;
-      mapIndex = newIndex;
-    }
+    const newIndex = __move__(dir, mapIndex, spriteIndex);
+    if (newIndex) mapIndex = newIndex;
   }
   ${codes[spriteIndex]}
   return {
@@ -81,6 +54,41 @@ export default function Frame(props) {
     const objects = ${JSON.stringify(objects)};
     let lastPressedKeys = {};
     const pressedKeys = {};
+    // sprite functions
+    function sleep(sec) {
+      return new Promise(resolve => setTimeout(resolve, sec * 1000));
+    }
+    function __move__(dir, mapIndex, spriteIndex) {
+      if (dir === 'left') {
+        if (mapIndex % mapSize === 0) return;
+        const newIndex = mapIndex - 1;
+        if (objects[newIndex] !== -1) return;
+        objects[newIndex] = spriteIndex;
+        objects[mapIndex] = -1;
+        return newIndex;
+      } else if (dir === 'right') {
+        if (mapIndex % mapSize === mapSize - 1) return;
+        const newIndex = mapIndex + 1;
+        if (objects[newIndex] !== -1) return;
+        objects[newIndex] = spriteIndex;
+        objects[mapIndex] = -1;
+        return newIndex;
+      } else if (dir === 'up') {
+        if (mapIndex < mapSize) return;
+        const newIndex = mapIndex - mapSize;
+        if (objects[newIndex] !== -1) return;
+        objects[newIndex] = spriteIndex;
+        objects[mapIndex] = -1;
+        return newIndex;
+      } else if (dir === 'down') {
+        if (mapIndex >= mapSize * mapSize - mapSize) return;
+        const newIndex = mapIndex + mapSize;
+        if (objects[newIndex] !== -1) return;
+        objects[newIndex] = spriteIndex;
+        objects[mapIndex] = -1;
+        return newIndex;
+      }
+    }
     // set up key listeners
     window.onkeydown = e => pressedKeys[e.keyCode] = true;
     window.onkeyup = e => pressedKeys[e.keyCode] = false;
