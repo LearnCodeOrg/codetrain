@@ -31,3 +31,36 @@ An educational browser game engine.
 `background`: array of background sprite indexes
 
 `objects`: array of object sprite indexes
+
+# Examples
+
+```js
+// looping and logging
+function start() {
+  for (i in range(3)) console.log(i);
+}
+```
+
+```js
+// basic object movement
+function update() {
+  if (isKey('w')) move('up');
+  if (isKey('a')) move('left');
+  if (isKey('s')) move('down');
+  if (isKey('d')) move('right');
+}
+```
+
+```js
+// basic object animation
+async function animate() {
+  await sleep(1);
+  move('right');
+  await sleep(1);
+  move('left');
+  animate();
+}
+function start() {
+  animate();
+}
+```
