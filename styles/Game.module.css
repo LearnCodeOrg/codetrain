@@ -1,6 +1,9 @@
 .container {
   border-radius: 8px;
   margin: 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .screen {

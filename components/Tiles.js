@@ -171,7 +171,7 @@ export default function Tiles(props) {
   }, [colors, tiles, currSprite]);
 
   return (
-    <div>
+    <div className={styles.container}>
       <h1>Tiles</h1>
       <canvas
         id="sprite-select"

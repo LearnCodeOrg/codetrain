@@ -9,7 +9,7 @@ export default function Colors(props) {
   const [palette, setPalette] = useState(0);
 
   return (
-    <div>
+    <div className={styles.container}>
       <h1>Colors</h1>
       <div className={styles.tilegrid}>
         {

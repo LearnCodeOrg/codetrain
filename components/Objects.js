@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import styles from '../styles/Tiles.module.css';
+import styles from '../styles/Objects.module.css';
 
 const pixelPixels = 16;
 const selectPixels = 128;
@@ -172,7 +172,7 @@ export default function Objects(props) {
   }, [colors, objects, currSprite]);
 
   return (
-    <div>
+    <div className={styles.container}>
       <h1>Objects</h1>
       <canvas
         id="object-select"
