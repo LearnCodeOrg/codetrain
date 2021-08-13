@@ -1,5 +1,6 @@
 import Game from '../components/Game.js';
 import Guide from '../components/Guide.js';
+import Colors from '../components/Colors.js';
 import Tiles from '../components/Tiles.js';
 
 import dynamic from 'next/dynamic';
@@ -33,6 +34,7 @@ export default function Index() {
 
   const defaultColors = palettes[0].colors;
   const [colors, setColors] = useState(defaultColors);
+  const [currColor, setCurrColor] = useState(0);
 
   const defaultSprites = Array(spriteCount).fill(
     Array(spriteSize * spriteSize).fill(0)
@@ -49,10 +51,15 @@ export default function Index() {
         codes={codes}
         setCodes={setCodes}
       />
-      <Tiles
+      <Colors
         colors={colors} setColors={setColors}
+        currColor={currColor} setCurrColor={setCurrColor}
+      />
+      <Tiles
+        colors={colors}
         tiles={tiles} setTiles={setTiles}
         spriteTypes={spriteTypes} setSpriteTypes={setSpriteTypes}
+        currColor={currColor} setCurrColor={setCurrColor}
         currSprite={currSprite} setCurrSprite={setCurrSprite}
         spriteCount={spriteCount}
         spriteSize={spriteSize}

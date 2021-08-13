@@ -1,0 +1,26 @@
+.tilegrid {
+  display: flex;
+  flex-wrap: wrap;
+  width: 128px;
+  outline: 4px solid #000;
+  margin: 20px;
+}
+
+.tile {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+
+.selected {
+  box-sizing: content-box;
+  box-shadow: inset 0 0 0 4px #000;
+  outline: 4px solid #fff;
+  z-index: 1;
+}
+
+.colorinput {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
