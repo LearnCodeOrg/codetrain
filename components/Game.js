@@ -3,6 +3,7 @@ import StopIcon from '@material-ui/icons/Stop';
 import Button from '@material-ui/core/Button';
 import Frame from '../components/Frame.js';
 
+import clamp from '../util/clamp.js';
 import { useEffect, useRef, useState } from 'react';
 
 import styles from '../styles/Game.module.css';
@@ -85,8 +86,8 @@ export default function Game(props) {
     const currX = e.clientX - canvas.offsetLeft + window.scrollX;
     const currY = e.clientY - canvas.offsetTop + window.scrollY;
     // get x and y in map units
-    const tileX = Math.floor(currX / spritePixels);
-    const tileY = Math.floor(currY / spritePixels);
+    const tileX = clamp(Math.floor(currX / spritePixels), 0, mapSize - 1);
+    const tileY = clamp(Math.floor(currY / spritePixels), 0, mapSize - 1);
     // get map index
     const mapIndex = tileY * mapSize + tileX;
     // sketch tile
@@ -98,8 +99,8 @@ export default function Game(props) {
       setBackground(newBackground);
     } else {
       // push object
-      const x = Math.max(0, Math.min(currX, mapPixels - spritePixels));
-      const y = Math.max(0, Math.min(currY, mapPixels - spritePixels));
+      const x = clamp(currX, 0, mapPixels - spritePixels);
+      const y = clamp(currY, 0, mapPixels - spritePixels);
       const object = { x, y, sprite: currObject };
       const newGameObjects = gameObjects.slice();
       newGameObjects.push(object);

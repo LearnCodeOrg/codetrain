@@ -1,6 +1,7 @@
-import styles from '../styles/Draw.module.css';
-
+import clamp from '../util/clamp.js';
 import { useEffect } from 'react';
+
+import styles from '../styles/Draw.module.css';
 
 let sketching = false;
 
@@ -21,12 +22,8 @@ export default function Draw(props) {
     const currX = e.clientX - canvas.offsetLeft + window.scrollX;
     const currY = e.clientY - canvas.offsetTop + window.scrollY;
     // get x and y in pixel units
-    const pixelX = Math.max(
-      0, Math.min(Math.floor(currX / pixelPixels), spriteSize - 1)
-    );
-    const pixelY = Math.max(
-      0, Math.min(Math.floor(currY / pixelPixels), spriteSize - 1)
-    );
+    const pixelX = clamp(Math.floor(currX / pixelPixels), 0, spriteSize - 1);
+    const pixelY = clamp(Math.floor(currY / pixelPixels), 0, spriteSize - 1);
     // get sprite
     const spriteIndex = pixelY * spriteSize + pixelX;
     if (currTile !== -1) {

@@ -85,12 +85,8 @@ export default function Objects(props) {
     const currX = e.clientX - canvas.offsetLeft + window.scrollX - selectBorder;
     const currY = e.clientY - canvas.offsetTop + window.scrollY - selectBorder;
     // get x and y in grid units
-    const gridX = Math.max(
-      0, Math.min(Math.floor(currX / selectSpritePixels), sqrtSpriteCount - 1)
-    );
-    const gridY = Math.max(
-      0, Math.min(Math.floor(currY / selectSpritePixels), sqrtSpriteCount - 1)
-    );
+    const gridX = clamp(Math.floor(currX / selectSpritePixels), 0, sqrtSpriteCount - 1);
+    const gridY = clamp(Math.floor(currY / selectSpritePixels), 0, sqrtSpriteCount - 1);
     // select sprite
     const spriteIndex = gridY * sqrtSpriteCount + gridX;
     if (spriteIndex === currObject) return;
