@@ -24,7 +24,7 @@ let sketching = false;
 
 export default function Game(props) {
   const {
-    tiles, colors, spriteSize, currTile, currObject, codes
+    tiles, objects, colors, spriteSize, currTile, currObject, codes
   } = props;
   const pixelPixels = Math.floor(spritePixels / spriteSize);
 
@@ -32,7 +32,7 @@ export default function Game(props) {
   const [background, setBackground] = useState(
     Array(mapSize * mapSize).fill(0)
   );
-  const [objects, setObjects] = useState(Array(mapSize * mapSize).fill(-1));
+  const [gameObjects, setGameObjects] = useState([]);
 
   const [showObjects, setShowObjects] = useState(true);
 
@@ -48,8 +48,8 @@ export default function Game(props) {
         const color = colors[sprite[colorIndex]];
         ctx.fillStyle = color;
         // get fill position
-        let xm = x * spritePixels + xp * pixelPixels;
-        let ym = y * spritePixels + yp * pixelPixels;
+        let xm = x + xp * pixelPixels;
+        let ym = y + yp * pixelPixels;
         // fill pixel
         ctx.fillRect(xm, ym, pixelPixels, pixelPixels);
       }
@@ -63,11 +63,19 @@ export default function Game(props) {
       for (let x = 0; x < mapSize; x++) {
         // get sprite
         const spriteIndex = y * mapSize + x;
-        const sprite = (objects[spriteIndex] === -1 || !showObjects) ?
-        tiles[background[spriteIndex]] : tiles[objects[spriteIndex]];
+        const sprite = tiles[background[spriteIndex]];
         // draw sprite
-        drawSprite(sprite, x, y);
+        drawSprite(sprite, x * spritePixels, y * spritePixels);
       }
+    }
+    // return if not showing objects
+    if (!showObjects) return;
+    // for each object
+    for (const object of gameObjects) {
+      // draw objects
+      const { x, y } = object;
+      const sprite = objects[object.sprite];
+      drawSprite(sprite, x, y);
     }
   }
 
@@ -88,6 +96,15 @@ export default function Game(props) {
       const newBackground = background.slice();
       newBackground[mapIndex] = currTile;
       setBackground(newBackground);
+    } else {
+      // push object
+      const x = Math.max(0, Math.min(currX, mapPixels - spritePixels));
+      const y = Math.max(0, Math.min(currY, mapPixels - spritePixels));
+      const object = { x, y, sprite: currObject };
+      const newGameObjects = gameObjects.slice();
+      newGameObjects.push(object);
+      setGameObjects(newGameObjects);
+      sketching = false;
     }
   }
 
@@ -101,7 +118,7 @@ export default function Game(props) {
   // draw map when any elements change
   useEffect(() => {
     draw();
-  }, [colors, tiles, background, objects, showObjects]);
+  }, [colors, tiles, objects, background, gameObjects, showObjects]);
 
   return (
     <div className={styles.container}>

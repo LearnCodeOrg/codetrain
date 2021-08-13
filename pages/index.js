@@ -86,8 +86,7 @@ export default function Index() {
         setTiles={setTiles} setObjects={setObjects}
       />
       <Game
-        tiles={tiles}
-        colors={colors}
+        colors={colors} tiles={tiles} objects={objects}
         spriteSize={spriteSize}
         currTile={currTile}
         currObject={currObject}
