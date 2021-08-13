@@ -2,6 +2,7 @@ import Game from '../components/Game.js';
 import Guide from '../components/Guide.js';
 import Colors from '../components/Colors.js';
 import Tiles from '../components/Tiles.js';
+import Objects from '../components/Objects.js';
 
 import dynamic from 'next/dynamic';
 import { useState } from 'react';
@@ -12,7 +13,8 @@ import styles from '../styles/Index.module.css';
 const Code = dynamic(import('../components/Code.js'), { ssr: false });
 
 // units
-const spriteCount = 16;
+const tileCount = 16;
+const objectCount = 16;
 const spriteSize = 8;
 
 const defaultCode =
@@ -28,7 +30,7 @@ function update() {
 `;
 
 export default function Index() {
-  const [codes, setCodes] = useState(Array(spriteCount).fill(defaultCode));
+  const [codes, setCodes] = useState(Array(objectCount).fill(defaultCode));
 
   const [currSprite, setCurrSprite] = useState(0);
 
@@ -36,16 +38,15 @@ export default function Index() {
   const [colors, setColors] = useState(defaultColors);
   const [currColor, setCurrColor] = useState(0);
 
-  const defaultSprites = Array(spriteCount).fill(
-    Array(spriteSize * spriteSize).fill(0)
-  );
-  const [tiles, setTiles] = useState(defaultSprites);
+  const defaultSprite = Array(spriteSize * spriteSize).fill(0);
+  const [tiles, setTiles] = useState(Array(tileCount).fill(defaultSprite));
+  const [objects, setObjects] = useState(Array(objectCount).fill(defaultSprite));
 
   return (
     <div className={styles.container}>
       <Code
         currSprite={currSprite}
-        spriteCount={spriteCount}
+        objectCount={objectCount}
         codes={codes}
         setCodes={setCodes}
       />
@@ -58,7 +59,16 @@ export default function Index() {
         tiles={tiles} setTiles={setTiles}
         currColor={currColor} setCurrColor={setCurrColor}
         currSprite={currSprite} setCurrSprite={setCurrSprite}
-        spriteCount={spriteCount}
+        tileCount={tileCount}
+        spriteSize={spriteSize}
+      />
+      <Objects
+        colors={colors}
+        objects={objects} setObjects={setObjects}
+        currColor={currColor} setCurrColor={setCurrColor}
+        currSprite={currSprite} setCurrSprite={setCurrSprite}
+        tileCount={tileCount}
+        objectCount={objectCount}
         spriteSize={spriteSize}
       />
       <Game
