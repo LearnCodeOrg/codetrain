@@ -12,9 +12,9 @@ let drawCanvas, drawCtx;
 
 let sketching = false;
 
-export default function Sprites(props) {
+export default function Tiles(props) {
   const {
-    colors, setColors, sprites, setSprites, spriteTypes, setSpriteTypes,
+    colors, setColors, tiles, setTiles, spriteTypes, setSpriteTypes,
     currSprite, setCurrSprite, spriteCount, spriteSize
   } = props;
   const spritePixels = spriteSize * pixelPixels;
@@ -44,7 +44,7 @@ export default function Sprites(props) {
       for (let y = 0; y < sqrtSpriteCount; y++) {
         // get sprite
         const spriteIndex = y * sqrtSpriteCount + x;
-        const sprite = sprites[spriteIndex];
+        const sprite = tiles[spriteIndex];
         // for each pixel
         for (let xp = 0; xp < spriteSize; xp++) {
           for (let yp = 0; yp < spriteSize; yp++) {
@@ -116,7 +116,7 @@ export default function Sprites(props) {
   // draws current sprite
   function draw() {
     // get current sprite
-    const sprite = sprites[currSprite];
+    const sprite = tiles[currSprite];
     // for each pixel
     for (let x = 0; x < spriteSize; x++) {
       for (let y = 0; y < spriteSize; y++) {
@@ -149,14 +149,14 @@ export default function Sprites(props) {
     );
     // get sprite
     const spriteIndex = pixelY * spriteSize + pixelX;
-    const newSprites = sprites.slice();
-    const newSprite = newSprites[currSprite].slice();
+    const newTiles = tiles.slice();
+    const newSprite = tiles[currSprite].slice();
     // return if unchanged
     if (newSprite[spriteIndex] === currColor) return;
     // set sprite
     newSprite[spriteIndex] = currColor;
-    newSprites[currSprite] = newSprite;
-    setSprites(newSprites);
+    newTiles[currSprite] = newSprite;
+    setTiles(newTiles);
   }
 
   // get canvas contexts on start
@@ -167,10 +167,10 @@ export default function Sprites(props) {
     drawCtx = drawCanvas.getContext('2d');
   }, []);
 
-  // draw sprite when colors or sprites change
+  // draw sprite when colors or tiles change
   useEffect(() => {
     draw();
-  }, [colors, sprites, currSprite]);
+  }, [colors, tiles, currSprite]);
 
   return (
     <div className={styles.container}>
@@ -215,7 +215,7 @@ export default function Sprites(props) {
         </select>
       </div>
       <div>
-        <h1>Sprites</h1>
+        <h1>Tiles</h1>
         <canvas
           id="sprite-select"
           width={fullSelectPixels}

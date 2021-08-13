@@ -1,6 +1,6 @@
 import Game from '../components/Game.js';
 import Guide from '../components/Guide.js';
-import Sprites from '../components/Sprites.js';
+import Tiles from '../components/Tiles.js';
 
 import dynamic from 'next/dynamic';
 import { useState } from 'react';
@@ -38,7 +38,7 @@ export default function Index() {
     Array(spriteSize * spriteSize).fill(0)
   );
   const defaultSpriteTypes = Array(spriteCount).fill('background');
-  const [sprites, setSprites] = useState(defaultSprites);
+  const [tiles, setTiles] = useState(defaultSprites);
   const [spriteTypes, setSpriteTypes] = useState(defaultSpriteTypes);
 
   return (
@@ -49,16 +49,16 @@ export default function Index() {
         codes={codes}
         setCodes={setCodes}
       />
-      <Sprites
+      <Tiles
         colors={colors} setColors={setColors}
-        sprites={sprites} setSprites={setSprites}
+        tiles={tiles} setTiles={setTiles}
         spriteTypes={spriteTypes} setSpriteTypes={setSpriteTypes}
         currSprite={currSprite} setCurrSprite={setCurrSprite}
         spriteCount={spriteCount}
         spriteSize={spriteSize}
       />
       <Game
-        sprites={sprites}
+        tiles={tiles}
         colors={colors}
         spriteSize={spriteSize}
         currSprite={currSprite}

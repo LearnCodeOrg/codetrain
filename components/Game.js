@@ -24,7 +24,7 @@ let sketching = false;
 
 export default function Game(props) {
   const {
-    sprites, colors, spriteSize, currSprite, spriteTypes, codes
+    tiles, colors, spriteSize, currSprite, spriteTypes, codes
   } = props;
   const pixelPixels = Math.floor(spritePixels / spriteSize);
 
@@ -64,7 +64,7 @@ export default function Game(props) {
         // get sprite
         const spriteIndex = y * mapSize + x;
         const sprite = (objects[spriteIndex] === -1 || !showObjects) ?
-        sprites[background[spriteIndex]] : sprites[objects[spriteIndex]];
+        tiles[background[spriteIndex]] : tiles[objects[spriteIndex]];
         // draw sprite
         drawSprite(sprite, x, y);
       }
@@ -108,7 +108,7 @@ export default function Game(props) {
   // draw map when any elements change
   useEffect(() => {
     draw();
-  }, [colors, sprites, background, objects, showObjects]);
+  }, [colors, tiles, background, objects, showObjects]);
 
   // update map on sprite types change
   useEffect(() => {
