@@ -1,4 +1,4 @@
-import clamp from '../util/clamp.js';
+import { clamp } from '../util/math.js';
 import { useEffect } from 'react';
 
 import styles from '../styles/Draw.module.css';

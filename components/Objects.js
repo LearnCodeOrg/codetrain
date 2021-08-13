@@ -1,3 +1,4 @@
+import { clamp } from '../util/math.js';
 import { useEffect, useState } from 'react';
 
 import styles from '../styles/Objects.module.css';
