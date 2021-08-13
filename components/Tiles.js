@@ -15,7 +15,7 @@ export default function Tiles(props) {
   const {
     colors, setColors, tiles, setTiles,
     currColor, setCurrColor,
-    currSprite, setCurrSprite,
+    currTile, setCurrTile,
     tileCount, spriteSize
   } = props;
   const spritePixels = spriteSize * pixelPixels;
@@ -61,11 +61,11 @@ export default function Tiles(props) {
         }
       }
     }
-    // return if current sprite out of range
-    if (currSprite > tileCount - 1) return;
+    // if no current tile, return
+    if (currTile === -1) return;
     // get outline coordinates
-    const xo = currSprite % 4;
-    const yo = Math.floor(currSprite / 4);
+    const xo = currTile % 4;
+    const yo = Math.floor(currTile / 4);
     // draw outer outline
     selectCtx.fillStyle = '#fff';
     const outLeft = xo * selectSpritePixels;
@@ -104,8 +104,8 @@ export default function Tiles(props) {
     );
     // select sprite
     const spriteIndex = gridY * sqrtSpriteCount + gridX;
-    if (spriteIndex === currSprite) return;
-    setCurrSprite(spriteIndex);
+    if (spriteIndex === currTile) return;
+    setCurrTile(spriteIndex);
     // draw select canvas
     drawSelect();
   }
@@ -115,8 +115,8 @@ export default function Tiles(props) {
     // draw select canvas
     drawSelect();
     // get current sprite
-    if (currSprite > tileCount - 1) return;
-    const sprite = tiles[currSprite];
+    if (currTile === -1) return;
+    const sprite = tiles[currTile];
     // for each pixel
     for (let x = 0; x < spriteSize; x++) {
       for (let y = 0; y < spriteSize; y++) {
@@ -148,12 +148,12 @@ export default function Tiles(props) {
     // get sprite
     const spriteIndex = pixelY * spriteSize + pixelX;
     const newTiles = tiles.slice();
-    const newSprite = tiles[currSprite].slice();
+    const newSprite = tiles[currTile].slice();
     // return if unchanged
     if (newSprite[spriteIndex] === currColor) return;
     // set sprite
     newSprite[spriteIndex] = currColor;
-    newTiles[currSprite] = newSprite;
+    newTiles[currTile] = newSprite;
     setTiles(newTiles);
   }
 
@@ -168,7 +168,7 @@ export default function Tiles(props) {
   // draw sprite when colors or tiles change
   useEffect(() => {
     draw();
-  }, [colors, tiles, currSprite]);
+  }, [colors, tiles, currTile]);
 
   return (
     <div className={styles.container}>

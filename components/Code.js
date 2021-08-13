@@ -5,19 +5,20 @@ import 'ace-builds/src-noconflict/theme-monokai.js';
 import styles from '../styles/Code.module.css';
 
 export default function Code(props) {
-  const { objectCount, currSprite, codes, setCodes } = props;
+  const { objectCount, currObject, codes, setCodes } = props;
 
   // updates current color with given value
   function updateCode(val) {
     const newCodes = codes.slice();
-    newCodes[currSprite] = val;
+    newCodes[currObject] = val;
     setCodes(newCodes);
   }
 
   return (
     <div>
       <AceEditor
-        value={codes[currSprite]}
+        value={currObject === -1 ? '' : codes[currObject]}
+        readOnly={currObject === -1}
         onChange={val => updateCode(val)}
         mode="javascript"
         theme="monokai"

@@ -24,7 +24,7 @@ let sketching = false;
 
 export default function Game(props) {
   const {
-    tiles, colors, spriteSize, currSprite, codes
+    tiles, colors, spriteSize, currTile, currObject, codes
   } = props;
   const pixelPixels = Math.floor(spritePixels / spriteSize);
 
@@ -81,11 +81,14 @@ export default function Game(props) {
     const tileY = Math.floor(currY / spritePixels);
     // get map index
     const mapIndex = tileY * mapSize + tileX;
-    // update background
-    if (background[mapIndex] === currSprite) return;
-    const newBackground = background.slice();
-    newBackground[mapIndex] = currSprite;
-    setBackground(newBackground);
+    // sketch tile
+    if (currTile !== -1) {
+      // update background
+      if (background[mapIndex] === currTile) return;
+      const newBackground = background.slice();
+      newBackground[mapIndex] = currTile;
+      setBackground(newBackground);
+    }
   }
 
   // on start

@@ -15,10 +15,9 @@ export default function Objects(props) {
   const {
     colors, setColors, objects, setObjects,
     currColor, setCurrColor,
-    currSprite, setCurrSprite,
+    currObject, setCurrObject,
     tileCount, objectCount, spriteSize
   } = props;
-  const currObject = currSprite - tileCount;
   const spritePixels = spriteSize * pixelPixels;
   const sqrtSpriteCount = Math.round(Math.sqrt(objectCount));
   const selectSpritePixels = Math.floor(selectPixels / sqrtSpriteCount);
@@ -62,8 +61,8 @@ export default function Objects(props) {
         }
       }
     }
-    // return if current sprite out of range
-    if (currObject < 0) return;
+    // return if no object selected
+    if (currObject === -1) return;
     // get outline coordinates
     const xo = currObject % 4;
     const yo = Math.floor(currObject / 4);
@@ -104,9 +103,9 @@ export default function Objects(props) {
       0, Math.min(Math.floor(currY / selectSpritePixels), sqrtSpriteCount - 1)
     );
     // select sprite
-    const spriteIndex = gridY * sqrtSpriteCount + gridX + tileCount;
-    if (spriteIndex === currSprite) return;
-    setCurrSprite(spriteIndex);
+    const spriteIndex = gridY * sqrtSpriteCount + gridX;
+    if (spriteIndex === currObject) return;
+    setCurrObject(spriteIndex);
     // draw select canvas
     drawSelect();
   }
@@ -116,7 +115,7 @@ export default function Objects(props) {
     // draw select canvas
     drawSelect();
     // get current sprite
-    if (currObject < 0) return;
+    if (currObject === -1) return;
     const sprite = objects[currObject];
     // for each pixel
     for (let x = 0; x < spriteSize; x++) {
@@ -169,7 +168,7 @@ export default function Objects(props) {
   // draw sprite when colors or objects change
   useEffect(() => {
     draw();
-  }, [colors, objects, currSprite]);
+  }, [colors, objects, currObject]);
 
   return (
     <div className={styles.container}>

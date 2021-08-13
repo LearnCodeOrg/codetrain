@@ -5,7 +5,7 @@ import Tiles from '../components/Tiles.js';
 import Objects from '../components/Objects.js';
 
 import dynamic from 'next/dynamic';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { palettes } from '../data/palettes.js';
 
 import styles from '../styles/Index.module.css';
@@ -32,7 +32,8 @@ function update() {
 export default function Index() {
   const [codes, setCodes] = useState(Array(objectCount).fill(defaultCode));
 
-  const [currSprite, setCurrSprite] = useState(0);
+  const [currTile, setCurrTile] = useState(0);
+  const [currObject, setCurrObject] = useState(-1);
 
   const defaultColors = palettes[0].colors;
   const [colors, setColors] = useState(defaultColors);
@@ -42,10 +43,18 @@ export default function Index() {
   const [tiles, setTiles] = useState(Array(tileCount).fill(defaultSprite));
   const [objects, setObjects] = useState(Array(objectCount).fill(defaultSprite));
 
+  // ensure single sprite selection
+  useEffect(() => {
+    if (currTile !== -1 && currObject !== -1) setCurrObject(-1);
+  }, [currTile]);
+  useEffect(() => {
+    if (currObject !== -1 && currTile !== -1) setCurrTile(-1);
+  }, [currObject]);
+
   return (
     <div className={styles.container}>
       <Code
-        currSprite={currSprite}
+        currObject={currObject}
         objectCount={objectCount}
         codes={codes}
         setCodes={setCodes}
@@ -58,7 +67,7 @@ export default function Index() {
         colors={colors}
         tiles={tiles} setTiles={setTiles}
         currColor={currColor} setCurrColor={setCurrColor}
-        currSprite={currSprite} setCurrSprite={setCurrSprite}
+        currTile={currTile} setCurrTile={setCurrTile}
         tileCount={tileCount}
         spriteSize={spriteSize}
       />
@@ -66,7 +75,7 @@ export default function Index() {
         colors={colors}
         objects={objects} setObjects={setObjects}
         currColor={currColor} setCurrColor={setCurrColor}
-        currSprite={currSprite} setCurrSprite={setCurrSprite}
+        currObject={currObject} setCurrObject={setCurrObject}
         tileCount={tileCount}
         objectCount={objectCount}
         spriteSize={spriteSize}
@@ -75,7 +84,8 @@ export default function Index() {
         tiles={tiles}
         colors={colors}
         spriteSize={spriteSize}
-        currSprite={currSprite}
+        currTile={currTile}
+        currObject={currObject}
         codes={codes}
       />
     </div>
