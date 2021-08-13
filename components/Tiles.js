@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { palettes } from '../data/palettes.js';
 
-import styles from '../styles/Sprites.module.css';
+import styles from '../styles/Tiles.module.css';
 
 const pixelPixels = 16;
 const selectPixels = 128;
