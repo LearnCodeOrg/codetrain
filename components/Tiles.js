@@ -2,40 +2,29 @@ import { useEffect, useState } from 'react';
 
 import styles from '../styles/Tiles.module.css';
 
-const pixelPixels = 16;
 const selectPixels = 128;
 const selectBorder = 4;
 
-let selectCanvas, selectCtx;
-let drawCanvas, drawCtx;
+let canvas, ctx;
 
 let sketching = false;
 
 export default function Tiles(props) {
   const {
-    colors, setColors, tiles, setTiles,
-    currColor, setCurrColor,
+    colors, tiles,
     currTile, setCurrTile,
     tileCount, spriteSize
   } = props;
-  const spritePixels = spriteSize * pixelPixels;
   const sqrtSpriteCount = Math.round(Math.sqrt(tileCount));
   const selectSpritePixels = Math.floor(selectPixels / sqrtSpriteCount);
   const selectPixelPixels = Math.floor(selectSpritePixels / spriteSize);
   const fullSelectPixels = selectBorder * 2 + selectPixels;
 
-  // updates current color with given value
-  function updateColor(val) {
-    const newColors = colors.slice();
-    newColors[currColor] = val;
-    setColors(newColors);
-  }
-
   // draws select canvas
   function drawSelect() {
     // draw outline
-    selectCtx.fillStyle = '#000';
-    selectCtx.fillRect(0, 0, fullSelectPixels, fullSelectPixels);
+    ctx.fillStyle = '#000';
+    ctx.fillRect(0, 0, fullSelectPixels, fullSelectPixels);
     // for each sprite
     for (let x = 0; x < sqrtSpriteCount; x++) {
       for (let y = 0; y < sqrtSpriteCount; y++) {
@@ -48,12 +37,12 @@ export default function Tiles(props) {
             // set fill color
             const colorIndex = yp * spriteSize + xp;
             const color = colors[sprite[colorIndex]];
-            selectCtx.fillStyle = color;
+            ctx.fillStyle = color;
             // set fill position and size
             const xPos = x * selectSpritePixels + xp * selectPixelPixels;
             const yPos = y * selectSpritePixels + yp * selectPixelPixels;
             // fill sprite
-            selectCtx.fillRect(
+            ctx.fillRect(
               xPos + selectBorder, yPos + selectBorder,
               selectPixelPixels, selectPixelPixels
             );
@@ -67,34 +56,34 @@ export default function Tiles(props) {
     const xo = currTile % 4;
     const yo = Math.floor(currTile / 4);
     // draw outer outline
-    selectCtx.fillStyle = '#fff';
+    ctx.fillStyle = '#fff';
     const outLeft = xo * selectSpritePixels;
     const outRight = outLeft + selectSpritePixels + selectBorder;
     const outTop = yo * selectSpritePixels;
     const outBottom = outTop + selectSpritePixels + selectBorder;
     const outLength = selectBorder * 2 + selectSpritePixels;
-    selectCtx.fillRect(outLeft, outTop, outLength, selectBorder);
-    selectCtx.fillRect(outLeft, outTop, selectBorder, outLength);
-    selectCtx.fillRect(outLeft, outBottom, outLength, selectBorder);
-    selectCtx.fillRect(outRight, outTop, selectBorder, outLength);
+    ctx.fillRect(outLeft, outTop, outLength, selectBorder);
+    ctx.fillRect(outLeft, outTop, selectBorder, outLength);
+    ctx.fillRect(outLeft, outBottom, outLength, selectBorder);
+    ctx.fillRect(outRight, outTop, selectBorder, outLength);
     // draw inner outline
-    selectCtx.fillStyle = '#000';
+    ctx.fillStyle = '#000';
     const inLeft = outLeft + selectBorder;
     const inRight = outLeft + selectSpritePixels;
     const inTop = outTop + selectBorder;
     const inBottom = outTop + selectSpritePixels;
     const inLength = selectSpritePixels;
-    selectCtx.fillRect(inLeft, inTop, inLength, selectBorder);
-    selectCtx.fillRect(inLeft, inTop, selectBorder, inLength);
-    selectCtx.fillRect(inLeft, inBottom, inLength, selectBorder);
-    selectCtx.fillRect(inRight, inTop, selectBorder, inLength);
+    ctx.fillRect(inLeft, inTop, inLength, selectBorder);
+    ctx.fillRect(inLeft, inTop, selectBorder, inLength);
+    ctx.fillRect(inLeft, inBottom, inLength, selectBorder);
+    ctx.fillRect(inRight, inTop, selectBorder, inLength);
   }
 
   // selects sprite with given mouse event data
   function select(e) {
     // get x and y on canvas
-    const currX = e.clientX - selectCanvas.offsetLeft + window.scrollX - selectBorder;
-    const currY = e.clientY - selectCanvas.offsetTop + window.scrollY - selectBorder;
+    const currX = e.clientX - canvas.offsetLeft + window.scrollX - selectBorder;
+    const currY = e.clientY - canvas.offsetTop + window.scrollY - selectBorder;
     // get x and y in grid units
     const gridX = Math.max(
       0, Math.min(Math.floor(currX / selectSpritePixels), sqrtSpriteCount - 1)
@@ -110,84 +99,26 @@ export default function Tiles(props) {
     drawSelect();
   }
 
-  // draws current sprite
-  function draw() {
-    // draw select canvas
-    drawSelect();
-    // get current sprite
-    if (currTile === -1) return;
-    const sprite = tiles[currTile];
-    // for each pixel
-    for (let x = 0; x < spriteSize; x++) {
-      for (let y = 0; y < spriteSize; y++) {
-        // set fill color
-        const colorIndex = y * spriteSize + x;
-        const color = colors[sprite[colorIndex]];
-        drawCtx.fillStyle = color;
-        // set fill position and size
-        const xPos = x * pixelPixels;
-        const yPos = y * pixelPixels;
-        // fill sprite
-        drawCtx.fillRect(xPos, yPos, pixelPixels, pixelPixels);
-      }
-    }
-  }
-
-  // sketches sprite with given mouse event data
-  function sketch(e) {
-    // get x and y on canvas
-    const currX = e.clientX - drawCanvas.offsetLeft + window.scrollX;
-    const currY = e.clientY - drawCanvas.offsetTop + window.scrollY;
-    // get x and y in pixel units
-    const pixelX = Math.max(
-      0, Math.min(Math.floor(currX / pixelPixels), spriteSize - 1)
-    );
-    const pixelY = Math.max(
-      0, Math.min(Math.floor(currY / pixelPixels), spriteSize - 1)
-    );
-    // get sprite
-    const spriteIndex = pixelY * spriteSize + pixelX;
-    const newTiles = tiles.slice();
-    const newSprite = tiles[currTile].slice();
-    // return if unchanged
-    if (newSprite[spriteIndex] === currColor) return;
-    // set sprite
-    newSprite[spriteIndex] = currColor;
-    newTiles[currTile] = newSprite;
-    setTiles(newTiles);
-  }
-
-  // get canvas contexts on start
+  // get canvas context on start
   useEffect(() => {
-    selectCanvas = document.getElementById('sprite-select');
-    selectCtx = selectCanvas.getContext('2d');
-    drawCanvas = document.getElementById('sprite-draw');
-    drawCtx = drawCanvas.getContext('2d');
+    canvas = document.getElementById('tile-select');
+    ctx = canvas.getContext('2d');
   }, []);
 
-  // draw sprite when colors or tiles change
+  // draw select when colors or tiles change
   useEffect(() => {
-    draw();
+    drawSelect();
   }, [colors, tiles, currTile]);
 
   return (
     <div className={styles.container}>
       <h1>Tiles</h1>
       <canvas
-        id="sprite-select"
+        id="tile-select"
         width={fullSelectPixels}
         height={fullSelectPixels}
         className={styles.selectcanvas}
         onMouseDown={select}
-      />
-      <canvas
-        id="sprite-draw"
-        width={spritePixels}
-        height={spritePixels}
-        onMouseDown={e => { sketching = true; sketch(e); }}
-        onMouseMove={e => { if (sketching) sketch(e); }}
-        onMouseUp={e => { sketching = false; }}
-        onMouseLeave={e => { sketching = false; }}
       />
     </div>
   );

@@ -3,6 +3,7 @@ import Guide from '../components/Guide.js';
 import Colors from '../components/Colors.js';
 import Tiles from '../components/Tiles.js';
 import Objects from '../components/Objects.js';
+import Draw from '../components/Draw.js';
 
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
@@ -65,20 +66,24 @@ export default function Index() {
       />
       <Tiles
         colors={colors}
-        tiles={tiles} setTiles={setTiles}
-        currColor={currColor} setCurrColor={setCurrColor}
+        tiles={tiles}
         currTile={currTile} setCurrTile={setCurrTile}
         tileCount={tileCount}
         spriteSize={spriteSize}
       />
       <Objects
         colors={colors}
-        objects={objects} setObjects={setObjects}
-        currColor={currColor} setCurrColor={setCurrColor}
+        objects={objects}
         currObject={currObject} setCurrObject={setCurrObject}
         tileCount={tileCount}
         objectCount={objectCount}
         spriteSize={spriteSize}
+      />
+      <Draw
+        colors={colors} tiles={tiles} objects={objects}
+        currTile={currTile} currObject={currObject}
+        currColor={currColor} spriteSize={spriteSize}
+        setTiles={setTiles} setObjects={setObjects}
       />
       <Game
         tiles={tiles}
