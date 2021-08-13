@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { palettes } from '../data/palettes.js';
 
 import styles from '../styles/Tiles.module.css';
 
@@ -14,18 +13,16 @@ let sketching = false;
 
 export default function Tiles(props) {
   const {
-    colors, setColors, tiles, setTiles, spriteTypes, setSpriteTypes,
-    currSprite, setCurrSprite, spriteCount, spriteSize
+    colors, setColors, tiles, setTiles,
+    currColor, setCurrColor,
+    currSprite, setCurrSprite,
+    spriteCount, spriteSize
   } = props;
   const spritePixels = spriteSize * pixelPixels;
   const sqrtSpriteCount = Math.round(Math.sqrt(spriteCount));
   const selectSpritePixels = Math.floor(selectPixels / sqrtSpriteCount);
   const selectPixelPixels = Math.floor(selectSpritePixels / spriteSize);
   const fullSelectPixels = selectBorder * 2 + selectPixels;
-
-  const [currColor, setCurrColor] = useState(0);
-
-  const [palette, setPalette] = useState(0);
 
   // updates current color with given value
   function updateColor(val) {
@@ -173,78 +170,36 @@ export default function Tiles(props) {
   }, [colors, tiles, currSprite]);
 
   return (
-    <div className={styles.container}>
-      <div>
-        <h1>Colors</h1>
-        <div className={styles.tilegrid}>
-          {
-            colors.map((color, i) =>
-              <div
-                onClick={() => setCurrColor(i)}
-                className={
-                  currColor === i ?
-                  `${styles.tile} ${styles.selected}` :
-                  styles.tile
-                }
-                key={i}
-                style={{ background: color }}
-              >
-              </div>
-            )
-          }
-        </div>
-        <input
-          type="color"
-          value={colors[currColor]}
-          className={styles.colorinput}
-          onChange={e => updateColor(e.target.value)}
-        />
-        <select
-          value={palette}
-          onChange={e => {
-            const newPalette = e.target.value;
-            setPalette(newPalette);
-            setColors(palettes[newPalette].colors);
-          }}
-        >
-        {
-          palettes.map((pal, i) =>
-            <option value={i} key={i}>{pal.name}</option>
-          )
-        }
-        </select>
-      </div>
-      <div>
-        <h1>Tiles</h1>
-        <canvas
-          id="sprite-select"
-          width={fullSelectPixels}
-          height={fullSelectPixels}
-          className={styles.selectcanvas}
-          onMouseDown={select}
-        />
-        <canvas
-          id="sprite-draw"
-          width={spritePixels}
-          height={spritePixels}
-          onMouseDown={e => { sketching = true; sketch(e); }}
-          onMouseMove={e => { if (sketching) sketch(e); }}
-          onMouseUp={e => { sketching = false; }}
-          onMouseLeave={e => { sketching = false; }}
-        />
-        <select
-          value={spriteTypes[currSprite]}
-          onChange={e => {
-            const newType = e.target.value;
-            const newSpriteTypes = spriteTypes.slice();
-            newSpriteTypes[currSprite] = newType;
-            setSpriteTypes(newSpriteTypes);
-          }}
-        >
-          <option value="background">Background</option>
-          {currSprite !== 0 && <option value="object">Object</option>}
-        </select>
-      </div>
+    <div>
+      <h1>Tiles</h1>
+      <canvas
+        id="sprite-select"
+        width={fullSelectPixels}
+        height={fullSelectPixels}
+        className={styles.selectcanvas}
+        onMouseDown={select}
+      />
+      <canvas
+        id="sprite-draw"
+        width={spritePixels}
+        height={spritePixels}
+        onMouseDown={e => { sketching = true; sketch(e); }}
+        onMouseMove={e => { if (sketching) sketch(e); }}
+        onMouseUp={e => { sketching = false; }}
+        onMouseLeave={e => { sketching = false; }}
+      />
+      <select
+        value={spriteTypes[currSprite]}
+        onChange={e => {
+          const newType = e.target.value;
+          const newSpriteTypes = spriteTypes.slice();
+          newSpriteTypes[currSprite] = newType;
+          setSpriteTypes(newSpriteTypes);
+        }}
+      >
+        <option value="background">Background</option>
+        {currSprite !== 0 && <option value="object">Object</option>}
+      </select>
     </div>
   );
 }
