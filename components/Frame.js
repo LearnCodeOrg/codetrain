@@ -19,7 +19,7 @@ export default function Frame(props) {
   const spriteIndex = ${spriteIndex};
   function move(dir) {
     const newIndex = __move__(dir, mapIndex, spriteIndex);
-    if (newIndex) mapIndex = newIndex;
+    if (newIndex !== undefined) mapIndex = newIndex;
   }
   ${codes[spriteIndex]}
   return {
@@ -57,6 +57,9 @@ export default function Frame(props) {
     // sprite functions
     function sleep(sec) {
       return new Promise(resolve => setTimeout(resolve, sec * 1000));
+    }
+    function range(num) {
+      return [...Array(num).keys()];
     }
     function __move__(dir, mapIndex, spriteIndex) {
       if (dir === 'left') {

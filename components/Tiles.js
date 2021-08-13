@@ -16,10 +16,10 @@ export default function Tiles(props) {
     colors, setColors, tiles, setTiles,
     currColor, setCurrColor,
     currSprite, setCurrSprite,
-    spriteCount, spriteSize
+    tileCount, spriteSize
   } = props;
   const spritePixels = spriteSize * pixelPixels;
-  const sqrtSpriteCount = Math.round(Math.sqrt(spriteCount));
+  const sqrtSpriteCount = Math.round(Math.sqrt(tileCount));
   const selectSpritePixels = Math.floor(selectPixels / sqrtSpriteCount);
   const selectPixelPixels = Math.floor(selectSpritePixels / spriteSize);
   const fullSelectPixels = selectBorder * 2 + selectPixels;
@@ -61,6 +61,8 @@ export default function Tiles(props) {
         }
       }
     }
+    // return if current sprite out of range
+    if (currSprite > tileCount - 1) return;
     // get outline coordinates
     const xo = currSprite % 4;
     const yo = Math.floor(currSprite / 4);
@@ -91,10 +93,8 @@ export default function Tiles(props) {
   // selects sprite with given mouse event data
   function select(e) {
     // get x and y on canvas
-    const currX =
-    e.clientX - selectCanvas.offsetLeft + window.scrollX - selectBorder;
-    const currY =
-    e.clientY - selectCanvas.offsetTop + window.scrollY - selectBorder;
+    const currX = e.clientX - selectCanvas.offsetLeft + window.scrollX - selectBorder;
+    const currY = e.clientY - selectCanvas.offsetTop + window.scrollY - selectBorder;
     // get x and y in grid units
     const gridX = Math.max(
       0, Math.min(Math.floor(currX / selectSpritePixels), sqrtSpriteCount - 1)
@@ -112,7 +112,10 @@ export default function Tiles(props) {
 
   // draws current sprite
   function draw() {
+    // draw select canvas
+    drawSelect();
     // get current sprite
+    if (currSprite > tileCount - 1) return;
     const sprite = tiles[currSprite];
     // for each pixel
     for (let x = 0; x < spriteSize; x++) {
@@ -128,8 +131,6 @@ export default function Tiles(props) {
         drawCtx.fillRect(xPos, yPos, pixelPixels, pixelPixels);
       }
     }
-    // update select canvas
-    drawSelect();
   }
 
   // sketches sprite with given mouse event data
