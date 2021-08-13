@@ -3,7 +3,7 @@ import StopIcon from '@material-ui/icons/Stop';
 import Button from '@material-ui/core/Button';
 import Frame from '../components/Frame.js';
 
-import clamp from '../util/clamp.js';
+import { clamp, between } from '../util/math.js';
 import { useEffect, useRef, useState } from 'react';
 
 import styles from '../styles/Game.module.css';
@@ -98,12 +98,23 @@ export default function Game(props) {
       newBackground[mapIndex] = currTile;
       setBackground(newBackground);
     } else {
-      // push object
       const x = clamp(currX, 0, mapPixels - spritePixels);
       const y = clamp(currY, 0, mapPixels - spritePixels);
-      const object = { x, y, sprite: currObject };
       const newGameObjects = gameObjects.slice();
-      newGameObjects.push(object);
+      // if object clicked, select object
+      const clicked = gameObjects.filter(obj => (
+        between(obj.x, x - spritePixels, x) &&
+        between(obj.y, y - spritePixels, y)
+      )).reverse();
+      if (clicked.length) {
+        const clickedIndex = newGameObjects.indexOf(clicked[0]);
+        newGameObjects.splice(clickedIndex, 1);
+        newGameObjects.push(clicked[0]);
+      // if empty space, create object
+      } else {
+        const object = { x, y, sprite: currObject };
+        newGameObjects.push(object);
+      }
       setGameObjects(newGameObjects);
       sketching = false;
     }
