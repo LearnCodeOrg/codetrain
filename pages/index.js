@@ -39,9 +39,7 @@ export default function Index() {
   const defaultSprites = Array(spriteCount).fill(
     Array(spriteSize * spriteSize).fill(0)
   );
-  const defaultSpriteTypes = Array(spriteCount).fill('background');
   const [tiles, setTiles] = useState(defaultSprites);
-  const [spriteTypes, setSpriteTypes] = useState(defaultSpriteTypes);
 
   return (
     <div className={styles.container}>
@@ -58,7 +56,6 @@ export default function Index() {
       <Tiles
         colors={colors}
         tiles={tiles} setTiles={setTiles}
-        spriteTypes={spriteTypes} setSpriteTypes={setSpriteTypes}
         currColor={currColor} setCurrColor={setCurrColor}
         currSprite={currSprite} setCurrSprite={setCurrSprite}
         spriteCount={spriteCount}
@@ -69,7 +66,6 @@ export default function Index() {
         colors={colors}
         spriteSize={spriteSize}
         currSprite={currSprite}
-        spriteTypes={spriteTypes}
         codes={codes}
       />
     </div>

@@ -24,7 +24,7 @@ let sketching = false;
 
 export default function Game(props) {
   const {
-    tiles, colors, spriteSize, currSprite, spriteTypes, codes
+    tiles, colors, spriteSize, currSprite, codes
   } = props;
   const pixelPixels = Math.floor(spritePixels / spriteSize);
 
@@ -79,23 +79,13 @@ export default function Game(props) {
     // get x and y in map units
     const tileX = Math.floor(currX / spritePixels);
     const tileY = Math.floor(currY / spritePixels);
-    // get sprite type and map index
-    const spriteType = spriteTypes[currSprite];
+    // get map index
     const mapIndex = tileY * mapSize + tileX;
     // update background
-    if (spriteType === 'background') {
-      if (background[mapIndex] === currSprite) return;
-      const newBackground = background.slice();
-      newBackground[mapIndex] = currSprite;
-      setBackground(newBackground);
-    // update objects
-    } else if (spriteTypes[currSprite] === 'object') {
-      const newSprite = objects[mapIndex] === currSprite ? -1 : currSprite;
-      const newObjects = objects.slice();
-      newObjects[mapIndex] = newSprite;
-      setObjects(newObjects);
-      sketching = false;
-    }
+    if (background[mapIndex] === currSprite) return;
+    const newBackground = background.slice();
+    newBackground[mapIndex] = currSprite;
+    setBackground(newBackground);
   }
 
   // on start
@@ -109,32 +99,6 @@ export default function Game(props) {
   useEffect(() => {
     draw();
   }, [colors, tiles, background, objects, showObjects]);
-
-  // update map on sprite types change
-  useEffect(() => {
-    // slice map
-    const newBackground = background.slice();
-    const newObjects = objects.slice();
-    // background to object
-    for (let i = 0; i < background.length; i++) {
-      const sprite = background[i];
-      if (spriteTypes[sprite] === 'object') {
-        newBackground[i] = 0;
-        newObjects[i] = sprite;
-      }
-    }
-    // object to background
-    for (let i = 0; i < objects.length; i++) {
-      const sprite = objects[i];
-      if (spriteTypes[sprite] === 'background') {
-        newBackground[i] = sprite;
-        newObjects[i] = -1;
-      }
-    }
-    // update map
-    setBackground(newBackground);
-    setObjects(newObjects);
-  }, [spriteTypes]);
 
   return (
     <div className={styles.container}>

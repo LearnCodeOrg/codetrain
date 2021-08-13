@@ -188,18 +188,6 @@ export default function Tiles(props) {
         onMouseUp={e => { sketching = false; }}
         onMouseLeave={e => { sketching = false; }}
       />
-      <select
-        value={spriteTypes[currSprite]}
-        onChange={e => {
-          const newType = e.target.value;
-          const newSpriteTypes = spriteTypes.slice();
-          newSpriteTypes[currSprite] = newType;
-          setSpriteTypes(newSpriteTypes);
-        }}
-      >
-        <option value="background">Background</option>
-        {currSprite !== 0 && <option value="object">Object</option>}
-      </select>
     </div>
   );
 }
