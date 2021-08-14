@@ -14,9 +14,13 @@ An educational browser game engine.
 
 `isKey(key)`: returns whether given `key` was pressed in the last frame
 
-## Object
+## Movement
 
-`move(dir)`: moves object `up`, `down`, `left`, or `right`
+`move(dir)`: moves object one tile `up`, `down`, `left`, or `right`
+
+`moveTiles(x, y)`: moves object by `x`, `y` in tiles
+
+`movePixels(x, y)`: moves object by `x`, `y` in pixels
 
 ## Utility
 
@@ -42,7 +46,7 @@ function start() {
 ```
 
 ```js
-// basic object movement
+// tiled object movement
 function update() {
   if (isKey('w')) move('up');
   if (isKey('a')) move('left');
@@ -52,7 +56,17 @@ function update() {
 ```
 
 ```js
-// basic object animation
+// smooth object movement
+function update() {
+  if (isKeyDown('w')) movePixels(0, -1);
+  if (isKeyDown('a')) movePixels(-1, 0);
+  if (isKeyDown('s')) movePixels(0, 1);
+  if (isKeyDown('d')) movePixels(1, 0);
+}
+```
+
+```js
+// movement animation
 async function animate() {
   await sleep(1);
   move('right');
