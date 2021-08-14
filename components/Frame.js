@@ -18,6 +18,10 @@ export default function Frame(props) {
   const move = dir => __move__(index, dir);
   const movePixels = (x, y) => __movePixels__(index, x, y);
   const moveTiles = (x, y) => __moveTiles__(index, x, y);
+  const moveToPixel = (x, y) => __moveToPixel__(index, x, y);
+  const moveToTile = (x, y) => __moveToTile__(index, x, y);
+  const getPixelPosition = () => __getPixelPosition__(index);
+  const getTilePosition = () => __getTilePosition__(index);
   ${codes[sprite]}
   return {
     start: typeof start === 'function' ? start : () => {},
@@ -45,6 +49,7 @@ export default function Frame(props) {
   <script>
     // variable declarations
     const mapSize = ${mapSize};
+    const mapPixels = ${mapPixels};
     const spriteSize = ${spriteSize};
     const spritePixels = ${spritePixels};
     const pixelPixels = ${pixelPixels};
@@ -75,6 +80,26 @@ export default function Frame(props) {
     function __moveTiles__(index, x, y) {
       gameObjects[index].x += x * spritePixels;
       gameObjects[index].y += y * spritePixels;
+    }
+    function __moveToPixel__(index, x, y) {
+      gameObjects[index].x = x * pixelPixels;
+      gameObjects[index].y = y * pixelPixels;
+    }
+    function __moveToTile__(index, x, y) {
+      gameObjects[index].x = x * spritePixels;
+      gameObjects[index].y = y * spritePixels;
+    }
+    function __getPixelPosition__(index) {
+      return {
+        x: Math.floor(gameObjects[index].x / pixelPixels),
+        y: Math.floor(gameObjects[index].y / pixelPixels)
+      };
+    }
+    function __getTilePosition__(index) {
+      return {
+        x: Math.floor(gameObjects[index].x / spritePixels),
+        y: Math.floor(gameObjects[index].y / spritePixels)
+      };
     }
     // set up key listeners
     window.onkeydown = e => pressedKeys[e.keyCode] = true;
