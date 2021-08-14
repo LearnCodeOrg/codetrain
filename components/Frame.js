@@ -6,7 +6,7 @@ import styles from '../styles/Frame.module.css';
 export default function Frame(props) {
   const {
     mapPixels, spriteSize, spritePixels, pixelPixels,
-    mapSize, codes, colors, sprites, background, objects
+    mapSize, codes, colors, tiles, objects, background, gameObjects
   } = props;
 
   // returns function definition for given object
@@ -48,10 +48,14 @@ export default function Frame(props) {
   <script>
     // variable declarations
     const mapSize = ${mapSize};
+    const spriteSize = ${spriteSize};
+    const spritePixels = ${spritePixels};
+    const pixelPixels = ${pixelPixels};
     const colors = ${JSON.stringify(colors)};
-    const sprites = ${JSON.stringify(sprites)};
-    const background = ${JSON.stringify(background)};
+    const tiles = ${JSON.stringify(tiles)};
     const objects = ${JSON.stringify(objects)};
+    const background = ${JSON.stringify(background)};
+    const gameObjects = ${JSON.stringify(gameObjects)};
     let lastPressedKeys = {};
     const pressedKeys = {};
     // sprite functions
@@ -119,9 +123,6 @@ export default function Frame(props) {
     function __start__() {
       // variable declarations
       let canvas, ctx;
-      const spriteSize = ${spriteSize};
-      const spritePixels = ${spritePixels};
-      const pixelPixels = ${pixelPixels};
       // canvas functions
       function drawSprite(sprite, x, y) {
         // for each pixel
@@ -132,8 +133,8 @@ export default function Frame(props) {
             const color = colors[sprite[colorIndex]];
             ctx.fillStyle = color;
             // get fill position
-            let xm = x * spritePixels + xp * pixelPixels;
-            let ym = y * spritePixels + yp * pixelPixels;
+            let xm = x + xp * pixelPixels;
+            let ym = y + yp * pixelPixels;
             // fill pixel
             ctx.fillRect(xm, ym, pixelPixels, pixelPixels);
           }
@@ -144,12 +145,18 @@ export default function Frame(props) {
         for (let y = 0; y < mapSize; y++) {
           for (let x = 0; x < mapSize; x++) {
             // get sprite
-            const mapIndex = y * mapSize + x;
-            const sprite = objects[mapIndex] === -1 ?
-            sprites[background[mapIndex]] : sprites[objects[mapIndex]];
+            const spriteIndex = y * mapSize + x;
+            const sprite = tiles[background[spriteIndex]];
             // draw sprite
-            drawSprite(sprite, x, y);
+            drawSprite(sprite, x * spritePixels, y * spritePixels);
           }
+        }
+        // for each object
+        for (const object of gameObjects) {
+          // draw object
+          const { x, y } = object;
+          const sprite = objects[object.sprite];
+          drawSprite(sprite, x, y);
         }
       }
       // game loop
