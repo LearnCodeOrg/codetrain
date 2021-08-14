@@ -1,5 +1,5 @@
 import { clamp } from '../util/math.js';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import styles from '../styles/Draw.module.css';
 
@@ -15,6 +15,8 @@ export default function Draw(props) {
     currTile, currObject, currColor, spriteSize
   } = props;
   const spritePixels = spriteSize * pixelPixels;
+
+  const [showGrid, setShowGrid] = useState(true);
 
   // sketches sprite with given mouse event data
   function sketch(e) {
@@ -49,6 +51,10 @@ export default function Draw(props) {
 
   // draws current tile
   function draw() {
+    if (showGrid) {
+      ctx.fillStyle = '#bbb';
+      ctx.fillRect(0, 0, spritePixels, spritePixels);
+    }
     // get current sprite
     const sprite = currTile === -1 ? objects[currObject] : tiles[currTile];
     // for each pixel
@@ -61,8 +67,12 @@ export default function Draw(props) {
         // set fill position and size
         const xPos = x * pixelPixels;
         const yPos = y * pixelPixels;
-        // fill sprite
-        ctx.fillRect(xPos, yPos, pixelPixels, pixelPixels);
+        if (showGrid) {
+          ctx.fillRect(xPos + 1, yPos + 1, pixelPixels - 2, pixelPixels - 2);
+        } else {
+          // fill sprite
+          ctx.fillRect(xPos, yPos, pixelPixels, pixelPixels);
+        }
       }
     }
   }
@@ -75,12 +85,13 @@ export default function Draw(props) {
   // draw sprite when colors or tiles change
   useEffect(() => {
     draw();
-  }, [colors, tiles, objects, currTile, currObject]);
+  }, [colors, tiles, objects, currTile, currObject, showGrid]);
 
   return (
     <div className={styles.container}>
       <h1>Draw</h1>
       <canvas
+        className={showGrid ? styles.gridded : styles.nogrid}
         id="sprite-draw"
         width={spritePixels}
         height={spritePixels}
@@ -88,6 +99,13 @@ export default function Draw(props) {
         onMouseMove={e => { if (sketching) sketch(e); }}
         onMouseUp={e => { sketching = false; }}
         onMouseLeave={e => { sketching = false; }}
+      />
+      <label htmlFor="showgrid-checkbox">Grid</label>
+      <input
+        id="showgrid-checkbox"
+        type="checkbox"
+        checked={showGrid}
+        onChange={e => setShowGrid(e.target.checked)}
       />
     </div>
   );

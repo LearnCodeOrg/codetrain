@@ -3,6 +3,10 @@
   margin: 0 10px;
 }
 
-.container > canvas {
+.gridded {
+  border: 4px solid #bbb;
+}
+
+.nogrid {
   border: 4px solid #000;
 }
