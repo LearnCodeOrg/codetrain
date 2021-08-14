@@ -22,6 +22,9 @@ const mapSize = 8;
 const spritePixels = Math.floor(mapPixels / mapSize);
 const halfSprite = Math.floor(spritePixels / 2);
 
+const highlightWidth = 4;
+const highlightLength = 12;
+
 let canvas, ctx;
 let sketching = false;
 let holding = false;
@@ -88,6 +91,26 @@ export default function Game(props) {
       // draw objects
       const { x, y } = object;
       const sprite = objects[object.sprite];
+      drawSprite(sprite, x, y);
+    }
+    // draw object highlight
+    if (gameObjects.length) {
+      // get selected object
+      const selectedObj = gameObjects[gameObjects.length - 1];
+      const { x, y } = selectedObj;
+      const sprite = objects[selectedObj.sprite];
+      ctx.fillStyle = '#fff';
+      // calculate highlight units
+      const size = highlightLength;
+      const left = x - highlightWidth;
+      const right = x + spritePixels + highlightWidth - highlightLength;
+      const top = y - highlightWidth;
+      const bottom = y + spritePixels + highlightWidth - highlightLength;
+      // draw highlight
+      ctx.fillRect(left, top, size, size);
+      ctx.fillRect(right, top, size, size);
+      ctx.fillRect(left, bottom, size, size);
+      ctx.fillRect(right, bottom, size, size);
       drawSprite(sprite, x, y);
     }
   }
