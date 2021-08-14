@@ -19,6 +19,7 @@ const buttonProps = {
 const mapPixels = 256;
 const mapSize = 8;
 const spritePixels = Math.floor(mapPixels / mapSize);
+const halfSprite = Math.floor(spritePixels / 2);
 
 let canvas, ctx;
 let sketching = false;
@@ -112,37 +113,52 @@ export default function Game(props) {
       setBackground(newBackground);
     // sketch object
     } else {
-      const xp = Math.floor(currX / pixelPixels) * pixelPixels;
-      const yp = Math.floor(currY / pixelPixels) * pixelPixels;
-      const x = clamp(xp, 0, mapPixels - spritePixels);
-      const y = clamp(yp, 0, mapPixels - spritePixels);
+      const pixeledX = Math.floor(currX / pixelPixels) * pixelPixels;
+      const pixeledY = Math.floor(currY / pixelPixels) * pixelPixels;
+      const centerX = clamp(pixeledX, halfSprite, mapPixels - halfSprite);
+      const centerY = clamp(pixeledY, halfSprite, mapPixels - halfSprite);
+      const x = centerX - halfSprite;
+      const y = centerY - halfSprite;
       const newGameObjects = gameObjects.slice();
+      // if already holding object
       if (holding) {
-        const heldObject = newGameObjects[newGameObjects.length - 1];
+        // get held object
+        const heldIndex = gameObjects.length - 1;
+        const heldObject = gameObjects[heldIndex];
+        // if held object moved
         if (heldObject.x !== x || heldObject.y !== y) {
-          newGameObjects[newGameObjects.length - 1] = {
-            x, y, sprite: heldObject.sprite
-          };
+          // update held object
+          newGameObjects[heldIndex] = { x, y, sprite: heldObject.sprite };
           setGameObjects(newGameObjects);
         }
-        return;
-      }
-      // if object clicked, select object
-      const clicked = gameObjects.filter(obj => (
-        between(obj.x, x - spritePixels, x) &&
-        between(obj.y, y - spritePixels, y)
-      )).reverse();
-      if (clicked.length) {
-        const clickedIndex = newGameObjects.indexOf(clicked[0]);
-        newGameObjects.splice(clickedIndex, 1);
-        newGameObjects.push({ x, y, sprite: clicked[0].sprite });
-      // if empty space, create object
+      // if not holding object
       } else {
-        const object = { x, y, sprite: currObject };
-        newGameObjects.push(object);
+        // get clicked objects
+        const clicked = gameObjects.filter(obj => (
+          between(obj.x, x - halfSprite, x + halfSprite) &&
+          between(obj.y, y - halfSprite, y + halfSprite)
+        )).reverse();
+        // if object clicked
+        if (clicked.length) {
+          // get held object
+          holding = true;
+          const heldObject = clicked[0];
+          if (heldObject.x === x || heldObject.y === y) return;
+          // update held object position
+          const heldIndex = newGameObjects.indexOf(heldObject);
+          newGameObjects.splice(heldIndex, 1);
+          newGameObjects.push({ x, y, sprite: clicked[0].sprite });
+          setGameObjects(newGameObjects);
+        // if empty space
+        } else {
+          // create object
+          const object = { x, y, sprite: currObject };
+          newGameObjects.push(object);
+          // start holding and update objects
+          holding = true;
+          setGameObjects(newGameObjects);
+        }
       }
-      holding = true;
-      setGameObjects(newGameObjects);
     }
   }
 
@@ -175,7 +191,6 @@ export default function Game(props) {
           pixelPixels={pixelPixels}
           codes={codes}
           colors={colors}
-          sprites={sprites}
           background={background}
           objects={objects}
           spriteSize={spriteSize}
