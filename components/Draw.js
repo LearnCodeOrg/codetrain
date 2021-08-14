@@ -78,7 +78,8 @@ export default function Draw(props) {
   }, [colors, tiles, objects, currTile, currObject]);
 
   return (
-    <div>
+    <div className={styles.container}>
+      <h1>Draw</h1>
       <canvas
         id="sprite-draw"
         width={spritePixels}

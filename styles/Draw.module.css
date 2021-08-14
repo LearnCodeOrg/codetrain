@@ -1,0 +1,8 @@
+.container {
+  text-align: center;
+  margin: 0 10px;
+}
+
+.container > canvas {
+  border: 4px solid #000;
+}
