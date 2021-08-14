@@ -22,6 +22,7 @@ export default function Frame(props) {
   const moveToTile = (x, y) => __moveToTile__(index, x, y);
   const getPixelPosition = () => __getPixelPosition__(index);
   const getTilePosition = () => __getTilePosition__(index);
+  const say = text => { dialogue = \`\${text}\`; }
   ${codes[sprite]}
   return {
     start: typeof start === 'function' ? start : () => {},
@@ -48,6 +49,7 @@ export default function Frame(props) {
   </style>
   <script>
     // variable declarations
+    let dialogue;
     const mapSize = ${mapSize};
     const mapPixels = ${mapPixels};
     const spriteSize = ${spriteSize};
@@ -104,6 +106,7 @@ export default function Frame(props) {
     // set up key listeners
     window.onkeydown = e => pressedKeys[e.keyCode] = true;
     window.onkeyup = e => pressedKeys[e.keyCode] = false;
+    window.onmousedown = e => { dialogue = undefined; }
     function isKeyDown(key) {
       // handle invalid key
       if (typeof key !== 'string' || !key.length) return undefined;
@@ -162,6 +165,28 @@ export default function Frame(props) {
           const { x, y } = object;
           const sprite = objects[object.sprite];
           drawSprite(sprite, x, y);
+        }
+        // draw dialogue text
+        if (dialogue) {
+          const left = mapPixels / 8;
+          const top = mapPixels * 3 / 8;
+          const offset = 8;
+          const width = mapPixels * 3 / 4 + offset * 2;
+          const height = mapPixels / 4 + offset * 2;
+          ctx.fillStyle = '#fff';
+          ctx.fillRect(left - offset, top - offset, width, height);
+          ctx.fillStyle = '#000';
+          const fontSize = 16;
+          const lineSize = 20;
+          ctx.font = \`\${fontSize}px monospace\`;
+          const line1 = dialogue.slice(0, lineSize);
+          const line2 = dialogue.slice(lineSize, lineSize * 2);
+          const line3 = dialogue.slice(lineSize * 2, lineSize * 3);
+          const line4 = dialogue.slice(lineSize * 3, lineSize * 4);
+          ctx.fillText(line1, left, top + fontSize);
+          ctx.fillText(line2, left, top + fontSize * 2);
+          ctx.fillText(line3, left, top + fontSize * 3);
+          ctx.fillText(line4, left, top + fontSize * 4);
         }
       }
       // game loop
