@@ -16,6 +16,10 @@ Try it here: [codet.vercel.app](https://codet.vercel.app)
 
 `isKey(key)`: returns whether given `key` was pressed in the last frame
 
+## Output
+
+`say(text)`: opens a dialogue box with given `text` closable with left click
+
 ## Movement
 
 `move(dir)`: moves object one tile `up`, `down`, `left`, or `right`
@@ -23,6 +27,10 @@ Try it here: [codet.vercel.app](https://codet.vercel.app)
 `moveTiles(x, y)`: moves object by `x`, `y` in tiles
 
 `movePixels(x, y)`: moves object by `x`, `y` in pixels
+
+`getTilePosition()`: returns an object containing `x`, `y` position in tiles
+
+`getPixelPosition()`: returns an object containing `x`, `y` position in pixels
 
 ## Utility
 
@@ -32,11 +40,27 @@ Try it here: [codet.vercel.app](https://codet.vercel.app)
 
 ## Variables
 
-`mapIndex`: the index on the map of the current working object
+`colors`: array of color data
 
-`background`: array of background sprite indexes
+`tiles`: array of tile sprite data
 
-`objects`: array of object sprite indexes
+`objects`: array of object sprite data
+
+`background`: array of active tile indexes
+
+`gameObjects`: array of active objects
+
+## Constants
+
+`mapSize`: map size in tiles
+
+`mapPixels`: map size in pixels
+
+`spriteSize`: sprite size in sprite pixels
+
+`spritePixels`: sprite size in pixels
+
+`pixelPixels`: sprite pixel size in pixels
 
 # Examples
 
