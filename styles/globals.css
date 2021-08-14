@@ -15,6 +15,6 @@ a {
   text-decoration: none;
 }
 
-button {
+button, label, input[type='checkbox'] {
   cursor: pointer;
 }

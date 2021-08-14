@@ -23,7 +23,7 @@ export default function Frame(props) {
     start: typeof start === 'function' ? start : () => {},
     update: typeof update === 'function' ? update : () => {}
   };
-})(),`);
+})()`);
   }
 
   const gameSrc =
@@ -171,7 +171,7 @@ export default function Frame(props) {
   }
 
   return (
-    <>
+    <div>
       <Button
         variant="contained"
         onClick={downloadGame}
@@ -186,6 +186,6 @@ export default function Frame(props) {
         height={mapPixels}
         frameBorder="0"
       />
-    </>
+    </div>
   );
 }

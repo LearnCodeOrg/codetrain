@@ -258,24 +258,31 @@ export default function Game(props) {
           width={mapPixels}
           height={mapPixels}
         />
-        <p>{getHeldPosition()}</p>
-        <button onClick={deleteObject} disabled={!gameObjects.length}>
-          <DeleteIcon />
-        </button>
-        <label htmlFor="showtiles-checkbox">Tiles</label>
-        <input
-          id="showtiles-checkbox"
-          type="checkbox"
-          checked={showTiles}
-          onChange={e => setShowTiles(e.target.checked)}
-        />
-        <label htmlFor="showobjects-checkbox">Objects</label>
-        <input
-          id="showobjects-checkbox"
-          type="checkbox"
-          checked={showObjects}
-          onChange={e => setShowObjects(e.target.checked)}
-        />
+        <div className={styles.tools}>
+          <p>{getHeldPosition()}</p>
+          <Button
+            onClick={deleteObject}
+            disabled={!gameObjects.length}
+            variant="contained"
+            className={styles.button}
+          >
+            <DeleteIcon />
+          </Button>
+          <label htmlFor="showtiles-checkbox">Tiles</label>
+          <input
+            id="showtiles-checkbox"
+            type="checkbox"
+            checked={showTiles}
+            onChange={e => setShowTiles(e.target.checked)}
+          />
+          <label htmlFor="showobjects-checkbox">Objects</label>
+          <input
+            id="showobjects-checkbox"
+            type="checkbox"
+            checked={showObjects}
+            onChange={e => setShowObjects(e.target.checked)}
+          />
+        </div>
       </div>
     </div>
   );

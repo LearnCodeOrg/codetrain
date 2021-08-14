@@ -17,3 +17,12 @@
   border-radius: 50%!important;
   min-width: 0!important;
 }
+
+.tools {
+  display: flex;
+  align-items: center;
+}
+
+.tools > p {
+  width: 60px;
+}
