@@ -1,5 +1,6 @@
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import StopIcon from '@material-ui/icons/Stop';
+import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
 import Frame from '../components/Frame.js';
 
@@ -138,12 +139,13 @@ export default function Game(props) {
           between(obj.x, x - halfSprite, x + halfSprite) &&
           between(obj.y, y - halfSprite, y + halfSprite)
         )).reverse();
+        console.log({clicked});
         // if object clicked
         if (clicked.length) {
           // get held object
           holding = true;
           const heldObject = clicked[0];
-          if (heldObject.x === x || heldObject.y === y) return;
+          if (heldObject.x === x && heldObject.y === y) return;
           // update held object position
           const heldIndex = newGameObjects.indexOf(heldObject);
           newGameObjects.splice(heldIndex, 1);
@@ -160,6 +162,16 @@ export default function Game(props) {
         }
       }
     }
+  }
+
+  // deletes last selected object
+  function deleteObject() {
+    // return if no objects
+    if (!gameObjects.length) return;
+    // pop last object
+    const newGameObjects = gameObjects.slice();
+    newGameObjects.pop();
+    setGameObjects(newGameObjects);
   }
 
   // on start
@@ -214,6 +226,9 @@ export default function Game(props) {
           width={mapPixels}
           height={mapPixels}
         />
+        <button onClick={deleteObject} disabled={!gameObjects.length}>
+          <DeleteIcon />
+        </button>
         <label htmlFor="showtiles-checkbox">Tiles</label>
         <input
           id="showtiles-checkbox"
