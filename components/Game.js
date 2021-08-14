@@ -22,6 +22,7 @@ const spritePixels = Math.floor(mapPixels / mapSize);
 
 let canvas, ctx;
 let sketching = false;
+let holding = false;
 
 export default function Game(props) {
   const {
@@ -97,10 +98,23 @@ export default function Game(props) {
       const newBackground = background.slice();
       newBackground[mapIndex] = currTile;
       setBackground(newBackground);
+    // sketch object
     } else {
-      const x = clamp(currX, 0, mapPixels - spritePixels);
-      const y = clamp(currY, 0, mapPixels - spritePixels);
+      const xp = Math.floor(currX / pixelPixels) * pixelPixels;
+      const yp = Math.floor(currY / pixelPixels) * pixelPixels;
+      const x = clamp(xp, 0, mapPixels - spritePixels);
+      const y = clamp(yp, 0, mapPixels - spritePixels);
       const newGameObjects = gameObjects.slice();
+      if (holding) {
+        const heldObject = newGameObjects[newGameObjects.length - 1];
+        if (heldObject.x !== x || heldObject.y !== y) {
+          newGameObjects[newGameObjects.length - 1] = {
+            x, y, sprite: heldObject.sprite
+          };
+          setGameObjects(newGameObjects);
+        }
+        return;
+      }
       // if object clicked, select object
       const clicked = gameObjects.filter(obj => (
         between(obj.x, x - spritePixels, x) &&
@@ -109,14 +123,14 @@ export default function Game(props) {
       if (clicked.length) {
         const clickedIndex = newGameObjects.indexOf(clicked[0]);
         newGameObjects.splice(clickedIndex, 1);
-        newGameObjects.push(clicked[0]);
+        newGameObjects.push({ x, y, sprite: clicked[0].sprite });
       // if empty space, create object
       } else {
         const object = { x, y, sprite: currObject };
         newGameObjects.push(object);
       }
+      holding = true;
       setGameObjects(newGameObjects);
-      sketching = false;
     }
   }
 
@@ -160,8 +174,14 @@ export default function Game(props) {
         <canvas
           ref={canvasRef}
           className={styles.screen}
-          onMouseDown={e => { sketching = true; sketchMap(e); }}
-          onMouseMove={e => { if (sketching) sketchMap(e); }}
+          onMouseDown={e => {
+            sketching = true;
+            holding = false;
+            sketchMap(e);
+          }}
+          onMouseMove={e => {
+            if (sketching) sketchMap(e);
+          }}
           onMouseUp={e => { sketching = false; }}
           onMouseLeave={e => { sketching = false; }}
           width={mapPixels}
