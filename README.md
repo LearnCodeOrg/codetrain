@@ -2,6 +2,8 @@
 
 An educational browser game engine.
 
+Try it here: [codet.vercel.app](https://codet.vercel.app)
+
 ## Game Loop
 
 `start()`: runs once at the start of the game
