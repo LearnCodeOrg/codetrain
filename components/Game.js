@@ -36,6 +36,7 @@ export default function Game(props) {
   );
   const [gameObjects, setGameObjects] = useState([]);
 
+  const [showTiles, setShowTiles] = useState(true);
   const [showObjects, setShowObjects] = useState(true);
 
   const canvasRef = useRef();
@@ -60,15 +61,23 @@ export default function Game(props) {
 
   // draws game canvas
   function draw() {
-    // for each tile
-    for (let y = 0; y < mapSize; y++) {
-      for (let x = 0; x < mapSize; x++) {
-        // get sprite
-        const spriteIndex = y * mapSize + x;
-        const sprite = tiles[background[spriteIndex]];
-        // draw sprite
-        drawSprite(sprite, x * spritePixels, y * spritePixels);
+    // if showing tiles
+    if (showTiles) {
+      // for each tile
+      for (let y = 0; y < mapSize; y++) {
+        for (let x = 0; x < mapSize; x++) {
+          // get sprite
+          const spriteIndex = y * mapSize + x;
+          const sprite = tiles[background[spriteIndex]];
+          // draw sprite
+          drawSprite(sprite, x * spritePixels, y * spritePixels);
+        }
       }
+    // if not showing tiles
+    } else {
+      // clear canvas
+      ctx.fillStyle = '#000';
+      ctx.fillRect(0, 0, mapPixels, mapPixels);
     }
     // return if not showing objects
     if (!showObjects) return;
@@ -83,6 +92,9 @@ export default function Game(props) {
 
   // sketches map with given mouse event data
   function sketchMap(e) {
+    // return if not showing sketch target
+    if (currTile !== -1 && !showTiles) return;
+    if (currObject !== -1 && !showObjects) return;
     // get x and y on canvas
     const currX = e.clientX - canvas.offsetLeft + window.scrollX;
     const currY = e.clientY - canvas.offsetTop + window.scrollY;
@@ -144,7 +156,7 @@ export default function Game(props) {
   // draw map when any elements change
   useEffect(() => {
     draw();
-  }, [colors, tiles, objects, background, gameObjects, showObjects]);
+  }, [colors, tiles, objects, background, gameObjects, showTiles, showObjects]);
 
   return (
     <div className={styles.container}>
@@ -186,6 +198,13 @@ export default function Game(props) {
           onMouseLeave={e => { sketching = false; }}
           width={mapPixels}
           height={mapPixels}
+        />
+        <label htmlFor="showtiles-checkbox">Tiles</label>
+        <input
+          id="showtiles-checkbox"
+          type="checkbox"
+          checked={showTiles}
+          onChange={e => setShowTiles(e.target.checked)}
         />
         <label htmlFor="showobjects-checkbox">Objects</label>
         <input
