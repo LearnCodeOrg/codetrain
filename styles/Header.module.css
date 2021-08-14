@@ -1,0 +1,21 @@
+.container {
+  height: 60px;
+  width: 100%;
+  position: fixed;
+  background: #ddd;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+}
+
+.container > div {
+  margin: 0 10px!important;
+}
+
+.container > button {
+  margin: 0 10px;
+}
+
+.flexfill {
+  flex-grow: 1;
+}

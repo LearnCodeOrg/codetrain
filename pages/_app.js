@@ -28,6 +28,7 @@ export default function App({ Component, pageProps }) {
         <link rel="manifest" href="/manifest.json" />
       </Head>
       <Header />
+      <div style={{ height: 60 }} />
       <Component {...pageProps} />
     </>
   );
