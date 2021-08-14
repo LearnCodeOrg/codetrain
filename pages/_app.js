@@ -1,3 +1,4 @@
+import Header from '../components/Header.js';
 import Head from 'next/head';
 
 import firebase from 'firebase/app';
@@ -26,6 +27,7 @@ export default function App({ Component, pageProps }) {
         <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png" />
         <link rel="manifest" href="/manifest.json" />
       </Head>
+      <Header />
       <Component {...pageProps} />
     </>
   );
