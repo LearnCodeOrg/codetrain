@@ -65,9 +65,16 @@ Try it here: [codet.vercel.app](https://codet.vercel.app)
 # Examples
 
 ```js
-// looping and logging
+// open dialogue box
 function start() {
-  for (i in range(3)) console.log(i);
+  say('Hello World!');
+}
+```
+
+```js
+// looping and moving
+function start() {
+  for (i in range(3)) move('right');
 }
 ```
 
@@ -102,5 +109,19 @@ async function animate() {
 }
 function start() {
   animate();
+}
+```
+
+```js
+// open dialogue based on user position
+let triggered = false;
+function update() {
+  if (!triggered) {
+    const position = getTilePosition();
+    if (position.x == 0 && position.y == 0) {
+      say('Hello!');
+      triggered = true;
+    }
+  }
 }
 ```
