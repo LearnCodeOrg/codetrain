@@ -10,18 +10,15 @@ export default function Frame(props) {
   } = props;
 
   // returns function definition for given object
-  function getCodeFunction(spriteIndex, mapIndex) {
-    // return empty if no object
-    if (spriteIndex === -1) return '';
+  function getCodeFunction(gameObject, index) {
+    const { x, y, sprite } = gameObject;
     return (
 `(function() {
-  let mapIndex = ${mapIndex};
-  const spriteIndex = ${spriteIndex};
-  function move(dir) {
-    const newIndex = __move__(dir, mapIndex, spriteIndex);
-    if (newIndex !== undefined) mapIndex = newIndex;
-  }
-  ${codes[spriteIndex]}
+  const index = ${index};
+  const move = dir => __move__(index, dir);
+  const movePixels = (x, y) => __movePixels__(index, x, y);
+  const moveTiles = (x, y) => __moveTiles__(index, x, y);
+  ${codes[sprite]}
   return {
     start: typeof start === 'function' ? start : () => {},
     update: typeof update === 'function' ? update : () => {}
@@ -65,36 +62,19 @@ export default function Frame(props) {
     function range(num) {
       return [...Array(num).keys()];
     }
-    function __move__(dir, mapIndex, spriteIndex) {
-      if (dir === 'left') {
-        if (mapIndex % mapSize === 0) return;
-        const newIndex = mapIndex - 1;
-        if (objects[newIndex] !== -1) return;
-        objects[newIndex] = spriteIndex;
-        objects[mapIndex] = -1;
-        return newIndex;
-      } else if (dir === 'right') {
-        if (mapIndex % mapSize === mapSize - 1) return;
-        const newIndex = mapIndex + 1;
-        if (objects[newIndex] !== -1) return;
-        objects[newIndex] = spriteIndex;
-        objects[mapIndex] = -1;
-        return newIndex;
-      } else if (dir === 'up') {
-        if (mapIndex < mapSize) return;
-        const newIndex = mapIndex - mapSize;
-        if (objects[newIndex] !== -1) return;
-        objects[newIndex] = spriteIndex;
-        objects[mapIndex] = -1;
-        return newIndex;
-      } else if (dir === 'down') {
-        if (mapIndex >= mapSize * mapSize - mapSize) return;
-        const newIndex = mapIndex + mapSize;
-        if (objects[newIndex] !== -1) return;
-        objects[newIndex] = spriteIndex;
-        objects[mapIndex] = -1;
-        return newIndex;
-      }
+    function __move__(index, dir) {
+      if (dir === 'up') gameObjects[index].y -= spritePixels;
+      else if (dir === 'down') gameObjects[index].y += spritePixels;
+      else if (dir === 'left') gameObjects[index].x -= spritePixels;
+      else if (dir === 'right') gameObjects[index].x += spritePixels;
+    }
+    function __movePixels__(index, x, y) {
+      gameObjects[index].x += x * pixelPixels;
+      gameObjects[index].y += y * pixelPixels;
+    }
+    function __moveTiles__(index, x, y) {
+      gameObjects[index].x += x * spritePixels;
+      gameObjects[index].y += y * spritePixels;
     }
     // set up key listeners
     window.onkeydown = e => pressedKeys[e.keyCode] = true;
@@ -115,9 +95,9 @@ export default function Frame(props) {
     }
     // sprite codes
     const spriteCodes = [
-      ${objects.map((object, mapIndex) =>
-        getCodeFunction(object, mapIndex)
-      ).join('')}
+      ${gameObjects.map((gameObject, index) =>
+        getCodeFunction(gameObject, index)
+      ).join(',\n')}
     ];
     // runs after body has loaded
     function __start__() {
