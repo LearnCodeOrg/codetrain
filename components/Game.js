@@ -162,7 +162,6 @@ export default function Game(props) {
           between(obj.x, x - halfSprite, x + halfSprite) &&
           between(obj.y, y - halfSprite, y + halfSprite)
         )).reverse();
-        console.log({clicked});
         // if object clicked
         if (clicked.length) {
           // get held object
@@ -185,6 +184,14 @@ export default function Game(props) {
         }
       }
     }
+  }
+
+  // returns position of current held object
+  function getHeldPosition() {
+    // return if no objects
+    if (!gameObjects.length) return '(?, ?)';
+    const { x, y } = gameObjects[gameObjects.length - 1];
+    return `(${Math.floor(x / pixelPixels)}, ${Math.floor(y / pixelPixels)})`;
   }
 
   // deletes last selected object
@@ -226,8 +233,10 @@ export default function Game(props) {
           pixelPixels={pixelPixels}
           codes={codes}
           colors={colors}
-          background={background}
+          tiles={tiles}
           objects={objects}
+          background={background}
+          gameObjects={gameObjects}
           spriteSize={spriteSize}
           mapSize={mapSize}
         />
@@ -249,6 +258,7 @@ export default function Game(props) {
           width={mapPixels}
           height={mapPixels}
         />
+        <p>{getHeldPosition()}</p>
         <button onClick={deleteObject} disabled={!gameObjects.length}>
           <DeleteIcon />
         </button>
