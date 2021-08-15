@@ -8,8 +8,9 @@
   align-items: center;
 }
 
-.container > div {
-  margin: 0 10px!important;
+.icon {
+  display: inline-block;
+  margin: 0 10px;
 }
 
 .container > button {
