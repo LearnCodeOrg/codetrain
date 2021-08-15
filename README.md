@@ -2,7 +2,7 @@
 
 An educational browser game engine.
 
-Try it here: [codet.vercel.app](https://codet.vercel.app)
+Try it here: [codetrain.org](https://codetrain.org)
 
 ## Game Loop
 
