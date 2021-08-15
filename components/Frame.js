@@ -1,6 +1,8 @@
 import GetAppIcon from '@material-ui/icons/GetApp';
 import Button from '@material-ui/core/Button';
 
+import { useState } from 'react';
+
 import styles from '../styles/Frame.module.css';
 
 export default function Frame(props) {
@@ -103,8 +105,11 @@ export default function Frame(props) {
         y: Math.floor(gameObjects[index].y / spritePixels)
       };
     }
-    // set up key listeners
-    window.onkeydown = e => pressedKeys[e.keyCode] = true;
+    // set up input listeners
+    window.onkeydown = e => {
+      pressedKeys[e.keyCode] = true;
+      dialogue = undefined;
+    }
     window.onkeyup = e => pressedKeys[e.keyCode] = false;
     window.onmousedown = e => { dialogue = undefined; }
     function isKeyDown(key) {
@@ -212,11 +217,13 @@ export default function Frame(props) {
 </html>
 `;
 
+  const [source, setSource] = useState(gameSrc);
+
   // downloads game as an html file
   function downloadGame() {
     const link = document.createElement('a');
     link.download = 'game.html';
-    link.href = `data:text/html;charset=utf-8,${encodeURIComponent(gameSrc)}`;
+    link.href = `data:text/html;charset=utf-8,${encodeURIComponent(source)}`;
     link.click();
   }
 
@@ -231,7 +238,7 @@ export default function Frame(props) {
       <iframe
         title="game"
         sandbox="allow-scripts"
-        srcDoc={gameSrc}
+        srcDoc={source}
         width={mapPixels}
         height={mapPixels}
         frameBorder="0"
