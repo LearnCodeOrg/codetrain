@@ -1,4 +1,5 @@
 import GetAppIcon from '@material-ui/icons/GetApp';
+import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import Button from '@material-ui/core/Button';
 
 import { useState } from 'react';
@@ -8,7 +9,8 @@ import styles from '../styles/Frame.module.css';
 export default function Frame(props) {
   const {
     mapPixels, spriteSize, spritePixels, pixelPixels,
-    mapSize, codes, colors, tiles, objects, background, gameObjects
+    mapSize, codes, colors, tiles, objects, background, gameObjects,
+    isChallenge
   } = props;
 
   // returns function definition for given object
@@ -229,12 +231,21 @@ export default function Frame(props) {
 
   return (
     <div>
-      <Button
-        variant="contained"
-        onClick={downloadGame}
-      >
-        <GetAppIcon />
-      </Button>
+      {
+        isChallenge ?
+        <Button
+          variant="contained"
+          onClick={() => setSource(gameSrc)}
+        >
+          <PlayArrowIcon />
+        </Button> :
+        <Button
+          variant="contained"
+          onClick={downloadGame}
+        >
+          <GetAppIcon />
+        </Button>
+      }
       <iframe
         title="game"
         sandbox="allow-scripts"
