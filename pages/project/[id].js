@@ -1,6 +1,17 @@
+import Frame from '../../components/Frame.js';
+
+import dynamic from 'next/dynamic';
 import firebase from 'firebase/app';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import { palettes } from '../../data/palettes.js';
+
+// units
+const mapPixels = 512;
+const mapSize = 8;
+const spriteSize = 8;
+const spritePixels = Math.floor(mapPixels / mapSize);
+const pixelPixels = Math.floor(spritePixels / spriteSize);
 
 export default function Project() {
   const [data, setData] = useState(undefined);
@@ -29,6 +40,20 @@ export default function Project() {
   return (
     <div>
       <h1>{data.title}</h1>
+      <p>{data.description}</p>
+      <Frame
+        mapPixels={mapPixels}
+        spritePixels={spritePixels}
+        pixelPixels={pixelPixels}
+        spriteSize={spriteSize}
+        mapSize={mapSize}
+        codes={data.codes}
+        colors={data.colors}
+        tiles={data.tiles}
+        objects={data.objects}
+        background={data.background}
+        gameObjects={data.gameObjects}
+      />
     </div>
   );
 }
