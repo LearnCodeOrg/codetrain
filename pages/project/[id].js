@@ -1,36 +1,34 @@
 import firebase from 'firebase/app';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 
-export default function Project(props) {
-  const { data } = props;
+export default function Project() {
+  const [data, setData] = useState(undefined);
+
+  // get project id
+  const router = useRouter();
+  const { id } = router.query;
+
+  // retrieves project data from firebase
+  async function getProjectData() {
+    // return if no id
+    if (!id) return;
+    // get and set project data
+    const projectRef = firebase.firestore().collection('projects').doc(id);
+    const projectDoc = await projectRef.get();
+    setData(projectDoc.exists ? projectDoc.data() : null);
+  }
+
+  // get project data on start
+  useEffect(getProjectData, [id]);
 
   // return if invalid data
-  if (!data) return <div>Project not found</div>;
+  if (data === undefined) return <div>Loading...</div>;
+  if (!data) return <div>project not found</div>;
 
   return (
     <div>
       <h1>{data.title}</h1>
     </div>
   );
-}
-
-export async function getStaticPaths() {
-  return {
-    paths: [],
-    fallback: true
-  };
-}
-
-export async function getStaticProps(props) {
-  // get project data
-  const projectId = props.params.id;
-  const projectsRef = firebase.firestore().collection('projects');
-  const projectRef = projectsRef.doc(projectId);
-  const projectDoc = await projectRef.get();
-  const projectData = projectDoc.exists ?
-  { ...projectDoc.data(), id: projectId } : undefined;
-  // return project data
-  return {
-    props: { data: projectData },
-    revalidate: 60
-  };
 }
