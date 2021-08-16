@@ -2,7 +2,8 @@ import Frame from '../../components/Frame.js';
 
 import dynamic from 'next/dynamic';
 import firebase from 'firebase/app';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import { palettes } from '../../data/palettes.js';
 
 const Editor = dynamic(import('../../components/Editor.js'), { ssr: false });
@@ -20,12 +21,32 @@ const tiles = [Array(8 ** 2).fill(0)];
 const objects = [Array(8 ** 2).fill(3)];
 const background = Array(mapSize ** 2).fill(0);
 
-export default function Challenge(props) {
-  const { data } = props;
+export default function Challenge() {
+  const [code, setCode] = useState('');
+  const [data, setData] = useState(undefined);
 
-  const [code, setCode] = useState(data?.code ?? '');
+  // get challenge id
+  const router = useRouter();
+  const { id } = router.query;
+
+  // retrieves challenge data from firebase
+  async function getChallengeData() {
+    // return if no id
+    if (!id) return;
+    // get challenge data
+    const challengeRef = firebase.firestore().collection('challenges').doc(id);
+    const challengeDoc = await challengeRef.get();
+    const challengeData = challengeDoc.exists ? challengeDoc.data() : null;
+    // set challenge data
+    setData(challengeData);
+    if (challengeData?.code) setCode(challengeData.code);
+  }
+
+  // get challenge data on start
+  useEffect(getChallengeData, [id]);
 
   // return if invalid data
+  if (data === undefined) return <div>Loading...</div>;
   if (!data) return <div>Challenge not found</div>;
 
   return (
@@ -51,26 +72,4 @@ export default function Challenge(props) {
       />
     </div>
   );
-}
-
-export async function getStaticPaths() {
-  return {
-    paths: [],
-    fallback: true
-  };
-}
-
-export async function getStaticProps(props) {
-  // get challenge data
-  const challengeId = props.params.id;
-  const challengesRef = firebase.firestore().collection('challenges');
-  const challengeRef = challengesRef.doc(challengeId);
-  const challengeDoc = await challengeRef.get();
-  const challengeData = challengeDoc.exists ?
-  { ...challengeDoc.data(), id: challengeId } : undefined;
-  // return challenge data
-  return {
-    props: { data: challengeData },
-    revalidate: 60
-  };
 }
