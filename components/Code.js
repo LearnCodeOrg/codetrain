@@ -1,8 +1,6 @@
-import AceEditor from 'react-ace';
+import dynamic from 'next/dynamic';
 
-import 'ace-builds/src-noconflict/mode-javascript.js';
-import 'ace-builds/src-noconflict/theme-monokai.js';
-import styles from '../styles/Code.module.css';
+const Editor = dynamic(import('../components/Editor.js'), { ssr: false });
 
 export default function Code(props) {
   const { objectCount, currObject, codes, setCodes } = props;
@@ -16,16 +14,10 @@ export default function Code(props) {
 
   return (
     <div>
-      <AceEditor
+      <Editor
         value={currObject === -1 ? '' : codes[currObject]}
         readOnly={currObject === -1}
         onChange={val => updateCode(val)}
-        mode="javascript"
-        theme="monokai"
-        wrapEnabled={true}
-        showPrintMargin={false}
-        tabSize={2}
-        setOptions={{ useWorker: false }}
       />
     </div>
   );

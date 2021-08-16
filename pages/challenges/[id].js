@@ -1,7 +1,13 @@
+import dynamic from 'next/dynamic';
 import firebase from 'firebase/app';
+import { useState } from 'react';
+
+const Editor = dynamic(import('../../components/Editor.js'), { ssr: false });
 
 export default function Challenge(props) {
   const { data } = props;
+
+  const [code, setCode] = useState(data?.code ?? '');
 
   // return if invalid data
   if (!data) return <div>Challenge not found</div>;
@@ -9,6 +15,10 @@ export default function Challenge(props) {
   return (
     <div>
       <h1>{data.title}</h1>
+      <Editor
+        value={code}
+        onChange={val => setCode(val)}
+      />
     </div>
   );
 }
