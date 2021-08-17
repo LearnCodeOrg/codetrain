@@ -1,24 +1,25 @@
+import Challenge from '../components/cards/Challenge.js';
 import Link from 'next/link';
 
 import firebase from 'firebase/app';
+
+import styles from '../styles/Learn.module.css';
 
 export default function Learn(props) {
   const { data } = props;
 
   return (
-    <div>
-      {
-        data.map(challenge =>
-          <div key={challenge.id}>
-            <Link href={`/challenges/${challenge.id}`}>
-              <a>
-                <h1>{challenge.title}</h1>
-              </a>
-            </Link>
-            <p>{challenge.description}</p>
-          </div>
-        )
-      }
+    <div className={styles.container}>
+      <div className={styles.challenges}>
+        {
+          data.map(challenge =>
+            <Challenge {...challenge} key={challenge.id} />
+          )
+        }
+      </div>
+      <Link href="/next">
+        <a>What&apos;s next?</a>
+      </Link>
     </div>
   );
 }

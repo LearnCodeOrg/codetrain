@@ -1,0 +1,10 @@
+.challenges {
+  display: flex;
+  margin: 10px;
+  flex-wrap: wrap;
+}
+
+.container > a:hover {
+  text-decoration: underline;
+  color: #2196f3;
+}
