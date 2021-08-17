@@ -9,7 +9,7 @@ import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
 import { palettes } from '../data/palettes.js';
 
-import styles from '../styles/Index.module.css';
+import styles from '../styles/pages/Index.module.css';
 
 const Code = dynamic(import('../components/Code.js'), { ssr: false });
 

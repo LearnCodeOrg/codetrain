@@ -1,7 +1,7 @@
 import { clamp } from '../util/math.js';
 import { useEffect, useState } from 'react';
 
-import styles from '../styles/Tiles.module.css';
+import styles from '../styles/components/Tiles.module.css';
 
 const selectPixels = 128;
 const selectBorder = 4;

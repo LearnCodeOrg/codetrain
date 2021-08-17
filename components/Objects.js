@@ -1,7 +1,7 @@
 import { clamp } from '../util/math.js';
 import { useEffect, useState } from 'react';
 
-import styles from '../styles/Objects.module.css';
+import styles from '../styles/components/Objects.module.css';
 
 const selectPixels = 128;
 const selectBorder = 4;

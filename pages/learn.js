@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import firebase from 'firebase/app';
 
-import styles from '../styles/Learn.module.css';
+import styles from '../styles/pages/Learn.module.css';
 
 export default function Learn(props) {
   const [challenges, setChallenges] = useState(undefined);

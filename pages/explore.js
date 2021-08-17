@@ -3,7 +3,7 @@ import Project from '../components/cards/Project.js';
 import { useEffect, useState } from 'react';
 import firebase from 'firebase/app';
 
-import styles from '../styles/Explore.module.css';
+import styles from '../styles/pages/Explore.module.css';
 
 export default function Explore() {
   const [projects, setProjects] = useState(undefined);

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import styles from '../../styles/Challenge.module.css';
+import styles from '../../styles/components/cards/Challenge.module.css';
 
 export default function Challenge(props) {
   const { id, title, description } = props;

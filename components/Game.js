@@ -7,7 +7,7 @@ import Frame from '../components/Frame.js';
 import { clamp, between } from '../util/math.js';
 import { useEffect, useRef, useState } from 'react';
 
-import styles from '../styles/Game.module.css';
+import styles from '../styles/components/Game.module.css';
 
 const keys = {};
 

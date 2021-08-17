@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import styles from '../../styles/Project.module.css';
+import styles from '../../styles/components/cards/Project.module.css';
 
 export default function Project(props) {
   const { id, title, username } = props;

@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button';
 
 import { useState } from 'react';
 
-import styles from '../styles/Frame.module.css';
+import styles from '../styles/components/Frame.module.css';
 
 export default function Frame(props) {
   const {
