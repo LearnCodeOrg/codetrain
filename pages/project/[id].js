@@ -35,7 +35,7 @@ export default function Project() {
 
   // return if invalid data
   if (data === undefined) return <div>Loading...</div>;
-  if (!data) return <div>project not found</div>;
+  if (!data) return <div>Project not found</div>;
 
   return (
     <div>
