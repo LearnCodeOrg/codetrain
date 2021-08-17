@@ -1,22 +1,17 @@
-import Link from 'next/link';
+import Project from '../components/cards/Project.js';
 
 import firebase from 'firebase/app';
+
+import styles from '../styles/Explore.module.css';
 
 export default function Challenges(props) {
   const { data } = props;
 
   return (
-    <div>
+    <div className={styles.projects}>
       {
         data.map(project =>
-          <div key={project.id}>
-            <Link href={`/projects/${project.id}`}>
-              <a>
-                <h1>{project.title}</h1>
-              </a>
-            </Link>
-            <p>{project.description}</p>
-          </div>
+          <Project {...project} key={project.id} />
         )
       }
     </div>
