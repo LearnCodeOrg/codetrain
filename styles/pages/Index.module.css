@@ -1,0 +1,28 @@
+.container {
+  height: calc(100% - 60px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.center {
+  text-align: center;
+  background: #efefef;
+  padding: 20px;
+  border-radius: 2px;
+  box-shadow: 0 0 5px #999;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.title > h1 {
+  margin: 0;
+}
+
+.title > div {
+  margin-left: 5px!important;
+}
