@@ -257,6 +257,7 @@ export default function Game(props) {
           gameObjects={gameObjects}
           spriteSize={spriteSize}
           mapSize={mapSize}
+          download
         />
       }
       <div style={ playing ? { display: 'none' } : {}}>

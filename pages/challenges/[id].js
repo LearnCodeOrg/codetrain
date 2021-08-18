@@ -69,7 +69,6 @@ export default function Challenge() {
         gameObjects={[{ sprite: 0, ...data.object }]}
         spriteSize={spriteSize}
         mapSize={mapSize}
-        isChallenge
       />
     </div>
   );

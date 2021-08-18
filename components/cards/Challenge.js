@@ -7,7 +7,7 @@ export default function Challenge(props) {
 
   return (
     <div className={styles.container}>
-      <Link href={`/challenge/${id}`}>
+      <Link href={`/challenges/${id}`}>
         <a>
           <h1>{title}</h1>
           <p>{description}</p>
