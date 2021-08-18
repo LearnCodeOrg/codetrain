@@ -9,16 +9,11 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import ExploreIcon from '@material-ui/icons/Explore';
 
 import firebase from 'firebase/app';
+import signInWithGoogle from '../util/signInWithGoogle.js';
 
 import styles from '../styles/components/Header.module.css';
 
 export default function Header() {
-  // opens google sign in popup
-  async function signInWithGoogle() {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    await firebase.auth().signInWithPopup(provider);
-  }
-
   return (
     <div className={styles.container}>
       <Link href="/">
