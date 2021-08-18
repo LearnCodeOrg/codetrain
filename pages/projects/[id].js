@@ -50,8 +50,8 @@ export default function Project() {
         mapSize={mapSize}
         codes={data.codes}
         colors={data.colors}
-        tiles={data.tiles}
-        objects={data.objects}
+        tiles={JSON.parse(data.tiles)}
+        objects={JSON.parse(data.objects)}
         background={data.background}
         gameObjects={data.gameObjects}
       />

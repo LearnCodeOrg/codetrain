@@ -1,3 +1,4 @@
+import Router from 'next/router';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import StopIcon from '@material-ui/icons/Stop';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -6,6 +7,7 @@ import Frame from '../components/Frame.js';
 
 import { clamp, between } from '../util/math.js';
 import { useEffect, useRef, useState } from 'react';
+import firebase from 'firebase/app';
 
 import styles from '../styles/components/Game.module.css';
 
@@ -44,7 +46,23 @@ export default function Game(props) {
   const [showTiles, setShowTiles] = useState(true);
   const [showObjects, setShowObjects] = useState(true);
 
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+
   const canvasRef = useRef();
+
+  // publishes project
+  async function publish() {
+    const projectsRef = firebase.firestore().collection('projects');
+    const docRef = await projectsRef.add({
+      uid: firebase.auth().currentUser.uid,
+      title, description,
+      codes, colors, gameObjects, background,
+      tiles: JSON.stringify(tiles),
+      objects: JSON.stringify(objects)
+    });
+    Router.push(`/projects/${docRef.id}`);
+  }
 
   // draws given sprite at given position
   function drawSprite(sprite, x, y) {
@@ -284,6 +302,24 @@ export default function Game(props) {
           />
         </div>
       </div>
+      <form onSubmit={e => {
+        e.preventDefault();
+        publish();
+      }}>
+        <input
+          placeholder="title"
+          value={title}
+          onChange={e => setTitle(e.target.value)}
+          required
+        />
+        <input
+          placeholder="description"
+          value={description}
+          onChange={e => setDescription(e.target.value)}
+          required
+        />
+        <button>Publish</button>
+      </form>
     </div>
   );
 }
