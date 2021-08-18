@@ -1,3 +1,4 @@
+import Loading from '../components/Loading.js';
 import Challenge from '../components/cards/Challenge.js';
 import Link from 'next/link';
 
@@ -19,7 +20,7 @@ export default function Learn(props) {
   // get challenges on start
   useEffect(getChallenges, []);
 
-  if (!challenges) return <div>Loading...</div>;
+  if (!challenges) return <Loading />;
 
   return (
     <div className={styles.container}>

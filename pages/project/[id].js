@@ -1,3 +1,4 @@
+import Loading from '../../components/Loading.js';
 import Frame from '../../components/Frame.js';
 
 import dynamic from 'next/dynamic';
@@ -34,7 +35,7 @@ export default function Project() {
   useEffect(getProjectData, [id]);
 
   // return if invalid data
-  if (data === undefined) return <div>Loading...</div>;
+  if (data === undefined) return <Loading />;
   if (!data) return <div>Project not found</div>;
 
   return (

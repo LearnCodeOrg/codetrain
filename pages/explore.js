@@ -1,3 +1,4 @@
+import Loading from '../components/Loading.js';
 import Project from '../components/cards/Project.js';
 
 import { useEffect, useState } from 'react';
@@ -18,7 +19,7 @@ export default function Explore() {
   // get projects on start
   useEffect(getProjects, []);
 
-  if (!projects) return <div>Loading...</div>;
+  if (!projects) return <Loading />;
 
   return (
     <div className={styles.projects}>
