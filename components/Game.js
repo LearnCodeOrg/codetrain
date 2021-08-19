@@ -40,16 +40,14 @@ export default function Game(props) {
   const pixelPixels = Math.floor(spritePixels / spriteSize);
 
   const [playing, setPlaying] = useState(false);
-  const [background, setBackground] = useState(
-    Array(mapSize * mapSize).fill(0)
-  );
-  const [gameObjects, setGameObjects] = useState([]);
+  const [background, setBackground] = useState(props.background);
+  const [gameObjects, setGameObjects] = useState(props.gameObjects);
 
   const [showTiles, setShowTiles] = useState(true);
   const [showObjects, setShowObjects] = useState(true);
 
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+  const [title, setTitle] = useState(props.title);
+  const [description, setDescription] = useState(props.description);
 
   const canvasRef = useRef();
   const didMountRef = useRef(false);
