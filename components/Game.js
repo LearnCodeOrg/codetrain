@@ -31,6 +31,8 @@ let canvas, ctx;
 let sketching = false;
 let holding = false;
 
+let beforeUnloadSet = false;
+
 export default function Game(props) {
   const {
     tiles, objects, colors, spriteSize, currTile, currObject, codes
@@ -50,6 +52,7 @@ export default function Game(props) {
   const [description, setDescription] = useState('');
 
   const canvasRef = useRef();
+  const didMountRef = useRef(false);
 
   // publishes project
   async function publish() {
@@ -233,6 +236,15 @@ export default function Game(props) {
   useEffect(() => {
     draw();
   }, [colors, tiles, objects, background, gameObjects, showTiles, showObjects]);
+
+  // set up changes may not be saved popup
+  useEffect(() => {
+    if (didMountRef.current && !beforeUnloadSet) {
+      window.onbeforeunload = () => '';
+      beforeUnloadSet = true;
+    }
+    else didMountRef.current = true;
+  }, [colors, tiles, objects, background, gameObjects]);
 
   return (
     <div className={styles.container}>
