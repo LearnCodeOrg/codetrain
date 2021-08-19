@@ -32,6 +32,16 @@ Try it here: [codetrain.org](https://codetrain.org)
 
 `getPixelPosition()`: returns an object containing `x`, `y` position in pixels
 
+## Tiles
+
+`getTile()`: returns index of tile at position
+
+`setTile(tile)`: sets tile at position to index `tile`
+
+`getTileAt(x, y)`: returns index of tile at `x`, `y`
+
+`setTileAt(x, y, tile)`: sets tile at `x`, `y` to index `tile`
+
 ## Utility
 
 `range(num)`: returns an array containing numbers up to `num`
@@ -123,5 +133,21 @@ function update() {
       triggered = true;
     }
   }
+}
+```
+
+```js
+// movement painting
+function paint(dir) {
+  const tile = getTile();
+  if (tile === tiles.length - 1) setTile(0);
+  else setTile(tile + 1);
+  move(dir);
+}
+function update() {
+  if (isKey('w')) paint('up');
+  if (isKey('a')) paint('left');
+  if (isKey('s')) paint('down');
+  if (isKey('d')) paint('right');
 }
 ```
