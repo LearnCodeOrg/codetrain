@@ -4,6 +4,8 @@ import Colors from '../components/Colors.js';
 import Tiles from '../components/Tiles.js';
 import Objects from '../components/Objects.js';
 import Draw from '../components/Draw.js';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
@@ -24,7 +26,7 @@ export default function Engine(props) {
   const [tiles, setTiles] = useState(props.tiles);
   const [objects, setObjects] = useState(props.objects);
 
-  const [collapsed, setCollapsed] = useState(true);
+  const [collapsed, setCollapsed] = useState(false);
 
   // ensure single sprite selection
   useEffect(() => {
@@ -43,34 +45,40 @@ export default function Engine(props) {
         setCodes={setCodes}
       />
       <button onClick={() => setCollapsed(oldCollapsed => !oldCollapsed)}>
-        Collapse
+        {
+          collapsed ? <ArrowRightIcon /> : <ArrowDropDownIcon />
+        }
       </button>
       <div className={styles.draw} style={collapsed ? { display: 'none' } : {}}>
-        <Colors
-          colors={colors} setColors={setColors}
-          currColor={currColor} setCurrColor={setCurrColor}
-        />
-        <Tiles
-          colors={colors}
-          tiles={tiles}
-          currTile={currTile} setCurrTile={setCurrTile}
-          tileCount={tileCount}
-          spriteSize={spriteSize}
-        />
-        <Objects
-          colors={colors}
-          objects={objects}
-          currObject={currObject} setCurrObject={setCurrObject}
-          tileCount={tileCount}
-          objectCount={objectCount}
-          spriteSize={spriteSize}
-        />
-        <Draw
-          colors={colors} tiles={tiles} objects={objects}
-          currTile={currTile} currObject={currObject}
-          currColor={currColor} spriteSize={spriteSize}
-          setTiles={setTiles} setObjects={setObjects}
-        />
+        <div>
+          <Colors
+            colors={colors} setColors={setColors}
+            currColor={currColor} setCurrColor={setCurrColor}
+          />
+          <Draw
+            colors={colors} tiles={tiles} objects={objects}
+            currTile={currTile} currObject={currObject}
+            currColor={currColor} spriteSize={spriteSize}
+            setTiles={setTiles} setObjects={setObjects}
+          />
+        </div>
+        <div>
+          <Tiles
+            colors={colors}
+            tiles={tiles}
+            currTile={currTile} setCurrTile={setCurrTile}
+            tileCount={tileCount}
+            spriteSize={spriteSize}
+          />
+          <Objects
+            colors={colors}
+            objects={objects}
+            currObject={currObject} setCurrObject={setCurrObject}
+            tileCount={tileCount}
+            objectCount={objectCount}
+            spriteSize={spriteSize}
+          />
+        </div>
       </div>
       <Game
         colors={colors} tiles={tiles} objects={objects}
