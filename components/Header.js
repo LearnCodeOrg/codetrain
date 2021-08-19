@@ -7,6 +7,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import ExploreIcon from '@material-ui/icons/Explore';
+import InfoIcon from '@material-ui/icons/Info';
 
 import firebase from 'firebase/app';
 import signInWithGoogle from '../util/signInWithGoogle.js';
@@ -46,6 +47,15 @@ export default function Header() {
           <Tooltip title="Explore" arrow>
             <IconButton>
               <ExploreIcon />
+            </IconButton>
+          </Tooltip>
+        </a>
+      </Link>
+      <Link href="/about">
+        <a>
+          <Tooltip title="About" arrow>
+            <IconButton>
+              <InfoIcon />
             </IconButton>
           </Tooltip>
         </a>

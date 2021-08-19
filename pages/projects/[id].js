@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 import { palettes } from '../../data/palettes.js';
 
 // units
-const mapPixels = 512;
+const mapPixels = 256;
 const mapSize = 8;
 const spriteSize = 8;
 const spritePixels = Math.floor(mapPixels / mapSize);

@@ -22,7 +22,9 @@ export default function User() {
   }
 
   // get user data on start
-  useEffect(getUserData, [id]);
+  useEffect(() => {
+    getUserData();
+  }, [id]);
 
   // return if invalid data
   if (data === undefined) return <Loading />;
