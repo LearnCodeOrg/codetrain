@@ -26,6 +26,10 @@ export default function Frame(props) {
   const moveToTile = (x, y) => __moveToTile__(index, x, y);
   const getPixelPosition = () => __getPixelPosition__(index);
   const getTilePosition = () => __getTilePosition__(index);
+  const getTile = () => __getTile__(index);
+  const setTile = tile => __setTile__(index, tile);
+  const getTileAt = (x, y) => background[y * mapSize + x];
+  const setTileAt = (x, y, tile) => { background[y * mapSize + x] = tile; }
   const say = text => { dialogue = \`\${text}\`; }
   ${codes[sprite]}
   return {
@@ -106,6 +110,16 @@ export default function Frame(props) {
         x: Math.floor(gameObjects[index].x / spritePixels),
         y: Math.floor(gameObjects[index].y / spritePixels)
       };
+    }
+    function __getTile__(index) {
+      const position = __getTilePosition__(index);
+      const tileIndex = position.y * mapSize + position.x;
+      return background[tileIndex];
+    }
+    function __setTile__(index, tile) {
+      const position = __getTilePosition__(index);
+      const tileIndex = position.y * mapSize + position.x;
+      background[tileIndex] = tile;
     }
     // set up input listeners
     window.onkeydown = e => {
