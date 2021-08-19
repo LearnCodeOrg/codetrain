@@ -24,6 +24,8 @@ export default function Engine(props) {
   const [tiles, setTiles] = useState(props.tiles);
   const [objects, setObjects] = useState(props.objects);
 
+  const [collapsed, setCollapsed] = useState(true);
+
   // ensure single sprite selection
   useEffect(() => {
     if (currTile !== -1 && currObject !== -1) setCurrObject(-1);
@@ -40,31 +42,36 @@ export default function Engine(props) {
         codes={codes}
         setCodes={setCodes}
       />
-      <Colors
-        colors={colors} setColors={setColors}
-        currColor={currColor} setCurrColor={setCurrColor}
-      />
-      <Tiles
-        colors={colors}
-        tiles={tiles}
-        currTile={currTile} setCurrTile={setCurrTile}
-        tileCount={tileCount}
-        spriteSize={spriteSize}
-      />
-      <Objects
-        colors={colors}
-        objects={objects}
-        currObject={currObject} setCurrObject={setCurrObject}
-        tileCount={tileCount}
-        objectCount={objectCount}
-        spriteSize={spriteSize}
-      />
-      <Draw
-        colors={colors} tiles={tiles} objects={objects}
-        currTile={currTile} currObject={currObject}
-        currColor={currColor} spriteSize={spriteSize}
-        setTiles={setTiles} setObjects={setObjects}
-      />
+      <button onClick={() => setCollapsed(oldCollapsed => !oldCollapsed)}>
+        Collapse
+      </button>
+      <div className={styles.draw} style={collapsed ? { display: 'none' } : {}}>
+        <Colors
+          colors={colors} setColors={setColors}
+          currColor={currColor} setCurrColor={setCurrColor}
+        />
+        <Tiles
+          colors={colors}
+          tiles={tiles}
+          currTile={currTile} setCurrTile={setCurrTile}
+          tileCount={tileCount}
+          spriteSize={spriteSize}
+        />
+        <Objects
+          colors={colors}
+          objects={objects}
+          currObject={currObject} setCurrObject={setCurrObject}
+          tileCount={tileCount}
+          objectCount={objectCount}
+          spriteSize={spriteSize}
+        />
+        <Draw
+          colors={colors} tiles={tiles} objects={objects}
+          currTile={currTile} currObject={currObject}
+          currColor={currColor} spriteSize={spriteSize}
+          setTiles={setTiles} setObjects={setObjects}
+        />
+      </div>
       <Game
         colors={colors} tiles={tiles} objects={objects}
         spriteSize={spriteSize}
