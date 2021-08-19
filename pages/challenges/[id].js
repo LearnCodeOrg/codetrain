@@ -44,7 +44,9 @@ export default function Challenge() {
   }
 
   // get challenge data on start
-  useEffect(getChallengeData, [id]);
+  useEffect(() => {
+    getChallengeData();
+  }, [id]);
 
   // return if invalid data
   if (data === undefined) return <Loading />;

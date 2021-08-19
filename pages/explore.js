@@ -17,7 +17,9 @@ export default function Explore() {
   }
 
   // get projects on start
-  useEffect(getProjects, []);
+  useEffect(() => {
+    getProjects();
+  }, []);
 
   if (!projects) return <Loading />;
 

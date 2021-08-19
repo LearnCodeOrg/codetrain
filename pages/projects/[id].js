@@ -32,7 +32,9 @@ export default function Project() {
   }
 
   // get project data on start
-  useEffect(getProjectData, [id]);
+  useEffect(() => {
+    getProjectData();
+  }, [id]);
 
   // return if invalid data
   if (data === undefined) return <Loading />;

@@ -12,7 +12,7 @@ export default function Index() {
       <div className={styles.center}>
         <div className={styles.title}>
           <h1>Codetrain</h1>
-          <Image src="/logo.png" height="48" width="48" />
+          <Image src="/logo.png" height="48" width="48" alt="logo" />
         </div>
         {
           firebase.auth().currentUser ?

@@ -18,7 +18,9 @@ export default function Learn(props) {
   }
 
   // get challenges on start
-  useEffect(getChallenges, []);
+  useEffect(() => {
+    getChallenges();
+  }, []);
 
   if (!challenges) return <Loading />;
 

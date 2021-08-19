@@ -19,7 +19,7 @@ export default function Header() {
     <div className={styles.container}>
       <Link href="/">
         <a className={styles.icon}>
-          <Image src="/logo.png" height="48" width="48" />
+          <Image src="/logo.png" height="48" width="48" alt="logo" />
         </a>
       </Link>
       <h1>Codetrain</h1>
