@@ -1,6 +1,8 @@
+import styles from '../styles/pages/About.module.css';
+
 export default function About() {
   return (
-    <div>
+    <div className={styles.container}>
       <h1>About</h1>
       <p>Learn. Create. Explore.</p>
       <h2>What is Codetrain?</h2>
