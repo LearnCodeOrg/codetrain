@@ -35,6 +35,7 @@ let beforeUnloadSet = false;
 
 export default function Game(props) {
   const {
+    projectId, creator,
     tiles, objects, colors, spriteSize, currTile, currObject, codes
   } = props;
   const pixelPixels = Math.floor(spritePixels / spriteSize);
@@ -52,17 +53,28 @@ export default function Game(props) {
   const canvasRef = useRef();
   const didMountRef = useRef(false);
 
-  // publishes project
-  async function publish() {
-    const projectsRef = firebase.firestore().collection('projects');
-    const docRef = await projectsRef.add({
-      uid: firebase.auth().currentUser.uid,
+  const uid = firebase.auth().currentUser?.uid;
+  const projectsRef = firebase.firestore().collection('projects');
+
+  // saves project to firebase
+  async function saveProject() {
+    // construct project object
+    const projectObj = {
+      creator: uid,
       title, description,
       codes, colors, gameObjects, background,
       tiles: JSON.stringify(tiles),
       objects: JSON.stringify(objects)
-    });
-    Router.push(`/projects/${docRef.id}`);
+    };
+    // if own project and existing, save
+    if (uid === creator && projectId) {
+      await projectsRef.doc(projectId).update(projectObj);
+      window.onbeforeunload = null;
+    // if no existing project, publish new project
+    } else {
+      const docRef = await projectsRef.add(projectObj);
+      Router.push(`/projects/${docRef.id}`);
+    }
   }
 
   // draws given sprite at given position
@@ -315,7 +327,7 @@ export default function Game(props) {
       </div>
       <form onSubmit={e => {
         e.preventDefault();
-        publish();
+        saveProject();
       }}>
         <input
           placeholder="title"
@@ -329,7 +341,11 @@ export default function Game(props) {
           onChange={e => setDescription(e.target.value)}
           required
         />
-        <button>Publish</button>
+        {
+          uid === creator ?
+          <button>Save</button> :
+          <button>Remix</button>
+        }
       </form>
     </div>
   );
