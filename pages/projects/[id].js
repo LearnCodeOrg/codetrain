@@ -1,5 +1,6 @@
 import Loading from '../../components/Loading.js';
 import Frame from '../../components/Frame.js';
+import Link from 'next/link';
 
 import dynamic from 'next/dynamic';
 import firebase from 'firebase/app';
@@ -44,6 +45,9 @@ export default function Project() {
     <div>
       <h1>{data.title}</h1>
       <p>{data.description}</p>
+      <Link href={`/edit/${id}`}>
+        <a>Edit</a>
+      </Link>
       <Frame
         mapPixels={mapPixels}
         spritePixels={spritePixels}

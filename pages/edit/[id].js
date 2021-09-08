@@ -38,10 +38,7 @@ export default function Edit() {
 
   return (
     <Engine
-      codes={data.codes} colors={data.colors}
-      tiles={JSON.parse(data.tiles)} objects={JSON.parse(data.objects)}
-      gameObjects={data.gameObjects} background={data.background}
-      title={data.title} description={data.description}
+      projectId={id} data={data}
       tileCount={tileCount} objectCount={objectCount} spriteSize={spriteSize}
     />
   );

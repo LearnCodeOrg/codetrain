@@ -15,16 +15,16 @@ import styles from '../styles/components/Engine.module.css';
 const Code = dynamic(import('../components/Code.js'), { ssr: false });
 
 export default function Engine(props) {
-  const { objectCount, tileCount, spriteSize } = props;
+  const { data, projectId, objectCount, tileCount, spriteSize } = props;
 
-  const [codes, setCodes] = useState(props.codes);
+  const [codes, setCodes] = useState(data.codes);
 
   const [currColor, setCurrColor] = useState(0);
   const [currTile, setCurrTile] = useState(0);
   const [currObject, setCurrObject] = useState(-1);
-  const [colors, setColors] = useState(props.colors);
-  const [tiles, setTiles] = useState(props.tiles);
-  const [objects, setObjects] = useState(props.objects);
+  const [colors, setColors] = useState(data.colors);
+  const [tiles, setTiles] = useState(JSON.parse(data.tiles));
+  const [objects, setObjects] = useState(JSON.parse(data.objects));
 
   const [collapsed, setCollapsed] = useState(false);
 
@@ -81,13 +81,14 @@ export default function Engine(props) {
         </div>
       </div>
       <Game
+        projectId={projectId} creator={data.creator}
         colors={colors} tiles={tiles} objects={objects}
         spriteSize={spriteSize}
         currTile={currTile}
         currObject={currObject}
         codes={codes}
-        background={props.background} gameObjects={props.gameObjects}
-        title={props.title} description={props.description}
+        background={data.background} gameObjects={data.gameObjects}
+        title={data.title} description={data.description}
       />
     </div>
   );
