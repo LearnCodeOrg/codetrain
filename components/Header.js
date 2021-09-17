@@ -25,40 +25,16 @@ export default function Header() {
       <h1>Codetrain</h1>
       <span className={styles.flexfill} />
       <Link href="/learn">
-        <a>
-          <Tooltip title="Learn" arrow>
-            <IconButton>
-              <CheckCircleIcon />
-            </IconButton>
-          </Tooltip>
-        </a>
+        <a className={styles.link}>Learn</a>
       </Link>
       <Link href="/create">
-        <a>
-          <Tooltip title="Create" arrow>
-            <IconButton>
-              <AddCircleIcon />
-            </IconButton>
-          </Tooltip>
-        </a>
+        <a className={styles.link}>Create</a>
       </Link>
       <Link href="/explore">
-        <a>
-          <Tooltip title="Explore" arrow>
-            <IconButton>
-              <ExploreIcon />
-            </IconButton>
-          </Tooltip>
-        </a>
+        <a className={styles.link}>Explore</a>
       </Link>
       <Link href="/about">
-        <a>
-          <Tooltip title="About" arrow>
-            <IconButton>
-              <InfoIcon />
-            </IconButton>
-          </Tooltip>
-        </a>
+        <a className={styles.link}>About</a>
       </Link>
       {
         firebase.auth().currentUser ?

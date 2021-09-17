@@ -14,8 +14,17 @@
   margin: 0 10px;
 }
 
-.container > button {
+.link {
   margin: 0 10px;
+  color: #666;
+}
+
+.link:hover {
+  color: var(--blue0);
+}
+
+.container > button {
+  margin-right: 10px;
 }
 
 .flexfill {
