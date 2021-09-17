@@ -1,0 +1,15 @@
+.container {
+  height: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.toolbar {
+  height: 30px;
+  background: #2f3129;
+}
+
+.container > div:last-of-type {
+  box-shadow: 0 0 5px #333;
+}

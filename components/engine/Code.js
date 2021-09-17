@@ -2,6 +2,8 @@ import dynamic from 'next/dynamic';
 
 const Editor = dynamic(import('../Editor.js'), { ssr: false });
 
+import styles from '../../styles/components/engine/Code.module.css';
+
 export default function Code(props) {
   const { objectCount, currObject, codes, setCodes } = props;
 
@@ -13,7 +15,9 @@ export default function Code(props) {
   }
 
   return (
-    <div>
+    <div className={styles.container}>
+      <div className={styles.toolbar}>
+      </div>
       <Editor
         value={currObject === -1 ? '' : codes[currObject]}
         readOnly={currObject === -1}
