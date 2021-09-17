@@ -4,9 +4,9 @@ import Button from '@material-ui/core/Button';
 
 import { useState } from 'react';
 
-import styles from '../styles/components/Frame.module.css';
+import styles from '../styles/components/GameFrame.module.css';
 
-export default function Frame(props) {
+export default function GameFrame(props) {
   const {
     mapPixels, spriteSize, spritePixels, pixelPixels,
     mapSize, codes, colors, tiles, objects, background, gameObjects,

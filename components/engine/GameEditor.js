@@ -3,14 +3,14 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import StopIcon from '@material-ui/icons/Stop';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
-import Frame from '../Frame.js';
+import Frame from '../GameFrame.js';
 import { Parser } from 'acorn';
 
 import { clamp, between } from '../../util/math.js';
 import { useEffect, useRef, useState } from 'react';
 import signInWithGoogle from '../../util/signInWithGoogle.js';
 
-import styles from '../../styles/components/engine/Game.module.css';
+import styles from '../../styles/components/engine/GameEditor.module.css';
 
 const keys = {};
 
@@ -34,7 +34,7 @@ let holding = false;
 
 let beforeUnloadSet = false;
 
-export default function Game(props) {
+export default function GameEditor(props) {
   const {
     projectId, creator,
     tiles, objects, colors, spriteSize, currTile, currObject, codes

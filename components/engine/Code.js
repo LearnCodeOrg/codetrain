@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic';
 
-const Editor = dynamic(import('../Editor.js'), { ssr: false });
+const CodeEditor = dynamic(import('../CodeEditor.js'), { ssr: false });
 
 import styles from '../../styles/components/engine/Code.module.css';
 
@@ -19,7 +19,7 @@ export default function Code(props) {
       <div className={styles.panel}>
         <div className={styles.toolbar}>
         </div>
-        <Editor
+        <CodeEditor
           value={currObject === -1 ? '' : codes[currObject]}
           readOnly={currObject === -1}
           onChange={val => updateCode(val)}

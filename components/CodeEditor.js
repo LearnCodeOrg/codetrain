@@ -3,7 +3,7 @@ import AceEditor from 'react-ace';
 import 'ace-builds/src-noconflict/mode-javascript.js';
 import 'ace-builds/src-noconflict/theme-monokai.js';
 
-export default function Editor(props) {
+export default function CodeEditor(props) {
   return (
     <AceEditor
       mode="javascript"

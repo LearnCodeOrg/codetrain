@@ -1,4 +1,4 @@
-import Game from './Game.js';
+import GameEditor from './GameEditor.js';
 import Guide from './Guide.js';
 import Colors from './Colors.js';
 import Tiles from './Tiles.js';
@@ -139,7 +139,7 @@ export default function Engine(props) {
             />
           </div>
         </div>
-        <Game
+        <GameEditor
           projectId={projectId} creator={data.creator}
           colors={colors} tiles={tiles} objects={objects}
           spriteSize={spriteSize}
