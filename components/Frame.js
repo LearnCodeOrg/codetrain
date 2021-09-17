@@ -244,30 +244,14 @@ export default function Frame(props) {
   }
 
   return (
-    <div>
-      <Button
-        variant="contained"
-        onClick={() => setSource(gameSrc)}
-      >
-        <ReplayIcon />
-      </Button>
-      {
-        download &&
-        <Button
-          variant="contained"
-          onClick={downloadGame}
-        >
-          <GetAppIcon />
-        </Button>
-      }
-      <iframe
-        title="game"
-        sandbox="allow-scripts"
-        srcDoc={source}
-        width={mapPixels}
-        height={mapPixels}
-        frameBorder="0"
-      />
-    </div>
+    <iframe
+      className={styles.screen}
+      title="game"
+      sandbox="allow-scripts"
+      srcDoc={source}
+      width={mapPixels}
+      height={mapPixels}
+      frameBorder="0"
+    />
   );
 }
