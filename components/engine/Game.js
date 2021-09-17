@@ -4,6 +4,7 @@ import StopIcon from '@material-ui/icons/Stop';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
 import Frame from '../Frame.js';
+import { Parser } from 'acorn';
 
 import { clamp, between } from '../../util/math.js';
 import { useEffect, useRef, useState } from 'react';
@@ -211,6 +212,32 @@ export default function Game(props) {
     setGameObjects(newGameObjects);
   }
 
+  // compiles code with acorn
+  function compileCode() {
+    // for each code snippet
+    for (const code of codes) {
+      // try parsing code
+      try {
+        Parser.parse(code);
+      // return error if thrown
+      } catch (e) {
+        return e.toString();
+      }
+    }
+  }
+
+  // toggles game playing
+  function togglePlay() {
+    // if playing, stop playing
+    if (playing) setPlaying(false);
+    // if no playing, compile and start
+    else {
+      const error = compileCode();
+      if (error) alert(error);
+      else setPlaying(true);
+    }
+  }
+
   // on start
   useEffect(() => {
     // get canvas
@@ -246,7 +273,7 @@ export default function Game(props) {
       <Button
         className={styles.button}
         variant="contained"
-        onClick={() => setPlaying(!playing)}
+        onClick={togglePlay}
       >
         {playing ? <StopIcon /> : <PlayArrowIcon />}
       </Button>
