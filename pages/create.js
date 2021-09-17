@@ -9,6 +9,7 @@ const objectCount = 16;
 const spriteSize = 8;
 const mapSize = 8;
 
+// default engine code
 const defaultCode =
 `// called once when the game starts
 function start() {
@@ -29,12 +30,16 @@ export default function Create() {
   const objects = Array(objectCount).fill(sprite);
   const background = Array(mapSize * mapSize).fill(0);
 
+  // construct engine data
+  const data = {
+    codes, colors, background, gameObjects: [], title: '', description: '',
+    tiles: JSON.stringify(tiles), objects: JSON.stringify(objects),
+  };
+
   return (
     <Engine
-      codes={codes}
-      colors={colors} tiles={tiles} objects={objects}
+      data={data}
       tileCount={tileCount} objectCount={objectCount} spriteSize={spriteSize}
-      gameObjects={[]} background={background} title={''} description={''}
     />
   );
 }
