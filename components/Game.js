@@ -8,6 +8,7 @@ import Frame from '../components/Frame.js';
 import { clamp, between } from '../util/math.js';
 import { useEffect, useRef, useState } from 'react';
 import firebase from 'firebase/app';
+import signInWithGoogle from '../util/signInWithGoogle.js';
 
 import styles from '../styles/components/Game.module.css';
 
@@ -58,6 +59,8 @@ export default function Game(props) {
 
   // saves project to firebase
   async function saveProject() {
+    // return if not authed
+    if (!uid) return;
     // construct project object
     const projectObj = {
       creator: uid,
@@ -67,7 +70,7 @@ export default function Game(props) {
       objects: JSON.stringify(objects)
     };
     // if own project and existing, save
-    if (uid === creator && projectId) {
+    if (creator && uid === creator && projectId) {
       await projectsRef.doc(projectId).update(projectObj);
       window.onbeforeunload = null;
     // if no existing project, publish new project
@@ -325,28 +328,32 @@ export default function Game(props) {
           />
         </div>
       </div>
-      <form onSubmit={e => {
-        e.preventDefault();
-        saveProject();
-      }}>
-        <input
-          placeholder="title"
-          value={title}
-          onChange={e => setTitle(e.target.value)}
-          required
-        />
-        <input
-          placeholder="description"
-          value={description}
-          onChange={e => setDescription(e.target.value)}
-          required
-        />
-        {
-          uid === creator ?
-          <button>Save</button> :
-          <button>Remix</button>
-        }
-      </form>
+      {
+        firebase.auth().currentUser ?
+        <form onSubmit={e => {
+          e.preventDefault();
+          saveProject();
+        }}>
+          <input
+            placeholder="title"
+            value={title}
+            onChange={e => setTitle(e.target.value)}
+            required
+          />
+          <input
+            placeholder="description"
+            value={description}
+            onChange={e => setDescription(e.target.value)}
+            required
+          />
+          {
+            (!creator || uid === creator) ?
+            <button>Save</button> :
+            <button>Remix</button>
+          }
+        </form> :
+        <button onClick={signInWithGoogle}>Sign in to save</button>
+      }
     </div>
   );
 }
