@@ -3,14 +3,14 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import StopIcon from '@material-ui/icons/Stop';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
-import Frame from '../components/Frame.js';
+import Frame from '../Frame.js';
 
-import { clamp, between } from '../util/math.js';
+import { clamp, between } from '../../util/math.js';
 import { useEffect, useRef, useState } from 'react';
 import firebase from 'firebase/app';
-import signInWithGoogle from '../util/signInWithGoogle.js';
+import signInWithGoogle from '../../util/signInWithGoogle.js';
 
-import styles from '../styles/components/Game.module.css';
+import styles from '../../styles/components/engine/Game.module.css';
 
 const keys = {};
 

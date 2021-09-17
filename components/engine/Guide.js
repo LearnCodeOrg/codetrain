@@ -1,4 +1,4 @@
-import styles from '../styles/components/Guide.module.css';
+import styles from '../../styles/components/engine/Guide.module.css';
 
 export default function Guide() {
   return (

@@ -1,7 +1,7 @@
-import { palettes } from '../data/palettes.js';
+import { palettes } from '../../data/palettes.js';
 import { useState } from 'react';
 
-import styles from '../styles/components/Colors.module.css';
+import styles from '../../styles/components/engine/Colors.module.css';
 
 export default function Colors(props) {
   const { colors, setColors, currColor, setCurrColor } = props;

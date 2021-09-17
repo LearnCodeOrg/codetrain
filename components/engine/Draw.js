@@ -1,7 +1,7 @@
-import { clamp } from '../util/math.js';
+import { clamp } from '../../util/math.js';
 import { useEffect, useState } from 'react';
 
-import styles from '../styles/components/Draw.module.css';
+import styles from '../../styles/components/engine/Draw.module.css';
 
 let sketching = false;
 

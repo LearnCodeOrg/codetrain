@@ -1,18 +1,18 @@
-import Game from '../components/Game.js';
-import Guide from '../components/Guide.js';
-import Colors from '../components/Colors.js';
-import Tiles from '../components/Tiles.js';
-import Objects from '../components/Objects.js';
-import Draw from '../components/Draw.js';
+import Game from './Game.js';
+import Guide from './Guide.js';
+import Colors from './Colors.js';
+import Tiles from './Tiles.js';
+import Objects from './Objects.js';
+import Draw from './Draw.js';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
 
-import styles from '../styles/components/Engine.module.css';
+import styles from '../../styles/components/engine/Engine.module.css';
 
-const Code = dynamic(import('../components/Code.js'), { ssr: false });
+const Code = dynamic(import('./Code.js'), { ssr: false });
 
 export default function Engine(props) {
   const { data, projectId, objectCount, tileCount, spriteSize } = props;

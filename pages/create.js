@@ -1,4 +1,4 @@
-import Engine from '../components/Engine.js';
+import Engine from '../components/engine/Engine.js';
 
 import { useState } from 'react';
 import { palettes } from '../data/palettes.js';

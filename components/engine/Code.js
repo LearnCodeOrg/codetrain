@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic';
 
-const Editor = dynamic(import('../components/Editor.js'), { ssr: false });
+const Editor = dynamic(import('../Editor.js'), { ssr: false });
 
 export default function Code(props) {
   const { objectCount, currObject, codes, setCodes } = props;
