@@ -8,6 +8,7 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 
 import dynamic from 'next/dynamic';
+import firebase from 'firebase/app';
 import { useEffect, useState } from 'react';
 
 import styles from '../../styles/components/engine/Engine.module.css';
@@ -28,6 +29,12 @@ export default function Engine(props) {
 
   const [collapsed, setCollapsed] = useState(false);
 
+  const [title, setTitle] = useState(data.title);
+  const [description, setDescription] = useState(data.description);
+
+  const uid = firebase.auth().currentUser?.uid;
+  const projectsRef = firebase.firestore().collection('projects');
+
   // ensure single sprite selection
   useEffect(() => {
     if (currTile !== -1 && currObject !== -1) setCurrObject(-1);
@@ -36,9 +43,58 @@ export default function Engine(props) {
     if (currObject !== -1 && currTile !== -1) setCurrTile(-1);
   }, [currObject]);
 
+  // saves project to firebase
+  async function saveProject() {
+    // return if not authed
+    if (!uid) return;
+    // construct project object
+    const projectObj = {
+      creator: uid,
+      title, description,
+      codes, colors, gameObjects, background,
+      tiles: JSON.stringify(tiles),
+      objects: JSON.stringify(objects)
+    };
+    // if own project and existing, save
+    if (data.creator && uid === data.creator && projectId) {
+      await projectsRef.doc(projectId).update(projectObj);
+      window.onbeforeunload = null;
+    // if no existing project, publish new project
+    } else {
+      const docRef = await projectsRef.add(projectObj);
+      Router.push(`/projects/${docRef.id}`);
+    }
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.toolbar}>
+        {
+          firebase.auth().currentUser ?
+          <form onSubmit={e => {
+            e.preventDefault();
+            saveProject();
+          }}>
+            <input
+              placeholder="title"
+              value={title}
+              onChange={e => setTitle(e.target.value)}
+              required
+            />
+            <input
+              placeholder="description"
+              value={description}
+              onChange={e => setDescription(e.target.value)}
+              required
+            />
+            {
+              (!data.creator || uid === data.creator) ?
+              <button>Save</button> :
+              <button>Remix</button>
+            }
+          </form> :
+          <button onClick={signInWithGoogle}>Sign in to save</button>
+        }
       </div>
       <div className={styles.content}>
         <Code
