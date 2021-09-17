@@ -7,7 +7,7 @@
 
 .center {
   text-align: center;
-  background: #efefef;
+  background: var(--gray0);
   padding: 20px;
   border-radius: 2px;
   box-shadow: 0 0 5px #999;

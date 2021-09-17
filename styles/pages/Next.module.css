@@ -14,5 +14,5 @@
 }
 
 .container a:hover {
-  color: #2196f3;
+  color: var(--blue0);
 }
