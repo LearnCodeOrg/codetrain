@@ -46,6 +46,7 @@ export default function Game(props) {
 
   const [showTiles, setShowTiles] = useState(true);
   const [showObjects, setShowObjects] = useState(true);
+  const [showHighlight, setShowHighlight] = useState(false);
 
   const canvasRef = useRef();
   const didMountRef = useRef(false);
@@ -98,7 +99,7 @@ export default function Game(props) {
       drawSprite(sprite, x, y);
     }
     // draw object highlight
-    if (gameObjects.length) {
+    if (showHighlight && gameObjects.length) {
       // get selected object
       const selectedObj = gameObjects[gameObjects.length - 1];
       const { x, y } = selectedObj;
@@ -193,7 +194,7 @@ export default function Game(props) {
   // returns position of current held object
   function getHeldPosition() {
     // return if no objects
-    if (!gameObjects.length) return '(?, ?)';
+    if (!gameObjects.length) return undefined;
     const { x, y } = gameObjects[gameObjects.length - 1];
     return `(${Math.floor(x / pixelPixels)}, ${Math.floor(y / pixelPixels)})`;
   }
@@ -220,7 +221,16 @@ export default function Game(props) {
   // draw map when any elements change
   useEffect(() => {
     draw();
-  }, [colors, tiles, objects, background, gameObjects, showTiles, showObjects]);
+  }, [
+    colors, tiles, objects, background, gameObjects,
+    showTiles, showObjects, showHighlight
+  ]);
+
+  // change object highlight on select change
+  useEffect(() => {
+    if (showHighlight && currObject === -1) setShowHighlight(false);
+    else if (!showHighlight && currObject !== -1) setShowHighlight(true);
+  }, [currTile, currObject]);
 
   // set up changes may not be saved popup
   useEffect(() => {
@@ -275,15 +285,20 @@ export default function Game(props) {
           height={mapPixels}
         />
         <div className={styles.tools}>
-          <p>{getHeldPosition()}</p>
-          <Button
-            onClick={deleteObject}
-            disabled={!gameObjects.length}
-            variant="contained"
-            className={styles.button}
-          >
-            <DeleteIcon />
-          </Button>
+          {
+            (showHighlight && !!gameObjects.length) &&
+            <>
+              <p>{getHeldPosition()}</p>
+              <Button
+                onClick={deleteObject}
+                disabled={!gameObjects.length}
+                variant="contained"
+                className={styles.button}
+              >
+                <DeleteIcon />
+              </Button>
+            </>
+          }
           <label htmlFor="showtiles-checkbox">Tiles</label>
           <input
             id="showtiles-checkbox"
