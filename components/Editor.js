@@ -12,6 +12,8 @@ export default function Editor(props) {
       showPrintMargin={false}
       tabSize={2}
       setOptions={{ useWorker: false }}
+      width="500px"
+      height="100%"
       {...props}
     />
   );

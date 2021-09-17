@@ -202,6 +202,8 @@ export default function Game(props) {
   function deleteObject() {
     // return if no objects
     if (!gameObjects.length) return;
+    // return if not confirmed
+    if (!window.confirm('Delete object?')) return;
     // pop last object
     const newGameObjects = gameObjects.slice();
     newGameObjects.pop();

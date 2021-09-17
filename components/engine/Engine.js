@@ -4,16 +4,16 @@ import Colors from './Colors.js';
 import Tiles from './Tiles.js';
 import Objects from './Objects.js';
 import Draw from './Draw.js';
+import Code from './Code.js';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 
 import dynamic from 'next/dynamic';
 import firebase from 'firebase/app';
+import signInWithGoogle from '../../util/signInWithGoogle.js';
 import { useEffect, useState } from 'react';
 
 import styles from '../../styles/components/engine/Engine.module.css';
-
-const Code = dynamic(import('./Code.js'), { ssr: false });
 
 export default function Engine(props) {
   const { data, projectId, objectCount, tileCount, spriteSize } = props;
