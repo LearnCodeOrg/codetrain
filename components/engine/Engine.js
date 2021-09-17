@@ -38,58 +38,62 @@ export default function Engine(props) {
 
   return (
     <div className={styles.container}>
-      <Code
-        currObject={currObject}
-        objectCount={objectCount}
-        codes={codes}
-        setCodes={setCodes}
-      />
-      <button onClick={() => setCollapsed(oldCollapsed => !oldCollapsed)}>
-        {
-          collapsed ? <ArrowRightIcon /> : <ArrowDropDownIcon />
-        }
-      </button>
-      <div className={styles.draw} style={collapsed ? { display: 'none' } : {}}>
-        <div>
-          <Colors
-            colors={colors} setColors={setColors}
-            currColor={currColor} setCurrColor={setCurrColor}
-          />
-          <Draw
-            colors={colors} tiles={tiles} objects={objects}
-            currTile={currTile} currObject={currObject}
-            currColor={currColor} spriteSize={spriteSize}
-            setTiles={setTiles} setObjects={setObjects}
-          />
-        </div>
-        <div>
-          <Tiles
-            colors={colors}
-            tiles={tiles}
-            currTile={currTile} setCurrTile={setCurrTile}
-            tileCount={tileCount}
-            spriteSize={spriteSize}
-          />
-          <Objects
-            colors={colors}
-            objects={objects}
-            currObject={currObject} setCurrObject={setCurrObject}
-            tileCount={tileCount}
-            objectCount={objectCount}
-            spriteSize={spriteSize}
-          />
-        </div>
+      <div className={styles.toolbar}>
       </div>
-      <Game
-        projectId={projectId} creator={data.creator}
-        colors={colors} tiles={tiles} objects={objects}
-        spriteSize={spriteSize}
-        currTile={currTile}
-        currObject={currObject}
-        codes={codes}
-        background={data.background} gameObjects={data.gameObjects}
-        title={data.title} description={data.description}
-      />
+      <div className={styles.content}>
+        <Code
+          currObject={currObject}
+          objectCount={objectCount}
+          codes={codes}
+          setCodes={setCodes}
+        />
+        <button onClick={() => setCollapsed(oldCollapsed => !oldCollapsed)}>
+          {
+            collapsed ? <ArrowRightIcon /> : <ArrowDropDownIcon />
+          }
+        </button>
+        <div className={styles.draw} style={collapsed ? { display: 'none' } : {}}>
+          <div>
+            <Colors
+              colors={colors} setColors={setColors}
+              currColor={currColor} setCurrColor={setCurrColor}
+            />
+            <Draw
+              colors={colors} tiles={tiles} objects={objects}
+              currTile={currTile} currObject={currObject}
+              currColor={currColor} spriteSize={spriteSize}
+              setTiles={setTiles} setObjects={setObjects}
+            />
+          </div>
+          <div>
+            <Tiles
+              colors={colors}
+              tiles={tiles}
+              currTile={currTile} setCurrTile={setCurrTile}
+              tileCount={tileCount}
+              spriteSize={spriteSize}
+            />
+            <Objects
+              colors={colors}
+              objects={objects}
+              currObject={currObject} setCurrObject={setCurrObject}
+              tileCount={tileCount}
+              objectCount={objectCount}
+              spriteSize={spriteSize}
+            />
+          </div>
+        </div>
+        <Game
+          projectId={projectId} creator={data.creator}
+          colors={colors} tiles={tiles} objects={objects}
+          spriteSize={spriteSize}
+          currTile={currTile}
+          currObject={currObject}
+          codes={codes}
+          background={data.background} gameObjects={data.gameObjects}
+          title={data.title} description={data.description}
+        />
+      </div>
     </div>
   );
 }
