@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Button from '@material-ui/core/Button';
 
 import firebase from 'firebase/app';
 import signInWithGoogle from '../util/signInWithGoogle.js';
@@ -11,23 +10,17 @@ export default function Index() {
     <div className={styles.container}>
       <div className={styles.center}>
         <div className={styles.title}>
-          <h1>Codetrain</h1>
           <Image src="/logo.png" height="48" width="48" alt="logo" />
+          <h1>Codetrain</h1>
         </div>
         {
           firebase.auth().currentUser ?
-          <Button
-            onClick={() => firebase.auth().signOut()}
-            variant="contained"
-          >
+          <button onClick={() => firebase.auth().signOut()}>
             Sign Out
-          </Button> :
-          <Button
-            onClick={signInWithGoogle}
-            variant="contained"
-          >
+          </button> :
+          <button onClick={signInWithGoogle}>
             Sign In
-          </Button>
+          </button>
         }
       </div>
     </div>
