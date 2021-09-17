@@ -270,13 +270,6 @@ export default function Game(props) {
 
   return (
     <div className={styles.container}>
-      <Button
-        className={styles.button}
-        variant="contained"
-        onClick={togglePlay}
-      >
-        {playing ? <StopIcon /> : <PlayArrowIcon />}
-      </Button>
       {
         playing &&
         <Frame
@@ -294,8 +287,9 @@ export default function Game(props) {
           download
         />
       }
-      <div style={ playing ? { display: 'none' } : {}}>
+      <div>
         <canvas
+          style={ playing ? { display: 'none' } : {}}
           ref={canvasRef}
           className={styles.screen}
           onMouseDown={e => {
@@ -311,36 +305,48 @@ export default function Game(props) {
           width={mapPixels}
           height={mapPixels}
         />
-        <div className={styles.tools}>
-          {
-            (showHighlight && !!gameObjects.length) &&
-            <>
-              <p>{getHeldPosition()}</p>
-              <Button
-                onClick={deleteObject}
-                disabled={!gameObjects.length}
-                variant="contained"
-                className={styles.button}
-              >
-                <DeleteIcon />
-              </Button>
-            </>
-          }
-          <label htmlFor="showtiles-checkbox">Tiles</label>
-          <input
-            id="showtiles-checkbox"
-            type="checkbox"
-            checked={showTiles}
-            onChange={e => setShowTiles(e.target.checked)}
-          />
-          <label htmlFor="showobjects-checkbox">Objects</label>
-          <input
-            id="showobjects-checkbox"
-            type="checkbox"
-            checked={showObjects}
-            onChange={e => setShowObjects(e.target.checked)}
-          />
-        </div>
+      </div>
+      <div className={styles.tools}>
+        {
+          !playing &&
+          <>
+            {
+              (showHighlight && !!gameObjects.length) &&
+              <>
+                <p>{getHeldPosition()}</p>
+                <Button
+                  onClick={deleteObject}
+                  disabled={!gameObjects.length}
+                  variant="contained"
+                  className={styles.button}
+                >
+                  <DeleteIcon />
+                </Button>
+              </>
+            }
+            <label htmlFor="showtiles-checkbox">Tiles</label>
+            <input
+              id="showtiles-checkbox"
+              type="checkbox"
+              checked={showTiles}
+              onChange={e => setShowTiles(e.target.checked)}
+            />
+            <label htmlFor="showobjects-checkbox">Objects</label>
+            <input
+              id="showobjects-checkbox"
+              type="checkbox"
+              checked={showObjects}
+              onChange={e => setShowObjects(e.target.checked)}
+            />
+          </>
+        }
+        <Button
+          className={styles.button}
+          variant="contained"
+          onClick={togglePlay}
+        >
+          {playing ? <StopIcon /> : <PlayArrowIcon />}
+        </Button>
       </div>
     </div>
   );
