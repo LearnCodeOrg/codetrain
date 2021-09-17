@@ -21,8 +21,14 @@
 .tools {
   display: flex;
   align-items: center;
+  background: var(--gray0);
+  padding: 5px;
 }
 
 .tools > p {
   width: 60px;
+}
+
+.flexfill {
+  flex-grow: 1;
 }

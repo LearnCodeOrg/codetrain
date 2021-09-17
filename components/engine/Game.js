@@ -215,13 +215,14 @@ export default function Game(props) {
   // compiles code with acorn
   function compileCode() {
     // for each code snippet
-    for (const code of codes) {
+    for (let i = 0; i < codes.length; i++) {
+      const code = codes[i];
       // try parsing code
       try {
         Parser.parse(code);
       // return error if thrown
       } catch (e) {
-        return e.toString();
+        return `[Object ${i}] ${e}`;
       }
     }
   }
@@ -287,25 +288,23 @@ export default function Game(props) {
           download
         />
       }
-      <div>
-        <canvas
-          style={ playing ? { display: 'none' } : {}}
-          ref={canvasRef}
-          className={styles.screen}
-          onMouseDown={e => {
-            sketching = true;
-            holding = false;
-            sketchMap(e);
-          }}
-          onMouseMove={e => {
-            if (sketching) sketchMap(e);
-          }}
-          onMouseUp={e => { sketching = false; }}
-          onMouseLeave={e => { sketching = false; }}
-          width={mapPixels}
-          height={mapPixels}
-        />
-      </div>
+      <canvas
+        style={ playing ? { display: 'none' } : {}}
+        ref={canvasRef}
+        className={styles.screen}
+        onMouseDown={e => {
+          sketching = true;
+          holding = false;
+          sketchMap(e);
+        }}
+        onMouseMove={e => {
+          if (sketching) sketchMap(e);
+        }}
+        onMouseUp={e => { sketching = false; }}
+        onMouseLeave={e => { sketching = false; }}
+        width={mapPixels}
+        height={mapPixels}
+      />
       <div className={styles.tools}>
         {
           !playing &&
@@ -340,6 +339,7 @@ export default function Game(props) {
             />
           </>
         }
+        <span className={styles.flexfill} />
         <Button
           className={styles.button}
           variant="contained"
