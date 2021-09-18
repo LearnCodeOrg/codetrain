@@ -1,5 +1,5 @@
 import Loading from '../../components/Loading.js';
-import Frame from '../../components/Frame.js';
+import GameFrame from '../../components/GameFrame.js';
 
 import dynamic from 'next/dynamic';
 import firebase from 'firebase/app';
@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { palettes } from '../../data/palettes.js';
 
-const Editor = dynamic(import('../../components/Editor.js'), { ssr: false });
+const CodeEditor = dynamic(import('../../components/CodeEditor.js'), { ssr: false });
 
 // units
 const mapPixels = 512;
@@ -55,11 +55,11 @@ export default function Challenge() {
   return (
     <div>
       <h1>{data.title}</h1>
-      <Editor
+      <CodeEditor
         value={code}
         onChange={val => setCode(val)}
       />
-      <Frame
+      <GameFrame
         mapPixels={mapPixels}
         spritePixels={spritePixels}
         pixelPixels={pixelPixels}

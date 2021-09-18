@@ -1,5 +1,5 @@
 import Loading from '../../components/Loading.js';
-import Frame from '../../components/Frame.js';
+import GameFrame from '../../components/GameFrame.js';
 import Link from 'next/link';
 
 import dynamic from 'next/dynamic';
@@ -48,7 +48,7 @@ export default function Project() {
       <Link href={`/edit/${id}`}>
         <a>Edit</a>
       </Link>
-      <Frame
+      <GameFrame
         mapPixels={mapPixels}
         spritePixels={spritePixels}
         pixelPixels={pixelPixels}

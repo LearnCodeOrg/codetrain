@@ -2,10 +2,12 @@
   display: flex;
   flex-direction: column;
   width: fit-content;
+  min-width: 100%;
+  height: calc(100% - 60px);
 }
 
 .toolbar {
-  height: 60px;
+  flex: 0 0 60px;
   background: var(--gray0);
   width: 100%;
 }
@@ -13,6 +15,7 @@
 .content {
   display: flex;
   align-items: flex-start;
+  flex-grow: 1;
 }
 
 .draw {
