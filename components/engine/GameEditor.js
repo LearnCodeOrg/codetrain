@@ -9,6 +9,7 @@ import { Parser } from 'acorn';
 import { clamp, between } from '../../util/math.js';
 import { useEffect, useRef, useState } from 'react';
 import signInWithGoogle from '../../util/signInWithGoogle.js';
+import firebase from 'firebase/app';
 
 import styles from '../../styles/components/engine/GameEditor.module.css';
 
@@ -49,8 +50,37 @@ export default function GameEditor(props) {
   const [showObjects, setShowObjects] = useState(true);
   const [showHighlight, setShowHighlight] = useState(false);
 
+  const [title, setTitle] = useState(props.title);
+  const [description, setDescription] = useState(props.description);
+
   const canvasRef = useRef();
   const didMountRef = useRef(false);
+
+  const projectsRef = firebase.firestore().collection('projects');
+  const uid = firebase.auth().currentUser?.uid;
+
+  // saves project to firebase
+  async function saveProject() {
+    // return if not authed
+    if (!uid) return;
+    // construct project object
+    const projectObj = {
+      creator: uid,
+      title, description,
+      codes, colors, gameObjects, background,
+      tiles: JSON.stringify(tiles),
+      objects: JSON.stringify(objects)
+    };
+    // if own project and existing, save
+    if (data.creator && uid === data.creator && projectId) {
+      await projectsRef.doc(projectId).update(projectObj);
+      window.onbeforeunload = null;
+    // if no existing project, publish new project
+    } else {
+      const docRef = await projectsRef.add(projectObj);
+      Router.push(`/projects/${docRef.id}`);
+    }
+  }
 
   // draws given sprite at given position
   function drawSprite(sprite, x, y) {
@@ -271,6 +301,32 @@ export default function GameEditor(props) {
 
   return (
     <div className={styles.container}>
+      {
+        firebase.auth().currentUser ?
+        <form onSubmit={e => {
+          e.preventDefault();
+          saveProject();
+        }}>
+          <input
+            placeholder="title"
+            value={title}
+            onChange={e => setTitle(e.target.value)}
+            required
+          />
+          <input
+            placeholder="description"
+            value={description}
+            onChange={e => setDescription(e.target.value)}
+            required
+          />
+          {
+            (!props.creator || uid === props.creator) ?
+            <button>Save</button> :
+            <button>Remix</button>
+          }
+        </form> :
+        <button onClick={signInWithGoogle}>Sign in to save</button>
+      }
       {
         playing &&
         <Frame
