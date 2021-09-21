@@ -99,13 +99,15 @@ export default function Draw(props) {
         onMouseUp={e => { sketching = false; }}
         onMouseLeave={e => { sketching = false; }}
       />
-      <label htmlFor="showgrid-checkbox">Grid</label>
-      <input
-        id="showgrid-checkbox"
-        type="checkbox"
-        checked={showGrid}
-        onChange={e => setShowGrid(e.target.checked)}
-      />
+      <div className={styles.toolbar}>
+        <label htmlFor="showgrid-checkbox">Grid</label>
+        <input
+          id="showgrid-checkbox"
+          type="checkbox"
+          checked={showGrid}
+          onChange={e => setShowGrid(e.target.checked)}
+        />
+      </div>
     </div>
   );
 }

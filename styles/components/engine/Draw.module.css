@@ -1,6 +1,8 @@
 .container {
   text-align: center;
   margin: 0 10px;
+  display: flex;
+  flex-direction: column;
 }
 
 .gridded {
@@ -9,4 +11,12 @@
 
 .nogrid {
   border: 4px solid #000;
+}
+
+.toolbar {
+  background: #efefef;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding: 0 5px;
 }
