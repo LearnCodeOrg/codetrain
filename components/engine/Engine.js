@@ -109,7 +109,7 @@ export default function Engine(props) {
           }
         </button>
         <div className={styles.draw} style={collapsed ? { display: 'none' } : {}}>
-          <div>
+          <div className={styles.drawtiles}>
             <Colors
               colors={colors} setColors={setColors}
               currColor={currColor} setCurrColor={setCurrColor}
@@ -121,7 +121,8 @@ export default function Engine(props) {
               setTiles={setTiles} setObjects={setObjects}
             />
           </div>
-          <div>
+          <div className="flexfill" />
+          <div className={styles.tileselect}>
             <Tiles
               colors={colors}
               tiles={tiles}

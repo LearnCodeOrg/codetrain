@@ -18,6 +18,10 @@ button, label, input[type='checkbox'] {
   cursor: pointer;
 }
 
+.flexfill {
+  flex-grow: 1;
+}
+
 :root {
   --gray0: #efefef;
   --blue0: #2196f3;

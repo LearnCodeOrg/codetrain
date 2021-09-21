@@ -26,7 +26,3 @@
 .container > button {
   margin-right: 10px;
 }
-
-.flexfill {
-  flex-grow: 1;
-}
