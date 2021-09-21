@@ -8,9 +8,15 @@ export default function Colors(props) {
 
   const [palette, setPalette] = useState(0);
 
+  // updates current color with given value
+  function updateColor(val) {
+    const newColors = colors.slice();
+    newColors[currColor] = val;
+    setColors(newColors);
+  }
+
   return (
     <div className={styles.container}>
-      <h1>Colors</h1>
       <div className={styles.tilegrid}>
         {
           colors.map((color, i) =>
