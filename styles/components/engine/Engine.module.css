@@ -31,3 +31,17 @@
 .tileselect {
   display: flex;
 }
+
+.gameeditor {
+  display: flex;
+  flex-direction: column;
+  width: 520px;
+}
+
+.gameeditor > form {
+  background: #efefef;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -66,34 +66,6 @@ export default function Engine(props) {
 
   return (
     <div className={styles.container}>
-      <div className={styles.toolbar}>
-        {
-          firebase.auth().currentUser ?
-          <form onSubmit={e => {
-            e.preventDefault();
-            saveProject();
-          }}>
-            <input
-              placeholder="title"
-              value={title}
-              onChange={e => setTitle(e.target.value)}
-              required
-            />
-            <input
-              placeholder="description"
-              value={description}
-              onChange={e => setDescription(e.target.value)}
-              required
-            />
-            {
-              (!data.creator || uid === data.creator) ?
-              <button>Save</button> :
-              <button>Remix</button>
-            }
-          </form> :
-          <button onClick={signInWithGoogle}>Sign in to save</button>
-        }
-      </div>
       <div className={styles.content}>
         <Code
           currObject={currObject}
@@ -133,16 +105,44 @@ export default function Engine(props) {
             />
           </div>
         </div>
-        <GameEditor
-          projectId={projectId} creator={data.creator}
-          colors={colors} tiles={tiles} objects={objects}
-          spriteSize={spriteSize}
-          currTile={currTile}
-          currObject={currObject}
-          codes={codes}
-          background={data.background} gameObjects={data.gameObjects}
-          title={data.title} description={data.description}
-        />
+        <div className={styles.gameeditor}>
+          {
+            firebase.auth().currentUser ?
+            <form onSubmit={e => {
+              e.preventDefault();
+              saveProject();
+            }}>
+              <input
+                placeholder="title"
+                value={title}
+                onChange={e => setTitle(e.target.value)}
+                required
+              />
+              <input
+                placeholder="description"
+                value={description}
+                onChange={e => setDescription(e.target.value)}
+                required
+              />
+              {
+                (!data.creator || uid === data.creator) ?
+                <button>Save</button> :
+                <button>Remix</button>
+              }
+            </form> :
+            <button onClick={signInWithGoogle}>Sign in to save</button>
+          }
+          <GameEditor
+            projectId={projectId} creator={data.creator}
+            colors={colors} tiles={tiles} objects={objects}
+            spriteSize={spriteSize}
+            currTile={currTile}
+            currObject={currObject}
+            codes={codes}
+            background={data.background} gameObjects={data.gameObjects}
+            title={data.title} description={data.description}
+          />
+        </div>
       </div>
     </div>
   );
