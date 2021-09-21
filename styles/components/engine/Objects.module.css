@@ -5,6 +5,10 @@
   margin: 0 10px;
 }
 
+.container > h1 {
+  margin: 0;
+}
+
 .selectcanvas {
   cursor: pointer;
   display: inline-block;

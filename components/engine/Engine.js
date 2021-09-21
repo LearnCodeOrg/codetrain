@@ -27,8 +27,6 @@ export default function Engine(props) {
   const [tiles, setTiles] = useState(JSON.parse(data.tiles));
   const [objects, setObjects] = useState(JSON.parse(data.objects));
 
-  const [collapsed, setCollapsed] = useState(false);
-
   const [title, setTitle] = useState(data.title);
   const [description, setDescription] = useState(data.description);
 
@@ -103,12 +101,7 @@ export default function Engine(props) {
           codes={codes}
           setCodes={setCodes}
         />
-        <button onClick={() => setCollapsed(oldCollapsed => !oldCollapsed)}>
-          {
-            collapsed ? <ArrowRightIcon /> : <ArrowDropDownIcon />
-          }
-        </button>
-        <div className={styles.draw} style={collapsed ? { display: 'none' } : {}}>
+        <div className={styles.draw}>
           <div className={styles.drawtiles}>
             <Colors
               colors={colors} setColors={setColors}
