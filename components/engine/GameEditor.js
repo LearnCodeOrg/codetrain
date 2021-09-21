@@ -20,7 +20,7 @@ const buttonProps = {
 };
 
 // units
-const mapPixels = 256;
+const mapPixels = 512;
 const mapSize = 8;
 const spritePixels = Math.floor(mapPixels / mapSize);
 const halfSprite = Math.floor(spritePixels / 2);
@@ -339,7 +339,7 @@ export default function GameEditor(props) {
             />
           </>
         }
-        <span className={styles.flexfill} />
+        <span className="flexfill" />
         <Button
           className={styles.button}
           variant="contained"

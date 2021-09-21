@@ -7,7 +7,7 @@ let sketching = false;
 
 let canvas, ctx;
 
-const pixelPixels = 16;
+const pixelPixels = 32;
 
 export default function Draw(props) {
   const {
@@ -89,7 +89,6 @@ export default function Draw(props) {
 
   return (
     <div className={styles.container}>
-      <h1>Draw</h1>
       <canvas
         className={showGrid ? styles.gridded : styles.nogrid}
         id="sprite-draw"
