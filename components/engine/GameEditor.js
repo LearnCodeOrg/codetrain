@@ -72,7 +72,7 @@ export default function GameEditor(props) {
       objects: JSON.stringify(objects)
     };
     // if own project and existing, save
-    if (data.creator && uid === data.creator && projectId) {
+    if (props.creator && uid === props.creator && projectId) {
       await projectsRef.doc(projectId).update(projectObj);
       window.onbeforeunload = null;
     // if no existing project, publish new project
@@ -301,32 +301,34 @@ export default function GameEditor(props) {
 
   return (
     <div className={styles.container}>
-      {
-        firebase.auth().currentUser ?
-        <form onSubmit={e => {
-          e.preventDefault();
-          saveProject();
-        }}>
-          <input
-            placeholder="title"
-            value={title}
-            onChange={e => setTitle(e.target.value)}
-            required
-          />
-          <input
-            placeholder="description"
-            value={description}
-            onChange={e => setDescription(e.target.value)}
-            required
-          />
-          {
-            (!props.creator || uid === props.creator) ?
-            <button>Save</button> :
-            <button>Remix</button>
-          }
-        </form> :
-        <button onClick={signInWithGoogle}>Sign in to save</button>
-      }
+      <div className={styles.databar}>
+        {
+          firebase.auth().currentUser ?
+          <form onSubmit={e => {
+            e.preventDefault();
+            saveProject();
+          }}>
+            <input
+              placeholder="title"
+              value={title}
+              onChange={e => setTitle(e.target.value)}
+              required
+            />
+            <input
+              placeholder="description"
+              value={description}
+              onChange={e => setDescription(e.target.value)}
+              required
+            />
+            {
+              (!props.creator || uid === props.creator) ?
+              <button>Save</button> :
+              <button>Remix</button>
+            }
+          </form> :
+          <button onClick={signInWithGoogle}>Sign in to save</button>
+        }
+      </div>
       {
         playing &&
         <Frame
