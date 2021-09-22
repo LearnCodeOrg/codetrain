@@ -24,9 +24,6 @@ export default function Header() {
       </Link>
       <h1>Codetrain</h1>
       <span className="flexfill" />
-      <Link href="/learn">
-        <a className={styles.link}>Learn</a>
-      </Link>
       <Link href="/create">
         <a className={styles.link}>Create</a>
       </Link>

@@ -383,20 +383,22 @@ export default function GameEditor(props) {
                 </Button>
               </>
             }
-            <label htmlFor="showtiles-checkbox">Tiles</label>
-            <input
-              id="showtiles-checkbox"
-              type="checkbox"
-              checked={showTiles}
-              onChange={e => setShowTiles(e.target.checked)}
-            />
-            <label htmlFor="showobjects-checkbox">Objects</label>
-            <input
-              id="showobjects-checkbox"
-              type="checkbox"
-              checked={showObjects}
-              onChange={e => setShowObjects(e.target.checked)}
-            />
+            <label>
+              Tiles
+              <input
+                type="checkbox"
+                checked={showTiles}
+                onChange={e => setShowTiles(e.target.checked)}
+              />
+            </label>
+            <label>
+              Objects
+              <input
+                type="checkbox"
+                checked={showObjects}
+                onChange={e => setShowObjects(e.target.checked)}
+              />
+            </label>
           </>
         }
         <span className="flexfill" />
