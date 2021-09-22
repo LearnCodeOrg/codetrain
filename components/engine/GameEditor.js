@@ -46,6 +46,7 @@ export default function GameEditor(props) {
   const [background, setBackground] = useState(props.background);
   const [gameObjects, setGameObjects] = useState(props.gameObjects);
 
+  const [showGrid, setShowGrid] = useState(true);
   const [showTiles, setShowTiles] = useState(true);
   const [showObjects, setShowObjects] = useState(true);
   const [showHighlight, setShowHighlight] = useState(false);
@@ -85,23 +86,35 @@ export default function GameEditor(props) {
   // draws given sprite at given position
   function drawSprite(sprite, x, y) {
     // for each pixel
-    for (let yp = 0; yp < spriteSize; yp++) {
-      for (let xp = 0; xp < spriteSize; xp++) {
+    for (let yPix = 0; yPix < spriteSize; yPix++) {
+      for (let xPix = 0; xPix < spriteSize; xPix++) {
         // set fill color
-        const colorIndex = yp * spriteSize + xp;
+        const colorIndex = yPix * spriteSize + xPix;
         const color = colors[sprite[colorIndex]];
         ctx.fillStyle = color;
         // get fill position
-        let xm = x + xp * pixelPixels;
-        let ym = y + yp * pixelPixels;
+        let xMap = x + xPix * pixelPixels;
+        let yMap = y + yPix * pixelPixels;
+        let pWidth = pixelPixels;
+        let pHeight = pixelPixels;
+        // update pixel if showing grid
+        if (showGrid) {
+          if (xPix === 0) { xMap += 1; pWidth -= 1; }
+          if (yPix === 0) { yMap += 1; pHeight -= 1; }
+          if (xPix === spriteSize - 1) pWidth -= 1;
+          if (yPix === spriteSize - 1) pHeight -= 1;
+        }
         // fill pixel
-        ctx.fillRect(xm, ym, pixelPixels, pixelPixels);
+        ctx.fillRect(xMap, yMap, pWidth, pHeight);
       }
     }
   }
 
   // draws game canvas
   function draw() {
+    // clear canvas
+    ctx.fillStyle = '#000';
+    ctx.fillRect(0, 0, mapPixels, mapPixels);
     // if showing tiles
     if (showTiles) {
       // for each tile
@@ -114,11 +127,6 @@ export default function GameEditor(props) {
           drawSprite(sprite, x * spritePixels, y * spritePixels);
         }
       }
-    // if not showing tiles
-    } else {
-      // clear canvas
-      ctx.fillStyle = '#000';
-      ctx.fillRect(0, 0, mapPixels, mapPixels);
     }
     // return if not showing objects
     if (!showObjects) return;
@@ -281,7 +289,7 @@ export default function GameEditor(props) {
     draw();
   }, [
     colors, tiles, objects, background, gameObjects,
-    showTiles, showObjects, showHighlight
+    showGrid, showTiles, showObjects, showHighlight
   ]);
 
   // change object highlight on select change
@@ -383,6 +391,14 @@ export default function GameEditor(props) {
                 </Button>
               </>
             }
+            <label>
+              Grid
+              <input
+                type="checkbox"
+                checked={showGrid}
+                onChange={e => setShowGrid(e.target.checked)}
+              />
+            </label>
             <label>
               Tiles
               <input
