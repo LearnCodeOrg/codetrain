@@ -1,6 +1,6 @@
 .container {
   text-align: center;
-  margin: 0 10px;
+  margin-top: 20px;
 }
 
 .tilegrid {
@@ -8,7 +8,7 @@
   flex-wrap: wrap;
   width: 128px;
   outline: 4px solid #000;
-  margin: 20px;
+  margin-bottom: 10px;
 }
 
 .tile {
@@ -24,8 +24,15 @@
   z-index: 1;
 }
 
+.modify {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .colorinput {
   width: 32px;
   height: 32px;
   cursor: pointer;
+  margin-right: 10px;
 }

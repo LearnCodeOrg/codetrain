@@ -34,26 +34,28 @@ export default function Colors(props) {
           )
         }
       </div>
-      <input
-        type="color"
-        value={colors[currColor]}
-        className={styles.colorinput}
-        onChange={e => updateColor(e.target.value)}
-      />
-      <select
-        value={palette}
-        onChange={e => {
-          const newPalette = e.target.value;
-          setPalette(newPalette);
-          setColors(palettes[newPalette].colors);
-        }}
-      >
-      {
-        palettes.map((pal, i) =>
-          <option value={i} key={i}>{pal.name}</option>
-        )
-      }
-      </select>
+      <div className={styles.modify}>
+        <input
+          type="color"
+          value={colors[currColor]}
+          className={styles.colorinput}
+          onChange={e => updateColor(e.target.value)}
+        />
+        <select
+          value={palette}
+          onChange={e => {
+            const newPalette = e.target.value;
+            setPalette(newPalette);
+            setColors(palettes[newPalette].colors);
+          }}
+        >
+        {
+          palettes.map((pal, i) =>
+            <option value={i} key={i}>{pal.name}</option>
+          )
+        }
+        </select>
+      </div>
     </div>
   );
 }
