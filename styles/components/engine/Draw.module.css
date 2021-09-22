@@ -5,11 +5,7 @@
   flex-direction: column;
 }
 
-.gridded {
-  border: 4px solid #bbb;
-}
-
-.nogrid {
+.spritedraw {
   border: 4px solid #000;
 }
 

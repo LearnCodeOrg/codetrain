@@ -28,7 +28,7 @@ export default function Code(props) {
               onChange={val => updateCode(val)}
             />
           </> :
-          <p>Select an object to write code.</p>
+          <p className={styles.placeholder}>Select an object to write code.</p>
         }
       </div>
     </div>

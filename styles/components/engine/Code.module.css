@@ -8,9 +8,16 @@
   display: flex;
   flex-direction: column;
   box-shadow: 0 0 5px #333;
+  background: #2f3129;
+  width: 500px;
 }
 
 .toolbar {
   height: 30px;
   background: #2f3129;
+}
+
+.placeholder {
+  margin: 10px;
+  color: var(--gray0);
 }

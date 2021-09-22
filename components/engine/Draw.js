@@ -52,7 +52,7 @@ export default function Draw(props) {
   // draws current tile
   function draw() {
     if (showGrid) {
-      ctx.fillStyle = '#bbb';
+      ctx.fillStyle = '#000';
       ctx.fillRect(0, 0, spritePixels, spritePixels);
     }
     // get current sprite
@@ -90,7 +90,7 @@ export default function Draw(props) {
   return (
     <div className={styles.container}>
       <canvas
-        className={showGrid ? styles.gridded : styles.nogrid}
+        className={styles.spritedraw}
         id="sprite-draw"
         width={spritePixels}
         height={spritePixels}
