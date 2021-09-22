@@ -18,6 +18,7 @@ export default function Engine(props) {
   const { data, projectId, objectCount, tileCount, spriteSize } = props;
 
   const [codes, setCodes] = useState(data.codes);
+  const [objectNames, setObjectNames] = useState(data.objectNames);
 
   const [currColor, setCurrColor] = useState(0);
   const [currTile, setCurrTile] = useState(0);
@@ -40,8 +41,8 @@ export default function Engine(props) {
         <Code
           currObject={currObject}
           objectCount={objectCount}
-          codes={codes}
-          setCodes={setCodes}
+          codes={codes} setCodes={setCodes}
+          objectNames={objectNames} setObjectNames={setObjectNames}
         />
         <div className={styles.draw}>
           <div className={styles.drawtiles}>
