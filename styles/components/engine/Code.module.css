@@ -14,16 +14,28 @@
 
 .toolbar {
   height: 30px;
+  padding: 0 4px;
   background: #2f3129;
   display: flex;
   align-items: center;
 }
 
 .nameinput {
-  margin-left: 4px;
   background: #272822;
   border: 0;
   color: #f8f8f2;
+}
+
+.compilebutton {
+  height: 24px;
+  padding: 0;
+  width: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #272822;
+  color: #f8f8f2;
+  border-radius: 50%;
 }
 
 .placeholder {

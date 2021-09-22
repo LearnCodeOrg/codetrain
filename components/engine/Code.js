@@ -37,8 +37,13 @@ export default function Code(props) {
               value={objectNames[currObject]}
               onChange={e => updateObjectName(e.target.value)}
             />
-            <button onClick={() => {
-              compileCode(codes[currObject], objectNames[currObject]);
+            <span className="flexfill" />
+            <button className={styles.compilebutton} onClick={() => {
+              const header = objectNames[currObject];
+              // if code compiles, give success message
+              if (compileCode(codes[currObject], header)) {
+                alert(`[${header}] Compiled successfully`)
+              }
             }}>
               <PlayArrowIcon />
             </button>
