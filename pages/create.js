@@ -24,6 +24,7 @@ function update() {
 
 export default function Create() {
   const codes = Array(objectCount).fill(defaultCode);
+  const objectNames = Array(objectCount).fill(0).map((val, i) => `Object ${i}`);
   const sprite = Array(spriteSize * spriteSize).fill(0);
   const colors = palettes[0].colors;
   const tiles = Array(tileCount).fill(sprite);
@@ -33,7 +34,7 @@ export default function Create() {
   // construct engine data
   const data = {
     codes, colors, background, gameObjects: [], title: '', description: '',
-    tiles: JSON.stringify(tiles), objects: JSON.stringify(objects),
+    objectNames, tiles: JSON.stringify(tiles), objects: JSON.stringify(objects)
   };
 
   return (

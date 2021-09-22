@@ -38,7 +38,8 @@ let beforeUnloadSet = false;
 export default function GameEditor(props) {
   const {
     projectId, creator,
-    tiles, objects, colors, spriteSize, currTile, currObject, codes
+    colors, spriteSize, currTile, currObject, codes,
+    objectNames, tiles, objects
   } = props;
   const pixelPixels = Math.floor(spritePixels / spriteSize);
 
@@ -67,7 +68,7 @@ export default function GameEditor(props) {
     // construct project object
     const projectObj = {
       creator: uid,
-      title, description,
+      title, description, objectNames,
       codes, colors, gameObjects, background,
       tiles: JSON.stringify(tiles),
       objects: JSON.stringify(objects)
@@ -260,7 +261,7 @@ export default function GameEditor(props) {
         Parser.parse(code);
       // return error if thrown
       } catch (e) {
-        return `[Object ${i}] ${e}`;
+        return `[${objectNames[i]}] ${e}`;
       }
     }
   }
@@ -305,7 +306,7 @@ export default function GameEditor(props) {
       beforeUnloadSet = true;
     }
     else didMountRef.current = true;
-  }, [colors, tiles, objects, background, gameObjects]);
+  }, [colors, tiles, objects, background, gameObjects, objectNames]);
 
   return (
     <div className={styles.container}>
