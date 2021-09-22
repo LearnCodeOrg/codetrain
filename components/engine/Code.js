@@ -17,13 +17,19 @@ export default function Code(props) {
   return (
     <div className={styles.container}>
       <div className={styles.panel}>
-        <div className={styles.toolbar}>
-        </div>
-        <CodeEditor
-          value={currObject === -1 ? '' : codes[currObject]}
-          readOnly={currObject === -1}
-          onChange={val => updateCode(val)}
-        />
+        {
+          currObject !== -1 ?
+          <>
+            <div className={styles.toolbar}>
+              <input />
+            </div>
+            <CodeEditor
+              value={currObject === -1 ? '' : codes[currObject]}
+              onChange={val => updateCode(val)}
+            />
+          </> :
+          <p>Select an object to write code.</p>
+        }
       </div>
     </div>
   );
