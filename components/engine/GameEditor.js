@@ -304,7 +304,7 @@ export default function GameEditor(props) {
       <div className={styles.databar}>
         {
           firebase.auth().currentUser ?
-          <form onSubmit={e => {
+          <form className={styles.saveform} onSubmit={e => {
             e.preventDefault();
             saveProject();
           }}>
@@ -320,11 +320,13 @@ export default function GameEditor(props) {
               onChange={e => setDescription(e.target.value)}
               required
             />
-            {
-              (!props.creator || uid === props.creator) ?
-              <button>Save</button> :
-              <button>Remix</button>
-            }
+            <button>
+              {
+                !props.creator ? 'Create' :
+                uid === props.creator ? 'Save' :
+                'Remix'
+              }
+            </button>
           </form> :
           <button onClick={signInWithGoogle}>Sign in to save</button>
         }

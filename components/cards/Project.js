@@ -3,7 +3,7 @@ import Link from 'next/link';
 import styles from '../../styles/components/cards/Project.module.css';
 
 export default function Project(props) {
-  const { id, title, uid } = props;
+  const { id, title, creator } = props;
 
   return (
     <div className={styles.container}>
@@ -12,9 +12,9 @@ export default function Project(props) {
           <h1>{title}</h1>
         </a>
       </Link>
-      <Link href={`/users/${uid}`}>
+      <Link href={`/users/${creator}`}>
         <a>
-          <p>{uid}</p>
+          <p>{creator}</p>
         </a>
       </Link>
     </div>
