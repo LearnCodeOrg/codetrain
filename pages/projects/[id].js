@@ -9,7 +9,7 @@ import { useRouter } from 'next/router';
 import { palettes } from '../../data/palettes.js';
 
 // units
-const mapPixels = 256;
+const mapPixels = 512;
 const mapSize = 8;
 const spriteSize = 8;
 const spritePixels = Math.floor(mapPixels / mapSize);
@@ -42,25 +42,29 @@ export default function Project() {
   if (!data) return <div>Project not found</div>;
 
   return (
-    <div>
-      <h1>{data.title}</h1>
-      <p>{data.description}</p>
-      <Link href={`/edit/${id}`}>
-        <a>Edit</a>
-      </Link>
-      <GameFrame
-        mapPixels={mapPixels}
-        spritePixels={spritePixels}
-        pixelPixels={pixelPixels}
-        spriteSize={spriteSize}
-        mapSize={mapSize}
-        codes={data.codes}
-        colors={data.colors}
-        tiles={JSON.parse(data.tiles)}
-        objects={JSON.parse(data.objects)}
-        background={data.background}
-        gameObjects={data.gameObjects}
-      />
+    <div className={styles.container}>
+      <div className={styles.center}>
+        <h1>{data.title}</h1>
+        <p className={styles.description}>{data.description}</p>
+        <p className={styles.editlink}>
+          <Link href={`/edit/${id}`}>
+            <a>Edit</a>
+          </Link>
+        </p>
+        <GameFrame
+          mapPixels={mapPixels}
+          spritePixels={spritePixels}
+          pixelPixels={pixelPixels}
+          spriteSize={spriteSize}
+          mapSize={mapSize}
+          codes={data.codes}
+          colors={data.colors}
+          tiles={JSON.parse(data.tiles)}
+          objects={JSON.parse(data.objects)}
+          background={data.background}
+          gameObjects={data.gameObjects}
+        />
+      </div>
     </div>
   );
 }
