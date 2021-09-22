@@ -4,11 +4,11 @@ import StopIcon from '@material-ui/icons/Stop';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
 import Frame from '../GameFrame.js';
-import { Parser } from 'acorn';
 
 import { clamp, between } from '../../util/math.js';
 import { useEffect, useRef, useState } from 'react';
 import signInWithGoogle from '../../util/signInWithGoogle.js';
+import compileCode from '../../util/compileCode.js';
 import firebase from 'firebase/app';
 
 import styles from '../../styles/components/engine/GameEditor.module.css';
@@ -251,19 +251,15 @@ export default function GameEditor(props) {
     setGameObjects(newGameObjects);
   }
 
-  // compiles code with acorn
-  function compileCode() {
+  // compiles code and returns whether successful
+  function compile() {
     // for each code snippet
     for (let i = 0; i < codes.length; i++) {
-      const code = codes[i];
-      // try parsing code
-      try {
-        Parser.parse(code);
-      // return error if thrown
-      } catch (e) {
-        return `[${objectNames[i]}] ${e}`;
-      }
+      // try compiling code
+      if (!compileCode(codes[i], objectNames[i])) return false;
     }
+    // if no fails, return true
+    return true;
   }
 
   // toggles game playing
@@ -272,9 +268,7 @@ export default function GameEditor(props) {
     if (playing) setPlaying(false);
     // if no playing, compile and start
     else {
-      const error = compileCode();
-      if (error) alert(error);
-      else setPlaying(true);
+      if (compile()) setPlaying(true);
     }
   }
 

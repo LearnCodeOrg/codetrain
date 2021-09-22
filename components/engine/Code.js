@@ -1,8 +1,11 @@
-import dynamic from 'next/dynamic';
+import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 
-const CodeEditor = dynamic(import('../CodeEditor.js'), { ssr: false });
+import dynamic from 'next/dynamic';
+import compileCode from '../../util/compileCode.js';
 
 import styles from '../../styles/components/engine/Code.module.css';
+
+const CodeEditor = dynamic(import('../CodeEditor.js'), { ssr: false });
 
 export default function Code(props) {
   const {
@@ -34,6 +37,11 @@ export default function Code(props) {
               value={objectNames[currObject]}
               onChange={e => updateObjectName(e.target.value)}
             />
+            <button onClick={() => {
+              compileCode(codes[currObject], objectNames[currObject]);
+            }}>
+              <PlayArrowIcon />
+            </button>
           </div> :
           <p className={styles.placeholder}>Select an object to write code.</p>
         }
