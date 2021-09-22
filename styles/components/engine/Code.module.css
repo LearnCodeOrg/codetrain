@@ -15,6 +15,15 @@
 .toolbar {
   height: 30px;
   background: #2f3129;
+  display: flex;
+  align-items: center;
+}
+
+.nameinput {
+  margin-left: 4px;
+  background: #272822;
+  border: 0;
+  color: #f8f8f2;
 }
 
 .placeholder {

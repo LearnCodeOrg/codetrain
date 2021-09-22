@@ -28,20 +28,20 @@ export default function Code(props) {
       <div className={styles.panel}>
         {
           currObject !== -1 ?
-          <>
-            <div className={styles.toolbar}>
-              <input
-                value={objectNames[currObject]}
-                onChange={e => updateObjectName(e.target.value)}
-              />
-            </div>
-            <CodeEditor
-              value={currObject === -1 ? '' : codes[currObject]}
-              onChange={val => updateCode(val)}
+          <div className={styles.toolbar}>
+            <input
+              className={`${styles.nameinput} monospace`}
+              value={objectNames[currObject]}
+              onChange={e => updateObjectName(e.target.value)}
             />
-          </> :
+          </div> :
           <p className={styles.placeholder}>Select an object to write code.</p>
         }
+        <CodeEditor
+          style={currObject === -1 ? { display: 'none' } : {}}
+          value={currObject === -1 ? '' : codes[currObject]}
+          onChange={val => updateCode(val)}
+        />
       </div>
     </div>
   );

@@ -18,6 +18,11 @@ button, label, input[type='checkbox'] {
   cursor: pointer;
 }
 
+.monospace {
+  font-family:
+    'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+}
+
 .flexfill {
   flex-grow: 1;
 }
