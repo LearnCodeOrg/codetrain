@@ -8,6 +8,8 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { palettes } from '../../data/palettes.js';
 
+import styles from '../../styles/pages/Project.module.css';
+
 // units
 const mapPixels = 512;
 const mapSize = 8;

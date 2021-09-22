@@ -1,0 +1,23 @@
+.container {
+  height: calc(100% - 80px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.center > h1 {
+  margin: 0;
+}
+
+.description {
+  margin: 0;
+}
+
+.editlink {
+  margin: 10px 0;
+  width: fit-content;
+}
+
+.editlink:hover {
+  color: var(--blue0);
+}
