@@ -2,7 +2,7 @@ import GetAppIcon from '@material-ui/icons/GetApp';
 import ReplayIcon from '@material-ui/icons/Replay';
 import Button from '@material-ui/core/Button';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import styles from '../styles/components/GameFrame.module.css';
 
@@ -242,6 +242,11 @@ export default function GameFrame(props) {
     link.click();
   }
 
+  // reset source when cleared
+  useEffect(() => {
+    if (source === null) setSource(gameSrc);
+  }, [source]);
+
   return (
     <div className={styles.container}>
       <iframe
@@ -254,6 +259,9 @@ export default function GameFrame(props) {
         frameBorder="0"
       />
       <div className={styles.toolbar}>
+        <button onClick={() => setSource(null)}>
+          <ReplayIcon />
+        </button>
         {
           props.download &&
           <button onClick={downloadGame}>
