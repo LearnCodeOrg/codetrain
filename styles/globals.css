@@ -35,6 +35,14 @@ button, label, input[type='checkbox'] {
   color: var(--blue0);
 }
 
+.circlebutton {
+  font-weight: bold!important;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%!important;
+  min-width: 0!important;
+}
+
 :root {
   --gray0: #efefef;
   --blue0: #2196f3;

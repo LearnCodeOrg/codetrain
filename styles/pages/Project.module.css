@@ -1,8 +1,9 @@
 .container {
-  height: calc(100% - 80px);
+  min-height: calc(100% - 80px);
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 20px 0;
 }
 
 .center > h1 {

@@ -36,6 +36,11 @@
   background: #272822;
   color: #f8f8f2;
   border-radius: 50%;
+  border: 0;
+}
+
+.compilebutton:hover {
+  background: #49483E;
 }
 
 .placeholder {
