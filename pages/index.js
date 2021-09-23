@@ -13,15 +13,17 @@ export default function Index() {
           <Image src="/logo.png" height="48" width="48" alt="logo" />
           <h1>Codetrain</h1>
         </div>
-        {
-          firebase.auth().currentUser ?
-          <button onClick={() => firebase.auth().signOut()}>
-            Sign Out
-          </button> :
-          <button onClick={signInWithGoogle}>
-            Sign In
-          </button>
-        }
+        <div className={styles.button}>
+          {
+            firebase.auth().currentUser ?
+            <button onClick={() => firebase.auth().signOut()}>
+              Sign Out
+            </button> :
+            <button onClick={signInWithGoogle}>
+              Sign In
+            </button>
+          }
+        </div>
         <h2>What is Codetrain?</h2>
         <p>Codetrain is an educational browser game engine. Our goal is to lower
         the barrier of entry into scripted programming languages.</p>
