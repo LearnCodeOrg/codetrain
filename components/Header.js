@@ -24,14 +24,14 @@ export default function Header() {
       </Link>
       <h1>Codetrain</h1>
       <span className="flexfill" />
+      <Link href="/">
+        <a className={styles.link}>Home</a>
+      </Link>
       <Link href="/create">
         <a className={styles.link}>Create</a>
       </Link>
       <Link href="/explore">
         <a className={styles.link}>Explore</a>
-      </Link>
-      <Link href="/about">
-        <a className={styles.link}>About</a>
       </Link>
       {
         firebase.auth().currentUser ?

@@ -50,7 +50,7 @@ export default function Project() {
         <p className={styles.description}>{data.description}</p>
         <p className={styles.editlink}>
           <Link href={`/edit/${id}`}>
-            <a>Edit</a>
+            <a className="link">Edit</a>
           </Link>
         </p>
         <GameFrame

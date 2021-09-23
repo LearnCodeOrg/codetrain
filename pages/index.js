@@ -43,6 +43,7 @@ export default function Index() {
           Codetrain is open source. Want to contribute? Find our GitHub repository
           {' '}
           <a
+            className="link"
             href="https://github.com/codeconvoy/codetrain"
             target="_blank"
             rel="noopener noreferrer"

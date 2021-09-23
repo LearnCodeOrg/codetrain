@@ -27,6 +27,14 @@ button, label, input[type='checkbox'] {
   flex-grow: 1;
 }
 
+.link {
+  text-decoration: underline;
+}
+
+.link:hover {
+  color: var(--blue0);
+}
+
 :root {
   --gray0: #efefef;
   --blue0: #2196f3;
