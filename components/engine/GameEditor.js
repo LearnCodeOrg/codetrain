@@ -2,8 +2,9 @@ import Router from 'next/router';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import StopIcon from '@material-ui/icons/Stop';
 import DeleteIcon from '@material-ui/icons/Delete';
+import GetAppIcon from '@material-ui/icons/GetApp';
 import Button from '@material-ui/core/Button';
-import Frame from '../GameFrame.js';
+import GameFrame from '../GameFrame.js';
 
 import { clamp, between } from '../../util/math.js';
 import { useEffect, useRef, useState } from 'react';
@@ -336,7 +337,7 @@ export default function GameEditor(props) {
       </div>
       {
         playing &&
-        <Frame
+        <GameFrame
           mapPixels={mapPixels}
           spritePixels={spritePixels}
           pixelPixels={pixelPixels}
@@ -372,20 +373,6 @@ export default function GameEditor(props) {
         {
           !playing &&
           <>
-            {
-              (showHighlight && !!gameObjects.length) &&
-              <>
-                <p>{getHeldPosition()}</p>
-                <Button
-                  onClick={deleteObject}
-                  disabled={!gameObjects.length}
-                  variant="contained"
-                  className={styles.button}
-                >
-                  <DeleteIcon />
-                </Button>
-              </>
-            }
             <label>
               Grid
               <input
@@ -410,11 +397,25 @@ export default function GameEditor(props) {
                 onChange={e => setShowObjects(e.target.checked)}
               />
             </label>
+            {
+              (showHighlight && !!gameObjects.length) &&
+              <>
+                <p>{getHeldPosition()}</p>
+                <Button
+                  className="circlebutton"
+                  onClick={deleteObject}
+                  disabled={!gameObjects.length}
+                  variant="contained"
+                >
+                  <DeleteIcon />
+                </Button>
+              </>
+            }
           </>
         }
         <span className="flexfill" />
         <Button
-          className={styles.button}
+          className="circlebutton"
           variant="contained"
           onClick={togglePlay}
         >
