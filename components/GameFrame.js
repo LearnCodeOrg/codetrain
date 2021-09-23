@@ -259,14 +259,22 @@ export default function GameFrame(props) {
         frameBorder="0"
       />
       <div className={styles.toolbar}>
-        <button onClick={() => setSource(null)}>
+        <Button
+          className="circlebutton"
+          variant="contained"
+          onClick={() => setSource(null)}
+        >
           <ReplayIcon />
-        </button>
+        </Button>
         {
           props.download &&
-          <button onClick={downloadGame}>
+          <Button
+            className="circlebutton"
+            variant="contained"
+            onClick={downloadGame}
+          >
             <GetAppIcon />
-          </button>
+          </Button>
         }
       </div>
     </div>
