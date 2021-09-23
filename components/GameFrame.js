@@ -254,6 +254,12 @@ export default function GameFrame(props) {
         frameBorder="0"
       />
       <div className={styles.toolbar}>
+        {
+          props.download &&
+          <button onClick={downloadGame}>
+            <GetAppIcon />
+          </button>
+        }
       </div>
     </div>
   );
