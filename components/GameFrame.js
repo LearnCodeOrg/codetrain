@@ -9,8 +9,7 @@ import styles from '../styles/components/GameFrame.module.css';
 export default function GameFrame(props) {
   const {
     mapPixels, spriteSize, spritePixels, pixelPixels,
-    mapSize, codes, colors, tiles, objects, background, gameObjects,
-    download
+    mapSize, codes, colors, tiles, objects, background, gameObjects
   } = props;
 
   // returns function definition for given object
@@ -244,14 +243,18 @@ export default function GameFrame(props) {
   }
 
   return (
-    <iframe
-      className={styles.screen}
-      title="game"
-      sandbox="allow-scripts"
-      srcDoc={source}
-      width={mapPixels}
-      height={mapPixels}
-      frameBorder="0"
-    />
+    <div className={styles.container}>
+      <iframe
+        className={styles.screen}
+        title="game"
+        sandbox="allow-scripts"
+        srcDoc={source}
+        width={mapPixels}
+        height={mapPixels}
+        frameBorder="0"
+      />
+      <div className={styles.toolbar}>
+      </div>
+    </div>
   );
 }
