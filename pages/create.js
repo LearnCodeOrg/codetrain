@@ -22,7 +22,8 @@ function update() {
 }
 `;
 
-export default function Create() {
+export default function Create(props) {
+
   const codes = Array(objectCount).fill(defaultCode);
   const objectNames = Array(objectCount).fill(0).map((val, i) => `Object ${i}`);
   const sprite = Array(spriteSize * spriteSize).fill(0);
@@ -39,8 +40,8 @@ export default function Create() {
 
   return (
     <Engine
-      data={data}
       tileCount={tileCount} objectCount={objectCount} spriteSize={spriteSize}
+      data={data} {...props}
     />
   );
 }

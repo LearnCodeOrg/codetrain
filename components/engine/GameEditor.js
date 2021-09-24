@@ -9,6 +9,7 @@ import GameFrame from '../GameFrame.js';
 import { clamp, between } from '../../util/math.js';
 import { useEffect, useRef, useState } from 'react';
 import signInWithGoogle from '../../util/signInWithGoogle.js';
+import createUser from '../../util/createUser.js';
 import compileCode from '../../util/compileCode.js';
 import firebase from 'firebase/app';
 
@@ -38,7 +39,7 @@ let beforeUnloadSet = false;
 
 export default function GameEditor(props) {
   const {
-    projectId, creator,
+    projectId, creator, authed,
     colors, spriteSize, currTile, currObject, codes,
     objectNames, tiles, objects
   } = props;
@@ -307,7 +308,9 @@ export default function GameEditor(props) {
     <div className={styles.container}>
       <div className={styles.databar}>
         {
-          firebase.auth().currentUser ?
+          authed === null ?
+          <button onClick={createUser}>Choose Username</button> :
+          authed ?
           <form className={styles.saveform} onSubmit={e => {
             e.preventDefault();
             saveProject();

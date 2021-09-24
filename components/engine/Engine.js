@@ -15,7 +15,7 @@ import { useEffect, useState } from 'react';
 import styles from '../../styles/components/engine/Engine.module.css';
 
 export default function Engine(props) {
-  const { data, projectId, objectCount, tileCount, spriteSize } = props;
+  const { data, projectId, objectCount, tileCount, spriteSize, authed } = props;
 
   const [codes, setCodes] = useState(data.codes);
   const [objectNames, setObjectNames] = useState(data.objectNames);
@@ -77,6 +77,7 @@ export default function Engine(props) {
           </div>
         </div>
         <GameEditor
+          authed={authed}
           projectId={projectId} creator={data.creator}
           colors={colors} tiles={tiles} objects={objects}
           objectNames={objectNames}
