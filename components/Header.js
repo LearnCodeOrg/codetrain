@@ -18,6 +18,15 @@ import styles from '../styles/components/Header.module.css';
 export default function Header(props) {
   const { authed } = props;
 
+  // attempts to create user
+  async function createUser() {
+    // create user documents
+    const { uid, photoURL } = firebase.auth().currentUser;
+    const userRef = firebase.firestore().collection('users').doc(uid);
+    await userRef.set({ photo: photoURL, username, friends: [] });
+    await usernameRef.set({ uid });
+  }
+
   return (
     <div className={styles.container}>
       <Link href="/">
