@@ -1,11 +1,10 @@
 import Header from '../components/Header.js';
 import Head from 'next/head';
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
-import { useAuthState } from 'react-firebase-hooks/auth';
 import { firebaseConfig } from '../util/firebaseConfig.js';
 import { useEffect, useState } from 'react';
 
@@ -19,13 +18,18 @@ if (!firebase.apps.length) {
 export default function App({ Component, pageProps }) {
   const [authed, setAuthed] = useState(undefined);
 
+  const router = useRouter();
+
   // checks whether user doc is existing
   async function checkUserDoc() {
     const uid = firebase.auth().currentUser.uid;
     const userRef = firebase.firestore().collection('users').doc(uid);
     const userDoc = await userRef.get();
     if (userDoc.exists) setAuthed(true);
-    else Router.push('/setup');
+    else {
+      setAuthed(null);
+      router.push('/setup');
+    }
   }
 
   // listen for user auth
@@ -37,6 +41,10 @@ export default function App({ Component, pageProps }) {
     });
     return () => authListener;
   }, []);
+
+  useEffect(() => {
+    if (authed === null && router.pathname !== 'setup') router.push('/setup')
+  }, [router]);
 
   return (
     <>
