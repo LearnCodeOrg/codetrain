@@ -3,6 +3,7 @@ import Image from 'next/image';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
+import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
@@ -14,7 +15,9 @@ import signInWithGoogle from '../util/signInWithGoogle.js';
 
 import styles from '../styles/components/Header.module.css';
 
-export default function Header() {
+export default function Header(props) {
+  const { authed } = props;
+
   return (
     <div className={styles.container}>
       <Link href="/">
@@ -37,7 +40,13 @@ export default function Header() {
         <a className={styles.link}>Explore</a>
       </Link>
       {
-        firebase.auth().currentUser ?
+        authed === null ?
+        <Tooltip title="Choose Username" arrow>
+          <IconButton onClick={createUser}>
+            <HelpOutlineIcon />
+          </IconButton>
+        </Tooltip> :
+        authed ?
         <Tooltip title="Sign Out" arrow>
           <IconButton onClick={() => firebase.auth().signOut()}>
             <ExitToAppIcon />
