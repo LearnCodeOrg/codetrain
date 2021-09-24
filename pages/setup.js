@@ -8,6 +8,15 @@ export default function SignUp(props) {
 
   const [username, setUsername] = useState('');
 
+  // attempts to create user
+  async function createUser() {
+    // create user documents
+    const { uid, photoURL } = firebase.auth().currentUser;
+    const userRef = firebase.firestore().collection('users').doc(uid);
+    await userRef.set({ photo: photoURL, username, friends: [] });
+    await usernameRef.set({ uid, username, usernameLower, photo: photoURL });
+  }
+
   // listen for user auth
   useEffect(() => {
     if (authed) Router.push('/');
