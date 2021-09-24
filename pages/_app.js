@@ -6,6 +6,7 @@ import 'firebase/auth';
 import 'firebase/firestore';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { firebaseConfig } from '../util/firebaseConfig.js';
+import { useEffect, useState } from 'react';
 
 import '../styles/globals.css';
 
@@ -15,7 +16,16 @@ if (!firebase.apps.length) {
 }
 
 export default function App({ Component, pageProps }) {
-  useAuthState(firebase.auth());
+  const [authed, setAuthed] = useState(undefined);
+
+  // listen for user auth
+  useEffect(() => {
+    const authListener = firebase.auth().onAuthStateChanged(() => {
+      const isAuthed = !!firebase.auth().currentUser;
+      setAuthed(isAuthed);
+    });
+    return () => authListener;
+  }, []);
 
   return (
     <>
@@ -30,7 +40,7 @@ export default function App({ Component, pageProps }) {
       </Head>
       <Header />
       <div style={{ height: 60 }} />
-      <Component {...pageProps} />
+      <Component authed={authed} {...pageProps} />
     </>
   );
 }
