@@ -1,4 +1,5 @@
 import Header from '../components/Header.js';
+import Main from '../components/Main.js';
 import Head from 'next/head';
 import Router, { useRouter } from 'next/router';
 
@@ -15,7 +16,8 @@ if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
 
-export default function App({ Component, pageProps }) {
+export default function App(props) {
+
   const [authed, setAuthed] = useState(undefined);
 
   const router = useRouter();
@@ -26,10 +28,7 @@ export default function App({ Component, pageProps }) {
     const userRef = firebase.firestore().collection('users').doc(uid);
     const userDoc = await userRef.get();
     if (userDoc.exists) setAuthed(true);
-    else {
-      setAuthed(null);
-      router.push('/setup');
-    }
+    else setAuthed(null);
   }
 
   // listen for user auth
@@ -42,10 +41,6 @@ export default function App({ Component, pageProps }) {
     return () => authListener;
   }, []);
 
-  useEffect(() => {
-    if (authed === null && router.pathname !== 'setup') router.push('/setup')
-  }, [router]);
-
   return (
     <>
       <Head>
@@ -57,9 +52,7 @@ export default function App({ Component, pageProps }) {
         <link rel="manifest" href="/manifest.json" />
         <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;900&display=swap" rel="stylesheet" />
       </Head>
-      <Header />
-      <div style={{ height: 60 }} />
-      <Component authed={authed} {...pageProps} />
+      <Main {...props} />
     </>
   );
 }
