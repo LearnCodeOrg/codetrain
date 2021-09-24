@@ -34,7 +34,7 @@ export default function Learn(props) {
         }
       </div>
       <Link href="/next">
-        <a>What&apos;s next?</a>
+        <a className="link">What&apos;s next?</a>
       </Link>
     </div>
   );

@@ -27,6 +27,9 @@ export default function Header() {
       <Link href="/">
         <a className={styles.link}>Home</a>
       </Link>
+      <Link href="/learn">
+        <a className={styles.link}>Learn</a>
+      </Link>
       <Link href="/create">
         <a className={styles.link}>Create</a>
       </Link>
