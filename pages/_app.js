@@ -1,5 +1,6 @@
 import Header from '../components/Header.js';
 import Head from 'next/head';
+import Router from 'next/router';
 
 import firebase from 'firebase/app';
 import 'firebase/auth';
@@ -18,11 +19,21 @@ if (!firebase.apps.length) {
 export default function App({ Component, pageProps }) {
   const [authed, setAuthed] = useState(undefined);
 
+  // checks whether user doc is existing
+  async function checkUserDoc() {
+    const uid = firebase.auth().currentUser.uid;
+    const userRef = firebase.firestore().collection('users').doc(uid);
+    const userDoc = await userRef.get();
+    if (userDoc.exists) setAuthed(true);
+    else Router.push('/setup');
+  }
+
   // listen for user auth
   useEffect(() => {
     const authListener = firebase.auth().onAuthStateChanged(() => {
       const isAuthed = !!firebase.auth().currentUser;
-      setAuthed(isAuthed);
+      if (isAuthed) checkUserDoc();
+      else setAuthed(false);
     });
     return () => authListener;
   }, []);
