@@ -1,8 +1,17 @@
-import { useState } from 'react';
+import Router from 'next/router';
 
-export default function SignUp() {
+import { useEffect, useState } from 'react';
+import firebase from 'firebase/app';
+
+export default function SignUp(props) {
+  const { authed } = props;
 
   const [username, setUsername] = useState('');
+
+  // listen for user auth
+  useEffect(() => {
+    if (authed) Router.push('/');
+  }, [authed]);
 
   return (
     <div>
