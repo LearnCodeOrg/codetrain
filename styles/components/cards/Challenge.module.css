@@ -4,14 +4,14 @@
   width: 200px;
   padding: 20px;
   box-shadow: 0 0 2px #999;
+  transition: 0.25s;
 }
 
-.container > a:hover {
-  color: var(--blue0);
-  text-decoration: underline;
+.container:hover {
+  transform: scale(1.05);
 }
 
-.container > a > h1 {
+.container h1 {
   margin: 0;
   overflow: hidden;
   white-space: nowrap;
@@ -19,7 +19,7 @@
   font-size: 24px;
 }
 
-.container > a > p {
+.container p {
   margin: 0;
   overflow: hidden;
   white-space: nowrap;

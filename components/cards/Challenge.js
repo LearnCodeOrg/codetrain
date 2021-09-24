@@ -6,13 +6,13 @@ export default function Challenge(props) {
   const { id, title, description } = props;
 
   return (
-    <div className={styles.container}>
-      <Link href={`/challenges/${id}`}>
-        <a>
+    <Link href={`/challenges/${id}`}>
+      <a className={styles.container}>
+        <div>
           <h1>{title}</h1>
           <p>{description}</p>
-        </a>
-      </Link>
-    </div>
+        </div>
+      </a>
+    </Link>
   );
 }
