@@ -1,7 +1,5 @@
-import Header from '../components/Header.js';
-import Main from '../components/Main.js';
+import Header from '../components/Header';
 import Head from 'next/head';
-import Router, { useRouter } from 'next/router';
 
 import firebase from 'firebase/app';
 import 'firebase/auth';
@@ -17,26 +15,25 @@ if (!firebase.apps.length) {
 }
 
 export default function App(props) {
+  const { Component, pageProps } = props;
 
-  const [authed, setAuthed] = useState(undefined);
+  const [username, setUsername] = useState(undefined);
 
-  const router = useRouter();
-
-  // checks whether user doc is existing
-  async function checkUserDoc() {
+  // retrieves current username
+  async function getUsername() {
+    // retrieve user doc
     const uid = firebase.auth().currentUser.uid;
     const userRef = firebase.firestore().collection('users').doc(uid);
     const userDoc = await userRef.get();
-    if (userDoc.exists) setAuthed(true);
-    else setAuthed(null);
+    // set username
+    setUsername(userDoc.exists ? userDoc.data().username : null);
   }
 
   // listen for user auth
   useEffect(() => {
     const authListener = firebase.auth().onAuthStateChanged(() => {
-      const isAuthed = !!firebase.auth().currentUser;
-      if (isAuthed) checkUserDoc();
-      else setAuthed(false);
+      // if authed, get username
+      if (firebase.auth().currentUser) getUsername();
     });
     return () => authListener;
   }, []);
@@ -52,7 +49,9 @@ export default function App(props) {
         <link rel="manifest" href="/manifest.json" />
         <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;900&display=swap" rel="stylesheet" />
       </Head>
-      <Main {...props} />
+      <Header />
+      <div style={{ height: 60 }} />
+      <Component username={username} {...pageProps} />
     </>
   );
 }
