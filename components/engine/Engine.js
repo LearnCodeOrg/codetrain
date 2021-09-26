@@ -5,8 +5,8 @@ import Tiles from './Tiles.js';
 import Objects from './Objects.js';
 import Draw from './Draw.js';
 import Code from './Code.js';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import ArrowRightIcon from '@material-ui/icons/ArrowRight';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 
 import dynamic from 'next/dynamic';
 import signInWithGoogle from '../../util/signInWithGoogle.js';

@@ -1,4 +1,4 @@
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 
 import dynamic from 'next/dynamic';
 import compileCode from '../../util/compileCode.js';

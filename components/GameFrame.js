@@ -1,6 +1,6 @@
-import GetAppIcon from '@material-ui/icons/GetApp';
-import ReplayIcon from '@material-ui/icons/Replay';
-import Button from '@material-ui/core/Button';
+import GetAppIcon from '@mui/icons-material/GetApp';
+import ReplayIcon from '@mui/icons-material/Replay';
+import Button from '@mui/material/Button';
 
 import { useEffect, useState } from 'react';
 

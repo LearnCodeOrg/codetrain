@@ -1,9 +1,9 @@
 import Router from 'next/router';
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-import StopIcon from '@material-ui/icons/Stop';
-import DeleteIcon from '@material-ui/icons/Delete';
-import GetAppIcon from '@material-ui/icons/GetApp';
-import Button from '@material-ui/core/Button';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import StopIcon from '@mui/icons-material/Stop';
+import DeleteIcon from '@mui/icons-material/Delete';
+import GetAppIcon from '@mui/icons-material/GetApp';
+import Button from '@mui/material/Button';
 import GameFrame from '../GameFrame.js';
 
 import { clamp, between } from '../../util/math.js';
