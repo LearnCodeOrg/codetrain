@@ -5,34 +5,42 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
 export default function User() {
-  const [data, setData] = useState(undefined);
+  const [userData, setUserData] = useState(undefined);
 
-  // get user id
+  const usersRef = firebase.firestore().collection('users');
+
+  // get username
   const router = useRouter();
-  const { id } = router.query;
+  const { username } = router.query;
 
   // retrieves user data from firebase
   async function getUserData() {
-    // return if no id
-    if (!id) return;
+    // return if no username
+    if (!username) return;
     // get and set user data
-    const userRef = firebase.firestore().collection('users').doc(id);
-    const userDoc = await userRef.get();
-    setData(userDoc.exists ? userDoc.data() : null);
+    const userQuery = usersRef.where('username', '==', username);
+    const userDocs = (await userQuery.get()).docs;
+    // if no user doc, set data to null
+    if (!userDocs.length) setUserData(null);
+    // if user data, set data and retrieve projects
+    else {
+      const data = { id: userDocs[0].id, ...userDocs[0].data() };
+      setUserData(data);
+    }
   }
 
   // get user data on start
   useEffect(() => {
     getUserData();
-  }, [id]);
+  }, [username]);
 
   // return if invalid data
-  if (data === undefined) return <Loading />;
-  if (!data) return <div>User not found</div>;
+  if (userData === undefined) return <Loading />;
+  if (!userData) return <div>User not found</div>;
 
   return (
     <div>
-      <h1>{data.username}</h1>
+      <h1>{userData.username}</h1>
     </div>
   );
 }
