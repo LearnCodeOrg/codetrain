@@ -12,8 +12,8 @@ export default function Explore() {
   async function getProjects() {
     // get and set projects data
     const projectsRef = firebase.firestore().collection('projects');
-    const projectsDocs = (await projectsRef.get()).docs;
-    setProjects(projectsDocs.map(doc => ({ ...doc.data(), id: doc.id })));
+    const projectsDocs = (await projectsRef.limit(10).get()).docs;
+    setProjects(projectsDocs.map(doc => ({ id: doc.id, ...doc.data() })));
   }
 
   // get projects on start

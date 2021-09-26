@@ -49,8 +49,7 @@ export default function App(props) {
         <link rel="manifest" href="/manifest.json" />
         <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;900&display=swap" rel="stylesheet" />
       </Head>
-      <Header />
-      <div style={{ height: 60 }} />
+      <Header username={username} />
       <Component username={username} {...pageProps} />
     </>
   );

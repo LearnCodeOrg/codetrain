@@ -23,7 +23,7 @@ function update() {
 `;
 
 export default function Create(props) {
-
+  // engine defaults
   const codes = Array(objectCount).fill(defaultCode);
   const objectNames = Array(objectCount).fill(0).map((val, i) => `Object ${i}`);
   const sprite = Array(spriteSize * spriteSize).fill(0);
