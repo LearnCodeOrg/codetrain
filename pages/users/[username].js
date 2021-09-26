@@ -1,4 +1,5 @@
-import Loading from '../../components/Loading.js';
+import Project from '../../components/cards/Project';
+import Loading from '../../components/Loading';
 
 import firebase from 'firebase/app';
 import { useEffect, useState } from 'react';
@@ -6,8 +7,10 @@ import { useRouter } from 'next/router';
 
 export default function User() {
   const [userData, setUserData] = useState(undefined);
+  const [projects, setProjects] = useState(undefined);
 
   const usersRef = firebase.firestore().collection('users');
+  const projectsRef = firebase.firestore().collection('projects');
 
   // get username
   const router = useRouter();
@@ -26,6 +29,9 @@ export default function User() {
     else {
       const data = { id: userDocs[0].id, ...userDocs[0].data() };
       setUserData(data);
+      const projectsQuery = projectsRef.where('uid', '==', data.id);
+      const projectDocs = (await projectsQuery.get()).docs;
+      setProjects(projectDocs.map(doc => ({ id: doc.id, ...doc.data() })));
     }
   }
 
@@ -41,6 +47,15 @@ export default function User() {
   return (
     <div>
       <h1>{userData.username}</h1>
+      <div className={styles.projects}>
+        {
+          projects ?
+          projects.map(project =>
+            <Project {...project} />
+          ) :
+          <Loading />
+        }
+      </div>
     </div>
   );
 }
