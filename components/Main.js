@@ -12,14 +12,14 @@ function MainAuthed(props) {
   const userRef = firebase.firestore().collection('users').doc(uid);
   const [userDoc] = useDocument(userRef);
 
-  // get auth state from user doc
-  const authed = userDoc === undefined ? false : userDoc.exists ? true : null;
+  // get username from user doc
+  const username = userDoc === undefined ? undefined :
+  userDoc.exists ? userDoc.data().username : null;
 
   return (
     <>
-      <Header authed={authed} />
-      <div style={{ height: 60 }} />
-      <Component authed={authed} {...pageProps} />
+      <Header username={username} />
+      <Component username={username} {...pageProps} />
     </>
   );
 }
@@ -42,7 +42,6 @@ export default function Main(props) {
     <MainAuthed {...props} /> :
     <>
       <Header />
-      <div style={{ height: 60 }} />
       <Component {...pageProps} />
     </>
   );
