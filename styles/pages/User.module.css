@@ -1,0 +1,17 @@
+.head {
+  margin: 20px;
+}
+
+.head > h1 {
+  margin: 0;
+}
+
+.head > p {
+  margin: 0;
+}
+
+.projects {
+  margin: 10px;
+  display: flex;
+  flex-wrap: wrap;
+}

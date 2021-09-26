@@ -5,6 +5,8 @@ import firebase from 'firebase/app';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
+import styles from '../../styles/pages/User.module.css';
+
 export default function User() {
   const [userData, setUserData] = useState(undefined);
   const [projects, setProjects] = useState(undefined);
@@ -47,6 +49,7 @@ export default function User() {
   return (
     <div>
       <h1>{userData.username}</h1>
+      <p>Joined {new Date(userData.joined).toLocaleDateString()}</p>
       <div className={styles.projects}>
         {
           projects ?
