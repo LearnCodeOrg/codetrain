@@ -39,7 +39,7 @@ let beforeUnloadSet = false;
 
 export default function GameEditor(props) {
   const {
-    projectId, creator, authed,
+    projectId, creator, username,
     colors, spriteSize, currTile, currObject, codes,
     objectNames, tiles, objects
   } = props;
@@ -69,7 +69,7 @@ export default function GameEditor(props) {
     if (!uid) return;
     // construct project object
     const projectObj = {
-      creator: uid,
+      username, uid: uid,
       title, description, objectNames,
       codes, colors, gameObjects, background,
       tiles: JSON.stringify(tiles),
@@ -308,9 +308,9 @@ export default function GameEditor(props) {
     <div className={styles.container}>
       <div className={styles.databar}>
         {
-          authed === null ?
+          username === null ?
           <button onClick={createUser}>Choose Username</button> :
-          authed ?
+          username ?
           <form className={styles.saveform} onSubmit={e => {
             e.preventDefault();
             saveProject();
