@@ -35,7 +35,7 @@ let canvas, ctx;
 let sketching = false;
 let holding = false;
 
-let beforeUnloadSet = false;
+let editorDirty = false;
 
 export default function GameEditor(props) {
   const {
@@ -63,7 +63,14 @@ export default function GameEditor(props) {
   const projectsRef = firebase.firestore().collection('projects');
   const uid = firebase.auth().currentUser?.uid;
 
-  function beforeUnload() {}
+  // called before page unloads
+  function beforeUnload(e) {
+    // return if editor not dirty
+    if (!editorDirty) return;
+    // cancel unload
+    e.preventDefault();
+    e.returnValue = '';
+  }
 
   // saves project to firebase
   async function saveProject() {
@@ -80,7 +87,7 @@ export default function GameEditor(props) {
     // if own project and existing, save
     if (props.creator && uid === props.creator && projectId) {
       await projectsRef.doc(projectId).update(projectObj);
-      window.removeEventListener('beforeunload', beforeUnload);
+      editorDirty = false;
     // if no existing project, publish new project
     } else {
       const docRef = await projectsRef.add(projectObj);
@@ -283,6 +290,8 @@ export default function GameEditor(props) {
     // get canvas
     canvas = canvasRef.current;
     ctx = canvas.getContext('2d');
+    // initialize unload event listener
+    window.addEventListener('beforeunload', beforeUnload);
   }, []);
 
   // draw map when any elements change
@@ -301,12 +310,14 @@ export default function GameEditor(props) {
 
   // set up changes may not be saved popup
   useEffect(() => {
-    if (didMountRef.current && !beforeUnloadSet) {
-      window.addEventListener('beforeunload', beforeUnload);
-      beforeUnloadSet = true;
+    if (didMountRef.current) {
+      if (!editorDirty) editorDirty = true;
     }
     else didMountRef.current = true;
-  }, [colors, tiles, objects, background, gameObjects, objectNames]);
+  }, [
+    colors, tiles, objects, background, gameObjects, codes, objectNames,
+    title, description
+  ]);
 
   return (
     <div className={styles.container}>
