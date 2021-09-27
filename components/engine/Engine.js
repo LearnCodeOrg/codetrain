@@ -5,10 +5,7 @@ import Tiles from './Tiles.js';
 import Objects from './Objects.js';
 import Draw from './Draw.js';
 import Code from './Code.js';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 
-import dynamic from 'next/dynamic';
 import signInWithGoogle from '../../util/signInWithGoogle.js';
 import { useEffect, useState } from 'react';
 

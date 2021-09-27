@@ -6,12 +6,6 @@
   height: calc(100% - 60px);
 }
 
-.toolbar {
-  flex: 0 0 60px;
-  background: var(--gray0);
-  width: 100%;
-}
-
 .content {
   display: flex;
   align-items: flex-start;
@@ -30,18 +24,4 @@
 
 .tileselect {
   display: flex;
-}
-
-.gameeditor {
-  display: flex;
-  flex-direction: column;
-  width: 520px;
-}
-
-.gameeditor > form {
-  background: #efefef;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
