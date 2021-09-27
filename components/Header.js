@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import Image from 'next/image';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
@@ -22,25 +21,15 @@ export default function Header(props) {
   return (
     <>
       <div className={styles.container}>
-        <Link href="/">
-          <a className={styles.icon}>
-            <Image src="/logo.png" height="48" width="48" alt="logo" />
-          </a>
-        </Link>
+        <a href="/" className={styles.icon}>
+          <Image src="/logo.png" height="48" width="48" alt="logo" />
+        </a>
         <h1>Codetrain</h1>
         <span className="flexfill" />
-        <Link href="/">
-          <a className={styles.link}>Home</a>
-        </Link>
-        <Link href="/learn">
-          <a className={styles.link}>Learn</a>
-        </Link>
-        <Link href="/create">
-          <a className={styles.link}>Create</a>
-        </Link>
-        <Link href="/explore">
-          <a className={styles.link}>Explore</a>
-        </Link>
+        <a href="/" className={styles.link}>Home</a>
+        <a href="/learn" className={styles.link}>Learn</a>
+        <a href="/create" className={styles.link}>Create</a>
+        <a href="/explore" className={styles.link}>Explore</a>
         {
           username === null ?
           <Tooltip title="Choose Username" arrow>
