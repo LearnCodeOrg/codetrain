@@ -1,6 +1,5 @@
 import Loading from '../../components/Loading.js';
 import GameFrame from '../../components/GameFrame.js';
-import Link from 'next/link';
 
 import dynamic from 'next/dynamic';
 import firebase from 'firebase/app';
@@ -49,9 +48,7 @@ export default function Project() {
         <h1>{data.title}</h1>
         <p className={styles.description}>{data.description}</p>
         <p className={styles.editlink}>
-          <Link href={`/edit/${id}`}>
-            <a className="link">Edit</a>
-          </Link>
+          <a href={`/edit/${id}`} className="link">Edit</a>
         </p>
         <GameFrame
           mapPixels={mapPixels}

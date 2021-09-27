@@ -1,6 +1,5 @@
 import Loading from '../components/Loading.js';
 import Challenge from '../components/cards/Challenge.js';
-import Link from 'next/link';
 
 import { useEffect, useState } from 'react';
 import firebase from 'firebase/app';
@@ -33,9 +32,7 @@ export default function Learn(props) {
           )
         }
       </div>
-      <Link href="/next">
-        <a className="link">What&apos;s next?</a>
-      </Link>
+      <a href="/next" className="link">What&apos;s next?</a>
     </div>
   );
 }
