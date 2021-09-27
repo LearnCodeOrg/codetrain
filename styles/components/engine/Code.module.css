@@ -13,7 +13,7 @@
 }
 
 .toolbar {
-  height: 30px;
+  min-height: 30px;
   padding: 0 4px;
   background: #2f3129;
   display: flex;

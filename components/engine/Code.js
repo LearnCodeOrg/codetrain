@@ -1,3 +1,4 @@
+import Loading from '../Loading';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 
 import dynamic from 'next/dynamic';
@@ -5,12 +6,12 @@ import compileCode from '../../util/compileCode.js';
 
 import styles from '../../styles/components/engine/Code.module.css';
 
-const CodeEditor = dynamic(import('../CodeEditor.js'), { ssr: false });
+const CodeEditor = dynamic(import('../CodeEditor.js'), {
+  loading: function Load() { return <Loading /> }, ssr: false
+});
 
 export default function Code(props) {
-  const {
-    objectCount, currObject, codes, setCodes, objectNames, setObjectNames
-  } = props;
+  const { currObject, codes, setCodes, objectNames, setObjectNames } = props;
 
   // updates current color with given value
   function updateCode(val) {
