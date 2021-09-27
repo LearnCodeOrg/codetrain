@@ -48,13 +48,15 @@ export default function User() {
 
   return (
     <div>
-      <h1>{userData.username}</h1>
-      <p>Joined {new Date(userData.joined).toLocaleDateString()}</p>
+      <div className={styles.head}>
+        <h1>{userData.username}</h1>
+        <p>Joined {new Date(userData.joined).toLocaleDateString()}</p>
+      </div>
       <div className={styles.projects}>
         {
           projects ?
           projects.map(project =>
-            <Project {...project} />
+            <Project {...project} key={project.id} />
           ) :
           <Loading />
         }

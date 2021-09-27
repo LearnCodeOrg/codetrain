@@ -63,6 +63,8 @@ export default function GameEditor(props) {
   const projectsRef = firebase.firestore().collection('projects');
   const uid = firebase.auth().currentUser?.uid;
 
+  function beforeUnload() {}
+
   // saves project to firebase
   async function saveProject() {
     // return if not authed
@@ -78,7 +80,7 @@ export default function GameEditor(props) {
     // if own project and existing, save
     if (props.creator && uid === props.creator && projectId) {
       await projectsRef.doc(projectId).update(projectObj);
-      window.onbeforeunload = null;
+      window.removeEventListener('beforeunload', beforeUnload);
     // if no existing project, publish new project
     } else {
       const docRef = await projectsRef.add(projectObj);
@@ -164,6 +166,8 @@ export default function GameEditor(props) {
 
   // sketches map with given mouse event data
   function sketchMap(e) {
+    // return if tutorial
+    if (props.tutorial) return;
     // return if not showing sketch target
     if (currTile !== -1 && !showTiles) return;
     if (currObject !== -1 && !showObjects) return;
@@ -298,7 +302,7 @@ export default function GameEditor(props) {
   // set up changes may not be saved popup
   useEffect(() => {
     if (didMountRef.current && !beforeUnloadSet) {
-      window.onbeforeunload = () => '';
+      window.addEventListener('beforeunload', beforeUnload);
       beforeUnloadSet = true;
     }
     else didMountRef.current = true;
