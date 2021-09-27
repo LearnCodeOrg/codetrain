@@ -19,17 +19,20 @@ export default async function createUser() {
     return;
   }
   // verify username availability
+  const usersRef = firebase.firestore().collection('users');
   const usernameLower = username.toLowerCase();
-  const usernamesRef = firebase.firestore().collection('usernames');
-  const usernameRef = usernamesRef.doc(usernameLower);
-  const usernameDoc = await usernameRef.get();
-  if (usernameDoc.exists) {
+  const userQuery = usersRef.where('usernameLower', '==', usernameLower);
+  const usernameQuery = await userQuery.get();
+  if (usernameQuery.docs.length) {
     alert("Username is taken. Please try another.");
     return;
   }
   // create user documents
   const { uid, photoURL } = firebase.auth().currentUser;
-  const userRef = firebase.firestore().collection('users').doc(uid);
-  await userRef.set({ photo: photoURL, username, friends: [] });
-  await usernameRef.set({ uid });
+  const userRef = usersRef.doc(uid);
+  await userRef.set({
+    joined: new Date().toDateString(),
+    photo: photoURL,
+    username, usernameLower: username.toLowerCase()
+  });
 }
