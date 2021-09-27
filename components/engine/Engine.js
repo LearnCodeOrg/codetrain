@@ -77,7 +77,7 @@ export default function Engine(props) {
         </div>
         <GameEditor
           username={username}
-          projectId={projectId} creator={data.creator}
+          projectId={projectId} creator={data.uid}
           colors={colors} tiles={tiles} objects={objects}
           objectNames={objectNames}
           spriteSize={spriteSize}

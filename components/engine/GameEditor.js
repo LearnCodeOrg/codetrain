@@ -344,8 +344,8 @@ export default function GameEditor(props) {
             />
             <button>
               {
-                !props.creator ? 'Create' :
-                uid === props.creator ? 'Save' :
+                !creator ? 'Create' :
+                uid === creator ? 'Save' :
                 'Remix'
               }
             </button>

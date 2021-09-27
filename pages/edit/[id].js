@@ -11,8 +11,6 @@ const objectCount = 16;
 const spriteSize = 8;
 
 export default function Edit(props) {
-  const { username } = props;
-
   const [data, setData] = useState(undefined);
 
   // get project id
@@ -40,8 +38,8 @@ export default function Edit(props) {
 
   return (
     <Engine
-      projectId={id} data={data} username={username}
       tileCount={tileCount} objectCount={objectCount} spriteSize={spriteSize}
+      projectId={id} data={data} {...props}
     />
   );
 }
