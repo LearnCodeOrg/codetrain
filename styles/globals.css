@@ -18,6 +18,10 @@ button, label, input[type='checkbox'] {
   cursor: pointer;
 }
 
+.MuiSnackbar-root * {
+  font-family: 'Lato', sans-serif;
+}
+
 .monospace {
   font-family:
     'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;

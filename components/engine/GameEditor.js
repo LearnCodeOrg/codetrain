@@ -4,7 +4,8 @@ import StopIcon from '@mui/icons-material/Stop';
 import DeleteIcon from '@mui/icons-material/Delete';
 import GetAppIcon from '@mui/icons-material/GetApp';
 import Button from '@mui/material/Button';
-import GameFrame from '../GameFrame.js';
+import GameFrame from '../GameFrame';
+import Snackbar from '../Snackbar';
 
 import { clamp, between } from '../../util/math.js';
 import { useEffect, useRef, useState } from 'react';
@@ -57,6 +58,8 @@ export default function GameEditor(props) {
   const [title, setTitle] = useState(props.title);
   const [description, setDescription] = useState(props.description);
 
+  const [saveSuccess, setSaveSuccess] = useState(false);
+
   const canvasRef = useRef();
   const didMountRef = useRef(false);
 
@@ -88,6 +91,7 @@ export default function GameEditor(props) {
     if (props.creator && uid === props.creator && projectId) {
       await projectsRef.doc(projectId).update(projectObj);
       editorDirty = false;
+      setSaveSuccess(true);
     // if no existing project, publish new project
     } else {
       const docRef = await projectsRef.add(projectObj);
@@ -440,6 +444,12 @@ export default function GameEditor(props) {
           {playing ? <StopIcon /> : <PlayArrowIcon />}
         </Button>
       </div>
+      <Snackbar
+        message="Project saved successfully."
+        type="success"
+        open={saveSuccess}
+        setOpen={setSaveSuccess}
+      />
     </div>
   );
 }
