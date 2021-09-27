@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  min-width: 100%;
+  height: calc(100% - 60px);
+}
+
+.container > h1 {
+  margin: 20px 20px 0 20px;
+}
+
+.container > p {
+  margin: 0 20px;
+}
+
+.content {
+  display: flex;
+  align-items: flex-start;
+  flex-grow: 1;
+}

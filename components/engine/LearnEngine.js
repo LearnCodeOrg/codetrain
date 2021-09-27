@@ -6,6 +6,8 @@ import signInWithGoogle from '../../util/signInWithGoogle';
 import { useEffect, useState } from 'react';
 import { palettes } from '../../data/palettes';
 
+import styles from '../../styles/components/engine/LearnEngine.module.css';
+
 export default function LearnEngine(props) {
   const { data, spriteSize, mapSize, username } = props;
 
@@ -20,6 +22,9 @@ export default function LearnEngine(props) {
 
   return (
     <div className={styles.container}>
+      <h1>{data.title}</h1>
+      <p>{data.description}</p>
+      <p>{data.instructions}</p>
       <div className={styles.content}>
         <Code
           currObject={0}
