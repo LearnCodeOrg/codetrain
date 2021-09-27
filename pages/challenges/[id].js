@@ -1,13 +1,11 @@
 import Loading from '../../components/Loading.js';
-import GameFrame from '../../components/GameFrame.js';
+import LearnEngine from '../../components/engine/LearnEngine.js';
 
 import dynamic from 'next/dynamic';
 import firebase from 'firebase/app';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { palettes } from '../../data/palettes.js';
-
-const CodeEditor = dynamic(import('../../components/CodeEditor.js'), { ssr: false });
 
 // units
 const mapPixels = 512;
@@ -16,14 +14,7 @@ const spriteSize = 8;
 const spritePixels = Math.floor(mapPixels / mapSize);
 const pixelPixels = Math.floor(spritePixels / spriteSize);
 
-// data
-const colors = palettes[0].colors;
-const tiles = [Array(8 ** 2).fill(0)];
-const objects = [Array(8 ** 2).fill(3)];
-const background = Array(mapSize ** 2).fill(0);
-
 export default function Challenge() {
-  const [code, setCode] = useState('');
   const [data, setData] = useState(undefined);
 
   // get challenge id
@@ -40,7 +31,6 @@ export default function Challenge() {
     const challengeData = challengeDoc.exists ? challengeDoc.data() : null;
     // set challenge data
     setData(challengeData);
-    if (challengeData?.code) setCode(challengeData.code);
   }
 
   // get challenge data on start
@@ -53,25 +43,13 @@ export default function Challenge() {
   if (!data) return <div>Challenge not found</div>;
 
   return (
-    <div>
-      <h1>{data.title}</h1>
-      <CodeEditor
-        value={code}
-        onChange={val => setCode(val)}
-      />
-      <GameFrame
-        mapPixels={mapPixels}
-        spritePixels={spritePixels}
-        pixelPixels={pixelPixels}
-        codes={[code]}
-        colors={colors}
-        tiles={tiles}
-        objects={objects}
-        background={background}
-        gameObjects={[{ sprite: 0, ...data.object }]}
-        spriteSize={spriteSize}
-        mapSize={mapSize}
-      />
-    </div>
+    <LearnEngine
+      mapPixels={mapPixels}
+      spritePixels={spritePixels}
+      pixelPixels={pixelPixels}
+      spriteSize={spriteSize}
+      mapSize={mapSize}
+      data={data}
+    />
   );
 }
