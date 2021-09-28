@@ -50,7 +50,9 @@ export default function GameEditor(props) {
 
   const [playing, setPlaying] = useState(false);
   const [background, setBackground] = useState(props.background);
-  const [gameObjects, setGameObjects] = useState(props.gameObjects);
+  const [gameObjects, setGameObjects] = useState(
+    insertObjectUnits(props.gameObjects)
+  );
 
   const [showGrid, setShowGrid] = useState(true);
   const [showTiles, setShowTiles] = useState(true);
@@ -67,6 +69,24 @@ export default function GameEditor(props) {
 
   const projectsRef = firebase.firestore().collection('projects');
   const uid = firebase.auth().currentUser?.uid;
+
+  // returns given gameobjects with units inserted
+  function insertObjectUnits(objs) {
+    return objs.map(obj => ({
+      sprite: obj.sprite,
+      x: obj.x * pixelPixels,
+      y: obj.y * pixelPixels
+    }));
+  }
+
+  // returns given gameobjects with units removed
+  function removeObjectUnits(objs) {
+    return objs.map(obj => ({
+      sprite: obj.sprite,
+      x: Math.round(obj.x / pixelPixels),
+      y: Math.round(obj.y / pixelPixels)
+    }));
+  }
 
   // called before page unloads
   function beforeUnload(e) {
@@ -85,7 +105,8 @@ export default function GameEditor(props) {
     const projectObj = {
       username, uid: uid,
       title, description, objectNames,
-      codes, colors, gameObjects, background,
+      codes, colors, background,
+      gameObjects: removeObjectUnits(gameObjects),
       tiles: JSON.stringify(tiles),
       objects: JSON.stringify(objects)
     };

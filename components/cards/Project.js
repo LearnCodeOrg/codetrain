@@ -53,7 +53,7 @@ export default function Project(props) {
       // draw object
       const { x, y } = object;
       const sprite = objects[object.sprite];
-      drawSprite(sprite, x / 4, y / 4);
+      drawSprite(sprite, x * pixelPixels, y * pixelPixels);
     }
   }
 
