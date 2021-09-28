@@ -2,10 +2,19 @@ import { useEffect, useRef } from 'react';
 
 import styles from '../../styles/components/cards/Project.module.css';
 
+// constants
+const mapSize = 8;
+const mapPixels = 128;
+const spriteSize = 8;
+const spritePixels = Math.floor(mapPixels / mapSize);
+const pixelPixels = Math.floor(spritePixels / spriteSize);
+
 let canvas, ctx;
 
 export default function Project(props) {
-  const { id, title, username } = props;
+  const { id, title, username, colors, background, gameObjects } = props;
+  const tiles = JSON.parse(props.tiles);
+  const objects = JSON.parse(props.objects);
 
   const canvasRef = useRef();
 
@@ -38,6 +47,13 @@ export default function Project(props) {
         // draw sprite
         drawSprite(sprite, x * spritePixels, y * spritePixels);
       }
+    }
+    // for each object
+    for (const object of gameObjects) {
+      // draw object
+      const { x, y } = object;
+      const sprite = objects[object.sprite];
+      drawSprite(sprite, x / 4, y / 4);
     }
   }
 
