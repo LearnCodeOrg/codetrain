@@ -275,7 +275,14 @@ export default function GameEditor(props) {
     // for each code snippet
     for (let i = 0; i < codes.length; i++) {
       // try compiling code
-      if (!compileCode(codes[i], objectNames[i])) return false;
+      const header = objectNames[i];
+      const error = compileCode(codes[i]);
+      // if error
+      if (error) {
+        // enqueue snackbar and return false
+        enqueueSnackbar(`[${header}] ${error}`, { variant: 'error' });
+        return false;
+      }
     }
     // if no fails, return true
     return true;
