@@ -6,6 +6,7 @@ import Objects from './Objects.js';
 import Draw from './Draw.js';
 import Code from './Code.js';
 
+import { SnackbarProvider, useSnackbar } from 'notistack';
 import signInWithGoogle from '../../util/signInWithGoogle.js';
 import { useEffect, useState } from 'react';
 
@@ -35,59 +36,61 @@ export default function Engine(props) {
   }, [currObject]);
 
   return (
-    <div className={styles.container}>
-      <div className={styles.content}>
-        <Code
-          currObject={currObject}
-          objectCount={objectCount}
-          codes={codes} setCodes={setCodes}
-          objectNames={objectNames} setObjectNames={setObjectNames}
-        />
-        <div className={styles.draw}>
-          <div className={styles.drawtiles}>
-            <Colors
-              colors={colors} setColors={setColors}
-              currColor={currColor} setCurrColor={setCurrColor}
-            />
-            <Draw
-              colors={colors} tiles={tiles} objects={objects}
-              currTile={currTile} currObject={currObject}
-              currColor={currColor} spriteSize={spriteSize}
-              setTiles={setTiles} setObjects={setObjects}
-            />
+    <SnackbarProvider maxSnack={3}>
+      <div className={styles.container}>
+        <div className={styles.content}>
+          <Code
+            currObject={currObject}
+            objectCount={objectCount}
+            codes={codes} setCodes={setCodes}
+            objectNames={objectNames} setObjectNames={setObjectNames}
+          />
+          <div className={styles.draw}>
+            <div className={styles.drawtiles}>
+              <Colors
+                colors={colors} setColors={setColors}
+                currColor={currColor} setCurrColor={setCurrColor}
+              />
+              <Draw
+                colors={colors} tiles={tiles} objects={objects}
+                currTile={currTile} currObject={currObject}
+                currColor={currColor} spriteSize={spriteSize}
+                setTiles={setTiles} setObjects={setObjects}
+              />
+            </div>
+            <div className="flexfill" />
+            <div className={styles.tileselect}>
+              <Tiles
+                colors={colors}
+                tiles={tiles}
+                currTile={currTile} setCurrTile={setCurrTile}
+                tileCount={tileCount}
+                spriteSize={spriteSize}
+              />
+              <Objects
+                colors={colors}
+                objects={objects}
+                currObject={currObject} setCurrObject={setCurrObject}
+                tileCount={tileCount}
+                objectCount={objectCount}
+                spriteSize={spriteSize}
+              />
+            </div>
           </div>
-          <div className="flexfill" />
-          <div className={styles.tileselect}>
-            <Tiles
-              colors={colors}
-              tiles={tiles}
-              currTile={currTile} setCurrTile={setCurrTile}
-              tileCount={tileCount}
-              spriteSize={spriteSize}
-            />
-            <Objects
-              colors={colors}
-              objects={objects}
-              currObject={currObject} setCurrObject={setCurrObject}
-              tileCount={tileCount}
-              objectCount={objectCount}
-              spriteSize={spriteSize}
-            />
-          </div>
+          <GameEditor
+            username={username}
+            projectId={projectId} creator={data.uid}
+            colors={colors} tiles={tiles} objects={objects}
+            objectNames={objectNames}
+            spriteSize={spriteSize}
+            currTile={currTile}
+            currObject={currObject}
+            codes={codes}
+            background={data.background} gameObjects={data.gameObjects}
+            title={data.title} description={data.description}
+          />
         </div>
-        <GameEditor
-          username={username}
-          projectId={projectId} creator={data.uid}
-          colors={colors} tiles={tiles} objects={objects}
-          objectNames={objectNames}
-          spriteSize={spriteSize}
-          currTile={currTile}
-          currObject={currObject}
-          codes={codes}
-          background={data.background} gameObjects={data.gameObjects}
-          title={data.title} description={data.description}
-        />
       </div>
-    </div>
+    </SnackbarProvider>
   );
 }
