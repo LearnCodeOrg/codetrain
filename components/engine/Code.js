@@ -62,11 +62,13 @@ export default function Code(props) {
           </div> :
           <p className={styles.placeholder}>Select an object to write code.</p>
         }
-        <CodeEditor
-          style={currObject === -1 ? { display: 'none' } : {}}
-          value={currObject === -1 ? '' : codes[currObject]}
-          onChange={val => updateCode(val)}
-        />
+        {
+          currObject !== -1 &&
+          <CodeEditor
+            value={codes[currObject]}
+            onChange={val => updateCode(val)}
+          />
+        }
       </div>
     </div>
   );
