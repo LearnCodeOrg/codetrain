@@ -27,11 +27,27 @@ export default function Project(props) {
     }
   }
 
+  // draws project cover
+  function drawCover() {
+    // for each tile
+    for (let y = 0; y < mapSize; y++) {
+      for (let x = 0; x < mapSize; x++) {
+        // get sprite
+        const spriteIndex = y * mapSize + x;
+        const sprite = tiles[background[spriteIndex]];
+        // draw sprite
+        drawSprite(sprite, x * spritePixels, y * spritePixels);
+      }
+    }
+  }
+
   // on start
   useEffect(() => {
     // get cover canvas
     canvas = canvasRef.current;
     ctx = canvas.getContext('2d');
+    // draw cover
+    drawCover();
   }, []);
 
   return (
