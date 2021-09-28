@@ -32,7 +32,7 @@ export default function Learn(props) {
           )
         }
       </div>
-      <a href="/next" className="link">What&apos;s next?</a>
+      <a href="/next" className="link">What&apos;s next?</a> {/* eslint-disable-line @next/next/no-html-link-for-pages */}
     </div>
   );
 }

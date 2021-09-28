@@ -21,15 +21,15 @@ export default function Header(props) {
   return (
     <>
       <div className={styles.container}>
-        <a href="/" className={styles.icon}>
+        <a href="/" className={styles.icon}> {/* eslint-disable-line @next/next/no-html-link-for-pages */}
           <Image src="/logo.png" height="48" width="48" alt="logo" />
         </a>
         <h1>Codetrain</h1>
         <span className="flexfill" />
-        <a href="/" className={styles.link}>Home</a>
-        <a href="/learn" className={styles.link}>Learn</a>
-        <a href="/create" className={styles.link}>Create</a>
-        <a href="/explore" className={styles.link}>Explore</a>
+        <a href="/" className={styles.link}>Home</a> {/* eslint-disable-line @next/next/no-html-link-for-pages */}
+        <a href="/learn" className={styles.link}>Learn</a> {/* eslint-disable-line @next/next/no-html-link-for-pages */}
+        <a href="/create" className={styles.link}>Create</a> {/* eslint-disable-line @next/next/no-html-link-for-pages */}
+        <a href="/explore" className={styles.link}>Explore</a> {/* eslint-disable-line @next/next/no-html-link-for-pages */}
         {
           username === null ?
           <Tooltip title="Choose Username" arrow>
