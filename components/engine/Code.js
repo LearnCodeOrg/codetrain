@@ -1,9 +1,9 @@
 import Loading from '../Loading';
-import Snackbar from '../Snackbar';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 
 import dynamic from 'next/dynamic';
-import compileCode from '../../util/compileCode.js';
+import compileCode from '../../util/compileCode';
+import { useSnackbar } from 'notistack';
 import { useState } from 'react';
 
 import styles from '../../styles/components/engine/Code.module.css';
@@ -14,6 +14,8 @@ const CodeEditor = dynamic(import('../CodeEditor.js'), {
 
 export default function Code(props) {
   const { currObject, codes, setCodes, objectNames, setObjectNames } = props;
+
+  const { enqueueSnackbar } = useSnackbar();
 
   const [compileSuccess, setCompileSuccess] = useState(false);
 
@@ -47,7 +49,7 @@ export default function Code(props) {
               const header = objectNames[currObject];
               // if code compiles, give success message
               if (compileCode(codes[currObject], header)) {
-                setCompileSuccess(true);
+                enqueueSnackbar('Compiled successfully.', { variant: 'success' });
               }
             }}>
               <PlayArrowIcon />
@@ -61,12 +63,6 @@ export default function Code(props) {
           onChange={val => updateCode(val)}
         />
       </div>
-      <Snackbar
-        type="success"
-        message="Compiled successfully."
-        open={compileSuccess}
-        setOpen={setCompileSuccess}
-      />
     </div>
   );
 }
