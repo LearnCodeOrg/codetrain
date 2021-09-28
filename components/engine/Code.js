@@ -33,6 +33,17 @@ export default function Code(props) {
     setObjectNames(newObjectNames);
   }
 
+  // compiles current object code
+  function compile() {
+    const header = objectNames[currObject];
+    const error = compileCode(codes[currObject]);
+    // enqueue snackbar based on result
+    if (error) enqueueSnackbar(`[${header}] ${error}`, { variant: 'error'});
+    else enqueueSnackbar(
+      `[${header}] Compiled successfully.`, { variant: 'success' }
+    );
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.panel}>
@@ -45,13 +56,7 @@ export default function Code(props) {
               onChange={e => updateObjectName(e.target.value)}
             />
             <span className="flexfill" />
-            <button className={styles.compilebutton} onClick={() => {
-              const header = objectNames[currObject];
-              // if code compiles, give success message
-              if (compileCode(codes[currObject], header)) {
-                enqueueSnackbar('Compiled successfully.', { variant: 'success' });
-              }
-            }}>
+            <button className={styles.compilebutton} onClick={compile}>
               <PlayArrowIcon />
             </button>
           </div> :
