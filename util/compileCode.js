@@ -1,14 +1,12 @@
 import { Parser } from 'acorn';
 
-// compiles code with acorn and returns whether successful
-export default function compileCode(code, header) {
+// compiles code with acorn and returns error
+export default function compileCode(code) {
   // try parsing code
   try {
     Parser.parse(code);
-    return true;
-  // alert error if thrown
+  // return error if thrown
   } catch (e) {
-    alert(`[${header}] ${e}`);
-    return false;
+    return e.toString();
   }
 }

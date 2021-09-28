@@ -18,7 +18,7 @@ button, label, input[type='checkbox'] {
   cursor: pointer;
 }
 
-.MuiSnackbar-root * {
+.SnackbarItem-message {
   font-family: 'Lato', sans-serif;
 }
 
