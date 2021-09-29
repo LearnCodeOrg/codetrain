@@ -90,20 +90,15 @@ export default function Docs() {
       <div className={styles.content}>
         <h1>Docs</h1>
         <h2 id="gameloop">Game Loop</h2>
-        <Code>
-{`// called once when the game starts
-function start() {}
-
-// called every frame
-function update() {}
-`}
-        </Code>
-        <h3>Examples</h3>
+        There are two built-in game loop functions, <code>start()</code> and
+        {' '}<code>update()</code>.<br /><br />
+        <code>start()</code> runs once at the start of the game.<br />
+        <code>update()</code> runs once a frame.
         <Code>
 {`let frames = 0;
 
 function start() {
-  console.log(frames); // 0
+  console.log(frames); // runs before update, logs 0
 }
 
 function update() {
