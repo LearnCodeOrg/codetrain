@@ -96,6 +96,17 @@ function update() {
   if (isKeyDown('d')) movePixels(1, 0);
 }`}
         </Code>
+        <h2 id="output">Output</h2>
+        <Code>
+{`say(text); // opens a closable dialogue box with given text`}
+        </Code>
+        <h3>Examples</h3>
+        <Code>
+{`// open dialogue box on start
+function start() {
+  say('Hello World!');
+}`}
+        </Code>
       </div>
     </div>
   )
