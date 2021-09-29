@@ -84,7 +84,8 @@ export default function Docs() {
       </Drawer>
       <div className={styles.content}>
         <h1>Docs</h1>
-        <h2 id="gameloop"><LoopIcon />Game Loop</h2>
+        <span id="gameloop" className={styles.bookmark} />
+        <h2><LoopIcon />Game Loop</h2>
         There are two built-in game loop functions, <code>start()</code> and
         {' '}<code>update()</code>.<br /><br />
         <code>start()</code> runs once at the start of the game.<br />
@@ -100,12 +101,14 @@ function update() {
   frames += 1;
 }`}
         </Code>
-        <h2 id="output"><TextsmsIcon />Output</h2>
+        <span id="output" className={styles.bookmark} />
+        <h2><TextsmsIcon />Output</h2>
         A dialogue box can be opened with <code>say(text)</code>.<br />
         <Code>
 {`say('Hello World!');`}
         </Code>
-        <h2 id="input"><KeyboardIcon />Input</h2>
+        <span id="input" className={styles.bookmark} />
+        <h2><KeyboardIcon />Input</h2>
         Keyboard input can be taken with <code>isKeyDown(key)</code> and{' '}
         <code>isKey(key)</code>.<br /><br />
         <code>isKeyDown(key)</code> returns whether given <code>key</code> is
@@ -119,7 +122,8 @@ function update() {
 }
 `}
         </Code>
-        <h2 id="movement"><DoubleArrowIcon />Movement</h2>
+        <span id="movement" className={styles.bookmark} />
+        <h2><DoubleArrowIcon />Movement</h2>
         Objects can be moved with <code>move(dir)</code>,
         {' '}<code>moveTiles(x, y)</code>, and <code>movePixels(x, y)</code>.
         <br /><br />
@@ -159,7 +163,8 @@ function update() {
 
 say(\`Object is at \${x}, \${y}\`);`}
         </Code>
-        <h2 id="tiles"><GridOnIcon />Tiles</h2>
+        <span id="tiles" className={styles.bookmark} />
+        <h2><GridOnIcon />Tiles</h2>
         Tiles can be retrieved with <code>getTile()</code> and
         {' '}<code>getTileAt(x, y, tile)</code>.<br /><br />
         <code>getTile()</code> returns index of tile at current position.<br />

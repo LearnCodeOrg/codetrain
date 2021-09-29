@@ -8,3 +8,8 @@
 .content > h1 {
   margin-top: 0;
 }
+
+.bookmark {
+  position: relative;
+  bottom: 60px;
+}
