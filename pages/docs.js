@@ -3,6 +3,11 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import LoopIcon from '@mui/icons-material/Loop';
+import TextsmsIcon from '@mui/icons-material/Textsms';
+import KeyboardIcon from '@mui/icons-material/Keyboard';
+import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
+import GridOnIcon from '@mui/icons-material/GridOn';
 
 import { useEffect } from 'react';
 import hljs from 'highlight.js/lib/core';
@@ -47,26 +52,31 @@ export default function Docs() {
         <List>
           <a href="#gameloop">
             <ListItem button>
+              <LoopIcon sx={{ marginRight: 2 }} />
               <ListItemText primary="Game Loop" />
-            </ListItem>
-          </a>
-          <a href="#input">
-            <ListItem button>
-              <ListItemText primary="Input" />
             </ListItem>
           </a>
           <a href="#output">
             <ListItem button>
+              <TextsmsIcon sx={{ marginRight: 2 }} />
               <ListItemText primary="Output" />
+            </ListItem>
+          </a>
+          <a href="#input">
+            <ListItem button>
+              <KeyboardIcon sx={{ marginRight: 2 }} />
+              <ListItemText primary="Input" />
             </ListItem>
           </a>
           <a href="#movement">
             <ListItem button>
+              <DoubleArrowIcon sx={{ marginRight: 2 }} />
               <ListItemText primary="Movement" />
             </ListItem>
           </a>
           <a href="#tiles">
             <ListItem button>
+              <GridOnIcon sx={{ marginRight: 2 }} />
               <ListItemText primary="Tiles" />
             </ListItem>
           </a>
@@ -74,7 +84,7 @@ export default function Docs() {
       </Drawer>
       <div className={styles.content}>
         <h1>Docs</h1>
-        <h2 id="gameloop">Game Loop</h2>
+        <h2 id="gameloop"><LoopIcon />Game Loop</h2>
         There are two built-in game loop functions, <code>start()</code> and
         {' '}<code>update()</code>.<br /><br />
         <code>start()</code> runs once at the start of the game.<br />
@@ -90,12 +100,12 @@ function update() {
   frames += 1;
 }`}
         </Code>
-        <h2 id="output">Output</h2>
+        <h2 id="output"><TextsmsIcon />Output</h2>
         A dialogue box can be opened with <code>say(text)</code>.<br />
         <Code>
 {`say('Hello World!');`}
         </Code>
-        <h2 id="input">Input</h2>
+        <h2 id="input"><KeyboardIcon />Input</h2>
         Keyboard input can be taken with <code>isKeyDown(key)</code> and{' '}
         <code>isKey(key)</code>.<br /><br />
         <code>isKeyDown(key)</code> returns whether given <code>key</code> is
@@ -109,7 +119,7 @@ function update() {
 }
 `}
         </Code>
-        <h2 id="movement">Movement</h2>
+        <h2 id="movement"><DoubleArrowIcon />Movement</h2>
         Objects can be moved with <code>move(dir)</code>,
         {' '}<code>moveTiles(x, y)</code>, and <code>movePixels(x, y)</code>.
         <br /><br />
@@ -149,7 +159,7 @@ function update() {
 
 say(\`Object is at \${x}, \${y}\`);`}
         </Code>
-        <h2 id="tiles">Tiles</h2>
+        <h2 id="tiles"><GridOnIcon />Tiles</h2>
         Tiles can be retrieved with <code>getTile()</code> and
         {' '}<code>getTileAt(x, y, tile)</code>.<br /><br />
         <code>getTile()</code> returns index of tile at current position.<br />
