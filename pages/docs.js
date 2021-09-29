@@ -124,39 +124,16 @@ function update() {
 }
 `}
         </Code>
-        <Code>
-{`// smooth object movement
-function update() {
-  if (isKeyDown('w')) movePixels(0, -1);
-  if (isKeyDown('a')) movePixels(-1, 0);
-  if (isKeyDown('s')) movePixels(0, 1);
-  if (isKeyDown('d')) movePixels(1, 0);
-}`}
-        </Code>
-        <h2 id="output">Output</h2>
-        <Code>
-{`say(text); // opens a closable dialogue box with given text`}
-        </Code>
-        <h3>Examples</h3>
-        <Code>
-{`// open dialogue box on start
-function start() {
-  say('Hello World!');
-}`}
-        </Code>
         <h2 id="movement">Movement</h2>
-        <Code>
-{`move(dir); // moves object one tile up, down, left, or right
-
-moveTiles(x, y); // moves object by x, y in tiles
-
-movePixels(x, y); // moves object by x, y in pixels
-
-getTilePosition(); // returns x, y position in tiles
-
-getPixelPosition(); // returns x, y position in pixels`}
-        </Code>
-        <h3>Examples</h3>
+        Objects can be moved with <code>move(dir)</code>,
+        {' '}<code>moveTiles(x, y)</code>, and <code>movePixels(x, y)</code>.
+        <br /><br />
+        <code>move(dir)</code> moves object one tile <code>up</code>,{' '}
+        <code>down</code>, <code>left</code>, or <code>right</code>.<br />
+        <code>moveTiles(x, y)</code> moves object by <code>x</code>,{' '}
+        <code>y</code>, in tiles.<br />
+        <code>movePixels(x, y)</code> moves object by <code>x</code>,{' '}
+        <code>y</code>, in pixels.
         <Code>
 {`// tiled object movement
 function update() {
@@ -176,7 +153,12 @@ function update() {
   if (isKeyDown('d')) movePixels(1, 0);
 }`}
         </Code>
-        <h2 id="tiles">Tiles</h2>
+        Object position can be found with <code>getTilePosition()</code> and
+        {' '}<code>getPixelPosition()</code>.<br /><br />
+        <code>getTilePosition()</code> returns <code>x</code>, <code>y</code>
+        {' '}position in tiles.<br />
+        <code>getPixelPosition()</code> returns <code>x</code>, <code>y</code>
+        {' '}position in pixels.
         <Code>
 {`getTile(); // returns index of tile at position
 
