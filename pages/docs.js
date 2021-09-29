@@ -105,14 +105,11 @@ function update() {
   frames += 1;
 }`}
         </Code>
-        <h2 id="input">Input</h2>
+        <h2 id="output">Output</h2>
+        A dialogue box can be opened with <code>say(text)</code>.<br />
         <Code>
-{`isKeyDown(key); // returns whether given key is pressed
-
-isKey(key); // returns whether given key was pressed in the last frame
-`}
+{`say('Hello World!');`}
         </Code>
-        <h3>Examples</h3>
         <Code>
 {`// tiled object movement
 function update() {
