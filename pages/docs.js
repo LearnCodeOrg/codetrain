@@ -166,6 +166,27 @@ function update() {
   if (isKey('d')) paint('right');
 }`}
         </Code>
+        <h2 id="utility">Utility</h2>
+        <Code>
+{`range(num); // returns an array containing numbers up to num
+
+sleep(sec); // returns a promise expiring in sec seconds`}
+        </Code>
+        <h3>Examples</h3>
+        <Code>
+{`// movement animation
+async function animate() {
+  await sleep(1);
+  move('right');
+  await sleep(1);
+  move('left');
+  animate();
+}
+
+function start() {
+  animate();
+}`}
+        </Code>
       </div>
     </div>
   )
