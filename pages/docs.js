@@ -187,6 +187,18 @@ function start() {
   animate();
 }`}
         </Code>
+        <h2 id="variables">Variables</h2>
+        <Code>
+{`colors // array of color data
+
+tiles // array of tile sprite data
+
+objects // array of object sprite data
+
+background // array of active tile indexes
+
+gameObjects // array of active objects`}
+        </Code>
       </div>
     </div>
   )
