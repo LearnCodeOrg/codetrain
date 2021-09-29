@@ -1,6 +1,7 @@
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 
 import { useEffect } from 'react';
@@ -86,7 +87,7 @@ export default function Docs() {
           </a>
         </List>
       </Drawer>
-      <div>
+      <div className={styles.content}>
         <h1>Docs</h1>
         <h2 id="gameloop">Game Loop</h2>
         <Code>

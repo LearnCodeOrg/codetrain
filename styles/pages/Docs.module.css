@@ -1,9 +1,10 @@
 .container {
-  height: calc(100% - 60px);
+  min-height: calc(100% - 60px);
   padding: 20px;
   background: #eaeef3;
+  display: flex;
 }
 
-.container > h1 {
-  margin: 0 0 10px 0;
+.content > h1 {
+  margin-top: 0;
 }
