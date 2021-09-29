@@ -8,6 +8,7 @@ import TextsmsIcon from '@mui/icons-material/Textsms';
 import KeyboardIcon from '@mui/icons-material/Keyboard';
 import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
 import GridOnIcon from '@mui/icons-material/GridOn';
+import LinkIcon from '@mui/icons-material/Link';
 
 import { useEffect } from 'react';
 import hljs from 'highlight.js/lib/core';
@@ -84,8 +85,15 @@ export default function Docs() {
       </Drawer>
       <div className={styles.content}>
         <h1>Docs</h1>
-        <span id="gameloop" className={styles.bookmark} />
-        <h2><LoopIcon />Game Loop</h2>
+        These docs provide an overview of the Codetrain engine functionality.
+        <div id="gameloop" className={styles.bookmark} />
+        <h2>
+          <LoopIcon />
+          Game Loop
+          <a href="#gameloop">
+            <LinkIcon />
+          </a>
+        </h2>
         There are two built-in game loop functions, <code>start()</code> and
         {' '}<code>update()</code>.<br /><br />
         <code>start()</code> runs once at the start of the game.<br />
@@ -101,14 +109,26 @@ function update() {
   frames += 1;
 }`}
         </Code>
-        <span id="output" className={styles.bookmark} />
-        <h2><TextsmsIcon />Output</h2>
+        <div id="output" className={styles.bookmark} />
+        <h2>
+          <TextsmsIcon />
+          Output
+          <a href="#output">
+            <LinkIcon />
+          </a>
+        </h2>
         A dialogue box can be opened with <code>say(text)</code>.<br />
         <Code>
 {`say('Hello World!');`}
         </Code>
-        <span id="input" className={styles.bookmark} />
-        <h2><KeyboardIcon />Input</h2>
+        <div id="input" className={styles.bookmark} />
+        <h2>
+          <KeyboardIcon />
+          Input
+          <a href="#input">
+            <LinkIcon />
+          </a>
+        </h2>
         Keyboard input can be taken with <code>isKeyDown(key)</code> and{' '}
         <code>isKey(key)</code>.<br /><br />
         <code>isKeyDown(key)</code> returns whether given <code>key</code> is
@@ -122,8 +142,14 @@ function update() {
 }
 `}
         </Code>
-        <span id="movement" className={styles.bookmark} />
-        <h2><DoubleArrowIcon />Movement</h2>
+        <div id="movement" className={styles.bookmark} />
+        <h2>
+          <DoubleArrowIcon />
+          Movement
+          <a href="#movement">
+            <LinkIcon />
+          </a>
+        </h2>
         Objects can be moved with <code>move(dir)</code>,
         {' '}<code>moveTiles(x, y)</code>, and <code>movePixels(x, y)</code>.
         <br /><br />
@@ -163,8 +189,14 @@ function update() {
 
 say(\`Object is at \${x}, \${y}\`);`}
         </Code>
-        <span id="tiles" className={styles.bookmark} />
-        <h2><GridOnIcon />Tiles</h2>
+        <div id="tiles" className={styles.bookmark} />
+        <h2>
+          <GridOnIcon />
+          Tiles
+          <a href="#tiles">
+            <LinkIcon />
+          </a>
+        </h2>
         Tiles can be retrieved with <code>getTile()</code> and
         {' '}<code>getTileAt(x, y, tile)</code>.<br /><br />
         <code>getTile()</code> returns index of tile at current position.<br />

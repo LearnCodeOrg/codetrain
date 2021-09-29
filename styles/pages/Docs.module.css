@@ -6,7 +6,7 @@
 }
 
 .content > h1 {
-  margin: 0 0 13px 0;
+  margin: 0 0 10px 0;
 }
 
 .content > h2 {
@@ -19,12 +19,28 @@
   margin-right: 2px;
 }
 
+.content > h2 > a {
+  display: flex;
+  margin-left: 5px;
+  color: #999;
+  opacity: 0;
+}
+
+.content > h2:hover > a {
+  opacity: 1;
+}
+
+.content > h2 > a:hover {
+  color: var(--blue0);
+}
+
 .content > pre {
   border-radius: 8px;
   overflow: hidden;
 }
 
 .bookmark {
+  display: flex;
   position: relative;
   bottom: 60px;
 }
