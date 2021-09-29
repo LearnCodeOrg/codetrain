@@ -69,6 +69,33 @@ function update() {
   frames += 1;
 }`}
         </Code>
+        <h2 id="input">Input</h2>
+        <Code>
+{`isKeyDown(key); // returns whether given key is pressed
+
+isKey(key); // returns whether given key was pressed in the last frame
+`}
+        </Code>
+        <h3>Examples</h3>
+        <Code>
+{`// tiled object movement
+function update() {
+  if (isKey('w')) move('up');
+  if (isKey('a')) move('left');
+  if (isKey('s')) move('down');
+  if (isKey('d')) move('right');
+}
+`}
+        </Code>
+        <Code>
+{`// smooth object movement
+function update() {
+  if (isKeyDown('w')) movePixels(0, -1);
+  if (isKeyDown('a')) movePixels(-1, 0);
+  if (isKeyDown('s')) movePixels(0, 1);
+  if (isKeyDown('d')) movePixels(1, 0);
+}`}
+        </Code>
       </div>
     </div>
   )
