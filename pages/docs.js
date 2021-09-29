@@ -44,6 +44,46 @@ export default function Docs() {
         anchor="left"
       >
         <List>
+          <a href="#gameloop">
+            <ListItem button>
+              <ListItemText primary="Game Loop" />
+            </ListItem>
+          </a>
+          <a href="#input">
+            <ListItem button>
+              <ListItemText primary="Input" />
+            </ListItem>
+          </a>
+          <a href="#output">
+            <ListItem button>
+              <ListItemText primary="Output" />
+            </ListItem>
+          </a>
+          <a href="#movement">
+            <ListItem button>
+              <ListItemText primary="Movement" />
+            </ListItem>
+          </a>
+          <a href="#tiles">
+            <ListItem button>
+              <ListItemText primary="Tiles" />
+            </ListItem>
+          </a>
+          <a href="#utility">
+            <ListItem button>
+              <ListItemText primary="Utility" />
+            </ListItem>
+          </a>
+          <a href="#variables">
+            <ListItem button>
+              <ListItemText primary="Variables" />
+            </ListItem>
+          </a>
+          <a href="#constants">
+            <ListItem button>
+              <ListItemText primary="Constants" />
+            </ListItem>
+          </a>
         </List>
       </Drawer>
       <div>
