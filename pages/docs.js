@@ -107,6 +107,38 @@ function start() {
   say('Hello World!');
 }`}
         </Code>
+        <h2 id="movement">Movement</h2>
+        <Code>
+{`move(dir); // moves object one tile up, down, left, or right
+
+moveTiles(x, y); // moves object by x, y in tiles
+
+movePixels(x, y); // moves object by x, y in pixels
+
+getTilePosition(); // returns x, y position in tiles
+
+getPixelPosition(); // returns x, y position in pixels`}
+        </Code>
+        <h3>Examples</h3>
+        <Code>
+{`// tiled object movement
+function update() {
+  if (isKey('w')) move('up');
+  if (isKey('a')) move('left');
+  if (isKey('s')) move('down');
+  if (isKey('d')) move('right');
+}
+`}
+        </Code>
+        <Code>
+{`// smooth object movement
+function update() {
+  if (isKeyDown('w')) movePixels(0, -1);
+  if (isKeyDown('a')) movePixels(-1, 0);
+  if (isKeyDown('s')) movePixels(0, 1);
+  if (isKeyDown('d')) movePixels(1, 0);
+}`}
+        </Code>
       </div>
     </div>
   )
