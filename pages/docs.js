@@ -223,17 +223,11 @@ function start() {
         <code>background</code> is the array of active tiles.<br />
         <code>gameObjects</code> is the array of active objects.
         <h2 id="constants">Constants</h2>
-        <Code>
-{`mapSize // map size in tiles
-
-mapPixels // map size in pixels
-
-spriteSize // sprite size in sprite pixels
-
-spritePixels // sprite size in pixels
-
-pixelPixels // sprite pixel size in pixels`}
-        </Code>
+        <code>mapSize</code> is the map size in tiles.<br />
+        <code>mapPixels</code> is the map size in pixels.<br />
+        <code>spriteSize</code> is the sprite size in sprite pixels.<br />
+        <code>spritePixels</code> is the sprite size in pixels.<br />
+        <code>pixelPixels</code> is the sprite pixel size in pixels.
       </div>
     </div>
   )
