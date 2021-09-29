@@ -190,12 +190,18 @@ else setTile(0);
 `}
         </Code>
         <h2 id="utility">Utility</h2>
+        <code>range(num)</code> returns an array containing numbers up to{' '}
+        <code>num</code>.
         <Code>
-{`range(num); // returns an array containing numbers up to num
-
-sleep(sec); // returns a promise expiring in sec seconds`}
+{`// set entire map to tile 0
+for (x in range(mapSize)) {
+  for (y in range(mapSize)) {
+    setTile(x, y, 0);
+  }
+}`}
         </Code>
-        <h3>Examples</h3>
+        <code>sleep(sec)</code> returns a promise expiring in <code>sec</code>
+        {' '}seconds.
         <Code>
 {`// movement animation
 async function animate() {
