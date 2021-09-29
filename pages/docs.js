@@ -3,6 +3,8 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
+import styles from '../styles/pages/Docs.module.css';
+
 function Section(props) {
   return (
     <Accordion>
@@ -18,7 +20,8 @@ function Section(props) {
 
 export default function Docs() {
   return (
-    <div>
+    <div className={styles.container}>
+      <h1>Docs</h1>
       <Section title="Game Loop">
         start(): runs once at the start of the game<br />
         update(): runs once a frame

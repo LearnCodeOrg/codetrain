@@ -1,0 +1,9 @@
+.container {
+  height: calc(100% - 60px);
+  padding: 20px;
+  background: #eaeef3;
+}
+
+.container > h1 {
+  margin: 0 0 10px 0;
+}
