@@ -217,17 +217,11 @@ function start() {
 }`}
         </Code>
         <h2 id="variables">Variables</h2>
-        <Code>
-{`colors // array of color data
-
-tiles // array of tile sprite data
-
-objects // array of object sprite data
-
-background // array of active tile indexes
-
-gameObjects // array of active objects`}
-        </Code>
+        <code>colors</code> is the array of color data.<br />
+        <code>tiles</code> is the array of tile sprite data.<br />
+        <code>objects</code> is the array of object sprite data.<br />
+        <code>background</code> is the array of active tiles.<br />
+        <code>gameObjects</code> is the array of active objects.
         <h2 id="constants">Constants</h2>
         <Code>
 {`mapSize // map size in tiles
