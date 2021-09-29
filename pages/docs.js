@@ -46,6 +46,30 @@ export default function Docs() {
         <List>
         </List>
       </Drawer>
+      <div>
+        <h1>Docs</h1>
+        <h2 id="gameloop">Game Loop</h2>
+        <Code>
+{`// called once when the game starts
+function start() {}
+
+// called every frame
+function update() {}
+`}
+        </Code>
+        <h3>Examples</h3>
+        <Code>
+{`let frames = 0;
+
+function start() {
+  console.log(frames); // 0
+}
+
+function update() {
+  frames += 1;
+}`}
+        </Code>
+      </div>
     </div>
   )
 }
