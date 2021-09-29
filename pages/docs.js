@@ -160,30 +160,34 @@ function update() {
         <code>getPixelPosition()</code> returns <code>x</code>, <code>y</code>
         {' '}position in pixels.
         <Code>
-{`getTile(); // returns index of tile at position
+{`const pos = getTilePosition();
 
-setTile(tile); // sets tile at position to index tile
-
-getTileAt(x, y); // returns index of tile at x, y
-
-setTileAt(x, y, tile); // sets tile at x, y to index tile`}
+say(\`Object is at \${x}, \${y}\`);`}
         </Code>
-        <h3>Examples</h3>
+        <h2 id="tiles">Tiles</h2>
+        Tiles can be retrieved with <code>getTile()</code> and
+        {' '}<code>getTileAt(x, y, tile)</code>.<br /><br />
+        <code>getTile()</code> returns index of tile at current position.<br />
+        <code>getTileAt(x, y)</code> returns index of tile at <code>x</code>,
+        {' '}<code>y</code>.
         <Code>
-{`// movement painting
-function paint(dir) {
-  const tile = getTile();
-  if (tile === tiles.length - 1) setTile(0);
-  else setTile(tile + 1);
-  move(dir);
-}
+{`const tile = getTile();
 
-function update() {
-  if (isKey('w')) paint('up');
-  if (isKey('a')) paint('left');
-  if (isKey('s')) paint('down');
-  if (isKey('d')) paint('right');
-}`}
+say(\`Object is on tile \${tile}\`);
+`}
+        </Code>
+        Tiles can be modified with <code>setTile(tile)</code> and
+        {' '}<code>setTileAt(x, y, tile)</code>.<br /><br />
+        <code>setTile(tile)</code> returns index of tile at current position.<br />
+        <code>setTileAt(x, y, tile)</code> sets tile at <code>x</code>,
+        {' '}<code>y</code> to index <code>tile</code>.
+        <Code>
+{`const tile = getTile();
+
+// toggle tile at position
+if (tile === 0) setTile(1);
+else setTile(0);
+`}
         </Code>
         <h2 id="utility">Utility</h2>
         <Code>
