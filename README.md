@@ -12,13 +12,13 @@ Try it here: [codetrain.org](https://codetrain.org)
 
 ## Input
 
-`isKeyDown(key)`: returns whether given `key` is pressed
+`isKeyDown(key)`: returns whether given `key` is down
 
 `isKey(key)`: returns whether given `key` was pressed in the last frame
 
 ## Output
 
-`say(text)`: opens a dialogue box with given `text` closable with left click
+`say(text)`: opens dialogue box with given `text`
 
 ## Movement
 
@@ -28,9 +28,9 @@ Try it here: [codetrain.org](https://codetrain.org)
 
 `movePixels(x, y)`: moves object by `x`, `y` in pixels
 
-`getTilePosition()`: returns an object containing `x`, `y` position in tiles
+`getTilePosition()`: returns `x`, `y` position in tiles
 
-`getPixelPosition()`: returns an object containing `x`, `y` position in pixels
+`getPixelPosition()`: returns `x`, `y` position in pixels
 
 ## Tiles
 
