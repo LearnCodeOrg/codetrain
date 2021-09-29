@@ -199,6 +199,18 @@ background // array of active tile indexes
 
 gameObjects // array of active objects`}
         </Code>
+        <h2 id="constants">Constants</h2>
+        <Code>
+{`mapSize // map size in tiles
+
+mapPixels // map size in pixels
+
+spriteSize // sprite size in sprite pixels
+
+spritePixels // sprite size in pixels
+
+pixelPixels // sprite pixel size in pixels`}
+        </Code>
       </div>
     </div>
   )
