@@ -110,13 +110,17 @@ function update() {
         <Code>
 {`say('Hello World!');`}
         </Code>
+        <h2 id="input">Input</h2>
+        Keyboard input can be taken with <code>isKeyDown(key)</code> and{' '}
+        <code>isKey(key)</code>.<br /><br />
+        <code>isKeyDown(key)</code> returns whether given <code>key</code> is
+        {' '}down.<br />
+        <code>isKey(key)</code> returns whether given <code>key</code> was
+        {' '}pressed in the last frame.
         <Code>
-{`// tiled object movement
-function update() {
-  if (isKey('w')) move('up');
-  if (isKey('a')) move('left');
-  if (isKey('s')) move('down');
-  if (isKey('d')) move('right');
+{`function update() {
+  if (isKey('q')) say('Q pressed'); // triggers once
+  if (isKeyDown('q')) console.log('Q down'); // triggers continually
 }
 `}
         </Code>
