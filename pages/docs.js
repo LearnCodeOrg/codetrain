@@ -10,6 +10,16 @@ import 'highlight.js/styles/github.css';
 
 import styles from '../styles/pages/Docs.module.css';
 
+function Code(props) {
+  return (
+    <pre>
+      <code className="language-javascript">
+        {props.children}
+      </code>
+    </pre>
+  );
+}
+
 export default function Docs() {
   // initialize hljs on start
   useEffect(() => {
