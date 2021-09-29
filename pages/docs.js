@@ -70,21 +70,6 @@ export default function Docs() {
               <ListItemText primary="Tiles" />
             </ListItem>
           </a>
-          <a href="#utility">
-            <ListItem button>
-              <ListItemText primary="Utility" />
-            </ListItem>
-          </a>
-          <a href="#variables">
-            <ListItem button>
-              <ListItemText primary="Variables" />
-            </ListItem>
-          </a>
-          <a href="#constants">
-            <ListItem button>
-              <ListItemText primary="Constants" />
-            </ListItem>
-          </a>
         </List>
       </Drawer>
       <div className={styles.content}>
@@ -189,45 +174,6 @@ if (tile === 0) setTile(1);
 else setTile(0);
 `}
         </Code>
-        <h2 id="utility">Utility</h2>
-        <code>range(num)</code> returns an array containing numbers up to{' '}
-        <code>num</code>.
-        <Code>
-{`// set entire map to tile 0
-for (x in range(mapSize)) {
-  for (y in range(mapSize)) {
-    setTile(x, y, 0);
-  }
-}`}
-        </Code>
-        <code>sleep(sec)</code> returns a promise expiring in <code>sec</code>
-        {' '}seconds.
-        <Code>
-{`// movement animation
-async function animate() {
-  await sleep(1);
-  move('right');
-  await sleep(1);
-  move('left');
-  animate();
-}
-
-function start() {
-  animate();
-}`}
-        </Code>
-        <h2 id="variables">Variables</h2>
-        <code>colors</code> is the array of color data.<br />
-        <code>tiles</code> is the array of tile sprite data.<br />
-        <code>objects</code> is the array of object sprite data.<br />
-        <code>background</code> is the array of active tiles.<br />
-        <code>gameObjects</code> is the array of active objects.
-        <h2 id="constants">Constants</h2>
-        <code>mapSize</code> is the map size in tiles.<br />
-        <code>mapPixels</code> is the map size in pixels.<br />
-        <code>spriteSize</code> is the sprite size in sprite pixels.<br />
-        <code>spritePixels</code> is the sprite size in pixels.<br />
-        <code>pixelPixels</code> is the sprite pixel size in pixels.
       </div>
     </div>
   )
