@@ -1,5 +1,4 @@
 import GameEditor from './GameEditor.js';
-import Guide from './Guide.js';
 import Colors from './Colors.js';
 import Tiles from './Tiles.js';
 import Objects from './Objects.js';

@@ -70,12 +70,6 @@ export default function GameFrame(props) {
     let lastPressedKeys = {};
     const pressedKeys = {};
     // sprite functions
-    function sleep(sec) {
-      return new Promise(resolve => setTimeout(resolve, sec * 1000));
-    }
-    function range(num) {
-      return [...Array(num).keys()];
-    }
     function __move__(index, dir) {
       if (dir === 'up') gameObjects[index].y -= spritePixels;
       else if (dir === 'down') gameObjects[index].y += spritePixels;

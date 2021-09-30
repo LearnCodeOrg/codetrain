@@ -2,7 +2,7 @@
   height: 60px;
   width: 100%;
   position: fixed;
-  background: var(--gray0);
+  background: var(--white);
   z-index: 10;
   display: flex;
   align-items: center;
