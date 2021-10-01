@@ -14,6 +14,11 @@ export default function Index() {
           <Image src="/logo.png" height="48" width="48" alt="logo" />
           <h1>Codetrain</h1>
         </div>
+        <div className={styles.links}>
+          <a href="/create">Create</a> {/* eslint-disable-line @next/next/no-html-link-for-pages */}
+          <a href="/explore">Explore</a> {/* eslint-disable-line @next/next/no-html-link-for-pages */}
+          <a href="/docs">Docs</a> {/* eslint-disable-line @next/next/no-html-link-for-pages */}
+        </div>
         {
           firebase.auth().currentUser ?
           <button onClick={() => firebase.auth().signOut()}>

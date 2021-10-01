@@ -56,6 +56,14 @@
   margin: 20px;
 }
 
+.links {
+  margin: 0 0 20px 0;
+}
+
+.links > a {
+  margin: 10px;
+}
+
 .footer {
   background: var(--gray2);
   width: 100%;
