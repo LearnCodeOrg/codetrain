@@ -1,8 +1,8 @@
 .container {
   min-height: calc(100% - 60px);
   display: flex;
-  justify-content: center;
-  padding: 20px 0;
+  flex-direction: column;
+  align-items: center;
   background: var(--gray);
 }
 
@@ -11,6 +11,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 40px 0;
 }
 
 .center a {
@@ -54,4 +55,17 @@
 .accordion {
   margin: 20px;
 }
+
+.footer {
+  background: var(--gray2);
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: pre;
+}
+
+.footer > a:hover {
+  text-decoration: underline;
 }

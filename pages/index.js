@@ -46,6 +46,12 @@ export default function Index() {
           </Accordion>
         </div>
       </div>
+      <div className="flexfill" />
+      <div className={styles.footer}>
+        &copy;{' '}
+        <a href="https://codeconvoy.org">CodeConvoy</a>
+        {' ' + new Date().getFullYear()}
+      </div>
     </div>
   );
 }
