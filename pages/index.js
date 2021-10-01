@@ -14,6 +14,15 @@ export default function Index() {
           <Image src="/logo.png" height="48" width="48" alt="logo" />
           <h1>Codetrain</h1>
         </div>
+        {
+          firebase.auth().currentUser ?
+          <button onClick={() => firebase.auth().signOut()}>
+            Sign Out
+          </button> :
+          <button onClick={signInWithGoogle}>
+            Sign In
+          </button>
+        }
         <div className={styles.accordion}>
           <Accordion title="What is Codetrain?">
             Codetrain is a retro game engine in the browser.

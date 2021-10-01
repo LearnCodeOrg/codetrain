@@ -1,13 +1,16 @@
 .container {
   min-height: calc(100% - 60px);
   display: flex;
-  align-items: center;
   justify-content: center;
   padding: 20px 0;
+  background: var(--gray);
 }
 
 .center {
   max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .center a {
@@ -34,7 +37,21 @@
   margin-right: 5px!important;
 }
 
-.button {
-  display: flex;
-  justify-content: center;
+.center > button {
+  padding: 10px 20px;
+  background: var(--white);
+  border-radius: 8px;
+  border: 2px solid #dadee3;
+  transition: 0.25s;
+}
+
+.center > button:hover {
+  background: var(--blue0);
+  border: 2px solid var(--purple);
+  color: var(--white);
+}
+
+.accordion {
+  margin: 20px;
+}
 }
