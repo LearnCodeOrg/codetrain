@@ -18,7 +18,7 @@ button, label, input[type='checkbox'] {
   cursor: pointer;
 }
 
-.SnackbarItem-message {
+button, .SnackbarItem-message, .MuiPaper-root * {
   font-family: 'Lato', sans-serif;
 }
 
@@ -48,6 +48,11 @@ button, label, input[type='checkbox'] {
 }
 
 :root {
-  --gray0: #efefef;
+  --white: #ffffff;
   --blue0: #2196f3;
+  --gray: #f6f6f6;
+  --gray1: #efefef;
+  --gray2: #d0d0d0;
+  --purple: #3f51b5;
+  --black: #222222;
 }

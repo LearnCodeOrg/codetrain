@@ -27,7 +27,7 @@
 .tools {
   display: flex;
   align-items: center;
-  background: var(--gray0);
+  background: var(--darkgray);
   padding: 0 5px;
   height: 40px;
 }
