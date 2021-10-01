@@ -1,5 +1,6 @@
 import Loading from '../components/Loading.js';
 import Project from '../components/cards/Project.js';
+import ExploreIcon from '@mui/icons-material/Explore';
 
 import { useEffect, useState } from 'react';
 import firebase from 'firebase/app';
@@ -24,12 +25,15 @@ export default function Explore() {
   if (!projects) return <Loading />;
 
   return (
-    <div className={styles.projects}>
-      {
-        projects.map(project =>
-          <Project {...project} key={project.id} />
-        )
-      }
+    <div className={styles.container}>
+      <h1><ExploreIcon fontSize="large" />Explore</h1>
+      <div className={styles.projects}>
+        {
+          projects.map(project =>
+            <Project {...project} key={project.id} />
+          )
+        }
+      </div>
     </div>
   );
 }
