@@ -3,6 +3,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import DescriptionIcon from '@mui/icons-material/Description';
 import LoopIcon from '@mui/icons-material/Loop';
 import TextsmsIcon from '@mui/icons-material/Textsms';
 import KeyboardIcon from '@mui/icons-material/Keyboard';
@@ -84,8 +85,9 @@ export default function Docs() {
         </List>
       </Drawer>
       <div className={styles.content}>
-        <h1>Docs</h1>
+        <h1><DescriptionIcon fontSize="large" />Docs</h1>
         These docs provide an overview of the Codetrain engine functionality.
+        <hr />
         <div id="gameloop" className={styles.bookmark} />
         <h2>
           <LoopIcon />
@@ -109,6 +111,7 @@ function update() {
   frames += 1;
 }`}
         </Code>
+        <hr />
         <div id="output" className={styles.bookmark} />
         <h2>
           <TextsmsIcon />
@@ -121,6 +124,7 @@ function update() {
         <Code>
 {`say('Hello World!');`}
         </Code>
+        <hr />
         <div id="input" className={styles.bookmark} />
         <h2>
           <KeyboardIcon />
@@ -142,6 +146,7 @@ function update() {
 }
 `}
         </Code>
+        <hr />
         <div id="movement" className={styles.bookmark} />
         <h2>
           <DoubleArrowIcon />
@@ -189,6 +194,7 @@ function update() {
 
 say(\`Object is at \${x}, \${y}\`);`}
         </Code>
+        <hr />
         <div id="tiles" className={styles.bookmark} />
         <h2>
           <GridOnIcon />
