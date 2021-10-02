@@ -28,6 +28,10 @@ export default function Index() {
             Sign In
           </button>
         }
+        <h2>Codetrain makes game development easier than ever.</h2>
+        <p>No downloads, no dependencies: <b>create games right from your browser.</b><br />
+        Easily export to HTML for portability. Explore and remix projects from
+        the community.</p>
         <div className={styles.accordion}>
           <Accordion title="What is Codetrain?">
             Codetrain is a retro game engine in the browser.

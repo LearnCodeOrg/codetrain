@@ -11,7 +11,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 40px 0;
+  padding: 40px 0 0 0;
 }
 
 .center a {
@@ -21,6 +21,15 @@
 .center a:hover {
   color: var(--purple);
   text-decoration: underline;
+}
+
+.center > h2 {
+  margin: 20px 0 15px 0;
+}
+
+.center > p {
+  text-align: center;
+  line-height: 30px;
 }
 
 .title {
@@ -54,6 +63,7 @@
 
 .accordion {
   margin: 20px;
+  line-height: 30px;
 }
 
 .links {
@@ -65,7 +75,8 @@
 }
 
 .footer {
-  background: var(--gray2);
+  background: var(--gray1);
+  box-shadow: 0 0 5px #333;
   width: 100%;
   height: 60px;
   display: flex;
