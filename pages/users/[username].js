@@ -7,6 +7,8 @@ import { useRouter } from 'next/router';
 
 import styles from '../../styles/pages/User.module.css';
 
+const maxProjects = 16;
+
 export default function User() {
   const [userData, setUserData] = useState(undefined);
   const [projects, setProjects] = useState(undefined);
@@ -31,7 +33,8 @@ export default function User() {
     else {
       const data = { id: userDocs[0].id, ...userDocs[0].data() };
       setUserData(data);
-      const projectsQuery = projectsRef.where('uid', '==', data.id);
+      const projectsQuery = projectsRef.where('uid', '==', data.id)
+      .orderBy('modified', 'desc').limit(maxProjects);
       const projectDocs = (await projectsQuery.get()).docs;
       setProjects(projectDocs.map(doc => ({ id: doc.id, ...doc.data() })));
     }

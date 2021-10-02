@@ -108,7 +108,8 @@ export default function GameEditor(props) {
       codes, colors, background,
       gameObjects: removeObjectUnits(gameObjects),
       tiles: JSON.stringify(tiles),
-      objects: JSON.stringify(objects)
+      objects: JSON.stringify(objects),
+      modified: new Date().getTime()
     };
     // if own project and existing, save
     if (props.creator && uid === props.creator && projectId) {
@@ -117,7 +118,9 @@ export default function GameEditor(props) {
       enqueueSnackbar('Saved successfully.', { variant: 'success' });
     // if no existing project, publish new project
     } else {
-      const docRef = await projectsRef.add(projectObj);
+      const docRef = await projectsRef.add({
+        created: new Date().getTime(), ...projectObj
+      });
       Router.push(`/projects/${docRef.id}`);
     }
   }
