@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import Loading from '../../components/Loading.js';
 import GameFrame from '../../components/GameFrame.js';
 
@@ -48,7 +49,9 @@ export default function Project() {
         <h1>{data.title}</h1>
         <p className={styles.description}>{data.description}</p>
         <p className={styles.editlink}>
-          <a href={`/edit/${id}`} className="link">Edit</a>
+          <Link href={`/edit/${id}`}>
+            <a className="link">Edit</a>
+          </Link>
         </p>
         <GameFrame
           mapPixels={mapPixels}

@@ -121,6 +121,7 @@ export default function GameEditor(props) {
       const docRef = await projectsRef.add({
         created: new Date().getTime(), ...projectObj
       });
+      editorDirty = false;
       Router.push(`/projects/${docRef.id}`);
     }
   }

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import Loading from '../components/Loading.js';
 import Challenge from '../components/cards/Challenge.js';
 
@@ -32,7 +33,9 @@ export default function Learn(props) {
           )
         }
       </div>
-      <a href="/next" className="link">What&apos;s next?</a> {/* eslint-disable-line @next/next/no-html-link-for-pages */}
+      <Link href="/next">
+        <a className="link">What&apos;s next?</a>
+      </Link>
     </div>
   );
 }
