@@ -1,3 +1,4 @@
+import Header from '../components/Header';
 import Link from 'next/link';
 import Image from 'next/image';
 import Accordion from '../components/Accordion';
@@ -10,6 +11,7 @@ import styles from '../styles/pages/Index.module.css';
 export default function Index() {
   return (
     <div className={styles.container}>
+      <Header />
       <div className={styles.center}>
         <div className={styles.title}>
           <Image src="/logo.png" height="48" width="48" alt="logo" />

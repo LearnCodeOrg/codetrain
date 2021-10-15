@@ -1,3 +1,4 @@
+import Header from '../components/Header';
 import Engine from '../components/engine/Engine.js';
 
 import { useState } from 'react';
@@ -39,9 +40,12 @@ export default function Create(props) {
   };
 
   return (
-    <Engine
-      tileCount={tileCount} objectCount={objectCount} spriteSize={spriteSize}
-      data={data} {...props}
-    />
+    <>
+      <Header />
+      <Engine
+        tileCount={tileCount} objectCount={objectCount} spriteSize={spriteSize}
+        data={data} {...props}
+      />
+    </>
   );
 }

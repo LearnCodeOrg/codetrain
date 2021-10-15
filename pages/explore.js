@@ -1,3 +1,4 @@
+import Header from '../components/Header';
 import Loading from '../components/Loading.js';
 import Project from '../components/cards/Project.js';
 import ExploreIcon from '@mui/icons-material/Explore';
@@ -30,6 +31,7 @@ export default function Explore() {
 
   return (
     <div className={styles.container}>
+      <Header />
       <h1><ExploreIcon fontSize="large" />Explore</h1>
       <div className={styles.projects}>
         {
