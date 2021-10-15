@@ -3,15 +3,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: var(--gray0);
 }
 
 .center {
-  max-width: 600px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 40px 0 0 0;
 }
 
 .center a {
@@ -47,6 +44,11 @@
   margin-right: 5px!important;
 }
 
+.divider > div {
+  background: var(--main0);
+  height: 60px;
+}
+
 .divider > svg {
   position: relative;
   display: block;
@@ -55,7 +57,7 @@
 }
 
 .divider > svg > path {
-  fill: #000;
+  fill: var(--main0);
 }
 
 .center > button {
