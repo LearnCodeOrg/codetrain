@@ -47,6 +47,9 @@ export default function Docs() {
             '& .MuiDrawer-paper': {
               width: 256,
               boxSizing: 'border-box',
+              background: 'var(--main0)',
+              borderRight: '2px solid var(--gray)',
+              color: 'var(--gray)',
               top: 60,
               zIndex: 0
             }
