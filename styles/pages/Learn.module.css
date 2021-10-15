@@ -1,9 +1,0 @@
-.challenges {
-  display: flex;
-  margin: 10px;
-  flex-wrap: wrap;
-}
-
-.container > a {
-  margin: 0 20px;
-}
