@@ -3,14 +3,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: var(--main0);
 }
 
 .center {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: var(--main0);
   color: var(--gray1);
+  text-align: center;
 }
 
 .logo {
@@ -32,12 +33,12 @@
 }
 
 .center > h2 {
-  margin: 20px 0 15px 0;
+  margin: 20px 40px 15px 40px;
 }
 
 .center > p {
-  text-align: center;
   line-height: 30px;
+  margin: 5px 40px 20px 40px;
 }
 
 .title {
@@ -85,9 +86,11 @@
 }
 
 .footer {
-  background: var(--gray1);
-  box-shadow: 0 0 5px #333;
-  width: 100%;
+  background: var(--main0);
+  color: var(--main1);
+  width: calc(100% - 80px);
+  max-width: 800px;
+  border-top: 2px solid var(--main1);
   height: 60px;
   display: flex;
   align-items: center;
