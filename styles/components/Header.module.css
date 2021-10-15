@@ -3,11 +3,12 @@
   width: 100%;
   position: sticky;
   top: 0;
-  background: var(--gray1);
+  background: var(--main0);
   z-index: 10;
   display: flex;
   align-items: center;
-  box-shadow: 0 0 5px #333;
+  border-bottom: 2px solid var(--main1);
+  color: var(--gray1);
 }
 
 .icon {
@@ -17,11 +18,10 @@
 
 .link {
   margin: 0 10px;
-  color: #666;
 }
 
 .link:hover {
-  color: var(--blue0);
+  color: var(--blue);
 }
 
 .container > button {
