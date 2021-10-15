@@ -3,7 +3,7 @@
   margin: 10px;
   width: 168px;
   padding: 20px;
-  box-shadow: 0 0 2px #999;
+  border-radius: 8px;
 }
 
 .container > a:hover {

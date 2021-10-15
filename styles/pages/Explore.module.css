@@ -1,8 +1,14 @@
+.container {
+  background: var(--main0);
+  min-height: 100%;
+}
+
 .container > h1 {
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 20px 0 0 0;
+  color: var(--gray);
 }
 
 .container > h1 > svg {
