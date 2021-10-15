@@ -12,7 +12,7 @@
 }
 
 .center a {
-  color: var(--blue0);
+  color: var(--blue);
 }
 
 .center a:hover {
@@ -69,7 +69,7 @@
 }
 
 .center > button:hover {
-  background: var(--blue0);
+  background: var(--blue);
   border: 2px solid var(--purple);
   color: var(--white);
 }
