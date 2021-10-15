@@ -50,9 +50,7 @@ button, .SnackbarItem-message, .MuiPaper-root * {
 :root {
   --white: #ffffff;
   --blue: #2196f3;
-  --gray0: #f6f6f6;
-  --gray1: #efefef;
-  --gray2: #dadada;
+  --gray: #efefef;
   --purple: #3f51b5;
 
   --main0: #1a1a1d;
