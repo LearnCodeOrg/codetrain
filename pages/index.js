@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import Image from 'next/image';
 import Accordion from '../components/Accordion';
 
@@ -15,9 +16,15 @@ export default function Index() {
           <h1>Codetrain</h1>
         </div>
         <div className={styles.links}>
-          <a href="/create">Create</a> {/* eslint-disable-line @next/next/no-html-link-for-pages */}
-          <a href="/explore">Explore</a> {/* eslint-disable-line @next/next/no-html-link-for-pages */}
-          <a href="/docs">Docs</a> {/* eslint-disable-line @next/next/no-html-link-for-pages */}
+          <Link href="/create">
+            <a>Create</a>
+          </Link>
+          <Link href="/explore">
+            <a>Explore</a>
+          </Link>
+          <Link href="/docs">
+            <a>Docs</a>
+          </Link>
         </div>
         {
           firebase.auth().currentUser ?
@@ -42,8 +49,14 @@ export default function Index() {
             constrained environment, Codetrain provides a platform for you.
           </Accordion>
           <Accordion title="How can I get started?">
-            Check out our <a href="/docs">docs</a> or jump straight into the {/* eslint-disable-line @next/next/no-html-link-for-pages */}
-            {' '}<a href="/create">engine</a>. {/* eslint-disable-line @next/next/no-html-link-for-pages */}
+            Check out our{' '}
+            <Link href="/docs">
+              <a>docs</a>
+            </Link>
+            {' '}or jump straight into the{' '}
+            <Link href="/create">
+              <a>engine</a>
+            </Link>.
           </Accordion>
           <Accordion title="Can I contribute?">
             Codetrain is open source. Want to contribute? Find our GitHub
