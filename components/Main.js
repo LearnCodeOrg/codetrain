@@ -1,5 +1,3 @@
-import Header from './Header.js';
-
 import firebase from 'firebase/app';
 import { useEffect, useState } from 'react';
 import { useDocument } from 'react-firebase-hooks/firestore';
@@ -16,12 +14,7 @@ function MainAuthed(props) {
   const username = userDoc === undefined ? undefined :
   userDoc.exists ? userDoc.data().username : null;
 
-  return (
-    <>
-      <Header username={username} />
-      <Component username={username} {...pageProps} />
-    </>
-  );
+  return <Component username={username} {...pageProps} />;
 }
 
 export default function Main(props) {
@@ -40,9 +33,6 @@ export default function Main(props) {
   return (
     authed ?
     <MainAuthed {...props} /> :
-    <>
-      <Header />
-      <Component {...pageProps} />
-    </>
+    <Component {...pageProps} />
   );
 }
