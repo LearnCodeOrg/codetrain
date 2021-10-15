@@ -19,10 +19,13 @@ export default function Index() {
             <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" />
           </svg>
         </div>
-        <div className={styles.title}>
-          <Image src="/logo.png" height="48" width="48" alt="logo" />
-          <h1>Codetrain</h1>
+        <div className={styles.logo}>
+          <Image src="/logo.png" height="96" width="96" alt="logo" />
         </div>
+        <h2>Codetrain makes game development easier than ever.</h2>
+        <p>No downloads, no dependencies: <b>create games right from your browser.</b><br />
+        Easily export to HTML for portability. Explore and remix projects from
+        the community.</p>
         <div className={styles.links}>
           <Link href="/create">
             <a>Create</a>
@@ -34,19 +37,6 @@ export default function Index() {
             <a>Docs</a>
           </Link>
         </div>
-        {
-          firebase.auth().currentUser ?
-          <button onClick={() => firebase.auth().signOut()}>
-            Sign Out
-          </button> :
-          <button onClick={signInWithGoogle}>
-            Sign In
-          </button>
-        }
-        <h2>Codetrain makes game development easier than ever.</h2>
-        <p>No downloads, no dependencies: <b>create games right from your browser.</b><br />
-        Easily export to HTML for portability. Explore and remix projects from
-        the community.</p>
         <div className={styles.accordion}>
           <Accordion title="What is Codetrain?">
             Codetrain is a retro game engine in the browser.
