@@ -3,11 +3,11 @@
   width: 100%;
   position: sticky;
   top: 0;
-  background: var(--main0);
+  background: var(--main2);
   z-index: 10;
   display: flex;
   align-items: center;
-  border-bottom: 2px solid var(--main1);
+  border-bottom: 2px solid var(--gray1);
   color: var(--gray1);
 }
 
@@ -26,4 +26,9 @@
 
 .container > button {
   margin-right: 10px;
+  color: var(--gray1);
+}
+
+.container > button:hover {
+  color: var(--blue);
 }

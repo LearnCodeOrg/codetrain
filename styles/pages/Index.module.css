@@ -75,6 +75,8 @@
 .accordion {
   margin: 20px;
   line-height: 30px;
+  width: calc(100% - 80px);
+  max-width: 800px;
 }
 
 .links {
