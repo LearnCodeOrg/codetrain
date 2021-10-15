@@ -47,6 +47,17 @@
   margin-right: 5px!important;
 }
 
+.divider > svg {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 150px;
+}
+
+.divider > svg > path {
+  fill: #000;
+}
+
 .center > button {
   padding: 10px 20px;
   background: var(--white);
