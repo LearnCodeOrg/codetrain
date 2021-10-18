@@ -47,7 +47,7 @@
 }
 
 .content > h2 > a:hover {
-  color: var(--blue);
+  color: var(--main4);
 }
 
 .content > pre {

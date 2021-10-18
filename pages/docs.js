@@ -52,6 +52,9 @@ export default function Docs() {
               color: 'var(--gray)',
               top: 60,
               zIndex: 0
+            },
+            '& .MuiDrawer-paper > ul > a:hover': {
+              color: 'var(--main4)'
             }
           }}
           variant="permanent"

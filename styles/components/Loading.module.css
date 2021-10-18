@@ -1,6 +1,11 @@
 .container {
-  height: calc(100% - 60px);
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: var(--main0);
+}
+
+.container > span {
+  color: var(--main4);
 }

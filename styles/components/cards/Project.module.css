@@ -1,5 +1,5 @@
 .container {
-  background: var(--gray);
+  background: var(--white);
   margin: 10px;
   width: 168px;
   padding: 20px;
@@ -7,7 +7,7 @@
 }
 
 .container > a:hover {
-  color: var(--blue);
+  color: var(--main4);
   text-decoration: underline;
 }
 
