@@ -21,7 +21,7 @@ export default function Header(props) {
   return (
     <div className={styles.container}>
       <a href="/" className={styles.icon}> {/* eslint-disable-line @next/next/no-html-link-for-pages */}
-        <Image src="/logo.png" height="48" width="48" alt="logo" />
+        <Image src="/img/logo.png" height="48" width="48" alt="logo" />
       </a>
       <h1>Codetrain</h1>
       <span className="flexfill" />

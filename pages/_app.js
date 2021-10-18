@@ -12,7 +12,7 @@ import '../styles/globals.css';
 // meta
 const title = "Codetrain";
 const description = "A retro game engine in the browser.";
-const image = "https://codetrain.org/cover.png";
+const image = "https://codetrain.org/img/cover.png";
 
 // initialize firebase
 if (!firebase.apps.length) {
