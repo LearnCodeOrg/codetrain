@@ -3,27 +3,12 @@
   width: 100%;
   position: sticky;
   top: 0;
-  background: var(--main0);
+  background: var(--primary);
   z-index: 1;
   display: flex;
   align-items: center;
-  box-shadow: 0 2px var(--gray);
-  color: var(--gray);
-}
-
-.container.inverted {
-  background: var(--gray);
-  color: var(--main0);
-  border-bottom: 0;
   box-shadow: 0 0 4px #333;
-}
-
-.container.inverted .link, .container.inverted > button {
-  color: #666;
-}
-
-.container.inverted .link:hover, .container.inverted > button:hover {
-  color: var(--blue);
+  color: var(--black);
 }
 
 .icon {
@@ -33,17 +18,18 @@
 
 .link {
   margin: 0 10px;
+  color: #666;
 }
 
 .link:hover {
-  color: var(--main4);
+  color: var(--highlight);
 }
 
 .container > button {
   margin-right: 10px;
-  color: var(--gray);
+  color: #666;
 }
 
 .container > button:hover {
-  color: var(--main4);
+  color: var(--highlight);
 }
