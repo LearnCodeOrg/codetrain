@@ -1,4 +1,10 @@
-# <img src="https://user-images.githubusercontent.com/27871609/137680977-9d8e47db-356f-41cf-9142-216808e5fd4f.png" height="48px"> Codetrain
+# Codetrain
+
+<p>
+  <a href="https://codetrain.org">
+    <img src="https://user-images.githubusercontent.com/27871609/137681791-e82f0807-c372-4c31-b350-2881bb532987.png" height="200px">
+  </a>
+</p>
 
 A retro game engine in the browser.
 
