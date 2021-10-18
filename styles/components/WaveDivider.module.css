@@ -1,15 +1,6 @@
-.container > div {
-  background: var(--main2);
-  height: 60px;
-}
-
 .container > svg {
   position: relative;
   display: block;
   width: 100%;
   height: 150px;
-}
-
-.container > svg > path {
-  fill: var(--main2);
 }
