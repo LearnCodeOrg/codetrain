@@ -9,7 +9,10 @@
 
 .databar {
   height: 40px;
-  background: var(--main2);
+  background: var(--gray);
+  border-radius: 32px;
+  margin-bottom: 10px;
+  box-shadow: 0 0 4px #999;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -27,10 +30,17 @@
 .tools {
   display: flex;
   align-items: center;
-  background: var(--main2);
-  color: var(--gray);
-  padding: 0 5px;
+  background: var(--gray);
+  border-radius: 32px;
+  color: var(--main0);
+  padding: 0 12px;
+  box-shadow: 0 0 4px #999;
+  margin-top: 10px;
   height: 40px;
+}
+
+.tools > label {
+  margin-right: 4px;
 }
 
 .tools > p {

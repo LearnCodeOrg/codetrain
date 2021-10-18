@@ -1,5 +1,4 @@
 .container {
-  text-align: center;
   display: flex;
   flex-direction: column;
   margin: 0 10px;
@@ -7,7 +6,8 @@
 
 .container > h1 {
   margin: 0;
-  color: var(--gray);
+  font-size: 24px;
+  color: var(--main0);
 }
 
 .selectcanvas {

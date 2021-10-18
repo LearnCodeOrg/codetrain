@@ -4,7 +4,6 @@
   width: fit-content;
   min-width: 100%;
   height: calc(100% - 60px);
-  background: var(--main0);
 }
 
 .content {
