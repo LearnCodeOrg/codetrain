@@ -16,7 +16,13 @@ export default function Index() {
       <div className={styles.center}>
         <WaveDivider height="60px" color="var(--main0)" />
         <div className={styles.logo}>
-          <Image src="/img/logo.png" width="96" height="96" />
+          <Image
+            src="/img/logo.png"
+            width="96"
+            height="96"
+            alt="logo"
+            quality={100}
+          />
         </div>
         <h2>Codetrain makes game development easier than ever.</h2>
         <p>No downloads, no dependencies: <b>create games right from your browser.</b><br />

@@ -41,7 +41,7 @@ export default function Create(props) {
 
   return (
     <>
-      <Header />
+      <Header inverted reload />
       <Engine
         tileCount={tileCount} objectCount={objectCount} spriteSize={spriteSize}
         data={data} {...props}

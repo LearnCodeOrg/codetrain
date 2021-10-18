@@ -39,7 +39,7 @@ export default function Edit(props) {
 
   return (
     <>
-      <Header />
+      <Header inverted reload />
       <Engine
         tileCount={tileCount} objectCount={objectCount} spriteSize={spriteSize}
         projectId={id} data={data} {...props}
