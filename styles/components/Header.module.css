@@ -4,16 +4,31 @@
   position: sticky;
   top: 0;
   background: var(--main0);
-  z-index: 10;
+  z-index: 1;
   display: flex;
   align-items: center;
-  border-bottom: 2px solid var(--gray);
+  box-shadow: 0 2px var(--gray);
   color: var(--gray);
+}
+
+.container.inverted {
+  background: var(--gray);
+  color: var(--main0);
+  border-bottom: 0;
+  box-shadow: 0 0 4px #333;
+}
+
+.container.inverted .link, .container.inverted > button {
+  color: #666;
+}
+
+.container.inverted .link:hover, .container.inverted > button:hover {
+  color: var(--blue);
 }
 
 .icon {
   display: inline-block;
-  margin: 0 10px;
+  margin: 0 5px;
 }
 
 .link {

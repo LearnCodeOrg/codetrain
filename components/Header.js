@@ -17,7 +17,7 @@ import createUser from '../util/createUser.js';
 import styles from '../styles/components/Header.module.css';
 
 export default function Header(props) {
-  const { username, reload } = props;
+  const { username, inverted, reload } = props;
 
   function HeaderLink(props) {
     const { href, className } = props;
@@ -34,7 +34,9 @@ export default function Header(props) {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={
+      inverted ? `${styles.container} ${styles.inverted}` : styles.container
+    }>
       <HeaderLink href="/" className={styles.icon}>
         <Image
           src="/img/logo.png"
