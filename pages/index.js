@@ -14,7 +14,6 @@ export default function Index() {
     <div className={styles.container}>
       <Header />
       <div className={styles.center}>
-        <WaveDivider height="60px" color="var(--main0)" />
         <div className={styles.logo}>
           <Image
             src="/img/logo.png"
@@ -24,8 +23,8 @@ export default function Index() {
             quality={100}
           />
         </div>
-        <h2>Codetrain makes game development easier than ever.</h2>
-        <p>No downloads, no dependencies: <b>create games right from your browser.</b><br />
+        <h2>Codetrain makes gamedev easier than ever.</h2>
+        <p>No downloads, no dependencies: <b>create retro games right from your browser.</b><br />
         Easily export to HTML for portability. Explore and remix projects from
         the community.</p>
         <div className={styles.links}>
@@ -39,13 +38,16 @@ export default function Index() {
             <a>Docs</a>
           </Link>
         </div>
-        <div className={styles.bottom}>
-          <WaveDivider height="0" color="var(--main2)" />
+        <div className={styles.middle}>
+          <WaveDivider color="var(--secondary)" />
           <div className={styles.examples}>
             <Image src="/img/example0.png" width="128" height="128" />
             <Image src="/img/example1.png" width="128" height="128" />
             <Image src="/img/example2.png" width="128" height="128" />
           </div>
+        </div>
+        <div className={styles.bottom}>
+          <WaveDivider height="0" color="var(--primary)" />
           <div className={styles.accordion}>
             <Accordion title="What is Codetrain?">
               Codetrain is a retro game engine in the browser.

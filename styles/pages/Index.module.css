@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: var(--main2);
+  background: var(--secondary);
 }
 
 .center {
@@ -12,10 +12,11 @@
 }
 
 .logo {
-  margin-top: -110px;
+  margin-top: 32px;
 }
 
 .center > h2 {
+  font-size: 32px;
   margin: 20px 40px 15px 40px;
 }
 
@@ -38,30 +39,34 @@
 }
 
 .links > a:hover {
-  color: var(--main4);
-  border-color: var(--main4);
+  color: var(--highlight);
+  border-color: var(--highlight);
+}
+
+.middle {
+  background: var(--primary);
+  padding-bottom: 10px;
+}
+
+.examples {
+  margin-top: -90px;
 }
 
 .bottom {
-  background: var(--main0);
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.examples {
-  margin-top: -60px;
-}
-
 .examples > div {
   margin: 10px!important;
-  border: 4px solid var(--gray);
+  border: 4px solid var(--black);
   border-radius: 8px;
 }
 
 .accordion {
-  margin: 20px;
+  margin: 20px 20px 0 20px;
   line-height: 30px;
   width: calc(100% - 80px);
   max-width: 800px;
@@ -77,8 +82,6 @@
 }
 
 .footer {
-  margin-top: -20px;
-  background: var(--main0);
   color: var(--gray);
   width: 100%;
   height: 60px;
