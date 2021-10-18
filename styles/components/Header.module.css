@@ -3,7 +3,7 @@
   width: 100%;
   position: sticky;
   top: 0;
-  background: var(--main2);
+  background: var(--main0);
   z-index: 10;
   display: flex;
   align-items: center;
@@ -21,7 +21,7 @@
 }
 
 .link:hover {
-  color: var(--blue);
+  color: var(--main4);
 }
 
 .container > button {
@@ -30,5 +30,5 @@
 }
 
 .container > button:hover {
-  color: var(--blue);
+  color: var(--main4);
 }

@@ -14,7 +14,7 @@ export default function Index() {
     <div className={styles.container}>
       <Header />
       <div className={styles.center}>
-        <WaveDivider height="60px" color="var(--main2)" />
+        <WaveDivider height="60px" color="var(--main0)" />
         <div className={styles.logo}>
           <Image src="/img/logo.png" width="96" height="96" />
         </div>
@@ -34,7 +34,7 @@ export default function Index() {
           </Link>
         </div>
         <div className={styles.bottom}>
-          <WaveDivider height="0" color="var(--main0)" />
+          <WaveDivider height="0" color="var(--main2)" />
           <div className={styles.examples}>
             <Image src="/img/example0.png" width="128" height="128" />
             <Image src="/img/example1.png" width="128" height="128" />
