@@ -35,6 +35,11 @@ export default function Index() {
         </div>
         <div className={styles.bottom}>
           <WaveDivider height="0" color="var(--main0)" />
+          <div className={styles.examples}>
+            <Image src="/img/example0.png" width="128" height="128" />
+            <Image src="/img/example1.png" width="128" height="128" />
+            <Image src="/img/example2.png" width="128" height="128" />
+          </div>
           <div className={styles.accordion}>
             <Accordion title="What is Codetrain?">
               Codetrain is a retro game engine in the browser.
