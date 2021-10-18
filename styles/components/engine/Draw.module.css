@@ -10,7 +10,8 @@
 }
 
 .toolbar {
-  background: #efefef;
+  background: var(--main2);
+  color: var(--gray);
   height: 40px;
   display: flex;
   align-items: center;

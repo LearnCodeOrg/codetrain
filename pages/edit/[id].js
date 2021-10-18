@@ -1,3 +1,4 @@
+import Header from '../../components/Header.js';
 import Loading from '../../components/Loading.js';
 import Engine from '../../components/engine/Engine.js';
 
@@ -37,9 +38,12 @@ export default function Edit(props) {
   if (!data) return <div>Project not found</div>;
 
   return (
-    <Engine
-      tileCount={tileCount} objectCount={objectCount} spriteSize={spriteSize}
-      projectId={id} data={data} {...props}
-    />
+    <>
+      <Header />
+      <Engine
+        tileCount={tileCount} objectCount={objectCount} spriteSize={spriteSize}
+        projectId={id} data={data} {...props}
+      />
+    </>
   );
 }
