@@ -15,19 +15,6 @@
   margin-top: -110px;
 }
 
-.center a {
-  padding: 10px 20px;
-  border-radius: 8px;
-  border: 2px solid var(--gray);
-  color: var(--gray);
-  transition: 0.25s;
-}
-
-.center a:hover {
-  color: var(--main4);
-  border: 2px solid var(--main4);
-}
-
 .center > h2 {
   margin: 20px 40px 15px 40px;
 }
@@ -35,6 +22,24 @@
 .center > p {
   line-height: 30px;
   margin: 5px 40px 20px 40px;
+}
+
+.links {
+  margin: 25px 0 50px 0;
+}
+
+.links > a {
+  margin: 10px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: 2px solid var(--gray);
+  color: var(--gray);
+  transition: 0.25s;
+}
+
+.links > a:hover {
+  color: var(--main4);
+  border-color: var(--main4);
 }
 
 .bottom {
@@ -46,12 +51,12 @@
 }
 
 .examples {
-  margin-top: -50px;
+  margin-top: -60px;
 }
 
 .examples > div {
-  margin: 0 10px!important;
-  border: 4px solid var(--main0);
+  margin: 10px!important;
+  border: 4px solid var(--gray);
   border-radius: 8px;
 }
 
@@ -62,15 +67,17 @@
   max-width: 800px;
 }
 
-.links {
-  margin: 10px 0 50px 0;
+.accordion a {
+  color: var(--blue);
 }
 
-.links > a {
-  margin: 10px;
+.accordion a:hover {
+  color: var(--purple);
+  text-decoration: underline;
 }
 
 .footer {
+  margin-top: -20px;
   background: var(--main0);
   color: var(--gray);
   width: 100%;
