@@ -1,6 +1,7 @@
 import Link from 'next/link';
-import Loading from '../../components/Loading.js';
-import GameFrame from '../../components/GameFrame.js';
+import Header from '../../components/Header';
+import Loading from '../../components/Loading';
+import GameFrame from '../../components/GameFrame';
 
 import dynamic from 'next/dynamic';
 import firebase from 'firebase/app';
@@ -45,27 +46,30 @@ export default function Project() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.center}>
-        <h1>{data.title}</h1>
-        <p className={styles.description}>{data.description}</p>
-        <p className={styles.editlink}>
-          <Link href={`/edit/${id}`}>
-            <a className="link">Edit</a>
-          </Link>
-        </p>
-        <GameFrame
-          mapPixels={mapPixels}
-          spritePixels={spritePixels}
-          pixelPixels={pixelPixels}
-          spriteSize={spriteSize}
-          mapSize={mapSize}
-          codes={data.codes}
-          colors={data.colors}
-          tiles={JSON.parse(data.tiles)}
-          objects={JSON.parse(data.objects)}
-          background={data.background}
-          gameObjects={data.gameObjects}
-        />
+      <Header />
+      <div className={styles.main}>
+        <div className={styles.center}>
+          <h1>{data.title}</h1>
+          <p className={styles.description}>{data.description}</p>
+          <p className={styles.editlink}>
+            <Link href={`/edit/${id}`}>
+              <a className="link">Edit</a>
+            </Link>
+          </p>
+          <GameFrame
+            mapPixels={mapPixels}
+            spritePixels={spritePixels}
+            pixelPixels={pixelPixels}
+            spriteSize={spriteSize}
+            mapSize={mapSize}
+            codes={data.codes}
+            colors={data.colors}
+            tiles={JSON.parse(data.tiles)}
+            objects={JSON.parse(data.objects)}
+            background={data.background}
+            gameObjects={data.gameObjects}
+          />
+        </div>
       </div>
     </div>
   );
