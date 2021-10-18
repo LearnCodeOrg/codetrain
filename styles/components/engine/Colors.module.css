@@ -31,8 +31,23 @@
 }
 
 .colorinput {
-  width: 32px;
-  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 8px;
+  overflow: hidden;
+}
+
+.colorinput > input {
   cursor: pointer;
-  margin-right: 10px;
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  border: 0;
+  padding: 0;
+}
+
+.colorinput:hover {
+  color: var(--blue);
 }

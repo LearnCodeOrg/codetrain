@@ -1,3 +1,5 @@
+import ColorizeIcon from '@mui/icons-material/Colorize';
+
 import { palettes } from '../../data/palettes.js';
 import { useState } from 'react';
 
@@ -35,12 +37,14 @@ export default function Colors(props) {
         }
       </div>
       <div className={styles.modify}>
-        <input
-          type="color"
-          value={colors[currColor]}
-          className={styles.colorinput}
-          onChange={e => updateColor(e.target.value)}
-        />
+        <label className={styles.colorinput}>
+          <ColorizeIcon />
+          <input
+            type="color"
+            value={colors[currColor]}
+            onChange={e => updateColor(e.target.value)}
+          />
+        </label>
         <select
           value={palette}
           onChange={e => {
