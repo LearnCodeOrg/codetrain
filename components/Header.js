@@ -19,56 +19,37 @@ import styles from '../styles/components/Header.module.css';
 export default function Header(props) {
   const { username, reload } = props;
 
+  function HeaderLink(props) {
+    const { href, className } = props;
+
+    return (
+      reload ?
+      <a href={href} className={className}>
+        {props.children}
+      </a> :
+      <Link href={href}>
+        <a className={className}>{props.children}</a>
+      </Link>
+    );
+  }
+
   return (
     <div className={styles.container}>
-      {
-        reload ?
-        <a href="/" className={styles.icon}> {/* eslint-disable-line @next/next/no-html-link-for-pages */}
-          <Image
-            src="/img/logo.png"
-            height="48"
-            width="48"
-            alt="logo"
-            quality={100}
-          />
-        </a> :
-        <Link href="/">
-          <a className={styles.icon}>
-            <Image
-              src="/img/logo.png"
-              height="48"
-              width="48"
-              alt="logo"
-              quality={100}
-            />
-          </a>
-        </Link>
-      }
+      <HeaderLink href="/" className={styles.icon}>
+        <Image
+          src="/img/logo.png"
+          height="48"
+          width="48"
+          alt="logo"
+          quality={100}
+        />
+      </HeaderLink>
       <h1>Codetrain</h1>
       <span className="flexfill" />
-      {
-        reload ?
-        <>
-          <a href="/" className={styles.link}>Home</a> {/* eslint-disable-line @next/next/no-html-link-for-pages */}
-          <a href="/create" className={styles.link}>Create</a> {/* eslint-disable-line @next/next/no-html-link-for-pages */}
-          <a href="/explore" className={styles.link}>Explore</a> {/* eslint-disable-line @next/next/no-html-link-for-pages */}
-          <a href="/docs" className={styles.link}>Docs</a> {/* eslint-disable-line @next/next/no-html-link-for-pages */}
-        </> :
-        <>
-          <Link href="/">
-            <a className={styles.link}>Home</a>
-          </Link>
-          <Link href="/create">
-            <a className={styles.link}>Create</a>
-          </Link>
-          <Link href="/explore">
-            <a className={styles.link}>Explore</a>
-          </Link>
-          <Link href="/docs">
-            <a className={styles.link}>Docs</a>
-          </Link>
-        </>
-      }
+      <HeaderLink href="/" className={styles.link}>Home</HeaderLink>
+      <HeaderLink href="/create" className={styles.link}>Create</HeaderLink>
+      <HeaderLink href="/explore" className={styles.link}>Explore</HeaderLink>
+      <HeaderLink href="/docs" className={styles.link}>Docs</HeaderLink>
       {
         username === null ?
         <Tooltip title="Choose Username" arrow>
