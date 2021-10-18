@@ -1,9 +1,14 @@
 .container {
-  min-height: calc(100% - 80px);
+  min-height: 100%;
+  background: var(--main0);
+}
+
+.main {
+  padding: 20px 0 60px 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px 0;
+  color: var(--gray);
 }
 
 .center > h1 {
@@ -17,8 +22,4 @@
 .editlink {
   margin: 10px 0;
   width: fit-content;
-}
-
-.editlink:hover {
-  color: var(--blue);
 }

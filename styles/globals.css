@@ -36,7 +36,7 @@ button, .SnackbarItem-message, .MuiPaper-root * {
 }
 
 .link:hover {
-  color: var(--blue);
+  color: var(--main4);
 }
 
 .circlebutton {
