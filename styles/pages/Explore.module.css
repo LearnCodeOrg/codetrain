@@ -1,5 +1,5 @@
 .container {
-  background: var(--main0);
+  background: var(--white);
   min-height: 100%;
 }
 
@@ -8,7 +8,7 @@
   align-items: center;
   justify-content: center;
   margin: 20px 0 0 0;
-  color: var(--gray);
+  color: var(--black);
 }
 
 .container > h1 > svg {
@@ -17,6 +17,6 @@
 
 .projects {
   display: flex;
-  margin: 10px;
+  margin: 10px 20px;
   flex-wrap: wrap;
 }

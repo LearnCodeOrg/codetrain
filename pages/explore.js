@@ -10,7 +10,9 @@ import styles from '../styles/pages/Explore.module.css';
 
 const maxProjects = 16;
 
-export default function Explore() {
+export default function Explore(props) {
+  const { username } = props;
+
   const [projects, setProjects] = useState(undefined);
 
   async function getProjects() {
@@ -27,19 +29,21 @@ export default function Explore() {
     getProjects();
   }, []);
 
-  if (!projects) return <Loading />;
-
   return (
     <div className={styles.container}>
-      <Header />
+      <Header username={username} />
       <h1><ExploreIcon fontSize="large" />Explore</h1>
-      <div className={styles.projects}>
-        {
-          projects.map(project =>
-            <Project {...project} key={project.id} />
-          )
-        }
-      </div>
+      {
+        projects ?
+        <div className={styles.projects}>
+          {
+            projects.map(project =>
+              <Project {...project} key={project.id} />
+            )
+          }
+        </div> :
+        <Loading />
+      }
     </div>
   );
 }
