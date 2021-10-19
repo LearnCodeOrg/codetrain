@@ -7,6 +7,9 @@ import Button from '@mui/material/Button';
 import GameFrame from '../GameFrame';
 
 import { clamp, between } from '../../util/math.js';
+import {
+  insertObjectUnits, removeObjectUnits
+} from '../../util/objectUnits.js';
 import { useEffect, useRef, useState } from 'react';
 import { useSnackbar } from 'notistack';
 import signInWithGoogle from '../../util/signInWithGoogle.js';
@@ -51,7 +54,7 @@ export default function GameEditor(props) {
   const [playing, setPlaying] = useState(false);
   const [background, setBackground] = useState(props.background);
   const [gameObjects, setGameObjects] = useState(
-    insertObjectUnits(props.gameObjects)
+    insertObjectUnits(props.gameObjects, pixelPixels)
   );
 
   const [showGrid, setShowGrid] = useState(true);
@@ -69,24 +72,6 @@ export default function GameEditor(props) {
 
   const projectsRef = firebase.firestore().collection('projects');
   const uid = firebase.auth().currentUser?.uid;
-
-  // returns given gameobjects with units inserted
-  function insertObjectUnits(objs) {
-    return objs.map(obj => ({
-      sprite: obj.sprite,
-      x: obj.x * pixelPixels,
-      y: obj.y * pixelPixels
-    }));
-  }
-
-  // returns given gameobjects with units removed
-  function removeObjectUnits(objs) {
-    return objs.map(obj => ({
-      sprite: obj.sprite,
-      x: Math.round(obj.x / pixelPixels),
-      y: Math.round(obj.y / pixelPixels)
-    }));
-  }
 
   // called before page unloads
   function beforeUnload(e) {
@@ -106,7 +91,7 @@ export default function GameEditor(props) {
       username, uid: uid,
       title, description, objectNames,
       codes, colors, background,
-      gameObjects: removeObjectUnits(gameObjects),
+      gameObjects: removeObjectUnits(gameObjects, pixelPixels),
       tiles: JSON.stringify(tiles),
       objects: JSON.stringify(objects),
       modified: new Date().getTime()
