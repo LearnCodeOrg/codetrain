@@ -48,8 +48,22 @@
   padding-bottom: 10px;
 }
 
-.examples {
-  margin-top: -90px;
+.banner {
+  margin-top: 10px;
+  height: 128px;
+  width: 200%;
+  min-width: calc(432px * 2);
+  background: url('/img/banner.png');
+  animation: slide 12s linear infinite;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(-432px);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 
 .bottom {
@@ -57,12 +71,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.examples > div {
-  margin: 10px!important;
-  border: 4px solid var(--black);
-  border-radius: 8px;
 }
 
 .accordion {

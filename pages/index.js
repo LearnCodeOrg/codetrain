@@ -41,11 +41,7 @@ export default function Index() {
       </div>
       <div className={styles.middle}>
         <WaveDivider color="var(--secondary)" />
-        <div className={styles.examples}>
-          <Image src="/img/example0.png" width="128" height="128" />
-          <Image src="/img/example1.png" width="128" height="128" />
-          <Image src="/img/example2.png" width="128" height="128" />
-        </div>
+        <div className={styles.banner} />
       </div>
       <div className={styles.bottom}>
         <div className={styles.accordion}>
