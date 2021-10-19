@@ -1,32 +1,37 @@
 .container {
   min-height: calc(100% - 60px);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  background: var(--primary);
+  overflow: hidden;
+}
+
+.top {
   background: var(--secondary);
-}
-
-.center {
   color: var(--gray);
-  text-align: center;
+  overflow: auto;
+  display: flex;
+  align-items: flex-start;
 }
 
-.logo {
-  margin-top: 32px;
+.icons {
+  margin: 32px 0 0 30px;
 }
 
-.center > h2 {
-  font-size: 32px;
+.icons > div:nth-of-type(2) {
+  margin: 0 16px 0 8px!important;
+}
+
+.overview > h2 {
+  font-size: 30px;
   margin: 20px 40px 15px 40px;
 }
 
-.center > p {
+.overview > p {
   line-height: 30px;
   margin: 5px 40px 20px 40px;
 }
 
 .links {
-  margin: 25px 0 50px 0;
+  margin: 30px 0 50px 30px;
 }
 
 .links > a {
@@ -41,6 +46,27 @@
 .links > a:hover {
   color: var(--highlight);
   border-color: var(--highlight);
+}
+
+.engine {
+  height: 100%;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.engine > a > div {
+  margin: 40px!important;
+  border-radius: 4px;
+  transition: 0.25s;
+  cursor: pointer;
+  box-shadow: 0 0 8px #000;
+}
+
+.engine > a > div:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 16px #000;
 }
 
 .middle {
@@ -90,7 +116,7 @@
 }
 
 .footer {
-  color: var(--gray);
+  color: var(--black);
   width: 100%;
   height: 60px;
   display: flex;
