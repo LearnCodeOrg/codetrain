@@ -14,34 +14,61 @@ export default function Index() {
     <div className={styles.container}>
       <Header />
       <div className={styles.top}>
-        <div className={styles.logo}>
-          <Image
-            src="/img/logo.png"
-            width="96"
-            height="96"
-            alt="logo"
-            quality={100}
-          />
+        <div className={styles.overview}>
+          <div className={styles.icons}>
+            <Image
+              src="/img/logo.png"
+              width="96"
+              height="96"
+              alt="logo"
+              quality={100}
+            />
+            <Image
+              src="/img/logo2.png"
+              width="96"
+              height="96"
+              alt="logo"
+              quality={100}
+            />
+            <Image
+              src="/img/logo3.png"
+              width="96"
+              height="96"
+              alt="logo"
+              quality={100}
+            />
+          </div>
+          <h2>Codetrain makes gamedev easier than ever.</h2>
+          <p>No downloads, no dependencies: <b>create retro games right from your browser.</b><br />
+          Easily export to HTML for portability. Explore and remix projects from
+          the community.</p>
+          <div className={styles.links}>
+            <Link href="/create">
+              <a>Create</a>
+            </Link>
+            <Link href="/explore">
+              <a>Explore</a>
+            </Link>
+            <Link href="/docs">
+              <a>Docs</a>
+            </Link>
+          </div>
         </div>
-        <h2>Codetrain makes gamedev easier than ever.</h2>
-        <p>No downloads, no dependencies: <b>create retro games right from your browser.</b><br />
-        Easily export to HTML for portability. Explore and remix projects from
-        the community.</p>
-        <div className={styles.links}>
-          <Link href="/create">
-            <a>Create</a>
-          </Link>
-          <Link href="/explore">
-            <a>Explore</a>
-          </Link>
-          <Link href="/docs">
-            <a>Docs</a>
-          </Link>
+        <div className={styles.engine}>
+        <Link href="/create">
+          <a>
+            <Image src="/img/engine.png" width="530" height="270" alt="engine" />
+          </a>
+        </Link>
         </div>
       </div>
       <div className={styles.middle}>
         <WaveDivider color="var(--secondary)" />
-        <div className={styles.banner} />
+        <Link href="/explore">
+          <a>
+            <div className={styles.banner} />
+          </a>
+        </Link>
       </div>
       <div className={styles.bottom}>
         <div className={styles.accordion}>
