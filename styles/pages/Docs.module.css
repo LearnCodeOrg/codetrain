@@ -5,8 +5,8 @@
 .main {
   min-height: calc(100% - 60px);
   padding: 20px;
-  background: var(--main0);
-  color: var(--gray);
+  background: var(--white);
+  color: var(--black);
   display: flex;
 }
 
@@ -47,7 +47,7 @@
 }
 
 .content > h2 > a:hover {
-  color: var(--main4);
+  color: var(--highlight);
 }
 
 .content > pre {

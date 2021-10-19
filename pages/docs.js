@@ -15,7 +15,7 @@ import LinkIcon from '@mui/icons-material/Link';
 import { useEffect } from 'react';
 import hljs from 'highlight.js/lib/core';
 import javascript from 'highlight.js/lib/languages/javascript';
-import 'highlight.js/styles/github.css';
+import 'highlight.js/styles/monokai.css';
 
 import styles from '../styles/pages/Docs.module.css';
 
@@ -29,7 +29,9 @@ function Code(props) {
   );
 }
 
-export default function Docs() {
+export default function Docs(props) {
+  const { username } = props;
+
   // initialize hljs on start
   useEffect(() => {
     hljs.registerLanguage('javascript', javascript);
@@ -38,7 +40,7 @@ export default function Docs() {
 
   return (
     <div className={styles.container}>
-      <Header />
+      <Header username={username} />
       <div className={styles.main}>
         <Drawer
           sx={{
@@ -47,14 +49,13 @@ export default function Docs() {
             '& .MuiDrawer-paper': {
               width: 256,
               boxSizing: 'border-box',
-              background: 'var(--main0)',
-              borderRight: '2px solid var(--gray)',
-              color: 'var(--gray)',
+              background: 'var(--gray)',
+              color: 'var(--black)',
               top: 60,
               zIndex: 0
             },
             '& .MuiDrawer-paper > ul > a:hover': {
-              color: 'var(--main4)'
+              color: 'var(--highlight)'
             }
           }}
           variant="permanent"
