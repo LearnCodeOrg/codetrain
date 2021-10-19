@@ -10,6 +10,7 @@
   overflow: auto;
   display: flex;
   align-items: flex-start;
+  height: 364px;
 }
 
 .icons {
@@ -20,14 +21,18 @@
   margin: 0 16px 0 8px!important;
 }
 
+.overview {
+  min-width: 640px;
+}
+
 .overview > h2 {
   font-size: 30px;
-  margin: 20px 40px 15px 40px;
+  margin: 20px 0 15px 40px;
 }
 
 .overview > p {
   line-height: 30px;
-  margin: 5px 40px 20px 40px;
+  margin: 5px 0 20px 40px;
 }
 
 .links {
@@ -57,7 +62,7 @@
 }
 
 .engine > a > div {
-  margin: 40px!important;
+  margin: 0 40px 0 30px!important;
   border-radius: 4px;
   transition: 0.25s;
   cursor: pointer;
@@ -65,8 +70,21 @@
 }
 
 .engine > a > div:hover {
-  transform: scale(1.08);
+  transform: scale(1.05);
   box-shadow: 0 0 16px #000;
+}
+
+@media (max-width: 1000px) {
+  .top {
+    height: auto;
+  }
+  .overview {
+    min-width: 0;
+    padding-right: 30px;
+  }
+  .engine {
+    display: none;
+  }
 }
 
 .middle {
