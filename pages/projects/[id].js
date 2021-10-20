@@ -7,7 +7,8 @@ import dynamic from 'next/dynamic';
 import firebase from 'firebase/app';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { palettes } from '../../data/palettes.js';
+import { palettes } from '../../data/palettes';
+import { insertObjectUnits } from '../../util/objectUnits';
 
 import styles from '../../styles/pages/Project.module.css';
 
@@ -67,7 +68,7 @@ export default function Project() {
             tiles={JSON.parse(data.tiles)}
             objects={JSON.parse(data.objects)}
             background={data.background}
-            gameObjects={data.gameObjects}
+            gameObjects={insertObjectUnits(data.gameObjects, pixelPixels)}
           />
         </div>
       </div>

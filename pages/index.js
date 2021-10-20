@@ -9,10 +9,12 @@ import signInWithGoogle from '../util/signInWithGoogle';
 
 import styles from '../styles/pages/Index.module.css';
 
-export default function Index() {
+export default function Index(props) {
+  const { username } = props;
+
   return (
     <div className={styles.container}>
-      <Header />
+      <Header username={username} />
       <div className={styles.top}>
         <div className={styles.overview}>
           <div className={styles.icons}>

@@ -1,3 +1,4 @@
+import Header from '../../components/Header';
 import Project from '../../components/cards/Project';
 import Loading from '../../components/Loading';
 
@@ -51,6 +52,7 @@ export default function User() {
 
   return (
     <div>
+      <Header />
       <div className={styles.head}>
         <h1>{userData.username}</h1>
         <p>Joined {new Date(userData.joined).toLocaleDateString()}</p>
