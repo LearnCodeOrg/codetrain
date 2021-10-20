@@ -4,6 +4,8 @@ import Engine from '../components/engine/Engine.js';
 import { useState } from 'react';
 import { palettes } from '../data/palettes.js';
 
+import styles from '../styles/pages/Engine.module.css';
+
 // units
 const tileCount = 16;
 const objectCount = 16;
@@ -24,6 +26,8 @@ function update() {
 `;
 
 export default function Create(props) {
+  const { username } = props;
+
   // engine defaults
   const codes = Array(objectCount).fill(defaultCode);
   const objectNames = Array(objectCount).fill(0).map((val, i) => `Object ${i}`);
@@ -40,12 +44,12 @@ export default function Create(props) {
   };
 
   return (
-    <>
-      <Header inverted reload />
+    <div className={styles.container}>
+      <Header username={username} reload />
       <Engine
         tileCount={tileCount} objectCount={objectCount} spriteSize={spriteSize}
         data={data} {...props}
       />
-    </>
+    </div>
   );
 }

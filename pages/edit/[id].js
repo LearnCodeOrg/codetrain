@@ -6,12 +6,16 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import firebase from 'firebase/app';
 
+import styles from '../../styles/pages/Engine.module.css';
+
 // units
 const tileCount = 16;
 const objectCount = 16;
 const spriteSize = 8;
 
 export default function Edit(props) {
+  const { username } = props;
+
   const [data, setData] = useState(undefined);
 
   // get project id
@@ -38,12 +42,12 @@ export default function Edit(props) {
   if (!data) return <div>Project not found</div>;
 
   return (
-    <>
-      <Header inverted reload />
+    <div className={styles.container}>
+      <Header username={username} reload />
       <Engine
         tileCount={tileCount} objectCount={objectCount} spriteSize={spriteSize}
         projectId={id} data={data} {...props}
       />
-    </>
+    </div>
   );
 }
