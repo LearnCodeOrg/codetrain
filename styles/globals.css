@@ -7,7 +7,6 @@ html, body, #__next {
   margin: 0;
   height: 100%;
   min-width: 100%;
-  width: fit-content;
   font-family: 'Lato', sans-serif;
 }
 
@@ -38,7 +37,7 @@ button, .SnackbarItem-message, .MuiPaper-root * {
 }
 
 .link:hover {
-  color: var(--main4);
+  color: var(--highlight);
 }
 
 .circlebutton {
@@ -54,10 +53,12 @@ button, .SnackbarItem-message, .MuiPaper-root * {
   --blue: #2196f3;
   --gray: #efefef;
   --purple: #3f51b5;
+  --black: #1a1a1a;
 
   --main0: #1a1a1d;
-  --main1: #4e4e50;
   --main2: #6f2232;
-  --main3: #950740;
-  --main4: #c3073f;
+
+  --primary: #efefef;
+  --secondary: #001ec9;
+  --highlight: #2196f3;
 }

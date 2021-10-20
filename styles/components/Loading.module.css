@@ -3,9 +3,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--main0);
+  background: var(--white);
 }
 
 .container > span {
-  color: var(--main4);
+  color: var(--highlight);
 }

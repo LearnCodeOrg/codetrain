@@ -1,5 +1,5 @@
 .head {
-  margin: 20px;
+  margin: 20px 30px;
 }
 
 .head > h1 {
@@ -11,7 +11,7 @@
 }
 
 .projects {
-  margin: 10px;
+  margin: 0 20px;
   display: flex;
   flex-wrap: wrap;
 }
