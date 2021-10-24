@@ -20,8 +20,8 @@ export default function Setup(props) {
   if (username !== null) return <Loading />;
 
   return (
-    <div>
-      <div>
+    <div className={styles.container}>
+      <div className={styles.center}>
         <h1>New User</h1>
         <form onSubmit={e => {
           e.preventDefault();
