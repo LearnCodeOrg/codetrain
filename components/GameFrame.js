@@ -2,7 +2,7 @@ import GetAppIcon from '@mui/icons-material/GetApp';
 import ReplayIcon from '@mui/icons-material/Replay';
 import Button from '@mui/material/Button';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { spriteSize, mapSize } from '../data/engine';
 
 import styles from '../styles/components/GameFrame.module.css';
@@ -12,6 +12,8 @@ export default function GameFrame(props) {
     mapPixels, spritePixels, pixelPixels,
     codes, colors, tiles, objects, background, gameObjects
   } = props;
+
+  const screenRef = useRef();
 
   // returns function definition for given object
   function getCodeFunction(gameObject, index) {
@@ -237,14 +239,28 @@ export default function GameFrame(props) {
     link.click();
   }
 
+  // focuses on screen
+  function focus() {
+    screenRef.current.focus();
+  }
+
   // reset source when cleared
   useEffect(() => {
-    if (source === null) setSource(gameSrc);
+    if (source === null) {
+      setSource(gameSrc);
+      focus();
+    }
   }, [source]);
+
+  // focus frame on start
+  useEffect(() => {
+    focus();
+  }, []);
 
   return (
     <div className={styles.container}>
       <iframe
+        ref={screenRef}
         className={styles.screen}
         title="game"
         sandbox="allow-scripts"
