@@ -60,7 +60,11 @@ export default function Code(props) {
               <PlayArrowIcon />
             </button>
           </div> :
-          <p className={styles.placeholder}>Select an object to write code.</p>
+          <p className={styles.placeholder}>
+            Select an object to write code.<br /><br />
+            {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+            New to Codetrain? See the <a href="/docs">docs.</a>
+          </p>
         }
         <div style={{ height: '100%', opacity: currObject === -1 ? 0 : 1 }}>
           <CodeEditor

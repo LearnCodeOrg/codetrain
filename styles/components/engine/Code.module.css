@@ -47,3 +47,12 @@
   margin: 10px;
   color: var(--gray);
 }
+
+.placeholder a {
+  color: var(--blue);
+}
+
+.placeholder a:hover {
+  color: var(--purple);
+  text-decoration: underline;
+}

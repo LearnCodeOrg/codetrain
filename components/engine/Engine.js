@@ -18,8 +18,8 @@ export default function Engine(props) {
   const [objectNames, setObjectNames] = useState(data.objectNames);
 
   const [currColor, setCurrColor] = useState(0);
-  const [currTile, setCurrTile] = useState(0);
-  const [currObject, setCurrObject] = useState(-1);
+  const [currTile, setCurrTile] = useState(-1);
+  const [currObject, setCurrObject] = useState(0);
   const [colors, setColors] = useState(data.colors);
   const [tiles, setTiles] = useState(JSON.parse(data.tiles));
   const [objects, setObjects] = useState(JSON.parse(data.objects));

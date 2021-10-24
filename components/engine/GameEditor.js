@@ -361,7 +361,6 @@ export default function GameEditor(props) {
               placeholder="description"
               value={description}
               onChange={e => setDescription(e.target.value)}
-              required
             />
             <button>
               {
