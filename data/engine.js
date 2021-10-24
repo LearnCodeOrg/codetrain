@@ -42,6 +42,16 @@ const playerObject = [
   1, 2, 2, 2, 2, 0, 2, 0,
   0, 3, 0, 0, 3, 0, 0, 0
 ];
+const grassTile = [
+  0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0,
+  0, 1, 0, 0, 0, 1, 0, 0,
+  0, 1, 0, 0, 0, 1, 0, 1,
+  0, 1, 0, 1, 0, 1, 0, 1,
+  0, 0, 0, 0, 0, 0, 0, 0
+];
 const defaultSprite = Array(spriteSize * spriteSize).fill(0);
 export const codes = Array(objectCount).fill(0).map((val, i) => (
   i === 0 ? playerCode : defaultCode
@@ -50,11 +60,22 @@ export const objectNames = Array(objectCount).fill(0).map((val, i) => (
   i === 0 ? 'Player' : `Object ${i}`
 ));
 export const colors = palettes[0].colors;
-export const tiles = Array(tileCount).fill(defaultSprite);
+export const tiles = Array(tileCount).fill(0).map((val, i) => (
+  i === 1 ? grassTile : defaultSprite
+));
 export const objects = Array(objectCount).fill(0).map((val, i) => (
   i === 0 ? playerObject : defaultSprite
 ));
-export const background = Array(mapSize * mapSize).fill(0);
+export const background = [
+  0, 0, 1, 1, 1, 1, 0, 0,
+  0, 0, 0, 1, 1, 1, 1, 0,
+  0, 0, 0, 0, 1, 1, 1, 0,
+  1, 0, 0, 1, 1, 1, 0, 0,
+  1, 0, 0, 1, 0, 0, 0, 1,
+  1, 1, 0, 0, 0, 0, 1, 1,
+  1, 1, 1, 0, 0, 0, 0, 1,
+  1, 1, 1, 1, 1, 1, 1, 0
+];
 
 // default data
 export const defaultData = {
