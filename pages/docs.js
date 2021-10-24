@@ -111,15 +111,15 @@ export default function Docs(props) {
           <code>start()</code> runs once at the start of the game.<br />
           <code>update()</code> runs once a frame.
           <Code>
-  {`let frames = 0;
+{`let frames = 0;
 
-  function start() {
-    console.log(frames); // runs before update, logs 0
-  }
+function start() {
+  console.log(frames); // runs before update, logs 0
+}
 
-  function update() {
-    frames += 1;
-  }`}
+function update() {
+  frames += 1;
+}`}
           </Code>
           <hr />
           <div id="output" className={styles.bookmark} />
@@ -132,7 +132,7 @@ export default function Docs(props) {
           </h2>
           A dialogue box can be opened with <code>say(text)</code>.<br />
           <Code>
-  {`say('Hello World!');`}
+{`say('Hello World!');`}
           </Code>
           <hr />
           <div id="input" className={styles.bookmark} />
@@ -150,11 +150,11 @@ export default function Docs(props) {
           <code>isKey(key)</code> returns whether given <code>key</code> was
           {' '}pressed in the last frame.
           <Code>
-  {`function update() {
-    if (isKey('q')) say('Q pressed'); // triggers once
-    if (isKeyDown('q')) console.log('Q down'); // triggers continually
-  }
-  `}
+{`function update() {
+  if (isKey('q')) say('Q pressed'); // triggers once
+  if (isKeyDown('q')) console.log('Q down'); // triggers continually
+}
+`}
           </Code>
           <hr />
           <div id="movement" className={styles.bookmark} />
@@ -175,23 +175,23 @@ export default function Docs(props) {
           <code>movePixels(x, y)</code> moves object by <code>x</code>,{' '}
           <code>y</code>, in pixels.
           <Code>
-  {`// tiled object movement
-  function update() {
-    if (isKey('w')) move('up');
-    if (isKey('a')) move('left');
-    if (isKey('s')) move('down');
-    if (isKey('d')) move('right');
-  }
-  `}
+{`// tiled object movement
+function update() {
+  if (isKey('w')) move('up');
+  if (isKey('a')) move('left');
+  if (isKey('s')) move('down');
+  if (isKey('d')) move('right');
+}
+`}
           </Code>
           <Code>
-  {`// smooth object movement
-  function update() {
-    if (isKeyDown('w')) movePixels(0, -1);
-    if (isKeyDown('a')) movePixels(-1, 0);
-    if (isKeyDown('s')) movePixels(0, 1);
-    if (isKeyDown('d')) movePixels(1, 0);
-  }`}
+{`// smooth object movement
+function update() {
+  if (isKeyDown('w')) movePixels(0, -1);
+  if (isKeyDown('a')) movePixels(-1, 0);
+  if (isKeyDown('s')) movePixels(0, 1);
+  if (isKeyDown('d')) movePixels(1, 0);
+}`}
           </Code>
           Object position can be found with <code>getTilePosition()</code> and
           {' '}<code>getPixelPosition()</code>.<br /><br />
@@ -200,9 +200,9 @@ export default function Docs(props) {
           <code>getPixelPosition()</code> returns <code>x</code>, <code>y</code>
           {' '}position in pixels.
           <Code>
-  {`const pos = getTilePosition();
+{`const pos = getTilePosition();
 
-  say(\`Object is at \${x}, \${y}\`);`}
+say(\`Object is at \${x}, \${y}\`);`}
           </Code>
           <hr />
           <div id="tiles" className={styles.bookmark} />
@@ -219,10 +219,10 @@ export default function Docs(props) {
           <code>getTileAt(x, y)</code> returns index of tile at <code>x</code>,
           {' '}<code>y</code>.
           <Code>
-  {`const tile = getTile();
+{`const tile = getTile();
 
-  say(\`Object is on tile \${tile}\`);
-  `}
+say(\`Object is on tile \${tile}\`);
+`}
           </Code>
           Tiles can be modified with <code>setTile(tile)</code> and
           {' '}<code>setTileAt(x, y, tile)</code>.<br /><br />
@@ -230,12 +230,12 @@ export default function Docs(props) {
           <code>setTileAt(x, y, tile)</code> sets tile at <code>x</code>,
           {' '}<code>y</code> to index <code>tile</code>.
           <Code>
-  {`const tile = getTile();
+{`const tile = getTile();
 
-  // toggle tile at position
-  if (tile === 0) setTile(1);
-  else setTile(0);
-  `}
+// toggle tile at position
+if (tile === 0) setTile(1);
+else setTile(0);
+`}
           </Code>
         </div>
       </div>
