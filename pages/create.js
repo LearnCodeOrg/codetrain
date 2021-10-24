@@ -1,16 +1,11 @@
 import Header from '../components/Header';
-import Engine from '../components/engine/Engine.js';
+import Engine from '../components/engine/Engine';
 
 import { useState } from 'react';
-import { palettes } from '../data/palettes.js';
+import { palettes } from '../data/palettes';
+import { tileCount, objectCount, spriteSize, mapSize } from '../data/engine';
 
 import styles from '../styles/pages/Engine.module.css';
-
-// units
-const tileCount = 16;
-const objectCount = 16;
-const spriteSize = 8;
-const mapSize = 8;
 
 // default engine code
 const defaultCode =
@@ -46,10 +41,7 @@ export default function Create(props) {
   return (
     <div className={styles.container}>
       <Header username={username} reload />
-      <Engine
-        tileCount={tileCount} objectCount={objectCount} spriteSize={spriteSize}
-        data={data} {...props}
-      />
+      <Engine data={data} {...props} />
     </div>
   );
 }

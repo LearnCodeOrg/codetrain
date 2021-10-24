@@ -8,14 +8,13 @@ import firebase from 'firebase/app';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { palettes } from '../../data/palettes';
+import { spriteSize, mapSize } from '../../data/engine';
 import { insertObjectUnits } from '../../util/objectUnits';
 
 import styles from '../../styles/pages/Project.module.css';
 
 // units
 const mapPixels = 512;
-const mapSize = 8;
-const spriteSize = 8;
 const spritePixels = Math.floor(mapPixels / mapSize);
 const pixelPixels = Math.floor(spritePixels / spriteSize);
 
@@ -61,8 +60,6 @@ export default function Project() {
             mapPixels={mapPixels}
             spritePixels={spritePixels}
             pixelPixels={pixelPixels}
-            spriteSize={spriteSize}
-            mapSize={mapSize}
             codes={data.codes}
             colors={data.colors}
             tiles={JSON.parse(data.tiles)}

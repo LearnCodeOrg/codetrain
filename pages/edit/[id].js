@@ -1,17 +1,12 @@
-import Header from '../../components/Header.js';
-import Loading from '../../components/Loading.js';
-import Engine from '../../components/engine/Engine.js';
+import Header from '../../components/Header';
+import Loading from '../../components/Loading';
+import Engine from '../../components/engine/Engine';
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import firebase from 'firebase/app';
 
 import styles from '../../styles/pages/Engine.module.css';
-
-// units
-const tileCount = 16;
-const objectCount = 16;
-const spriteSize = 8;
 
 export default function Edit(props) {
   const { username } = props;
@@ -44,10 +39,7 @@ export default function Edit(props) {
   return (
     <div className={styles.container}>
       <Header username={username} reload />
-      <Engine
-        tileCount={tileCount} objectCount={objectCount} spriteSize={spriteSize}
-        projectId={id} data={data} {...props}
-      />
+      <Engine projectId={id} data={data} {...props} />
     </div>
   );
 }
