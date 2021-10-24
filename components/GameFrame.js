@@ -3,13 +3,14 @@ import ReplayIcon from '@mui/icons-material/Replay';
 import Button from '@mui/material/Button';
 
 import { useEffect, useState } from 'react';
+import { spriteSize, mapSize } from '../data/engine';
 
 import styles from '../styles/components/GameFrame.module.css';
 
 export default function GameFrame(props) {
   const {
-    mapPixels, spriteSize, spritePixels, pixelPixels,
-    mapSize, codes, colors, tiles, objects, background, gameObjects
+    mapPixels, spritePixels, pixelPixels,
+    codes, colors, tiles, objects, background, gameObjects
   } = props;
 
   // returns function definition for given object

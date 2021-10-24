@@ -6,10 +6,9 @@ import GetAppIcon from '@mui/icons-material/GetApp';
 import Button from '@mui/material/Button';
 import GameFrame from '../GameFrame';
 
-import { clamp, between } from '../../util/math.js';
-import {
-  insertObjectUnits, removeObjectUnits
-} from '../../util/objectUnits.js';
+import { clamp, between } from '../../util/math';
+import { spriteSize, mapSize } from '../../data/engine';
+import { insertObjectUnits, removeObjectUnits } from '../../util/objectUnits';
 import { useEffect, useRef, useState } from 'react';
 import { useSnackbar } from 'notistack';
 import signInWithGoogle from '../../util/signInWithGoogle.js';
@@ -28,7 +27,6 @@ const buttonProps = {
 
 // units
 const mapPixels = 512;
-const mapSize = 8;
 const spritePixels = Math.floor(mapPixels / mapSize);
 const halfSprite = Math.floor(spritePixels / 2);
 
@@ -44,7 +42,7 @@ let editorDirty = false;
 export default function GameEditor(props) {
   const {
     projectId, creator, username,
-    colors, spriteSize, currTile, currObject, codes,
+    colors, currTile, currObject, codes,
     objectNames, tiles, objects
   } = props;
   const pixelPixels = Math.floor(spritePixels / spriteSize);
@@ -388,8 +386,6 @@ export default function GameEditor(props) {
           objects={objects}
           background={background}
           gameObjects={gameObjects}
-          spriteSize={spriteSize}
-          mapSize={mapSize}
           download
         />
       }

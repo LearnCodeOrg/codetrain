@@ -1,13 +1,12 @@
 import Link from 'next/link';
 
 import { useEffect, useRef } from 'react';
+import { spriteSize, mapSize } from '../../data/engine';
 
 import styles from '../../styles/components/cards/Project.module.css';
 
 // constants
-const mapSize = 8;
 const mapPixels = 128;
-const spriteSize = 8;
 const spritePixels = Math.floor(mapPixels / mapSize);
 const pixelPixels = Math.floor(spritePixels / spriteSize);
 

@@ -1,5 +1,6 @@
-import { clamp } from '../../util/math.js';
 import { useEffect, useState } from 'react';
+import { spriteSize, objectCount } from '../../data/engine';
+import { clamp } from '../../util/math';
 
 import styles from '../../styles/components/engine/Objects.module.css';
 
@@ -11,11 +12,7 @@ let canvas, ctx;
 let sketching = false;
 
 export default function Objects(props) {
-  const {
-    colors, objects,
-    currObject, setCurrObject,
-    tileCount, objectCount, spriteSize
-  } = props;
+  const { colors, objects, currObject, setCurrObject } = props;
   const sqrtSpriteCount = Math.round(Math.sqrt(objectCount));
   const selectSpritePixels = Math.floor(selectPixels / sqrtSpriteCount);
   const selectPixelPixels = Math.floor(selectSpritePixels / spriteSize);

@@ -1,4 +1,5 @@
-import { clamp } from '../../util/math.js';
+import { clamp } from '../../util/math';
+import { spriteSize } from '../../data/engine';
 import { useEffect, useState } from 'react';
 
 import styles from '../../styles/components/engine/Draw.module.css';
@@ -12,7 +13,7 @@ const pixelPixels = 32;
 export default function Draw(props) {
   const {
     colors, tiles, setTiles, objects, setObjects,
-    currTile, currObject, currColor, spriteSize
+    currTile, currObject, currColor
   } = props;
   const spritePixels = spriteSize * pixelPixels;
 

@@ -1,5 +1,6 @@
-import { clamp } from '../../util/math.js';
 import { useEffect, useState } from 'react';
+import { clamp } from '../../util/math';
+import { tileCount, spriteSize } from '../../data/engine';
 
 import styles from '../../styles/components/engine/Tiles.module.css';
 
@@ -11,11 +12,7 @@ let canvas, ctx;
 let sketching = false;
 
 export default function Tiles(props) {
-  const {
-    colors, tiles,
-    currTile, setCurrTile,
-    tileCount, spriteSize
-  } = props;
+  const { colors, tiles, currTile, setCurrTile } = props;
   const sqrtSpriteCount = Math.round(Math.sqrt(tileCount));
   const selectSpritePixels = Math.floor(selectPixels / sqrtSpriteCount);
   const selectPixelPixels = Math.floor(selectSpritePixels / spriteSize);

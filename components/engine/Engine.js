@@ -12,9 +12,7 @@ import { useEffect, useState } from 'react';
 import styles from '../../styles/components/engine/Engine.module.css';
 
 export default function Engine(props) {
-  const {
-    data, projectId, objectCount, tileCount, spriteSize, username
-  } = props;
+  const { data, projectId, username } = props;
 
   const [codes, setCodes] = useState(data.codes);
   const [objectNames, setObjectNames] = useState(data.objectNames);
@@ -40,7 +38,6 @@ export default function Engine(props) {
         <div className={styles.content}>
           <Code
             currObject={currObject}
-            objectCount={objectCount}
             codes={codes} setCodes={setCodes}
             objectNames={objectNames} setObjectNames={setObjectNames}
           />
@@ -52,8 +49,7 @@ export default function Engine(props) {
               />
               <Draw
                 colors={colors} tiles={tiles} objects={objects}
-                currTile={currTile} currObject={currObject}
-                currColor={currColor} spriteSize={spriteSize}
+                currTile={currTile} currObject={currObject} currColor={currColor}
                 setTiles={setTiles} setObjects={setObjects}
               />
             </div>
@@ -63,16 +59,11 @@ export default function Engine(props) {
                 colors={colors}
                 tiles={tiles}
                 currTile={currTile} setCurrTile={setCurrTile}
-                tileCount={tileCount}
-                spriteSize={spriteSize}
               />
               <Objects
                 colors={colors}
                 objects={objects}
                 currObject={currObject} setCurrObject={setCurrObject}
-                tileCount={tileCount}
-                objectCount={objectCount}
-                spriteSize={spriteSize}
               />
             </div>
           </div>
@@ -81,7 +72,6 @@ export default function Engine(props) {
             projectId={projectId} creator={data.uid}
             colors={colors} tiles={tiles} objects={objects}
             objectNames={objectNames}
-            spriteSize={spriteSize}
             currTile={currTile}
             currObject={currObject}
             codes={codes}
