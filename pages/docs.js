@@ -30,8 +30,6 @@ function Code(props) {
 }
 
 export default function Docs(props) {
-  const { username } = props;
-
   // initialize hljs on start
   useEffect(() => {
     hljs.registerLanguage('javascript', javascript);
@@ -40,7 +38,7 @@ export default function Docs(props) {
 
   return (
     <div className={styles.container}>
-      <Header username={username} />
+      <Header {...props} />
       <div className={styles.main}>
         <Drawer
           sx={{

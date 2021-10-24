@@ -10,7 +10,7 @@ import styles from '../../styles/pages/User.module.css';
 
 const maxProjects = 16;
 
-export default function User() {
+export default function User(props) {
   const [userData, setUserData] = useState(undefined);
   const [projects, setProjects] = useState(undefined);
 
@@ -52,7 +52,7 @@ export default function User() {
 
   return (
     <div>
-      <Header />
+      <Header {...props} />
       <div className={styles.head}>
         <h1>{userData.username}</h1>
         <p>Joined {new Date(userData.joined).toLocaleDateString()}</p>

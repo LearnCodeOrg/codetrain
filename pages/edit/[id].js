@@ -9,8 +9,6 @@ import firebase from 'firebase/app';
 import styles from '../../styles/pages/Engine.module.css';
 
 export default function Edit(props) {
-  const { username } = props;
-
   const [data, setData] = useState(undefined);
 
   // get project id
@@ -38,7 +36,7 @@ export default function Edit(props) {
 
   return (
     <div className={styles.container}>
-      <Header username={username} reload />
+      <Header {...props} reload />
       <Engine projectId={id} data={data} {...props} />
     </div>
   );

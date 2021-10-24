@@ -18,7 +18,7 @@ const mapPixels = 512;
 const spritePixels = Math.floor(mapPixels / mapSize);
 const pixelPixels = Math.floor(spritePixels / spriteSize);
 
-export default function Project() {
+export default function Project(props) {
   const [data, setData] = useState(undefined);
 
   // get project id
@@ -46,7 +46,7 @@ export default function Project() {
 
   return (
     <div className={styles.container}>
-      <Header />
+      <Header {...props} />
       <div className={styles.main}>
         <div className={styles.center}>
           <h1>{data.title}</h1>
