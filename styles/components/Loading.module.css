@@ -7,5 +7,6 @@
 }
 
 .container > span {
+  margin: 20px;
   color: var(--highlight);
 }

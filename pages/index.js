@@ -57,7 +57,14 @@ export default function Index(props) {
         <div className={styles.engine}>
         <Link href="/create">
           <a>
-            <Image src="/img/engine.png" width="530" height="270" alt="engine" />
+            <Image
+              src="/img/engine.png"
+              width="530"
+              height="270"
+              placeholder="blur"
+              blurDataURL="/img/engine.png"
+              alt="engine"
+            />
           </a>
         </Link>
         </div>

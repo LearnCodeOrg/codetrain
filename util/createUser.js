@@ -1,8 +1,7 @@
 import firebase from 'firebase/app';
 
-// attempts to create user
-export default async function createUser() {
-  const username = window.prompt('Enter a username:');
+// attempts to create user with given username
+export default async function createUser(username) {
   // verify username
   if (!username) {
     alert("Please enter a username.");
