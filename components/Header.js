@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import Router from 'next/router';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
@@ -12,7 +13,6 @@ import InfoIcon from '@mui/icons-material/Info';
 
 import firebase from 'firebase/app';
 import signInWithGoogle from '../util/signInWithGoogle.js';
-import createUser from '../util/createUser.js';
 
 import styles from '../styles/components/Header.module.css';
 
@@ -52,8 +52,8 @@ export default function Header(props) {
       <HeaderLink href="/docs" className={styles.link}>Docs</HeaderLink>
       {
         username === null ?
-        <Tooltip title="Choose Username" arrow>
-          <IconButton onClick={createUser}>
+        <Tooltip title="User Setup" arrow>
+          <IconButton onClick={() => Router.push('/setup')}>
             <HelpOutlineIcon />
           </IconButton>
         </Tooltip> :

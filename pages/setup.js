@@ -13,7 +13,7 @@ export default function Setup(props) {
 
   // listen for auth
   useEffect(() => {
-    if (username) Router.push('/');
+    if (username || username === false) Router.push('/');
   }, [username]);
 
   // return if loading

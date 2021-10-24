@@ -11,9 +11,8 @@ import { spriteSize, mapSize } from '../../data/engine';
 import { insertObjectUnits, removeObjectUnits } from '../../util/objectUnits';
 import { useEffect, useRef, useState } from 'react';
 import { useSnackbar } from 'notistack';
-import signInWithGoogle from '../../util/signInWithGoogle.js';
-import createUser from '../../util/createUser.js';
-import compileCode from '../../util/compileCode.js';
+import signInWithGoogle from '../../util/signInWithGoogle';
+import compileCode from '../../util/compileCode';
 import firebase from 'firebase/app';
 
 import styles from '../../styles/components/engine/GameEditor.module.css';
@@ -345,7 +344,9 @@ export default function GameEditor(props) {
       <div className={styles.databar}>
         {
           username === null ?
-          <button onClick={createUser}>Choose Username</button> :
+          <button onClick={() => Router.push('/setup')}>
+            User Setup
+          </button> :
           username ?
           <form className={styles.saveform} onSubmit={e => {
             e.preventDefault();
