@@ -31,17 +31,19 @@ export default function Explore(props) {
     <div className={styles.container}>
       <Header {...props} />
       <h1><ExploreIcon fontSize="large" />Explore</h1>
-      {
-        projects ?
-        <div className={styles.projects}>
-          {
-            projects.map(project =>
-              <Project {...project} key={project.id} />
-            )
-          }
-        </div> :
-        <Loading />
-      }
+      <div className={styles.content}>
+        {
+          projects ?
+          <div className={styles.projects}>
+            {
+              projects.map(project =>
+                <Project {...project} key={project.id} />
+              )
+            }
+          </div> :
+          <Loading />
+        }
+      </div>
     </div>
   );
 }
