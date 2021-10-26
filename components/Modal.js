@@ -25,8 +25,8 @@ export default function Modal(props) {
       }}
     >
       <Fade in={open} timeout={100}>
-        <div>
-          <button onClick={onClose}>
+        <div className={styles.modal}>
+          <button className={styles.close} onClick={onClose}>
             <ClearIcon />
           </button>
           {props.children}

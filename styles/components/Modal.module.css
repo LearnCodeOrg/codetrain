@@ -1,0 +1,35 @@
+.modal {
+  text-align: center;
+  background: var(--gray);
+  max-width: 400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  padding: 20px 40px;
+  box-shadow: 0 0 10px var(--black);
+}
+
+.modal > h1 {
+  margin: 0;
+}
+
+.close {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  right: -8px;
+  top: -8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 0;
+  box-shadow: 0 0 10px var(--black);
+  background: var(--gray);
+}
+
+.close:hover {
+  background: #ddd;
+}
