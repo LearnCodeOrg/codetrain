@@ -17,6 +17,10 @@
   margin: 0;
 }
 
+.center > a {
+  margin-bottom: 10px;
+}
+
 .description {
   margin: 0;
 }

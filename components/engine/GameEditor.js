@@ -101,9 +101,11 @@ export default function GameEditor(props) {
       enqueueSnackbar('Saved successfully.', { variant: 'success' });
     // if no existing project, publish new project
     } else {
-      const docRef = await projectsRef.add({
-        created: new Date().getTime(), ...projectObj
-      });
+      const docRef = await projectsRef.add(
+        projectId ?
+        { created: new Date().getTime(), ...projectObj, remixed: projectId } :
+        { created: new Date().getTime(), ...projectObj }
+      );
       editorDirty = false;
       Router.push(`/projects/${docRef.id}`);
     }

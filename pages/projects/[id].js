@@ -50,6 +50,14 @@ export default function Project(props) {
       <div className={styles.main}>
         <div className={styles.center}>
           <h1>{data.title}</h1>
+          <p className={styles.remix}>
+            {
+              data.remixed &&
+              <Link href={`/projects/${data.remixed}`}>
+                <a className="link">Remix Source</a>
+              </Link>
+            }
+          </p>
           <p className={styles.description}>{data.description}</p>
           <p className={styles.editlink}>
             <Link href={`/edit/${id}`}>
