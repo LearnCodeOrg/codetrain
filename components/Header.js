@@ -17,7 +17,7 @@ import signInWithGoogle from '../util/signInWithGoogle.js';
 import styles from '../styles/components/Header.module.css';
 
 export default function Header(props) {
-  const { username, reload } = props;
+  const { username, reload, setupUser } = props;
 
   function HeaderLink(props) {
     const { href, className } = props;
@@ -53,7 +53,7 @@ export default function Header(props) {
       {
         username === null ?
         <Tooltip title="User Setup" arrow>
-          <IconButton onClick={() => Router.push('/setup')}>
+          <IconButton onClick={setupUser}>
             <HelpOutlineIcon />
           </IconButton>
         </Tooltip> :

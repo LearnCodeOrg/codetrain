@@ -42,7 +42,8 @@ export default function GameEditor(props) {
   const {
     projectId, creator, username,
     colors, currTile, currObject, codes,
-    objectNames, tiles, objects
+    objectNames, tiles, objects,
+    setupUser
   } = props;
   const pixelPixels = Math.floor(spritePixels / spriteSize);
 
@@ -344,7 +345,7 @@ export default function GameEditor(props) {
       <div className={styles.databar}>
         {
           username === null ?
-          <button onClick={() => Router.push('/setup')}>
+          <button onClick={setupUser}>
             User Setup
           </button> :
           username ?

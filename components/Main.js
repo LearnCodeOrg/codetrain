@@ -24,6 +24,11 @@ export default function Main(props) {
   const userRef = firebase.firestore().collection('users').doc(uid ?? '~');
   const [userDoc] = useDocument(userRef);
 
+  // opens user setup modal
+  function setupUser() {
+    setModalOpen(true);
+  }
+
   return (
     <>
       <Modal open={modalOpen} setOpen={setModalOpen}>
