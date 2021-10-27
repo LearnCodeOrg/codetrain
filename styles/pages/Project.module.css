@@ -17,6 +17,20 @@
   margin: 0;
 }
 
+.remix {
+  font-size: 16px;
+  margin-left: 10px;
+}
+
+.center a {
+  color: var(--blue);
+}
+
+.center a:hover {
+  color: var(--purple);
+  text-decoration: underline;
+}
+
 .description {
   margin: 0;
 }

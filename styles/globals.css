@@ -32,14 +32,6 @@ button, .SnackbarItem-message, .MuiPaper-root * {
   flex-grow: 1;
 }
 
-.link {
-  text-decoration: underline;
-}
-
-.link:hover {
-  color: var(--highlight);
-}
-
 .circlebutton {
   font-weight: bold!important;
   width: 32px;

@@ -49,19 +49,25 @@ export default function Project(props) {
       <Header {...props} />
       <div className={styles.main}>
         <div className={styles.center}>
-          <h1>{data.title}</h1>
+          <h1>
+            {data.title}
+            <span className={styles.remix}>
+              {
+                data.remixed &&
+                <Link href={`/projects/${data.remixed}`}>
+                  <a>(Remix)</a>
+                </Link>
+              }
+            </span>
+          </h1>
           <p className={styles.description}>{data.description}</p>
+          <Link href={`/users/${data.uid}`}>
+            <a>{data.username}</a>
+          </Link>
           <p className={styles.editlink}>
             <Link href={`/edit/${id}`}>
-              <a className="link">Edit</a>
+              <a>Edit {data.title}</a>
             </Link>
-            {
-              data.remixed ?
-              <Link href={`/projects/${data.remixed}`}>
-                <a className={`${styles.remix} link`}>Remix</a>
-              </Link> :
-              <>Original</>
-            }
           </p>
           <GameFrame
             mapPixels={mapPixels}
