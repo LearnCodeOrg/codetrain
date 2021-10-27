@@ -48,6 +48,23 @@ button, .SnackbarItem-message, .MuiPaper-root * {
   min-width: 0!important;
 }
 
+.graybutton {
+  padding: 5px 10px;
+  border: 0;
+  box-shadow: 0 0 3px #000;
+  border-radius: 5px;
+}
+
+.graybutton:hover {
+  background: #ddd;
+}
+
+.grayinput {
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  padding: 5px;
+}
+
 :root {
   --white: #ffffff;
   --blue: #2196f3;

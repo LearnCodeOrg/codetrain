@@ -6,6 +6,8 @@ import { useEffect, useState } from 'react';
 import { useDocument } from 'react-firebase-hooks/firestore';
 import createUser from '../util/createUser';
 
+import styles from '../styles/components/Main.module.css';
+
 export default function Main(props) {
   const { Component, pageProps } = props;
 
@@ -28,6 +30,7 @@ export default function Main(props) {
 
   // opens user setup modal
   function setupUser() {
+    setUsername('');
     setModalOpen(true);
   }
 
@@ -35,7 +38,7 @@ export default function Main(props) {
     <>
       <Modal open={modalOpen} setOpen={setModalOpen}>
         <h1>User Setup</h1>
-        <form onSubmit={e => {
+        <form className={styles.createform} onSubmit={e => {
           e.preventDefault();
           createUser(username);
           setModalOpen(false);
@@ -46,7 +49,7 @@ export default function Main(props) {
             placeholder="username"
             required
           />
-          <button>Create User</button>
+          <button className="graybutton">Create User</button>
         </form>
       </Modal>
       <Component

@@ -1,0 +1,10 @@
+.createform {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.createform > button {
+  margin-top: 10px;
+}
