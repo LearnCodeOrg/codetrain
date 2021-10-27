@@ -372,7 +372,9 @@ export default function GameEditor(props) {
               }
             </button>
           </form> :
-          <button onClick={signInWithGoogle}>Sign in to save</button>
+          <button onClick={() => signInWithGoogle(setupUser)}>
+            Sign in to save
+          </button>
         }
       </div>
       {

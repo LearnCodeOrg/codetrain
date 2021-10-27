@@ -64,7 +64,7 @@ export default function Header(props) {
           </IconButton>
         </Tooltip> :
         <Tooltip title="Sign In" arrow>
-          <IconButton onClick={signInWithGoogle}>
+          <IconButton onClick={() => signInWithGoogle(setupUser)}>
             <PersonOutlineIcon />
           </IconButton>
         </Tooltip>
