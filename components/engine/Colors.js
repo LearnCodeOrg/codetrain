@@ -46,6 +46,7 @@ export default function Colors(props) {
           />
         </label>
         <select
+          className="grayinput"
           value={palette}
           onChange={e => {
             const newPalette = e.target.value;

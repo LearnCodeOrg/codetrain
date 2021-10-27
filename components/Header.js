@@ -51,13 +51,7 @@ export default function Header(props) {
       <HeaderLink href="/explore" className={styles.link}>Explore</HeaderLink>
       <HeaderLink href="/docs" className={styles.link}>Docs</HeaderLink>
       {
-        username === null ?
-        <Tooltip title="User Setup" arrow>
-          <IconButton onClick={setupUser}>
-            <HelpOutlineIcon />
-          </IconButton>
-        </Tooltip> :
-        username ?
+        (username === null || username) ?
         <Tooltip title="Sign Out" arrow>
           <IconButton onClick={() => firebase.auth().signOut()}>
             <ExitToAppIcon />

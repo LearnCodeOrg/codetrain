@@ -44,6 +44,7 @@ export default function Main(props) {
           setModalOpen(false);
         }}>
           <input
+            className="grayinput"
             value={username}
             onChange={e => setUsername(e.target.value)}
             placeholder="username"

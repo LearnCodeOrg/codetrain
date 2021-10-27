@@ -5,7 +5,6 @@ import Image from 'next/image';
 import Accordion from '../components/Accordion';
 
 import firebase from 'firebase/app';
-import signInWithGoogle from '../util/signInWithGoogle';
 
 import styles from '../styles/pages/Index.module.css';
 

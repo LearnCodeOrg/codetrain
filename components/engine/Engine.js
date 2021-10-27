@@ -6,7 +6,6 @@ import Draw from './Draw.js';
 import Code from './Code.js';
 
 import { SnackbarProvider, useSnackbar } from 'notistack';
-import signInWithGoogle from '../../util/signInWithGoogle.js';
 import { useEffect, useState } from 'react';
 
 import styles from '../../styles/components/engine/Engine.module.css';

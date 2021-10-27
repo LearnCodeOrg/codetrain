@@ -30,6 +30,10 @@
   justify-content: center;
 }
 
+.modify > select {
+  cursor: pointer;
+}
+
 .colorinput {
   display: flex;
   align-items: center;

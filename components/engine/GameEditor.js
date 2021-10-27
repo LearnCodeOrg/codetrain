@@ -345,7 +345,7 @@ export default function GameEditor(props) {
       <div className={styles.databar}>
         {
           username === null ?
-          <button onClick={setupUser}>
+          <button className="graybutton" onClick={setupUser}>
             User Setup
           </button> :
           username ?
@@ -354,17 +354,19 @@ export default function GameEditor(props) {
             saveProject();
           }}>
             <input
+              className="grayinput"
               placeholder="title"
               value={title}
               onChange={e => setTitle(e.target.value)}
               required
             />
             <input
+              className="grayinput"
               placeholder="description"
               value={description}
               onChange={e => setDescription(e.target.value)}
             />
-            <button>
+            <button className="graybutton">
               {
                 !creator ? 'Create' :
                 uid === creator ? 'Save' :
@@ -372,7 +374,10 @@ export default function GameEditor(props) {
               }
             </button>
           </form> :
-          <button onClick={() => signInWithGoogle(setupUser)}>
+          <button
+            className="graybutton"
+            onClick={() => signInWithGoogle(setupUser)}
+          >
             Sign in to save
           </button>
         }

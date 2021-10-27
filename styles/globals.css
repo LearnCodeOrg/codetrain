@@ -60,7 +60,7 @@ button, .SnackbarItem-message, .MuiPaper-root * {
 }
 
 .grayinput {
-  border: 2px solid #ddd;
+  border: 2px solid #ccc;
   border-radius: 5px;
   padding: 5px;
 }
