@@ -4,12 +4,14 @@ import Router from 'next/router';
 import firebase from 'firebase/app';
 import { useEffect, useState } from 'react';
 import { useDocument } from 'react-firebase-hooks/firestore';
+import createUser from '../util/createUser';
 
 export default function Main(props) {
   const { Component, pageProps } = props;
 
   const [authed, setAuthed] = useState(undefined);
   const [modalOpen, setModalOpen] = useState(false);
+  const [username, setUsername] = useState('');
 
   // listen for user auth
   useEffect(() => {
@@ -33,6 +35,19 @@ export default function Main(props) {
     <>
       <Modal open={modalOpen} setOpen={setModalOpen}>
         <h1>User Setup</h1>
+        <form onSubmit={e => {
+          e.preventDefault();
+          createUser(username);
+          setModalOpen(false);
+        }}>
+          <input
+            value={username}
+            onChange={e => setUsername(e.target.value)}
+            placeholder="username"
+            required
+          />
+          <button>Create User</button>
+        </form>
       </Modal>
       <Component
         username={
