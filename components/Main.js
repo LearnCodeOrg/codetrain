@@ -1,3 +1,4 @@
+import Modal from './Modal';
 import Router from 'next/router';
 
 import firebase from 'firebase/app';
@@ -8,6 +9,7 @@ export default function Main(props) {
   const { Component, pageProps } = props;
 
   const [authed, setAuthed] = useState(undefined);
+  const [modalOpen, setModalOpen] = useState(false);
 
   // listen for user auth
   useEffect(() => {
@@ -23,14 +25,20 @@ export default function Main(props) {
   const [userDoc] = useDocument(userRef);
 
   return (
-    <Component
-      username={
-        !authed ? authed :
-        userDoc === undefined ? undefined :
-        userDoc.exists ? userDoc.data().username :
-        null
-      }
-      {...pageProps}
-    />
+    <>
+      <Modal open={modalOpen} setOpen={setModalOpen}>
+        <h1>User Setup</h1>
+      </Modal>
+      <Component
+        username={
+          !authed ? authed :
+          userDoc === undefined ? undefined :
+          userDoc.exists ? userDoc.data().username :
+          null
+        }
+        setupUser={setupUser}
+        {...pageProps}
+      />
+    </>
   );
 }
