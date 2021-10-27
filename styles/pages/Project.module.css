@@ -17,10 +17,6 @@
   margin: 0;
 }
 
-.center > a {
-  margin-bottom: 10px;
-}
-
 .description {
   margin: 0;
 }
@@ -28,4 +24,8 @@
 .editlink {
   margin: 10px 0;
   width: fit-content;
+}
+
+.editlink > a {
+  margin-right: 8px;
 }
