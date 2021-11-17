@@ -84,7 +84,7 @@ export default function Index(props) {
           <Accordion title="Who is Codetrain for?">
             Everyone. Whether you&apos;re a beginner looking to learn more about
             game development or an expert looking to challenge themselves in a
-            constrained environment, Codetrain provides a platform for you.
+            minimalist environment, Codetrain provides a platform for you.
           </Accordion>
           <Accordion title="How can I get started?">
             Check out our{' '}
@@ -97,7 +97,7 @@ export default function Index(props) {
             </Link>.
           </Accordion>
           <Accordion title="Can I contribute?">
-            Codetrain is open source. Want to contribute? Find our GitHub
+            Codetrain is 100% open source. Want to contribute? Find our GitHub
             {' '}repository <a
               href="https://github.com/codeconvoy/codetrain"
               target="_blank"

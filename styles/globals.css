@@ -57,6 +57,14 @@ button, .SnackbarItem-message, .MuiPaper-root * {
   padding: 5px;
 }
 
+.MuiAccordionSummary-content {
+  margin: 0!important;
+}
+
+.MuiAccordionSummary-root.Mui-expanded {
+  min-height: 48px;
+}
+
 :root {
   --white: #ffffff;
   --blue: #2196f3;
