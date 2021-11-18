@@ -21,15 +21,15 @@ export default function GameFrame(props) {
     return (
 `(function() {
   const index = ${index};
-  const move = dir => __move__(index, dir);
-  const movePixels = (x, y) => __movePixels__(index, x, y);
-  const moveTiles = (x, y) => __moveTiles__(index, x, y);
-  const setPixelPos = (x, y) => __setPixelPos__(index, x, y);
-  const setTilePos = (x, y) => __setTilePos__(index, x, y);
-  const getPixelPos = () => __getPixelPos__(index);
-  const getTilePos = () => __getTilePos__(index);
-  const getTile = () => __getTile__(index);
-  const setTile = tile => __setTile__(index, tile);
+  const move = dir => $$.move(index, dir);
+  const movePixels = (x, y) => $$.movePixels(index, x, y);
+  const moveTiles = (x, y) => $$.moveTiles(index, x, y);
+  const setPixelPos = (x, y) => $$.setPixelPos(index, x, y);
+  const setTilePos = (x, y) => $$.setTilePos(index, x, y);
+  const getPixelPos = () => $$.getPixelPos(index);
+  const getTilePos = () => $$.getTilePos(index);
+  const getTile = () => $$.getTile(index);
+  const setTile = tile => $$.setTile(index, tile);
   const getTileAt = (x, y) => $$.background[y * $$.mapSize + x];
   const setTileAt = (x, y, tile) => { $$.background[y * $$.mapSize + x] = tile; }
   const say = text => { $$.dialogue = \`\${text}\`; }
@@ -58,7 +58,7 @@ export default function GameFrame(props) {
     }
   </style>
   <script>
-    // variable declarations
+    // backend variables
     const $$ = {
       dialogue: undefined,
       mapSize: ${mapSize},
@@ -72,52 +72,51 @@ export default function GameFrame(props) {
       background: ${JSON.stringify(background)},
       gameObjects: ${JSON.stringify(gameObjects)},
       lastPressedKeys: {},
-      pressedKeys: {}
-    }
-    // sprite functions
-    function __move__(index, dir) {
-      if (dir === 'up') $$.gameObjects[index].y -= $$.spritePixels;
-      else if (dir === 'down') $$.gameObjects[index].y += $$.spritePixels;
-      else if (dir === 'left') $$.gameObjects[index].x -= $$.spritePixels;
-      else if (dir === 'right') $$.gameObjects[index].x += $$.spritePixels;
-    }
-    function __movePixels__(index, x, y) {
-      $$.gameObjects[index].x += x * $$.pixelPixels;
-      $$.gameObjects[index].y += y * $$.pixelPixels;
-    }
-    function __moveTiles__(index, x, y) {
-      $$.gameObjects[index].x += x * $$.spritePixels;
-      $$.gameObjects[index].y += y * $$.spritePixels;
-    }
-    function __setPixelPos__(index, x, y) {
-      $$.gameObjects[index].x = x * $$.pixelPixels;
-      $$.gameObjects[index].y = y * $$.pixelPixels;
-    }
-    function __setTilePos__(index, x, y) {
-      $$.gameObjects[index].x = x * $$.spritePixels;
-      $$.gameObjects[index].y = y * $$.spritePixels;
-    }
-    function __getPixelPos__(index) {
-      return {
-        x: Math.floor($$.gameObjects[index].x / $$.pixelPixels),
-        y: Math.floor($$.gameObjects[index].y / $$.pixelPixels)
-      };
-    }
-    function __getTilePos__(index) {
-      return {
-        x: Math.floor($$.gameObjects[index].x / $$.spritePixels),
-        y: Math.floor($$.gameObjects[index].y / $$.spritePixels)
-      };
-    }
-    function __getTile__(index) {
-      const position = __getTilePosition__(index);
-      const tileIndex = position.y * $$.mapSize + position.x;
-      return $$.background[tileIndex];
-    }
-    function __setTile__(index, tile) {
-      const position = __getTilePosition__(index);
-      const tileIndex = position.y * $$.mapSize + position.x;
-      $$.background[tileIndex] = tile;
+      pressedKeys: {},
+      move: (index, dir) => {
+        if (dir === 'up') $$.gameObjects[index].y -= $$.spritePixels;
+        else if (dir === 'down') $$.gameObjects[index].y += $$.spritePixels;
+        else if (dir === 'left') $$.gameObjects[index].x -= $$.spritePixels;
+        else if (dir === 'right') $$.gameObjects[index].x += $$.spritePixels;
+      },
+      movePixels: (index, x, y) => {
+        $$.gameObjects[index].x += x * $$.pixelPixels;
+        $$.gameObjects[index].y += y * $$.pixelPixels;
+      },
+      moveTiles: (index, x, y) => {
+        $$.gameObjects[index].x += x * $$.spritePixels;
+        $$.gameObjects[index].y += y * $$.spritePixels;
+      },
+      setPixelPos: (index, x, y) => {
+        $$.gameObjects[index].x = x * $$.pixelPixels;
+        $$.gameObjects[index].y = y * $$.pixelPixels;
+      },
+      setTilePos: (index, x, y) => {
+        $$.gameObjects[index].x = x * $$.spritePixels;
+        $$.gameObjects[index].y = y * $$.spritePixels;
+      },
+      getPixelPos: (index) => {
+        return {
+          x: Math.floor($$.gameObjects[index].x / $$.pixelPixels),
+          y: Math.floor($$.gameObjects[index].y / $$.pixelPixels)
+        };
+      },
+      getTilePos: (index) => {
+        return {
+          x: Math.floor($$.gameObjects[index].x / $$.spritePixels),
+          y: Math.floor($$.gameObjects[index].y / $$.spritePixels)
+        };
+      },
+      getTile: (index) => {
+        const pos = $$.getTilePos(index);
+        const tileIndex = pos.y * $$.mapSize + pos.x;
+        return $$.background[tileIndex];
+      },
+      setTile: (index, tile) => {
+        const pos = $$.getTilePos(index);
+        const tileIndex = pos.y * $$.mapSize + pos.x;
+        $$.background[tileIndex] = tile;
+      }
     }
     // set up input listeners
     window.onkeydown = e => {
