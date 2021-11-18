@@ -24,10 +24,10 @@ export default function GameFrame(props) {
   const move = dir => __move__(index, dir);
   const movePixels = (x, y) => __movePixels__(index, x, y);
   const moveTiles = (x, y) => __moveTiles__(index, x, y);
-  const moveToPixel = (x, y) => __moveToPixel__(index, x, y);
-  const moveToTile = (x, y) => __moveToTile__(index, x, y);
-  const getPixelPosition = () => __getPixelPosition__(index);
-  const getTilePosition = () => __getTilePosition__(index);
+  const setPixelPos = (x, y) => __setPixelPos__(index, x, y);
+  const setTilePos = (x, y) => __setTilePos__(index, x, y);
+  const getPixelPos = () => __getPixelPos__(index);
+  const getTilePos = () => __getTilePos__(index);
   const getTile = () => __getTile__(index);
   const setTile = tile => __setTile__(index, tile);
   const getTileAt = (x, y) => background[y * mapSize + x];
@@ -87,21 +87,21 @@ export default function GameFrame(props) {
       gameObjects[index].x += x * spritePixels;
       gameObjects[index].y += y * spritePixels;
     }
-    function __moveToPixel__(index, x, y) {
+    function __setPixelPos__(index, x, y) {
       gameObjects[index].x = x * pixelPixels;
       gameObjects[index].y = y * pixelPixels;
     }
-    function __moveToTile__(index, x, y) {
+    function __setTilePos__(index, x, y) {
       gameObjects[index].x = x * spritePixels;
       gameObjects[index].y = y * spritePixels;
     }
-    function __getPixelPosition__(index) {
+    function __getPixelPos__(index) {
       return {
         x: Math.floor(gameObjects[index].x / pixelPixels),
         y: Math.floor(gameObjects[index].y / pixelPixels)
       };
     }
-    function __getTilePosition__(index) {
+    function __getTilePos__(index) {
       return {
         x: Math.floor(gameObjects[index].x / spritePixels),
         y: Math.floor(gameObjects[index].y / spritePixels)

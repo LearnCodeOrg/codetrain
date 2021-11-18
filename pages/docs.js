@@ -191,16 +191,30 @@ function update() {
   if (isKeyDown('d')) movePixels(1, 0);
 }`}
           </Code>
-          Object position can be found with <code>getTilePosition()</code> and
-          {' '}<code>getPixelPosition()</code>.<br /><br />
-          <code>getTilePosition()</code> returns <code>x</code>, <code>y</code>
+          Object position can be retrieved with <code>getTilePos()</code> and
+          {' '}<code>getPixelPos()</code>.<br /><br />
+          <code>getTilePos()</code> returns <code>x</code>, <code>y</code>
           {' '}position in tiles.<br />
-          <code>getPixelPosition()</code> returns <code>x</code>, <code>y</code>
+          <code>getPixelPos()</code> returns <code>x</code>, <code>y</code>
           {' '}position in pixels.
           <Code>
-{`const pos = getTilePosition();
+{`const pos = getTilePos();
 
-say(\`Object is at \${x}, \${y}\`);`}
+say(\`Object is at \${pos.x}, \${pos.y}\`);`}
+          </Code>
+          Object position can be set with <code>moveToTile(x, y)</code> and{' '}
+          <code>moveToPixel(x, y)</code>.
+          <br /><br />
+          <code>setTilePos(x, y)</code> moves object to <code>x</code>,{' '}
+          <code>y</code>, in tiles.<br />
+          <code>setPixelPos(x, y)</code> moves object to <code>x</code>,{' '}
+          <code>y</code>, in pixels.
+          <Code>
+{`// setting object position
+function update() {
+  if (isKeyDown('0')) setTilePos(0, 0);
+  if (isKeyDown('1')) setTilePos(7, 7);
+}`}
           </Code>
           <hr />
           <div id="tiles" className={styles.bookmark} />
