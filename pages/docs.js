@@ -128,7 +128,7 @@ function update() {
               <LinkIcon />
             </a>
           </h2>
-          A dialogue box can be opened with <code>say(text)</code>.<br />
+          Dialogue boxes can be opened with <code>say(text)</code>.<br />
           <Code>
 {`say('Hello World!');`}
           </Code>
@@ -202,8 +202,8 @@ function update() {
 
 say(\`Object is at \${pos.x}, \${pos.y}\`);`}
           </Code>
-          Object position can be set with <code>moveToTile(x, y)</code> and{' '}
-          <code>moveToPixel(x, y)</code>.
+          Object position can be set with <code>setTilePos(x, y)</code> and{' '}
+          <code>setPixelPos(x, y)</code>.
           <br /><br />
           <code>setTilePos(x, y)</code> moves object to <code>x</code>,{' '}
           <code>y</code>, in tiles.<br />

@@ -4,7 +4,7 @@
   position: sticky;
   top: 0;
   background: var(--primary);
-  z-index: 1;
+  z-index: 10;
   display: flex;
   align-items: center;
   box-shadow: 0 0 4px #333;

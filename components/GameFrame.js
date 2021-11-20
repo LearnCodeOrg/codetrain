@@ -116,7 +116,12 @@ export default function GameFrame(props) {
         const pos = $$.getTilePos(index);
         const tileIndex = pos.y * $$.mapSize + pos.x;
         $$.background[tileIndex] = tile;
-      }
+      },
+      spriteCodes: [
+        ${gameObjects.map((gameObject, index) =>
+          getCodeFunction(gameObject, index)
+        ).join(',\n')}
+      ]
     }
     // set up input listeners
     window.onkeydown = e => {
@@ -139,12 +144,6 @@ export default function GameFrame(props) {
       const keyCode = key.toUpperCase().charCodeAt(0);
       return $$.pressedKeys[keyCode] && !$$.lastPressedKeys[keyCode];
     }
-    // sprite codes
-    const spriteCodes = [
-      ${gameObjects.map((gameObject, index) =>
-        getCodeFunction(gameObject, index)
-      ).join(',\n')}
-    ];
     // runs after body has loaded
     function __start__() {
       // variable declarations
@@ -210,7 +209,7 @@ export default function GameFrame(props) {
       // game loop
       function gameLoop(time) {
         // run update functions
-        spriteCodes.forEach(code => code.update());
+        $$.spriteCodes.forEach(code => code.update());
         // draw
         draw();
         // update keys
@@ -222,7 +221,7 @@ export default function GameFrame(props) {
       canvas = document.getElementById('canvas-game');
       ctx = canvas.getContext('2d');
       // run start functions
-      spriteCodes.forEach(code => code.start());
+      $$.spriteCodes.forEach(code => code.start());
       // start game loop
       requestAnimationFrame(gameLoop);
     }

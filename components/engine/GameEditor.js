@@ -84,6 +84,7 @@ export default function GameEditor(props) {
   async function saveProject() {
     // return if not authed
     if (!uid) return;
+    const time = new Date().getTime();
     // construct project object
     const projectObj = {
       username, uid: uid,
@@ -92,7 +93,7 @@ export default function GameEditor(props) {
       gameObjects: removeObjectUnits(gameObjects, pixelPixels),
       tiles: JSON.stringify(tiles),
       objects: JSON.stringify(objects),
-      modified: new Date().getTime()
+      modified: time
     };
     // if own project and existing, save
     if (props.creator && uid === props.creator && projectId) {
@@ -103,8 +104,8 @@ export default function GameEditor(props) {
     } else {
       const docRef = await projectsRef.add(
         projectId ?
-        { created: new Date().getTime(), ...projectObj, remixed: projectId } :
-        { created: new Date().getTime(), ...projectObj }
+        { created: time, ...projectObj, remixed: projectId } :
+        { created: time, ...projectObj }
       );
       editorDirty = false;
       Router.push(`/projects/${docRef.id}`);
