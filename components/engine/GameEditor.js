@@ -269,6 +269,20 @@ export default function GameEditor(props) {
     return objectNames[currObject];
   }
 
+  // updates current object id with given value
+  function updateObjectId(value) {
+    // get held object
+    const heldObject = gameObjects[gameObjects.length - 1];
+    const newGameObjects = gameObjects.slice();
+    const heldIndex = newGameObjects.indexOf(heldObject);
+    // splice new object
+    newGameObjects.splice(heldIndex, 1);
+    newGameObjects.push({
+      id: value, x: heldObject.x, y: heldObject.y, sprite: heldObject.sprite
+    });
+    setGameObjects(newGameObjects);
+  }
+
   // returns position of current held object
   function getHeldPosition() {
     // return if no objects
@@ -467,6 +481,8 @@ export default function GameEditor(props) {
                 </Button>
                 <input
                   className="grayinput"
+                  value={gameObjects[currObject].id}
+                  onChange={e => updateObjectId(e.target.value)}
                 />
               </>
             }
