@@ -45,7 +45,7 @@ export default function GameFrame(props) {
 `<html>
   <body onload="__start__()">
     <canvas
-      id="canvas-game"
+      id="$$canvas"
       width=${mapPixels}
       height=${mapPixels}
     />
@@ -68,6 +68,7 @@ export default function GameFrame(props) {
   <script>
     // backend variables
     const $$ = {
+      ctx: $$canvas.getContext('2d'),
       dialogue: undefined,
       mapSize: ${mapSize},
       mapPixels: ${mapPixels},
@@ -126,6 +127,10 @@ export default function GameFrame(props) {
         $$.background[tileIndex] = tile;
       },
       throwError: (message) => {
+        // clear canvas
+        $$.ctx.fillStyle = '#fff';
+        $$.ctx.fillRect(0, 0, $$.mapPixels, $$.mapPixels);
+        // create error text
         const p = document.createElement('p');
         p.className = 'error';
         p.innerText = message;
@@ -155,8 +160,6 @@ export default function GameFrame(props) {
     }
     // runs after body has loaded
     function __start__() {
-      // variable declarations
-      let canvas, ctx;
       // canvas functions
       function drawSprite(sprite, x, y) {
         // for each pixel
@@ -233,9 +236,6 @@ export default function GameFrame(props) {
         // continue loop
         requestAnimationFrame(gameLoop);
       }
-      // get canvas and context
-      canvas = document.getElementById('canvas-game');
-      ctx = canvas.getContext('2d');
       // try starting game
       try {
         // initialize user code
