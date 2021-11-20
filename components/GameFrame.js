@@ -56,6 +56,14 @@ export default function GameFrame(props) {
       overflow: hidden;
       background: #fff;
     }
+    .error {
+      margin: 10px;
+      position: absolute;
+      top: 0;
+      color: red;
+      font-family:
+        'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+    }
   </style>
   <script>
     // backend variables
@@ -116,6 +124,12 @@ export default function GameFrame(props) {
         const pos = $$.getTilePos(index);
         const tileIndex = pos.y * $$.mapSize + pos.x;
         $$.background[tileIndex] = tile;
+      },
+      throwError: (message) => {
+        const p = document.createElement('p');
+        p.className = 'error';
+        p.innerText = message;
+        document.body.appendChild(p);
       }
     }
     // set up input listeners
@@ -207,8 +221,9 @@ export default function GameFrame(props) {
         try {
           // run update functions
           $$.spriteCodes.forEach(code => code.update());
+        // throw error
         } catch (e) {
-          console.log(e.message);
+          $$.throwError(e);
           return;
         }
         // draw
@@ -232,9 +247,9 @@ export default function GameFrame(props) {
         // start game loop
         $$.spriteCodes.forEach(code => code.start());
         requestAnimationFrame(gameLoop);
-      // catch error
+      // throw error
       } catch (e) {
-        console.log(e.message);
+        $$.throwError(e);
       }
     }
   </script>
