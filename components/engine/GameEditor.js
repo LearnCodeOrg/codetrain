@@ -190,8 +190,6 @@ export default function GameEditor(props) {
 
   // sketches map with given mouse event data
   function sketchMap(e) {
-    // return if tutorial
-    if (props.tutorial) return;
     // return if not showing sketch target
     if (currTile !== -1 && !showTiles) return;
     if (currObject !== -1 && !showObjects) return;
@@ -212,6 +210,7 @@ export default function GameEditor(props) {
       setBackground(newBackground);
     // sketch object
     } else {
+      // get click position
       const pixeledX = Math.floor(currX / pixelPixels) * pixelPixels;
       const pixeledY = Math.floor(currY / pixelPixels) * pixelPixels;
       const centerX = clamp(pixeledX, halfSprite, mapPixels - halfSprite);
@@ -242,7 +241,6 @@ export default function GameEditor(props) {
           // get held object
           holding = true;
           const heldObject = clicked[0];
-          if (heldObject.x === x && heldObject.y === y) return;
           // update held object position
           const heldIndex = newGameObjects.indexOf(heldObject);
           newGameObjects.splice(heldIndex, 1);
