@@ -20,16 +20,16 @@ export default function GameFrame(props) {
     const { x, y, sprite } = gameObject;
     return (
 `(function() {
-  const index = ${index};
-  const move = dir => $$.move(index, dir);
-  const movePixels = (x, y) => $$.movePixels(index, x, y);
-  const moveTiles = (x, y) => $$.moveTiles(index, x, y);
-  const setPixelPos = (x, y) => $$.setPixelPos(index, x, y);
-  const setTilePos = (x, y) => $$.setTilePos(index, x, y);
-  const getPixelPos = () => $$.getPixelPos(index);
-  const getTilePos = () => $$.getTilePos(index);
-  const getTile = () => $$.getTile(index);
-  const setTile = tile => $$.setTile(index, tile);
+  const $$index = ${index};
+  const move = dir => $$.move($$index, dir);
+  const movePixels = (x, y) => $$.movePixels($$index, x, y);
+  const moveTiles = (x, y) => $$.moveTiles($$index, x, y);
+  const setPixelPos = (x, y) => $$.setPixelPos($$index, x, y);
+  const setTilePos = (x, y) => $$.setTilePos($$index, x, y);
+  const getPixelPos = () => $$.getPixelPos($$index);
+  const getTilePos = () => $$.getTilePos($$index);
+  const getTile = () => $$.getTile($$index);
+  const setTile = tile => $$.setTile($$index, tile);
   const getTileAt = (x, y) => $$.background[y * $$.mapSize + x];
   const setTileAt = (x, y, tile) => { $$.background[y * $$.mapSize + x] = tile; }
   const say = text => { $$.dialogue = \`\${text}\`; }
@@ -165,12 +165,12 @@ export default function GameFrame(props) {
             // set fill color
             const colorIndex = yp * $$.spriteSize + xp;
             const color = $$.colors[sprite[colorIndex]];
-            ctx.fillStyle = color;
+            $$.ctx.fillStyle = color;
             // get fill position
             let xm = x + xp * $$.pixelPixels;
             let ym = y + yp * $$.pixelPixels;
             // fill pixel
-            ctx.fillRect(xm, ym, $$.pixelPixels, $$.pixelPixels);
+            $$.ctx.fillRect(xm, ym, $$.pixelPixels, $$.pixelPixels);
           }
         }
       }
@@ -200,20 +200,20 @@ export default function GameFrame(props) {
           const offset = 8;
           const width = $$.mapPixels * 3 / 4 + offset * 2;
           const height = $$.mapPixels / 4 + offset * 2;
-          ctx.fillStyle = '#fff';
-          ctx.fillRect(left - offset, top - offset, width, height);
-          ctx.fillStyle = '#000';
+          $$.ctx.fillStyle = '#fff';
+          $$.ctx.fillRect(left - offset, top - offset, width, height);
+          $$.ctx.fillStyle = '#000';
           const fontSize = 16;
           const lineSize = 20;
-          ctx.font = \`\${fontSize}px monospace\`;
+          $$.ctx.font = \`\${fontSize}px monospace\`;
           const line1 = $$.dialogue.slice(0, lineSize);
           const line2 = $$.dialogue.slice(lineSize, lineSize * 2);
           const line3 = $$.dialogue.slice(lineSize * 2, lineSize * 3);
           const line4 = $$.dialogue.slice(lineSize * 3, lineSize * 4);
-          ctx.fillText(line1, left, top + fontSize);
-          ctx.fillText(line2, left, top + fontSize * 2);
-          ctx.fillText(line3, left, top + fontSize * 3);
-          ctx.fillText(line4, left, top + fontSize * 4);
+          $$.ctx.fillText(line1, left, top + fontSize);
+          $$.ctx.fillText(line2, left, top + fontSize * 2);
+          $$.ctx.fillText(line3, left, top + fontSize * 3);
+          $$.ctx.fillText(line4, left, top + fontSize * 4);
         }
       }
       // game loop
