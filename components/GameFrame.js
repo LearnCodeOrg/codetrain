@@ -116,12 +116,7 @@ export default function GameFrame(props) {
         const pos = $$.getTilePos(index);
         const tileIndex = pos.y * $$.mapSize + pos.x;
         $$.background[tileIndex] = tile;
-      },
-      spriteCodes: [
-        ${gameObjects.map((gameObject, index) =>
-          getCodeFunction(gameObject, index)
-        ).join(',\n')}
-      ]
+      }
     }
     // set up input listeners
     window.onkeydown = e => {
@@ -165,6 +160,7 @@ export default function GameFrame(props) {
           }
         }
       }
+      // draws the canvas
       function draw() {
         // for each tile
         for (let y = 0; y < $$.mapSize; y++) {
@@ -208,8 +204,13 @@ export default function GameFrame(props) {
       }
       // game loop
       function gameLoop(time) {
-        // run update functions
-        $$.spriteCodes.forEach(code => code.update());
+        try {
+          // run update functions
+          $$.spriteCodes.forEach(code => code.update());
+        } catch (e) {
+          console.log(e.message);
+          return;
+        }
         // draw
         draw();
         // update keys
@@ -220,10 +221,21 @@ export default function GameFrame(props) {
       // get canvas and context
       canvas = document.getElementById('canvas-game');
       ctx = canvas.getContext('2d');
-      // run start functions
-      $$.spriteCodes.forEach(code => code.start());
-      // start game loop
-      requestAnimationFrame(gameLoop);
+      // try starting game
+      try {
+        // initialize user code
+        $$.spriteCodes = [
+          ${gameObjects.map((gameObject, index) =>
+            getCodeFunction(gameObject, index)
+          ).join(',\n')}
+        ];
+        // start game loop
+        $$.spriteCodes.forEach(code => code.start());
+        requestAnimationFrame(gameLoop);
+      // catch error
+      } catch (e) {
+        console.log(e.message);
+      }
     }
   </script>
 </html>
