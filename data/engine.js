@@ -79,7 +79,8 @@ export const background = [
 
 // default data
 export const defaultData = {
-  codes, colors, background, gameObjects: [{ sprite: 0, x: 0, y: 0 }],
-  title: 'My First Project', description: 'WASD to move.', objectNames,
+  codes, colors, background, objectNames,
+  gameObjects: [{ id: objectNames[0], sprite: 0, x: 0, y: 0 }],
+  title: 'My First Project', description: 'WASD to move.',
   tiles: JSON.stringify(tiles), objects: JSON.stringify(objects)
 };

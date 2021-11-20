@@ -226,7 +226,9 @@ export default function GameEditor(props) {
         // if held object moved
         if (heldObject.x !== x || heldObject.y !== y) {
           // update held object
-          newGameObjects[heldIndex] = { x, y, sprite: heldObject.sprite };
+          newGameObjects[heldIndex] = {
+            id: heldObject.id, x, y, sprite: heldObject.sprite
+          };
           setGameObjects(newGameObjects);
         }
       // if not holding object
@@ -244,12 +246,15 @@ export default function GameEditor(props) {
           // update held object position
           const heldIndex = newGameObjects.indexOf(heldObject);
           newGameObjects.splice(heldIndex, 1);
-          newGameObjects.push({ x, y, sprite: clicked[0].sprite });
+          newGameObjects.push({
+            id: heldObject.id, x, y, sprite: heldObject.sprite
+          });
           setGameObjects(newGameObjects);
         // if empty space
         } else {
           // create object
-          const object = { x, y, sprite: currObject };
+          const id = getNewId();
+          const object = { id, x, y, sprite: currObject };
           newGameObjects.push(object);
           // start holding and update objects
           holding = true;
@@ -257,6 +262,11 @@ export default function GameEditor(props) {
         }
       }
     }
+  }
+
+  // returns a unique new id for current object
+  function getNewId() {
+    return objectNames[currObject];
   }
 
   // returns position of current held object
@@ -455,6 +465,9 @@ export default function GameEditor(props) {
                 >
                   <DeleteIcon />
                 </Button>
+                <input
+                  className="grayinput"
+                />
               </>
             }
           </>
