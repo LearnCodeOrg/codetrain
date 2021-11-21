@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { palettes } from '../data/palettes';
 import { defaultData } from '../data/engine';
 
-import styles from '../styles/pages/Engine.module.css';
+import styles from '../styles/pages/Create.module.css';
 
 export default function Create(props) {
   return (
