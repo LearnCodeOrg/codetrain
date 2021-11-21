@@ -1,6 +1,5 @@
 .container {
-  height: 60px;
-  width: 100%;
+  height: var(--header);
   position: sticky;
   top: 0;
   background: var(--primary);
@@ -36,9 +35,26 @@
 
 .container > button {
   margin-right: 10px;
+}
+
+.container button {
   color: #666;
 }
 
-.container > button:hover {
+.container button:hover {
   color: var(--highlight);
+}
+
+.smallscreen {
+  display: none;
+  align-items: center;
+}
+
+@media (max-width: 576px) {
+  .smallscreen {
+    display: flex;
+  }
+  .bigscreen {
+    display: none;
+  }
 }
