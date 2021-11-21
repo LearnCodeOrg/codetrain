@@ -13,7 +13,7 @@ let sketching = false;
 
 export default function Tiles(props) {
   const {
-    container,
+    containerRef,
     colors, tiles, currTile, setCurrTile
   } = props;
 
@@ -84,8 +84,8 @@ export default function Tiles(props) {
   // selects sprite with given mouse event data
   function select(e) {
     // get x and y on canvas
-    const currX = e.clientX - canvas.offsetLeft + container.scrollLeft - selectBorder;
-    const currY = e.clientY - canvas.offsetTop + container.scrollTop - selectBorder;
+    const currX = e.clientX - canvas.offsetLeft + containerRef.current.scrollLeft - selectBorder;
+    const currY = e.clientY - canvas.offsetTop + containerRef.current.scrollTop - selectBorder;
     // get x and y in grid units
     const gridX = clamp(Math.floor(currX / selectSpritePixels), 0, sqrtSpriteCount - 1);
     const gridY = clamp(Math.floor(currY / selectSpritePixels), 0, sqrtSpriteCount - 1);

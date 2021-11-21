@@ -12,7 +12,7 @@ const pixelPixels = 32;
 
 export default function Draw(props) {
   const {
-    container,
+    containerRef,
     colors, tiles, setTiles, objects, setObjects,
     currTile, currObject, currColor
   } = props;
@@ -23,8 +23,8 @@ export default function Draw(props) {
   // sketches sprite with given mouse event data
   function sketch(e) {
     // get x and y on canvas
-    const currX = e.clientX - canvas.offsetLeft + container.scrollLeft;
-    const currY = e.clientY - canvas.offsetTop + container.scrollTop;
+    const currX = e.clientX - canvas.offsetLeft + containerRef.current.scrollLeft;
+    const currY = e.clientY - canvas.offsetTop + containerRef.current.scrollTop;
     // get x and y in pixel units
     const pixelX = clamp(Math.floor(currX / pixelPixels), 0, spriteSize - 1);
     const pixelY = clamp(Math.floor(currY / pixelPixels), 0, spriteSize - 1);
