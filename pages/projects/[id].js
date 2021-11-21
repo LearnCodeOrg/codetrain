@@ -27,8 +27,8 @@ export default function Project(props) {
 
   // retrieves project data from firebase
   async function getProjectData() {
-    // return if no id
-    if (!id) return;
+    // clear project
+    setData(undefined);
     // get and set project data
     const projectRef = firebase.firestore().collection('projects').doc(id);
     const projectDoc = await projectRef.get();
@@ -37,7 +37,7 @@ export default function Project(props) {
 
   // get project data on start
   useEffect(() => {
-    getProjectData();
+    if (id) getProjectData();
   }, [id]);
 
   // return if invalid data
@@ -55,7 +55,7 @@ export default function Project(props) {
               {
                 data.remixed &&
                 <Link href={`/projects/${data.remixed}`}>
-                  <a>(Remix)</a>
+                  <a>(Remixed)</a>
                 </Link>
               }
             </span>
