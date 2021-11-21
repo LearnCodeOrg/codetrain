@@ -35,7 +35,7 @@ export default function Header(props) {
 
   return (
     <div className={styles.container}>
-      <HeaderLink href="/" className={styles.icon}>
+      <HeaderLink href="/" className={styles.logo}>
         <Image
           src="/img/logo.png"
           height="48"
@@ -43,8 +43,8 @@ export default function Header(props) {
           alt="logo"
           quality={100}
         />
+        <h1>Codetrain</h1>
       </HeaderLink>
-      <h1>Codetrain</h1>
       <span className="flexfill" />
       <HeaderLink href="/" className={styles.link}>Home</HeaderLink>
       <HeaderLink href="/create" className={styles.link}>Create</HeaderLink>
