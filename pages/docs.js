@@ -265,6 +265,16 @@ else setTile(0);
               <LinkIcon />
             </a>
           </h2>
+          Objects can be retrieved with <code>getObjectById(id)</code>.
+          <br /><br />
+          <code>getObjectById(id)</code> returns the first reference of an{' '}
+          object with given <code>id</code>.
+          <Code>
+{`const player = getObjectById('player');
+
+player.move('right');
+`}
+          </Code>
         </div>
       </div>
     </div>
