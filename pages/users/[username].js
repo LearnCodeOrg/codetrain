@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import Header from '../../components/Header';
 import Project from '../../components/cards/Project';
 import Loading from '../../components/Loading';
@@ -46,26 +47,35 @@ export default function User(props) {
     getUserData();
   }, [username]);
 
-  // return if invalid data
-  if (userData === undefined) return <Loading />;
-  if (!userData) return <div>User not found</div>;
-
   return (
-    <div>
+    <div className={styles.container}>
       <Header {...props} />
-      <div className={styles.head}>
-        <h1>{userData.username}</h1>
-        <p>Joined {new Date(userData.joined).toLocaleDateString()}</p>
-      </div>
-      <div className={styles.projects}>
-        {
-          projects ?
-          projects.map(project =>
-            <Project {...project} key={project.id} />
-          ) :
-          <Loading />
-        }
-      </div>
+      {
+        userData === undefined ?
+        <Loading /> :
+        !userData ?
+        <div className="notfound">
+          <h1>User not found</h1>
+          <Link href="/">
+            <a className="bluelink">Return home</a>
+          </Link>
+        </div> :
+        <>
+          <div className={styles.head}>
+            <h1>{userData.username}</h1>
+            <p>Joined {new Date(userData.joined).toLocaleDateString()}</p>
+          </div>
+          <div className={styles.projects}>
+            {
+              projects ?
+              projects.map(project =>
+                <Project {...project} key={project.id} />
+              ) :
+              <Loading />
+            }
+          </div>
+        </>
+      }
     </div>
   );
 }
