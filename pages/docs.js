@@ -116,14 +116,15 @@ export default function Docs(props) {
           <code>start()</code> runs once at the start of the game.<br />
           <code>update()</code> runs once a frame.
           <Code>
-{`let frames = 0;
+{`// code here runs first
 
 function start() {
-  console.log(frames); // runs before update, logs 0
+  // code here runs second
 }
 
 function update() {
-  frames += 1;
+  // code here runs last
+  // code here runs every frame
 }`}
           </Code>
           <hr />
@@ -135,9 +136,12 @@ function update() {
               <LinkIcon />
             </a>
           </h2>
-          Dialogue boxes can be opened with <code>say(text)</code>.<br />
+          Text can be displayed with <code>say(text)</code>.<br /><br />
+          <code>say(text)</code> opens a dialogue box with given{' '}
+          <code>text</code>.
           <Code>
-{`say('Hello World!');`}
+{`// open dialogue box saying 'Hello World!'
+say('Hello World!');`}
           </Code>
           <hr />
           <div id="input" className={styles.bookmark} />
@@ -156,10 +160,12 @@ function update() {
           {' '}pressed in the last frame.
           <Code>
 {`function update() {
-  if (isKey('q')) say('Q pressed'); // triggers once
-  if (isKeyDown('q')) console.log('Q down'); // triggers continually
-}
-`}
+  // triggers when q pressed down
+  if (isKey('q')) say('Q pressed');
+
+  // triggers while q pressed down
+  if (isKeyDown('q')) console.log('Q down');
+}`}
           </Code>
           <hr />
           <div id="movement" className={styles.bookmark} />
@@ -186,8 +192,7 @@ function update() {
   if (isKey('a')) move('left');
   if (isKey('s')) move('down');
   if (isKey('d')) move('right');
-}
-`}
+}`}
           </Code>
           <Code>
 {`// smooth object movement
@@ -205,9 +210,11 @@ function update() {
           <code>getPixelPos()</code> returns <code>x</code>, <code>y</code>
           {' '}position in pixels.
           <Code>
-{`const pos = getTilePos();
+{`// get tile position
+const pos = getTilePos();
 
-say(\`Object is at \${pos.x}, \${pos.y}\`);`}
+// if at 0, 0, open dialogue box
+if (pos.x === 0 && pos.y === 0) say('At 0, 0');`}
           </Code>
           Object position can be set with <code>setTilePos(x, y)</code> and{' '}
           <code>setPixelPos(x, y)</code>.
@@ -217,9 +224,11 @@ say(\`Object is at \${pos.x}, \${pos.y}\`);`}
           <code>setPixelPos(x, y)</code> moves object to <code>x</code>,{' '}
           <code>y</code>, in pixels.
           <Code>
-{`// setting object position
-function update() {
+{`function update() {
+  // if 0 pressed, move to top left corner
   if (isKeyDown('0')) setTilePos(0, 0);
+
+  // if 1 pressed, move to bottom right corner
   if (isKeyDown('1')) setTilePos(7, 7);
 }`}
           </Code>
@@ -238,10 +247,11 @@ function update() {
           <code>getTileAt(x, y)</code> returns index of tile at <code>x</code>,
           {' '}<code>y</code>.
           <Code>
-{`const tile = getTile();
+{`// get tile at position
+const tile = getTile();
 
-say(\`Object is on tile \${tile}\`);
-`}
+// if on tile 0, open dialogue box
+if (tile === 0) say('On tile 0');`}
           </Code>
           Tiles can be modified with <code>setTile(tile)</code> and
           {' '}<code>setTileAt(x, y, tile)</code>.<br /><br />
@@ -249,12 +259,11 @@ say(\`Object is on tile \${tile}\`);
           <code>setTileAt(x, y, tile)</code> sets tile at <code>x</code>,
           {' '}<code>y</code> to index <code>tile</code>.
           <Code>
-{`const tile = getTile();
+{`// get tile at position
+const tile = getTile();
 
-// toggle tile at position
-if (tile === 0) setTile(1);
-else setTile(0);
-`}
+// if tile 1, set to tile 0
+if (tile === 1) setTile(0);`}
           </Code>
           <hr />
           <div id="objects" className={styles.bookmark} />
@@ -270,10 +279,11 @@ else setTile(0);
           <code>getObjectById(id)</code> returns the first reference of an{' '}
           object with given <code>id</code>.
           <Code>
-{`const player = getObjectById('player');
+{`// get object with ID 'player'
+const player = getObjectById('player');
 
-player.move('right');
-`}
+// move player right
+player.move('right');`}
           </Code>
         </div>
       </div>
