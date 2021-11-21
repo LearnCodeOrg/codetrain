@@ -3,7 +3,6 @@
 }
 
 .main {
-  min-height: calc(100% - 60px);
   padding: 20px;
   background: var(--white);
   color: var(--black);
