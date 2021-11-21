@@ -6,12 +6,15 @@ import Draw from './Draw.js';
 import Code from './Code.js';
 
 import { SnackbarProvider, useSnackbar } from 'notistack';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import styles from '../../styles/components/engine/Engine.module.css';
 
 export default function Engine(props) {
   const { data, projectId, username, setupUser } = props;
+
+  const containerRef = useRef();
+  const container = containerRef.current;
 
   const [codes, setCodes] = useState(data.codes);
   const [objectNames, setObjectNames] = useState(data.objectNames);
@@ -33,7 +36,7 @@ export default function Engine(props) {
 
   return (
     <SnackbarProvider maxSnack={3}>
-      <div className={styles.container}>
+      <div ref={containerRef} className={styles.container}>
         <div className={styles.content}>
           <Code
             currObject={currObject}
@@ -47,6 +50,7 @@ export default function Engine(props) {
                 currColor={currColor} setCurrColor={setCurrColor}
               />
               <Draw
+                container={container}
                 colors={colors} tiles={tiles} objects={objects}
                 currTile={currTile} currObject={currObject} currColor={currColor}
                 setTiles={setTiles} setObjects={setObjects}
@@ -55,11 +59,13 @@ export default function Engine(props) {
             <div className="flexfill" />
             <div className={styles.tileselect}>
               <Tiles
+                container={container}
                 colors={colors}
                 tiles={tiles}
                 currTile={currTile} setCurrTile={setCurrTile}
               />
               <Objects
+                container={container}
                 colors={colors}
                 objects={objects}
                 currObject={currObject} setCurrObject={setCurrObject}
@@ -67,6 +73,7 @@ export default function Engine(props) {
             </div>
           </div>
           <GameEditor
+            container={container}
             username={username}
             projectId={projectId} creator={data.uid}
             colors={colors} tiles={tiles} objects={objects}

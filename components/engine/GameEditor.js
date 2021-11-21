@@ -41,6 +41,7 @@ const keys = {};
 
 export default function GameEditor(props) {
   const {
+    container,
     projectId, creator, username,
     colors, currTile, currObject, codes,
     objectNames, tiles, objects,
@@ -198,8 +199,8 @@ export default function GameEditor(props) {
     if (currTile !== -1 && !showTiles) return;
     if (currObject !== -1 && !showObjects) return;
     // get x and y on canvas
-    const currX = e.clientX - canvas.offsetLeft + window.scrollX;
-    const currY = e.clientY - canvas.offsetTop + window.scrollY;
+    const currX = e.clientX - canvas.offsetLeft + container.scrollLeft;
+    const currY = e.clientY - canvas.offsetTop + container.scrollTop;
     // get x and y in map units
     const tileX = clamp(Math.floor(currX / spritePixels), 0, mapSize - 1);
     const tileY = clamp(Math.floor(currY / spritePixels), 0, mapSize - 1);
