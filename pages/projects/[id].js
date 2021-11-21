@@ -40,48 +40,55 @@ export default function Project(props) {
     if (id) getProjectData();
   }, [id]);
 
-  // return if invalid data
-  if (data === undefined) return <Loading />;
-  if (!data) return <div>Project not found</div>;
-
   return (
     <div className={styles.container}>
       <Header {...props} />
-      <div className={styles.main}>
-        <div className={styles.center}>
-          <h1>
-            {data.title}
-            <span className={styles.remix}>
-              {
-                data.remixed &&
-                <Link href={`/projects/${data.remixed}`}>
-                  <a>(Remixed)</a>
-                </Link>
-              }
-            </span>
-          </h1>
-          <p className={styles.description}>{data.description}</p>
-          <Link href={`/users/${data.uid}`}>
-            <a>{data.username}</a>
+      {
+        data === undefined ?
+        <Loading /> :
+        !data ?
+        <div className="notfound">
+          <h1>Project not found</h1>
+          <Link href="/">
+            <a className="bluelink">Return home</a>
           </Link>
-          <p className={styles.editlink}>
-            <Link href={`/edit/${id}`}>
-              <a>Edit {data.title}</a>
+        </div> :
+        <div className={styles.main}>
+          <div className={styles.center}>
+            <h1>
+              {data.title}
+              <span className={styles.remix}>
+                {
+                  data.remixed &&
+                  <Link href={`/projects/${data.remixed}`}>
+                    <a>(Remixed)</a>
+                  </Link>
+                }
+              </span>
+            </h1>
+            <p className={styles.description}>{data.description}</p>
+            <Link href={`/users/${data.uid}`}>
+              <a>{data.username}</a>
             </Link>
-          </p>
-          <GameFrame
-            mapPixels={mapPixels}
-            spritePixels={spritePixels}
-            pixelPixels={pixelPixels}
-            codes={data.codes}
-            colors={data.colors}
-            tiles={JSON.parse(data.tiles)}
-            objects={JSON.parse(data.objects)}
-            background={data.background}
-            gameObjects={insertObjectUnits(data.gameObjects, pixelPixels)}
-          />
+            <p className={styles.editlink}>
+              <Link href={`/edit/${id}`}>
+                <a>Edit {data.title}</a>
+              </Link>
+            </p>
+            <GameFrame
+              mapPixels={mapPixels}
+              spritePixels={spritePixels}
+              pixelPixels={pixelPixels}
+              codes={data.codes}
+              colors={data.colors}
+              tiles={JSON.parse(data.tiles)}
+              objects={JSON.parse(data.objects)}
+              background={data.background}
+              gameObjects={insertObjectUnits(data.gameObjects, pixelPixels)}
+            />
+          </div>
         </div>
-      </div>
+      }
     </div>
   );
 }
