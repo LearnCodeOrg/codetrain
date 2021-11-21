@@ -37,6 +37,8 @@ let holding = false;
 
 let editorDirty = false;
 
+const keys = {};
+
 export default function GameEditor(props) {
   const {
     projectId, creator, username,
@@ -324,6 +326,11 @@ export default function GameEditor(props) {
     }
   }
 
+  // handle keypress
+  function handleKey(e) {
+    const key = e.keyCode;
+  }
+
   // on start
   useEffect(() => {
     // get canvas
@@ -332,6 +339,12 @@ export default function GameEditor(props) {
     // initialize unload event listener
     window.addEventListener('beforeunload', beforeUnload);
   }, []);
+
+  // listen for keys
+  useEffect(() => {
+    window.addEventListener('keydown', handleKey);
+    return () => window.removeEventListener('keydown', handleKey);
+  }, [handleKey]);
 
   // draw map when any elements change
   useEffect(() => {
