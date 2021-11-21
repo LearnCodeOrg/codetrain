@@ -4,12 +4,11 @@ import Router from 'next/router';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
-import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import HomeIcon from '@mui/icons-material/Home';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import ExploreIcon from '@mui/icons-material/Explore';
-import InfoIcon from '@mui/icons-material/Info';
+import DescriptionIcon from '@mui/icons-material/Description';
 
 import firebase from 'firebase/app';
 import signInWithGoogle from '../util/signInWithGoogle.js';
@@ -46,10 +45,34 @@ export default function Header(props) {
         <h1>Codetrain</h1>
       </HeaderLink>
       <span className="flexfill" />
-      <HeaderLink href="/" className={styles.link}>Home</HeaderLink>
-      <HeaderLink href="/create" className={styles.link}>Create</HeaderLink>
-      <HeaderLink href="/explore" className={styles.link}>Explore</HeaderLink>
-      <HeaderLink href="/docs" className={styles.link}>Docs</HeaderLink>
+      <div className={styles.bigscreen}>
+        <HeaderLink href="/" className={styles.link}>Home</HeaderLink>
+        <HeaderLink href="/create" className={styles.link}>Create</HeaderLink>
+        <HeaderLink href="/explore" className={styles.link}>Explore</HeaderLink>
+        <HeaderLink href="/docs" className={styles.link}>Docs</HeaderLink>
+      </div>
+      <div className={styles.smallscreen}>
+        <Tooltip title="Home" arrow>
+          <IconButton onClick={() => Router.push('/')}>
+            <HomeIcon />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="Create" arrow>
+          <IconButton onClick={() => Router.push('/create')}>
+            <AddCircleIcon />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="Explore" arrow>
+          <IconButton onClick={() => Router.push('/explore')}>
+            <ExploreIcon />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="Docs" arrow>
+          <IconButton onClick={() => Router.push('/docs')}>
+            <DescriptionIcon />
+          </IconButton>
+        </Tooltip>
+      </div>
       {
         (username === null || username) ?
         <Tooltip title="Sign Out" arrow>
