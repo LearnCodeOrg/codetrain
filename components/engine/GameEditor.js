@@ -335,6 +335,26 @@ export default function GameEditor(props) {
     // delete object
     if (key === 8) {
       if (isActiveObject) deleteObject();
+    // move object
+    } else if ([37, 38, 39, 40].includes(key)) {
+      // return if no active object
+      if (!isActiveObject) return;
+      // get held object
+      const heldObject = gameObjects[gameObjects.length - 1];
+      const newGameObjects = gameObjects.slice();
+      newGameObjects.pop();
+      // update coordinates
+      let x = heldObject.x;
+      let y = heldObject.y;
+      if (key === 37) x -= pixelPixels;
+      else if (key === 38) y -= pixelPixels;
+      else if (key === 39) x += pixelPixels;
+      else if (key === 40) y += pixelPixels;
+      // update objects
+      newGameObjects.push({
+        id: heldObject.id, x, y, sprite: heldObject.sprite
+      });
+      setGameObjects(newGameObjects);
     }
   }
 
