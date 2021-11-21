@@ -17,7 +17,7 @@ export default function GameFrame(props) {
 
   // returns function definition for given object
   function getCodeFunction(gameObject, index) {
-    const { x, y, sprite } = gameObject;
+    const { id, x, y, sprite } = gameObject;
     return (
 `(function() {
   const $$index = ${index};
@@ -33,8 +33,13 @@ export default function GameFrame(props) {
   const getTileAt = (x, y) => $$.background[y * $$.mapSize + x];
   const setTileAt = (x, y, tile) => { $$.background[y * $$.mapSize + x] = tile; }
   const say = text => { $$.dialogue = \`\${text}\`; }
+  const getObjectById = id => $$.getObjectById(id);
   ${codes[sprite]}
   return {
+    id: '${id}',
+    move, movePixels, moveTiles,
+    setPixelPos, setTilePos, getPixelPos, getTilePos,
+    getTile, setTile, say,
     start: typeof start === 'function' ? start : () => {},
     update: typeof update === 'function' ? update : () => {}
   };
@@ -125,6 +130,9 @@ export default function GameFrame(props) {
         const pos = $$.getTilePos(index);
         const tileIndex = pos.y * $$.mapSize + pos.x;
         $$.background[tileIndex] = tile;
+      },
+      getObjectById: (id) => {
+        return $$.spriteCodes.find(obj => obj.id === id) ?? null;
       },
       throwError: (message) => {
         // clear canvas
