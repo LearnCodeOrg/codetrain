@@ -11,13 +11,12 @@ import { spriteSize, mapSize } from '../../data/engine';
 import { insertObjectUnits, removeObjectUnits } from '../../util/objectUnits';
 import { useEffect, useRef, useState } from 'react';
 import { useSnackbar } from 'notistack';
+import { v4 as uuid } from 'uuid';
 import signInWithGoogle from '../../util/signInWithGoogle';
 import compileCode from '../../util/compileCode';
 import firebase from 'firebase/app';
 
 import styles from '../../styles/components/engine/GameEditor.module.css';
-
-const keys = {};
 
 const buttonProps = {
   className: styles.button,
@@ -253,8 +252,7 @@ export default function GameEditor(props) {
         // if empty space
         } else {
           // create object
-          const id = getNewId();
-          const object = { id, x, y, sprite: currObject };
+          const object = { id: uuid(), x, y, sprite: currObject };
           newGameObjects.push(object);
           // start holding and update objects
           holding = true;
@@ -262,11 +260,6 @@ export default function GameEditor(props) {
         }
       }
     }
-  }
-
-  // returns a unique new id for current object
-  function getNewId() {
-    return objectNames[currObject];
   }
 
   // updates current object id with given value
@@ -481,7 +474,7 @@ export default function GameEditor(props) {
                 </Button>
                 <input
                   className="grayinput"
-                  value={gameObjects[currObject].id}
+                  value={gameObjects[gameObjects.length - 1].id}
                   onChange={e => updateObjectId(e.target.value)}
                 />
               </>
