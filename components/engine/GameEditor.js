@@ -72,6 +72,9 @@ export default function GameEditor(props) {
   const projectsRef = firebase.firestore().collection('projects');
   const uid = firebase.auth().currentUser?.uid;
 
+  // whether any gameobject is currently selected
+  const isActiveObject = showObjects && showHighlight && !!gameObjects.length;
+
   // called before page unloads
   function beforeUnload(e) {
     // return if editor not dirty
@@ -329,6 +332,10 @@ export default function GameEditor(props) {
   // handle keypress
   function handleKey(e) {
     const key = e.keyCode;
+    // delete object
+    if (key === 8) {
+      if (isActiveObject) deleteObject();
+    }
   }
 
   // on start
@@ -474,7 +481,7 @@ export default function GameEditor(props) {
               />
             </label>
             {
-              (showHighlight && !!gameObjects.length) &&
+              isActiveObject &&
               <>
                 <p>{getHeldPosition()}</p>
                 <Button
