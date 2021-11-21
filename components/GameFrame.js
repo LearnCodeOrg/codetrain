@@ -37,9 +37,8 @@ export default function GameFrame(props) {
   ${codes[sprite]}
   return {
     id: '${id}',
-    move, movePixels, moveTiles,
+    move, movePixels, moveTiles, getTile, setTile,
     setPixelPos, setTilePos, getPixelPos, getTilePos,
-    getTile, setTile, say,
     start: typeof start === 'function' ? start : () => {},
     update: typeof update === 'function' ? update : () => {}
   };

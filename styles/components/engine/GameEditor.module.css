@@ -46,3 +46,7 @@
 .tools > p {
   width: 60px;
 }
+
+.tools > input {
+  margin-left: 8px;
+}

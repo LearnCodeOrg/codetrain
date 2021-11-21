@@ -8,7 +8,7 @@ import firebase from 'firebase/app';
 
 import styles from '../styles/pages/Explore.module.css';
 
-const maxProjects = 16;
+const maxProjects = 36;
 
 export default function Explore(props) {
   const [projects, setProjects] = useState(undefined);

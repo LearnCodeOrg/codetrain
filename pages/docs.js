@@ -23,6 +23,7 @@ import styles from '../styles/pages/Docs.module.css';
 function Code(props) {
   return (
     <pre>
+      {/* eslint-disable-next-line */}
       <code className="language-javascript">
         {props.children}
       </code>

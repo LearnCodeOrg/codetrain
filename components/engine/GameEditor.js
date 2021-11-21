@@ -352,6 +352,9 @@ export default function GameEditor(props) {
       else if (key === 38) y -= pixelPixels;
       else if (key === 39) x += pixelPixels;
       else if (key === 40) y += pixelPixels;
+      // clamp x and y
+      x = clamp(x, 0, mapPixels - spritePixels);
+      y = clamp(y, 0, mapPixels - spritePixels);
       // update objects
       newGameObjects.push({
         id: heldObject.id, x, y, sprite: heldObject.sprite
@@ -521,6 +524,7 @@ export default function GameEditor(props) {
                   <DeleteIcon />
                 </Button>
                 <input
+                  placeholder="Object ID"
                   className="grayinput"
                   value={gameObjects[gameObjects.length - 1].id}
                   onChange={e => updateObjectId(e.target.value)}
