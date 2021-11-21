@@ -89,16 +89,17 @@ export default function Index(props) {
           <Accordion title="How can I get started?">
             Check out our{' '}
             <Link href="/docs">
-              <a>docs</a>
+              <a className="bluelink">docs</a>
             </Link>
             {' '}or jump straight into the{' '}
             <Link href="/create">
-              <a>engine</a>
+              <a className="bluelink">engine</a>
             </Link>.
           </Accordion>
           <Accordion title="Can I contribute?">
             Codetrain is 100% open source. Want to contribute? Find our GitHub
             {' '}repository <a
+              className="bluelink"
               href="https://github.com/codeconvoy/codetrain"
               target="_blank"
               rel="noopener noreferrer"

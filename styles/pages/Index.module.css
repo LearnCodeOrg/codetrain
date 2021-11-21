@@ -123,15 +123,6 @@
   max-width: 800px;
 }
 
-.accordion a {
-  color: var(--blue);
-}
-
-.accordion a:hover {
-  color: var(--purple);
-  text-decoration: underline;
-}
-
 .footer {
   color: var(--black);
   width: 100%;

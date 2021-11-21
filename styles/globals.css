@@ -26,6 +26,27 @@ button, .SnackbarItem-message, .MuiPaper-root * {
   font-family: 'Lato', sans-serif;
 }
 
+.bluelink {
+  color: var(--blue);
+}
+
+.bluelink:hover {
+  color: var(--purple);
+  text-decoration: underline;
+}
+
+.notfound {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.notfound > h1 {
+  margin: 0 0 10px 0;
+}
+
 .monospace {
   font-family:
     'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
