@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import Header from '../../components/Header';
 import Loading from '../../components/Loading';
 import Engine from '../../components/engine/Engine';
@@ -30,14 +31,21 @@ export default function Edit(props) {
     getProjectData();
   }, [id]);
 
-  // return if invalid data
-  if (data === undefined) return <Loading />;
-  if (!data) return <div>Project not found</div>;
-
   return (
     <div className={styles.container}>
       <Header {...props} reload />
-      <Engine projectId={id} data={data} {...props} />
+      {
+        data === undefined ?
+        <Loading /> :
+        !data ?
+        <div className="notfound">
+          <h1>Project not found</h1>
+          <Link href="/">
+            <a className="bluelink">Return home</a>
+          </Link>
+        </div> :
+        <Engine projectId={id} data={data} {...props} />
+      }
     </div>
   );
 }
