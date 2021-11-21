@@ -11,7 +11,7 @@ import { spriteSize, mapSize } from '../../data/engine';
 import { insertObjectUnits, removeObjectUnits } from '../../util/objectUnits';
 import { useEffect, useRef, useState } from 'react';
 import { useSnackbar } from 'notistack';
-import { v4 as uuid } from 'uuid';
+import { shortid } from '../../util/uuid';
 import signInWithGoogle from '../../util/signInWithGoogle';
 import compileCode from '../../util/compileCode';
 import firebase from 'firebase/app';
@@ -257,7 +257,7 @@ export default function GameEditor(props) {
         // if empty space
         } else {
           // create object
-          const object = { id: uuid(), x, y, sprite: currObject };
+          const object = { id: shortid(), x, y, sprite: currObject };
           newGameObjects.push(object);
           // start holding and update objects
           holding = true;
