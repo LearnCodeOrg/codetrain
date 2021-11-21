@@ -10,6 +10,7 @@ import TextsmsIcon from '@mui/icons-material/Textsms';
 import KeyboardIcon from '@mui/icons-material/Keyboard';
 import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
 import GridOnIcon from '@mui/icons-material/GridOn';
+import AccessibilityIcon from '@mui/icons-material/Accessibility';
 import LinkIcon from '@mui/icons-material/Link';
 
 import { useEffect } from 'react';
@@ -88,6 +89,12 @@ export default function Docs(props) {
               <ListItem button>
                 <GridOnIcon sx={{ marginRight: 2 }} />
                 <ListItemText primary="Tiles" />
+              </ListItem>
+            </a>
+            <a href="#objects">
+              <ListItem button>
+                <AccessibilityIcon sx={{ marginRight: 2 }} />
+                <ListItemText primary="Objects" />
               </ListItem>
             </a>
           </List>
@@ -249,6 +256,15 @@ if (tile === 0) setTile(1);
 else setTile(0);
 `}
           </Code>
+          <hr />
+          <div id="objects" className={styles.bookmark} />
+          <h2>
+            <AccessibilityIcon />
+            Objects
+            <a href="#objects">
+              <LinkIcon />
+            </a>
+          </h2>
         </div>
       </div>
     </div>
