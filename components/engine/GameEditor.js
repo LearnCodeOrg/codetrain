@@ -337,6 +337,8 @@ export default function GameEditor(props) {
       if (isActiveObject) deleteObject();
     // move object
     } else if ([37, 38, 39, 40].includes(key)) {
+      // cancel default action
+      e.preventDefault();
       // return if no active object
       if (!isActiveObject) return;
       // get held object
@@ -400,7 +402,10 @@ export default function GameEditor(props) {
 
   return (
     <div className={styles.container}>
-      <div className={styles.databar}>
+      <div
+        className={styles.databar}
+        onKeyDown={e => e.stopPropagation()}
+      >
         {
           username === null ?
           <button className="graybutton" onClick={setupUser}>
@@ -472,7 +477,10 @@ export default function GameEditor(props) {
         width={mapPixels}
         height={mapPixels}
       />
-      <div className={styles.tools}>
+      <div
+        className={styles.tools}
+        onKeyDown={e => e.stopPropagation()}
+      >
         {
           !playing &&
           <>
