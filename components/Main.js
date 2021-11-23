@@ -48,6 +48,7 @@ export default function Main(props) {
             value={username}
             onChange={e => setUsername(e.target.value)}
             placeholder="username"
+            onKeyDown={e => e.stopPropagation()}
             required
           />
           <button className="graybutton">Create User</button>

@@ -104,4 +104,5 @@ button, .SnackbarItem-message, .MuiPaper-root * {
   --highlight: #2196f3;
 
   --header: 60px;
+  --page: calc(100% - var(--header));
 }

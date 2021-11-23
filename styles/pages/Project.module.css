@@ -1,5 +1,5 @@
 .container {
-  min-height: 100%;
+  height: var(--page);
   width: fit-content;
   min-width: 100%;
   background: var(--white);

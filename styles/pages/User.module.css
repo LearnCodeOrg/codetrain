@@ -1,3 +1,7 @@
+.container {
+  height: var(--page);
+}
+
 .head {
   margin: 20px 30px;
 }
