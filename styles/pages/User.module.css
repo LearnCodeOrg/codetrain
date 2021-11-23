@@ -19,3 +19,7 @@
   display: flex;
   flex-wrap: wrap;
 }
+
+.projects > p {
+  margin: 0 10px;
+}
