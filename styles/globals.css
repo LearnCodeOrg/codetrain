@@ -89,6 +89,18 @@ button, .SnackbarItem-message, .MuiPaper-root * {
   min-height: 48px;
 }
 
+@media (max-width: 576px) {
+  .MuiDrawer-root, .MuiDrawer-root .MuiPaper-root {
+    width: 56px;
+  }
+  .MuiDrawer-root .MuiButtonBase-root {
+    height: 48px;
+  }
+  .MuiDrawer-root .MuiButtonBase-root .MuiListItemText-root {
+    display: none;
+  }
+}
+
 :root {
   --white: #ffffff;
   --blue: #2196f3;
