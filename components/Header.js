@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Router from 'next/router';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
+import PersonIcon from '@mui/icons-material/Person';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import HomeIcon from '@mui/icons-material/Home';
@@ -47,6 +48,12 @@ export default function Header(props) {
       <span className="flexfill" />
       <div className={styles.bigscreen}>
         <HeaderLink href="/" className={styles.link}>Home</HeaderLink>
+        {
+          username &&
+          <HeaderLink href={`/users/${username}`} className={styles.link}>
+            Profile
+          </HeaderLink>
+        }
         <HeaderLink href="/create" className={styles.link}>Create</HeaderLink>
         <HeaderLink href="/explore" className={styles.link}>Explore</HeaderLink>
         <HeaderLink href="/docs" className={styles.link}>Docs</HeaderLink>
@@ -55,6 +62,11 @@ export default function Header(props) {
         <Tooltip title="Home" arrow>
           <IconButton onClick={() => Router.push('/')}>
             <HomeIcon />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="Profile" arrow>
+          <IconButton onClick={() => Router.push(`/users/${username}`)}>
+            <PersonIcon />
           </IconButton>
         </Tooltip>
         <Tooltip title="Create" arrow>
