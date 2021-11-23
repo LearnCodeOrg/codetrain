@@ -76,32 +76,37 @@ export default function User(props) {
           <div className={styles.head}>
             <h1>{userData.username}</h1>
             <p>Joined {new Date(userData.joined).toLocaleDateString()}</p>
-            {
-              editing ?
-              <input
-                value={description}
-                onChange={e => setDescription(e.target.value)}
-              /> :
-              <p>{description ?? userData.description}</p>
-            }
-            {
-              uid === userData.id &&
-              (
+            <div>
+              {
                 editing ?
-                <button onClick={() => {
-                  updateDescription();
-                  setEditing(false);
-                }}>
-                  <SaveIcon />
-                </button> :
-                <button onClick={() => {
-                  setDescription(userData.description ?? '');
-                  setEditing(true);
-                }}>
-                  <EditIcon />
-                </button>
-              )
-            }
+                <input
+                  value={description}
+                  onChange={e => setDescription(e.target.value)}
+                  maxLength="2048"
+                /> :
+                <p>{description ?? userData.description}</p>
+              }
+              {
+                uid === userData.id &&
+                (
+                  editing ?
+                  <button onClick={() => {
+                    updateDescription();
+                    setEditing(false);
+                  }}>
+                    <SaveIcon />
+                  </button> :
+                  <button onClick={() => {
+                    if (description === undefined) {
+                      setDescription(userData.description ?? '');
+                    }
+                    setEditing(true);
+                  }}>
+                    <EditIcon />
+                  </button>
+                )
+              }
+            </div>
           </div>
           <div className={styles.projects}>
             {
