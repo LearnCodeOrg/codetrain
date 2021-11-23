@@ -1,8 +1,9 @@
-import WaveDivider from '../components/WaveDivider';
-import Header from '../components/Header';
 import Link from 'next/link';
 import Image from 'next/image';
+import WaveDivider from '../components/WaveDivider';
+import Header from '../components/Header';
 import Accordion from '../components/Accordion';
+import GitHubIcon from '@mui/icons-material/GitHub';
 
 import firebase from 'firebase/app';
 
@@ -113,6 +114,14 @@ export default function Index(props) {
         <a href="https://codeconvoy.org">CodeConvoy</a>
         {' ' + new Date().getFullYear()}
       </div>
+      <a
+        className={styles.badge}
+        href="https://github.com/codeconvoy/codetrain"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <GitHubIcon fontSize="large" />
+      </a>
     </div>
   );
 }

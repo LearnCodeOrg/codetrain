@@ -136,3 +136,27 @@
 .footer > a:hover {
   text-decoration: underline;
 }
+
+.badge {
+  position: fixed;
+  background: var(--black);
+  color: var(--white);
+  width: 128px;
+  height: 128px;
+  transform: rotate(45deg);
+  bottom: -64px;
+  right: -64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.badge:hover {
+  color: var(--blue);
+}
+
+.badge > svg {
+  transform: rotate(-45deg);
+  position: relative;
+  right: 36px;
+}
