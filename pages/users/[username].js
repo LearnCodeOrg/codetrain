@@ -13,6 +13,7 @@ const maxProjects = 16;
 
 export default function User(props) {
   const [userData, setUserData] = useState(undefined);
+  const [editing, setEditing] = useState(false);
   const [projects, setProjects] = useState(undefined);
 
   const usersRef = firebase.firestore().collection('users');
@@ -65,6 +66,30 @@ export default function User(props) {
           <div className={styles.head}>
             <h1>{userData.username}</h1>
             <p>Joined {new Date(userData.joined).toLocaleDateString()}</p>
+            {
+              editing ?
+              <input
+                value={description}
+                onChange={e => setDescription(e.target.value)}
+              /> :
+              <p>{description ?? userData.description}</p>
+            }
+            {
+              uid === userData.id &&
+              (
+                editing ?
+                <button onClick={() => {
+                  setEditing(false);
+                }}>
+                  <SaveIcon />
+                </button> :
+                <button onClick={() => {
+                  setEditing(true);
+                }}>
+                  <EditIcon />
+                </button>
+              )
+            }
           </div>
           <div className={styles.projects}>
             {
