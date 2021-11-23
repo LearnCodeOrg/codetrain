@@ -2,8 +2,12 @@
   height: var(--page);
 }
 
+.content {
+  padding: 20px;
+}
+
 .head {
-  margin: 20px 30px;
+  margin: 0 10px 20px 10px;
 }
 
 .head > h1 {
@@ -14,8 +18,34 @@
   margin: 0;
 }
 
+.description > p {
+  font-style: italic;
+  margin: 16px 0 0 0;
+}
+
+.description > input {
+  margin: 16px 0 0 0;
+  height: 19px;
+}
+
+.description > button {
+  border: 0;
+  box-shadow: 0 0 3px #000;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin-top: 20px;
+  background: #efefef;
+}
+
+.description > button:hover {
+  background: #ddd;
+}
+
 .projects {
-  margin: 0 20px;
   display: flex;
   flex-wrap: wrap;
 }

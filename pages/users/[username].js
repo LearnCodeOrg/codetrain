@@ -72,14 +72,15 @@ export default function User(props) {
             <a className="bluelink">Return home</a>
           </Link>
         </div> :
-        <>
+        <div className={styles.content}>
           <div className={styles.head}>
             <h1>{userData.username}</h1>
             <p>Joined {new Date(userData.joined).toLocaleDateString()}</p>
-            <div>
+            <div className={styles.description}>
               {
                 editing ?
                 <input
+                  placeholder="Description"
                   value={description}
                   onChange={e => setDescription(e.target.value)}
                   maxLength="2048"
@@ -119,7 +120,7 @@ export default function User(props) {
               <Loading />
             }
           </div>
-        </>
+        </div>
       }
     </div>
   );
