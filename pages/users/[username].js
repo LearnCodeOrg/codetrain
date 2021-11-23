@@ -2,6 +2,8 @@ import Link from 'next/link';
 import Header from '../../components/Header';
 import Project from '../../components/cards/Project';
 import Loading from '../../components/Loading';
+import EditIcon from '@mui/icons-material/Edit';
+import SaveIcon from '@mui/icons-material/Save';
 
 import firebase from 'firebase/app';
 import { useEffect, useState } from 'react';
@@ -14,10 +16,13 @@ const maxProjects = 16;
 export default function User(props) {
   const [userData, setUserData] = useState(undefined);
   const [editing, setEditing] = useState(false);
+  const [description, setDescription] = useState(undefined);
   const [projects, setProjects] = useState(undefined);
 
   const usersRef = firebase.firestore().collection('users');
   const projectsRef = firebase.firestore().collection('projects');
+
+  const uid = firebase.auth().currentUser?.uid;
 
   // get username
   const router = useRouter();
@@ -49,6 +54,11 @@ export default function User(props) {
     getUserData();
   }, [username]);
 
+  // updates user description in firebase
+  async function updateDescription() {
+    await usersRef.doc(uid).update({ description });
+  }
+
   return (
     <div className={styles.container}>
       <Header {...props} />
@@ -79,11 +89,13 @@ export default function User(props) {
               (
                 editing ?
                 <button onClick={() => {
+                  updateDescription();
                   setEditing(false);
                 }}>
                   <SaveIcon />
                 </button> :
                 <button onClick={() => {
+                  setDescription(userData.description ?? '');
                   setEditing(true);
                 }}>
                   <EditIcon />
