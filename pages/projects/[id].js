@@ -1,3 +1,4 @@
+import Router from 'next/router';
 import Link from 'next/link';
 import Header from '../../components/Header';
 import Loading from '../../components/Loading';
@@ -34,8 +35,7 @@ export default function Project(props) {
     // clear project
     setData(undefined);
     // get and set project data
-    const projectRef = firebase.firestore().collection('projects').doc(id);
-    const projectDoc = await projectRef.get();
+    const projectDoc = await projectsRef.doc(id).get();
     setData(projectDoc.exists ? projectDoc.data() : null);
   }
 
@@ -78,7 +78,7 @@ export default function Project(props) {
               </span>
             </h1>
             <p className={styles.description}>{data.description}</p>
-            <Link href={`/users/${data.uid}`}>
+            <Link href={`/users/${data.username}`}>
               <a>{data.username}</a>
             </Link>
             <p className={styles.actions}>
@@ -103,6 +103,7 @@ export default function Project(props) {
               mapPixels={mapPixels}
               spritePixels={spritePixels}
               pixelPixels={pixelPixels}
+              tileNames={data.tileNames}
               codes={data.codes}
               colors={data.colors}
               tiles={JSON.parse(data.tiles)}

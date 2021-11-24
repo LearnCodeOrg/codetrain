@@ -32,14 +32,27 @@
 }
 
 .description {
-  margin: 0;
+  margin: 0 0 5px 0;
 }
 
-.editlink {
+.actions {
   margin: 10px 0;
   width: fit-content;
 }
 
-.editlink > a {
+.actions > button {
+  background: #efefef;
+  border: 0;
+  padding: 2px 5px;
   margin-right: 8px;
+  border-radius: 4px;
+  box-shadow: 0 0 3px #999;
+}
+
+.delete {
+  color: red;
+}
+
+.actions > button:hover {
+  background: #ddd;
 }
