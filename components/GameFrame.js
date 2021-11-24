@@ -9,7 +9,7 @@ import styles from '../styles/components/GameFrame.module.css';
 
 export default function GameFrame(props) {
   const {
-    mapPixels, spritePixels, pixelPixels,
+    mapPixels, spritePixels, pixelPixels, tileNames,
     codes, colors, tiles, objects, background, gameObjects
   } = props;
 
@@ -30,8 +30,8 @@ export default function GameFrame(props) {
   const getTilePos = () => $$.getTilePos($$index);
   const getTile = () => $$.getTile($$index);
   const setTile = tile => $$.setTile($$index, tile);
-  const getTileAt = (x, y) => $$.background[y * $$.mapSize + x];
-  const setTileAt = (x, y, tile) => { $$.background[y * $$.mapSize + x] = tile; }
+  const getTileAt = (x, y) => $$.getTileAt(x, y);
+  const setTileAt = (x, y, tile) => $$.setTileAt(x, y, tile);
   const say = text => { $$.dialogue = \`\${text}\`; }
   const getObjectById = id => $$.getObjectById(id);
   ${codes[sprite]}
@@ -79,6 +79,7 @@ export default function GameFrame(props) {
       spriteSize: ${spriteSize},
       spritePixels: ${spritePixels},
       pixelPixels: ${pixelPixels},
+      tileNames: ${JSON.stringify(tileNames)},
       colors: ${JSON.stringify(colors)},
       tiles: ${JSON.stringify(tiles)},
       objects: ${JSON.stringify(objects)},
@@ -122,13 +123,25 @@ export default function GameFrame(props) {
       },
       getTile: (index) => {
         const pos = $$.getTilePos(index);
-        const tileIndex = pos.y * $$.mapSize + pos.x;
-        return $$.background[tileIndex];
+        const mapIndex = pos.y * $$.mapSize + pos.x;
+        const nameIndex = $$.background[mapIndex];
+        return $$.tileNames[nameIndex];
       },
       setTile: (index, tile) => {
         const pos = $$.getTilePos(index);
-        const tileIndex = pos.y * $$.mapSize + pos.x;
-        $$.background[tileIndex] = tile;
+        const mapIndex = pos.y * $$.mapSize + pos.x;
+        const nameIndex = $$.tileNames.indexOf(tile);
+        $$.background[mapIndex] = nameIndex;
+      },
+      getTileAt: (x, y) => {
+        const mapIndex = y * $$.mapSize + x;
+        const nameIndex = $$.background[mapIndex];
+        return $$.tileNames[nameIndex];
+      },
+      setTileAt: (x, y, tile) => {
+        const mapIndex = y * $$.mapSize + x;
+        const nameIndex = $$.tileNames.indexOf(tile);
+        $$.background[mapIndex] = nameIndex;
       },
       getObjectById: (id) => {
         return $$.spriteCodes.find(obj => obj.id === id) ?? null;
