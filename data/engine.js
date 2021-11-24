@@ -53,20 +53,23 @@ const grassTile = [
   0, 0, 0, 0, 0, 0, 0, 0
 ];
 const defaultSprite = Array(spriteSize * spriteSize).fill(0);
-export const codes = Array(objectCount).fill(0).map((val, i) => (
+const codes = Array(objectCount).fill(0).map((val, i) => (
   i === 0 ? playerCode : defaultCode
 ));
-export const objectNames = Array(objectCount).fill(0).map((val, i) => (
-  i === 0 ? 'Player' : `Object ${i}`
+const objectNames = Array(objectCount).fill(0).map((val, i) => (
+  i === 0 ? 'player' : `object ${i}`
 ));
-export const colors = palettes[0].colors;
-export const tiles = Array(tileCount).fill(0).map((val, i) => (
+const tileNames = Array(objectCount).fill(0).map((val, i) => (
+  i === 0 ? 'empty' : i === 1 ? 'grass' : `tile ${i}`
+));
+const colors = palettes[0].colors;
+const tiles = Array(tileCount).fill(0).map((val, i) => (
   i === 1 ? grassTile : defaultSprite
 ));
-export const objects = Array(objectCount).fill(0).map((val, i) => (
+const objects = Array(objectCount).fill(0).map((val, i) => (
   i === 0 ? playerObject : defaultSprite
 ));
-export const background = [
+const background = [
   0, 0, 1, 1, 1, 1, 0, 0,
   0, 0, 0, 1, 1, 1, 1, 0,
   0, 0, 0, 0, 1, 1, 1, 0,
@@ -77,9 +80,13 @@ export const background = [
   1, 1, 1, 1, 1, 1, 1, 0
 ];
 
+// default tile names if none given
+export const defaultTileNames = Array(objectCount)
+  .fill(0).map((val, i) => (`object ${i}`));
+
 // default data
 export const defaultData = {
-  codes, colors, background, objectNames,
+  codes, colors, background, objectNames, tileNames,
   gameObjects: [{ id: objectNames[0].toLowerCase(), sprite: 0, x: 0, y: 0 }],
   title: 'My First Project', description: 'WASD to move.',
   tiles: JSON.stringify(tiles), objects: JSON.stringify(objects)
