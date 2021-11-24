@@ -13,7 +13,10 @@ const CodeEditor = dynamic(import('../CodeEditor.js'), {
 });
 
 export default function Code(props) {
-  const { currObject, codes, setCodes, objectNames, setObjectNames } = props;
+  const {
+    currObject, currTile, codes, setCodes,
+    objectNames, setObjectNames, tileNames, setTileNames
+  } = props;
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -33,6 +36,13 @@ export default function Code(props) {
     setObjectNames(newObjectNames);
   }
 
+  // updates current tile name with given value
+  function updateTileName(val) {
+    const newTileNames = tileNames.slice();
+    newTileNames[currTile] = val;
+    setTileNames(newTileNames);
+  }
+
   // compiles current object code
   function compile() {
     const header = objectNames[currObject];
@@ -47,19 +57,29 @@ export default function Code(props) {
   return (
     <div className={styles.container}>
       <div className={styles.panel}>
-        {
-          currObject !== -1 ?
-          <div className={styles.toolbar}>
+        <div className={styles.toolbar}>
+          {
+            currObject === -1 ?
             <input
               className={`${styles.nameinput} monospace`}
-              value={objectNames[currObject]}
-              onChange={e => updateObjectName(e.target.value)}
-            />
-            <span className="flexfill" />
-            <button className={styles.compilebutton} onClick={compile}>
-              <PlayArrowIcon />
-            </button>
-          </div> :
+              value={tileNames[currTile]}
+              onChange={e => updateTileName(e.target.value)}
+            /> :
+            <>
+              <input
+                className={`${styles.nameinput} monospace`}
+                value={objectNames[currObject]}
+                onChange={e => updateObjectName(e.target.value)}
+              />
+              <span className="flexfill" />
+              <button className={styles.compilebutton} onClick={compile}>
+                <PlayArrowIcon />
+              </button>
+            </>
+          }
+        </div>
+        {
+          currObject === -1 &&
           <p className={styles.placeholder}>
             Select an object to write code.<br /><br />
             {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
