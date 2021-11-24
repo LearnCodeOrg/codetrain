@@ -125,22 +125,28 @@ export default function GameFrame(props) {
         const pos = $$.getTilePos(index);
         const mapIndex = pos.y * $$.mapSize + pos.x;
         const nameIndex = $$.background[mapIndex];
-        return $$.tileNames[nameIndex];
+        return $$.tileNames[nameIndex] ?? null;
       },
       setTile: (index, tile) => {
         const pos = $$.getTilePos(index);
         const mapIndex = pos.y * $$.mapSize + pos.x;
         const nameIndex = $$.tileNames.indexOf(tile);
+        if (nameIndex === -1) {
+          throw \`ReferenceError: \${tile} is not a valid tile\`;
+        }
         $$.background[mapIndex] = nameIndex;
       },
       getTileAt: (x, y) => {
         const mapIndex = y * $$.mapSize + x;
         const nameIndex = $$.background[mapIndex];
-        return $$.tileNames[nameIndex];
+        return $$.tileNames[nameIndex] ?? null;
       },
       setTileAt: (x, y, tile) => {
         const mapIndex = y * $$.mapSize + x;
         const nameIndex = $$.tileNames.indexOf(tile);
+        if (nameIndex === -1) {
+          throw \`ReferenceError: \${tile} is not a valid tile\`;
+        }
         $$.background[mapIndex] = nameIndex;
       },
       getObjectById: (id) => {
