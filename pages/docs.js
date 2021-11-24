@@ -226,11 +226,11 @@ if (pos.x === 0 && pos.y === 0) say('At 0, 0');`}
           <code>y</code>, in pixels.
           <Code>
 {`function update() {
-  // if 0 pressed, move to top left corner
-  if (isKeyDown('0')) setTilePos(0, 0);
+  // if q pressed, move to top left corner
+  if (isKeyDown('q')) setTilePos(0, 0);
 
-  // if 1 pressed, move to bottom right corner
-  if (isKeyDown('1')) setTilePos(7, 7);
+  // if z pressed, move to bottom right corner
+  if (isKeyDown('z')) setTilePos(7, 7);
 }`}
           </Code>
           <hr />
@@ -251,8 +251,8 @@ if (pos.x === 0 && pos.y === 0) say('At 0, 0');`}
 {`// get tile at position
 const tile = getTile();
 
-// if on tile 0, open dialogue box
-if (tile === 0) say('On tile 0');`}
+// if on coin, open dialogue box
+if (tile === 'coin') say('You found the coin!');`}
           </Code>
           Tiles can be modified with <code>setTile(tile)</code> and
           {' '}<code>setTileAt(x, y, tile)</code>.<br /><br />
@@ -263,8 +263,8 @@ if (tile === 0) say('On tile 0');`}
 {`// get tile at position
 const tile = getTile();
 
-// if tile 1, set to tile 0
-if (tile === 1) setTile(0);`}
+// if tile empty, set to grass
+if (tile === 'empty') setTile('grass');`}
           </Code>
           <hr />
           <div id="objects" className={styles.bookmark} />
