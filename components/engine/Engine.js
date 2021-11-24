@@ -7,6 +7,7 @@ import Code from './Code.js';
 
 import { SnackbarProvider, useSnackbar } from 'notistack';
 import { useEffect, useRef, useState } from 'react';
+import { defaultTileNames } from '../../data/engine';
 
 import styles from '../../styles/components/engine/Engine.module.css';
 
@@ -17,6 +18,7 @@ export default function Engine(props) {
 
   const [codes, setCodes] = useState(data.codes);
   const [objectNames, setObjectNames] = useState(data.objectNames);
+  const [tileNames, setTileNames] = useState(data.tileNames ?? defaultTileNames);
 
   const [currColor, setCurrColor] = useState(0);
   const [currTile, setCurrTile] = useState(-1);
@@ -38,9 +40,10 @@ export default function Engine(props) {
       <div ref={containerRef} className={styles.container}>
         <div className={styles.content}>
           <Code
-            currObject={currObject}
+            currObject={currObject} currTile={currTile}
             codes={codes} setCodes={setCodes}
             objectNames={objectNames} setObjectNames={setObjectNames}
+            tileNames={tileNames} setTileNames={setTileNames}
           />
           <div className={styles.draw}>
             <div className={styles.drawtiles}>
@@ -76,7 +79,7 @@ export default function Engine(props) {
             username={username}
             projectId={projectId} creator={data.uid}
             colors={colors} tiles={tiles} objects={objects}
-            objectNames={objectNames}
+            objectNames={objectNames} tileNames={tileNames}
             currTile={currTile}
             currObject={currObject}
             codes={codes}

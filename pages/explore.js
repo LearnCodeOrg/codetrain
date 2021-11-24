@@ -8,16 +8,13 @@ import firebase from 'firebase/app';
 
 import styles from '../styles/pages/Explore.module.css';
 
-const maxProjects = 36;
-
 export default function Explore(props) {
   const [projects, setProjects] = useState(undefined);
 
   async function getProjects() {
     // get and set projects data
     const projectsRef = firebase.firestore().collection('projects');
-    const projectsQuery = projectsRef.orderBy('modified', 'desc')
-    .limit(maxProjects);
+    const projectsQuery = projectsRef.orderBy('modified', 'desc');
     const projectsDocs = (await projectsQuery.get()).docs;
     setProjects(projectsDocs.map(doc => ({ id: doc.id, ...doc.data() })));
   }

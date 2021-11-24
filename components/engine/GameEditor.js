@@ -44,7 +44,7 @@ export default function GameEditor(props) {
     containerRef,
     projectId, creator, username,
     colors, currTile, currObject, codes,
-    objectNames, tiles, objects,
+    objectNames, tileNames, tiles, objects,
     setupUser
   } = props;
   const pixelPixels = Math.floor(spritePixels / spriteSize);
@@ -92,8 +92,8 @@ export default function GameEditor(props) {
     const time = new Date().getTime();
     // construct project object
     const projectObj = {
-      username, uid: uid,
-      title, description, objectNames,
+      username, uid,
+      title, description, objectNames, tileNames,
       codes, colors, background,
       gameObjects: removeObjectUnits(gameObjects, pixelPixels),
       tiles: JSON.stringify(tiles),
@@ -455,6 +455,7 @@ export default function GameEditor(props) {
           mapPixels={mapPixels}
           spritePixels={spritePixels}
           pixelPixels={pixelPixels}
+          tileNames={tileNames}
           codes={codes}
           colors={colors}
           tiles={tiles}
