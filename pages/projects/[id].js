@@ -21,6 +21,10 @@ const pixelPixels = Math.floor(spritePixels / spriteSize);
 export default function Project(props) {
   const [data, setData] = useState(undefined);
 
+  const projectsRef = firebase.firestore().collection('projects');
+
+  const uid = firebase.auth().currentUser?.uid;
+
   // get project id
   const router = useRouter();
   const { id } = router.query;
@@ -33,6 +37,13 @@ export default function Project(props) {
     const projectRef = firebase.firestore().collection('projects').doc(id);
     const projectDoc = await projectRef.get();
     setData(projectDoc.exists ? projectDoc.data() : null);
+  }
+
+  // deletes project in firebase
+  async function deleteProject() {
+    if (!window.confirm(`Delete ${data.title}? This is permanent.`)) return;
+    await projectsRef.doc(id).delete();
+    Router.push('/');
   }
 
   // get project data on start
@@ -70,10 +81,23 @@ export default function Project(props) {
             <Link href={`/users/${data.uid}`}>
               <a>{data.username}</a>
             </Link>
-            <p className={styles.editlink}>
-              <Link href={`/edit/${id}`}>
-                <a>Edit {data.title}</a>
-              </Link>
+            <p className={styles.actions}>
+              <button onClick={() => Router.push(`/edit/${id}`)}>
+                {
+                  data.uid === uid ?
+                  'Edit Project' :
+                  'Remix Project'
+                }
+              </button>
+              {
+                data.uid === uid &&
+                <button
+                  className={styles.delete}
+                  onClick={deleteProject}
+                >
+                  Delete Project
+                </button>
+              }
             </p>
             <GameFrame
               mapPixels={mapPixels}
