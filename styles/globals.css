@@ -116,6 +116,7 @@ button, .SnackbarItem-message, .MuiPaper-root * {
   --secondary: #001ec9;
   --highlight: #2196f3;
 
+  --banner: 3;
   --header: 60px;
   --page: calc(100% - var(--header));
 }
