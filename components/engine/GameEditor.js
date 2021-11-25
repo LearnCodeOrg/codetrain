@@ -287,7 +287,9 @@ export default function GameEditor(props) {
     // return if no objects
     if (!gameObjects.length) return undefined;
     const { x, y } = gameObjects[gameObjects.length - 1];
-    return `(${Math.floor(x / pixelPixels)}, ${Math.floor(y / pixelPixels)})`;
+    const pixelX = Math.floor(x / pixelPixels).toString().padStart(2, '0');
+    const pixelY = Math.floor(y / pixelPixels).toString().padStart(2, '0');
+    return `(${pixelX}, ${pixelY})`;
   }
 
   // deletes last selected object
@@ -534,7 +536,7 @@ export default function GameEditor(props) {
                   <DeleteIcon />
                 </Button>
                 <input
-                  placeholder="Object ID"
+                  placeholder="object id"
                   className="grayinput"
                   value={gameObjects[gameObjects.length - 1].id}
                   onChange={e => updateObjectId(e.target.value)}
