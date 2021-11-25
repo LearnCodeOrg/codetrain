@@ -82,7 +82,7 @@ const background = [
 
 // default tile names if none given
 export const defaultTileNames = Array(objectCount)
-  .fill(0).map((val, i) => (`object ${i}`));
+  .fill(0).map((val, i) => (`tile ${i}`));
 
 // default data
 export const defaultData = {

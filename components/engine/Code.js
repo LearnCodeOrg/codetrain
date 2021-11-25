@@ -55,7 +55,7 @@ export default function Code(props) {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} onKeyDown={e => e.stopPropagation()}>
       <div className={styles.panel}>
         <div className={styles.toolbar}>
           {

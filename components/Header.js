@@ -48,12 +48,6 @@ export default function Header(props) {
       <span className="flexfill" />
       <div className={styles.bigscreen}>
         <HeaderLink href="/" className={styles.link}>Home</HeaderLink>
-        {
-          username &&
-          <HeaderLink href={`/users/${username}`} className={styles.link}>
-            Profile
-          </HeaderLink>
-        }
         <HeaderLink href="/create" className={styles.link}>Create</HeaderLink>
         <HeaderLink href="/explore" className={styles.link}>Explore</HeaderLink>
         <HeaderLink href="/docs" className={styles.link}>Docs</HeaderLink>
@@ -62,11 +56,6 @@ export default function Header(props) {
         <Tooltip title="Home" arrow>
           <IconButton onClick={() => Router.push('/')}>
             <HomeIcon />
-          </IconButton>
-        </Tooltip>
-        <Tooltip title="Profile" arrow>
-          <IconButton onClick={() => Router.push(`/users/${username}`)}>
-            <PersonIcon />
           </IconButton>
         </Tooltip>
         <Tooltip title="Create" arrow>
