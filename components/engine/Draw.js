@@ -14,7 +14,8 @@ export default function Draw(props) {
   const {
     containerRef,
     colors, tiles, setTiles, objects, setObjects,
-    currTile, currObject, currColor
+    currTile, currObject, currColor,
+    objectNames, setObjectNames, tileNames, setTileNames
   } = props;
   const spritePixels = spriteSize * pixelPixels;
 
@@ -79,6 +80,20 @@ export default function Draw(props) {
     }
   }
 
+  // updates current object name with given value
+  function updateObjectName(val) {
+    const newObjectNames = objectNames.slice();
+    newObjectNames[currObject] = val;
+    setObjectNames(newObjectNames);
+  }
+
+  // updates current tile name with given value
+  function updateTileName(val) {
+    const newTileNames = tileNames.slice();
+    newTileNames[currTile] = val;
+    setTileNames(newTileNames);
+  }
+
   useEffect(() => {
     canvas = document.getElementById('sprite-draw');
     ctx = canvas.getContext('2d');
@@ -110,6 +125,19 @@ export default function Draw(props) {
             onChange={e => setShowGrid(e.target.checked)}
           />
         </label>
+        {
+          currObject === -1 ?
+          <input
+            className="grayinput"
+            value={tileNames[currTile]}
+            onChange={e => updateTileName(e.target.value)}
+          /> :
+          <input
+            className="grayinput"
+            value={objectNames[currObject]}
+            onChange={e => updateObjectName(e.target.value)}
+          />
+        }
       </div>
     </div>
   );

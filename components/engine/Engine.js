@@ -42,8 +42,6 @@ export default function Engine(props) {
           <Code
             currObject={currObject} currTile={currTile}
             codes={codes} setCodes={setCodes}
-            objectNames={objectNames} setObjectNames={setObjectNames}
-            tileNames={tileNames} setTileNames={setTileNames}
           />
           <div className={styles.draw}>
             <div className={styles.drawtiles}>
@@ -56,6 +54,8 @@ export default function Engine(props) {
                 colors={colors} tiles={tiles} objects={objects}
                 currTile={currTile} currObject={currObject} currColor={currColor}
                 setTiles={setTiles} setObjects={setObjects}
+                objectNames={objectNames} setObjectNames={setObjectNames}
+                tileNames={tileNames} setTileNames={setTileNames}
               />
             </div>
             <div className="flexfill" />

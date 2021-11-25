@@ -13,10 +13,7 @@ const CodeEditor = dynamic(import('../CodeEditor.js'), {
 });
 
 export default function Code(props) {
-  const {
-    currObject, currTile, codes, setCodes,
-    objectNames, setObjectNames, tileNames, setTileNames
-  } = props;
+  const { currObject, currTile, codes, setCodes, } = props;
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -27,20 +24,6 @@ export default function Code(props) {
     const newCodes = codes.slice();
     newCodes[currObject] = val;
     setCodes(newCodes);
-  }
-
-  // updates current object name with given value
-  function updateObjectName(val) {
-    const newObjectNames = objectNames.slice();
-    newObjectNames[currObject] = val;
-    setObjectNames(newObjectNames);
-  }
-
-  // updates current tile name with given value
-  function updateTileName(val) {
-    const newTileNames = tileNames.slice();
-    newTileNames[currTile] = val;
-    setTileNames(newTileNames);
   }
 
   // compiles current object code
@@ -59,23 +42,10 @@ export default function Code(props) {
       <div className={styles.panel}>
         <div className={styles.toolbar}>
           {
-            currObject === -1 ?
-            <input
-              className={`${styles.nameinput} monospace`}
-              value={tileNames[currTile]}
-              onChange={e => updateTileName(e.target.value)}
-            /> :
-            <>
-              <input
-                className={`${styles.nameinput} monospace`}
-                value={objectNames[currObject]}
-                onChange={e => updateObjectName(e.target.value)}
-              />
-              <span className="flexfill" />
-              <button className={styles.compilebutton} onClick={compile}>
-                <PlayArrowIcon />
-              </button>
-            </>
+            currObject !== -1 &&
+            <button className={styles.compilebutton} onClick={compile}>
+              <PlayArrowIcon />
+            </button>
           }
         </div>
         {
