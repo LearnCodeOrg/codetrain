@@ -21,26 +21,25 @@
   align-items: center;
 }
 
-.nameinput {
-  background: #272822;
-  border: 0;
+.toolbar > p {
   color: #f8f8f2;
+  margin: 0 0 0 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .compilebutton {
-  position: absolute;
-  bottom: 4px;
-  right: 4px;
-  height: 32px;
+  height: 24px;
   padding: 0;
-  width: 32px;
+  width: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #2f3129;
+  background: #202020;
   color: #f8f8f2;
   border-radius: 50%;
-  border: 2px solid #49483E;
+  border: 0;
 }
 
 .compilebutton:hover {

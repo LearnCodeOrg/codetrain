@@ -13,7 +13,9 @@ const CodeEditor = dynamic(import('../CodeEditor.js'), {
 });
 
 export default function Code(props) {
-  const { currObject, currTile, codes, setCodes, } = props;
+  const {
+    currObject, codes, setCodes, objectNames
+  } = props;
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -41,6 +43,16 @@ export default function Code(props) {
     <div className={styles.container} onKeyDown={e => e.stopPropagation()}>
       <div className={styles.panel}>
         {
+          currObject !== -1 &&
+          <div className={styles.toolbar}>
+            <p className="monospace">{objectNames[currObject]}</p>
+            <span className="flexfill" />
+            <button className={styles.compilebutton} onClick={compile}>
+              <PlayArrowIcon />
+            </button>
+          </div>
+        }
+        {
           currObject === -1 &&
           <p className={styles.placeholder}>
             Select an object to write code.<br /><br />
@@ -54,12 +66,6 @@ export default function Code(props) {
             readOnly={currObject === -1}
             onChange={val => updateCode(val)}
           />
-          {
-            currObject !== -1 &&
-            <button className={styles.compilebutton} onClick={compile}>
-              <PlayArrowIcon />
-            </button>
-          }
         </div>
       </div>
     </div>
