@@ -95,14 +95,14 @@
   margin-top: 10px;
   height: 128px;
   width: 200%;
-  min-width: calc(432px * 2);
+  min-width: calc(144px * 6 * 2);
   background: url('/img/banner.png');
-  animation: slide 12s linear infinite;
+  animation: slide 24s linear infinite;
 }
 
 @keyframes slide {
   0% {
-    transform: translateX(-432px);
+    transform: translateX(calc(-144px * 6));
   }
   100% {
     transform: translateX(0);
