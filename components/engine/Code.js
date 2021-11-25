@@ -40,14 +40,6 @@ export default function Code(props) {
   return (
     <div className={styles.container} onKeyDown={e => e.stopPropagation()}>
       <div className={styles.panel}>
-        <div className={styles.toolbar}>
-          {
-            currObject !== -1 &&
-            <button className={styles.compilebutton} onClick={compile}>
-              <PlayArrowIcon />
-            </button>
-          }
-        </div>
         {
           currObject === -1 &&
           <p className={styles.placeholder}>
@@ -62,6 +54,12 @@ export default function Code(props) {
             readOnly={currObject === -1}
             onChange={val => updateCode(val)}
           />
+          {
+            currObject !== -1 &&
+            <button className={styles.compilebutton} onClick={compile}>
+              <PlayArrowIcon />
+            </button>
+          }
         </div>
       </div>
     </div>

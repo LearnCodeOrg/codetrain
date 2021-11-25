@@ -10,6 +10,7 @@
   box-shadow: 0 0 5px #333;
   background: #2f3129;
   width: 500px;
+  position: relative;
 }
 
 .toolbar {
@@ -27,16 +28,19 @@
 }
 
 .compilebutton {
-  height: 24px;
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  height: 32px;
   padding: 0;
-  width: 24px;
+  width: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #272822;
+  background: #2f3129;
   color: #f8f8f2;
   border-radius: 50%;
-  border: 0;
+  border: 2px solid #49483E;
 }
 
 .compilebutton:hover {
