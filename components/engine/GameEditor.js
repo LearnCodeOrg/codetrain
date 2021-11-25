@@ -324,7 +324,7 @@ export default function GameEditor(props) {
   function togglePlay() {
     // if playing, stop playing
     if (playing) setPlaying(false);
-    // if no playing, compile and start
+    // if not playing, compile and start
     else {
       if (compile()) setPlaying(true);
     }
@@ -332,7 +332,15 @@ export default function GameEditor(props) {
 
   // handle keypress
   function handleKey(e) {
+    // get key
     const key = e.keyCode;
+    // toggle game
+    if (key === 32 || key === 13) {
+      togglePlay();
+      return;
+    }
+    // return if playing
+    if (playing) return;
     // delete object
     if (key === 8) {
       if (isActiveObject) deleteObject();
