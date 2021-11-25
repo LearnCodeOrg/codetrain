@@ -116,7 +116,7 @@ export default function Draw(props) {
         onMouseUp={e => { sketching = false; }}
         onMouseLeave={e => { sketching = false; }}
       />
-      <div className={styles.toolbar}>
+      <div className={styles.toolbar} onKeyDown={e => e.stopPropagation()}>
         <label>
           Grid
           <input
@@ -128,11 +128,13 @@ export default function Draw(props) {
         {
           currObject === -1 ?
           <input
+            placeholder="tile name"
             className="grayinput"
             value={tileNames[currTile]}
             onChange={e => updateTileName(e.target.value)}
           /> :
           <input
+            placeholder="object name"
             className="grayinput"
             value={objectNames[currObject]}
             onChange={e => updateObjectName(e.target.value)}
