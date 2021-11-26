@@ -55,11 +55,10 @@ export default function Main(props) {
         </form>
       </Modal>
       <Component
-        username={
+        userData={
           !authed ? authed :
           userDoc === undefined ? undefined :
-          userDoc.exists ? userDoc.data().username :
-          null
+          userDoc.exists ? userDoc.data() : null
         }
         setupUser={setupUser}
         {...pageProps}

@@ -12,7 +12,7 @@ import { defaultTileNames } from '../../data/engine';
 import styles from '../../styles/components/engine/Engine.module.css';
 
 export default function Engine(props) {
-  const { data, projectId, username, setupUser } = props;
+  const { data, projectId, userData, setupUser } = props;
 
   const containerRef = useRef();
 
@@ -77,7 +77,7 @@ export default function Engine(props) {
           </div>
           <GameEditor
             containerRef={containerRef}
-            username={username}
+            username={userData?.username}
             projectId={projectId} creator={data.uid}
             colors={colors} tiles={tiles} objects={objects}
             objectNames={objectNames} tileNames={tileNames}

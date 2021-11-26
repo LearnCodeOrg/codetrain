@@ -17,7 +17,7 @@ import signInWithGoogle from '../util/signInWithGoogle.js';
 import styles from '../styles/components/Header.module.css';
 
 export default function Header(props) {
-  const { username, reload, setupUser } = props;
+  const { userData, reload, setupUser } = props;
 
   function HeaderLink(props) {
     const { href, className } = props;
@@ -75,7 +75,7 @@ export default function Header(props) {
         </Tooltip>
       </div>
       {
-        (username === null || username) ?
+        (userData === null || userData) ?
         <Tooltip title="Sign Out" arrow>
           <IconButton onClick={() => firebase.auth().signOut()}>
             <ExitToAppIcon />

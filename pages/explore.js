@@ -10,6 +10,8 @@ import firebase from 'firebase/app';
 import styles from '../styles/pages/Explore.module.css';
 
 export default function Explore(props) {
+  const { userData } = props;
+
   const [mode, setMode] = useState('projects');
 
   return (
@@ -26,7 +28,7 @@ export default function Explore(props) {
       <div className={styles.content}>
         {mode === 'projects' && <Projects />}
         {mode === 'users' && <Users />}
-        {mode === 'palettes' && <Palettes />}
+        {mode === 'palettes' && <Palettes userPalettes={userData?.palettes} />}
       </div>
     </div>
   );
