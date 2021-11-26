@@ -1,7 +1,17 @@
+import DeleteIcon from '@mui/icons-material/Delete';
+
+import firebase from 'firebase/app';
+
 import styles from '../../styles/components/cards/Palette.module.css';
 
 export default function Palette(props) {
-  const { name, colors, created, uid } = props;
+  const { name, colors, created, uid, id } = props;
+
+  // deletes palette from firebase
+  async function deletePalette() {
+    if (!window.confirm(`Delete palette "${name}"?`)) return;
+    await firebase.firestore().collection('palettes').doc(id).delete();
+  }
 
   return (
     <div>
@@ -16,6 +26,12 @@ export default function Palette(props) {
           )
         }
       </div>
+      {
+        firebase.auth().currentUser?.uid === uid &&
+        <button onClick={deletePalette}>
+          <DeleteIcon />
+        </button>
+      }
     </div>
   );
 }
