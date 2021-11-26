@@ -4,6 +4,7 @@ import SaveIcon from '@mui/icons-material/Save';
 
 import { palettes } from '../../data/palettes.js';
 import { useState } from 'react';
+import firebase from 'firebase/app';
 
 import styles from '../../styles/components/engine/Colors.module.css';
 
@@ -14,11 +15,23 @@ export default function Colors(props) {
   const [modalOpen, setModalOpen] = useState(false);
   const [name, setName] = useState('');
 
+  const uid = firebase.auth().currentUser?.uid;
+  const palettesRef = firebase.firestore().collection('palettes');
+
   // updates current color with given value
   function updateColor(val) {
     const newColors = colors.slice();
     newColors[currColor] = val;
     setColors(newColors);
+  }
+
+  // creates a new palette in firebase
+  async function savePalette() {
+    setModalOpen(false);
+    await palettesRef.add({
+      uid, colors, name,
+      created: new Date().getTime()
+    });
   }
 
   return (
