@@ -71,3 +71,15 @@
 .toolbar > button:hover {
   color: var(--blue);
 }
+
+.palette {
+  display: flex;
+  width: fit-content;
+  margin: 10px auto;
+  border: 4px solid #000;
+}
+
+.palette > div {
+  width: 32px;
+  height: 32px;
+}

@@ -1,3 +1,4 @@
+import Modal from '../Modal';
 import ColorizeIcon from '@mui/icons-material/Colorize';
 import SaveIcon from '@mui/icons-material/Save';
 
@@ -10,6 +11,7 @@ export default function Colors(props) {
   const { colors, setColors, currColor, setCurrColor } = props;
 
   const [palette, setPalette] = useState(0);
+  const [modalOpen, setModalOpen] = useState(false);
 
   // updates current color with given value
   function updateColor(val) {
@@ -30,10 +32,9 @@ export default function Colors(props) {
                 `${styles.tile} ${styles.selected}` :
                 styles.tile
               }
-              key={i}
               style={{ background: color }}
-            >
-            </div>
+              key={i}
+            />
           )
         }
       </div>
@@ -65,6 +66,19 @@ export default function Colors(props) {
           <SaveIcon />
         </button>
       </div>
+      <Modal open={modalOpen} setOpen={setModalOpen}>
+        <h1>Save Palette</h1>
+        <div className={styles.palette}>
+          {
+            colors.map((color, i) =>
+              <div
+                style={{ background: color }}
+                key={i}
+              />
+            )
+          }
+        </div>
+      </Modal>
     </div>
   );
 }
