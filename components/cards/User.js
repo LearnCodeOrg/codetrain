@@ -1,14 +1,23 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 import styles from '../../styles/components/cards/User.module.css';
 
 export default function User(props) {
-  const { username } = props;
+  const { photo, username, joined } = props;
 
   return (
-    <div>
+    <div className={styles.container}>
       <Link href={`/users/${username}`}>
-        <a>{username}</a>
+        <a>
+          <div className={styles.content}>
+            <div className={styles.top}>
+              <img src={photo} />
+              <span>{username}</span>
+            </div>
+            <p>{`Joined ${new Date(joined).toLocaleDateString()}`}</p>
+          </div>
+        </a>
       </Link>
     </div>
   );
