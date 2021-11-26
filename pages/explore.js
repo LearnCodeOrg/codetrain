@@ -1,29 +1,16 @@
 import Header from '../components/Header';
-import Loading from '../components/Loading.js';
-import Project from '../components/cards/Project.js';
+import Projects from '../components/Projects';
+import Users from '../components/Users';
+import Palettes from '../components/Palettes';
 import ExploreIcon from '@mui/icons-material/Explore';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import firebase from 'firebase/app';
 
 import styles from '../styles/pages/Explore.module.css';
 
 export default function Explore(props) {
-  const [projects, setProjects] = useState(undefined);
   const [mode, setMode] = useState('projects');
-
-  async function getProjects() {
-    // get and set projects data
-    const projectsRef = firebase.firestore().collection('projects');
-    const projectsQuery = projectsRef.orderBy('modified', 'desc');
-    const projectsDocs = (await projectsQuery.get()).docs;
-    setProjects(projectsDocs.map(doc => ({ id: doc.id, ...doc.data() })));
-  }
-
-  // get projects on start
-  useEffect(() => {
-    getProjects();
-  }, []);
 
   return (
     <div className={styles.container}>
@@ -32,22 +19,14 @@ export default function Explore(props) {
       <div className={styles.options}>
         <select value={mode} onChange={e => setMode(e.target.value)}>
           <option value="projects">Projects</option>
-          <option value="palettes">Palettes</option>
           <option value="users">Users</option>
+          <option value="palettes">Palettes</option>
         </select>
       </div>
       <div className={styles.content}>
-        {
-          projects ?
-          <div className={styles.projects}>
-            {
-              projects.map(project =>
-                <Project {...project} key={project.id} />
-              )
-            }
-          </div> :
-          <Loading />
-        }
+        {mode === 'projects' && <Projects />}
+        {mode === 'users' && <Users />}
+        {mode === 'palettes' && <Palettes />}
       </div>
     </div>
   );
