@@ -14,9 +14,9 @@ export default function Palette(props) {
   }
 
   return (
-    <div>
+    <div className={styles.container}>
       <p>{name}</p>
-      <div>
+      <div className={styles.palette}>
         {
           colors.map((color, i) =>
             <div

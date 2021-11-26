@@ -1,0 +1,24 @@
+.container {
+  background: #efefef;
+  padding: 10px;
+  margin: 10px;
+  width: 168px;
+  min-height: 64px;
+  border-radius: 8px;
+}
+
+.container > p {
+  margin: 0;
+}
+
+.palette {
+  display: flex;
+  width: fit-content;
+  margin: 10px auto;
+  border: 4px solid #000;
+}
+
+.palette > div {
+  width: 32px;
+  height: 32px;
+}
