@@ -34,8 +34,13 @@ export default function Colors(props) {
     });
   }
 
+  // resets modal data
+  function resetModal() {
+    setName('');
+  }
+
   return (
-    <div className={styles.container}>
+    <div className={styles.container} onKeyDown={e => e.stopPropagation()}>
       <div className={styles.tilegrid}>
         {
           colors.map((color, i) =>
@@ -76,12 +81,18 @@ export default function Colors(props) {
           )
         }
         </select>
-        <button onClick={() => setModalOpen(true)}>
-          <SaveIcon />
-        </button>
+        {
+          firebase.auth().currentUser &&
+          <button onClick={() => {
+            resetModal();
+            setModalOpen(true);
+          }}>
+            <SaveIcon />
+          </button>
+        }
       </div>
       <Modal open={modalOpen} setOpen={setModalOpen}>
-        <h1>Save Palette</h1>
+        <h1>New Palette</h1>
         <div className={styles.palette}>
           {
             colors.map((color, i) =>
