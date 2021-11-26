@@ -4,14 +4,13 @@ import Loading from './Loading';
 import { useEffect, useState } from 'react';
 import firebase from 'firebase/app';
 
-import styles from '../styles/components/Projects.module.css';
+import styles from '../styles/components/Grid.module.css';
 
 export default function Projects() {
   const [projects, setProjects] = useState(undefined);
 
   // retrieves projects from firebase
   async function getProjects() {
-    // get and set projects data
     const projectsRef = firebase.firestore().collection('projects');
     const projectsQuery = projectsRef.orderBy('modified', 'desc');
     const projectsDocs = (await projectsQuery.get()).docs;

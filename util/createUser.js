@@ -30,8 +30,9 @@ export default async function createUser(username) {
   const { uid, photoURL } = firebase.auth().currentUser;
   const userRef = usersRef.doc(uid);
   await userRef.set({
-    joined: new Date().toDateString(),
+    joined: new Date().getTime(),
     photo: photoURL,
-    username, usernameLower: username.toLowerCase()
+    username: username,
+    usernameLower: username.toLowerCase()
   });
 }

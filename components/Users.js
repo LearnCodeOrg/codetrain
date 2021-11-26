@@ -4,7 +4,7 @@ import Loading from './Loading';
 import { useEffect, useState } from 'react';
 import firebase from 'firebase/app';
 
-import styles from '../styles/components/Users.module.css';
+import styles from '../styles/components/Grid.module.css';
 
 export default function Users() {
   const [users, setUsers] = useState(undefined);

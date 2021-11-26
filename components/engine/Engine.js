@@ -42,6 +42,7 @@ export default function Engine(props) {
           <Code
             currObject={currObject} currTile={currTile}
             codes={codes} setCodes={setCodes}
+            objectNames={objectNames}
           />
           <div className={styles.draw}>
             <div className={styles.drawtiles}>
