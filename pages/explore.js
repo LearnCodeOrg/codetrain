@@ -10,6 +10,7 @@ import styles from '../styles/pages/Explore.module.css';
 
 export default function Explore(props) {
   const [projects, setProjects] = useState(undefined);
+  const [mode, setMode] = useState('projects');
 
   async function getProjects() {
     // get and set projects data
@@ -28,6 +29,13 @@ export default function Explore(props) {
     <div className={styles.container}>
       <Header {...props} />
       <h1><ExploreIcon fontSize="large" />Explore</h1>
+      <div className={styles.options}>
+        <select value={mode} onChange={e => setMode(e.target.value)}>
+          <option value="projects">Projects</option>
+          <option value="palettes">Palettes</option>
+          <option value="users">Users</option>
+        </select>
+      </div>
       <div className={styles.content}>
         {
           projects ?

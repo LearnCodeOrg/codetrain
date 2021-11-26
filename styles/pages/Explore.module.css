@@ -15,6 +15,12 @@
   margin-right: 5px;
 }
 
+.options {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
 .content {
   display: flex;
   align-items: center;
