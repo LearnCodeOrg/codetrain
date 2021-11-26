@@ -1,11 +1,13 @@
 import DeleteIcon from '@mui/icons-material/Delete';
+import StarIcon from '@mui/icons-material/Star';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
 
 import firebase from 'firebase/app';
 
 import styles from '../../styles/components/cards/Palette.module.css';
 
 export default function Palette(props) {
-  const { name, colors, created, uid, id } = props;
+  const { name, colors, created, uid, id, userPalettes } = props;
 
   // deletes palette from firebase
   async function deletePalette() {
@@ -27,10 +29,22 @@ export default function Palette(props) {
         }
       </div>
       {
-        firebase.auth().currentUser?.uid === uid &&
+        currentUser?.uid === uid &&
         <button onClick={deletePalette}>
           <DeleteIcon />
         </button>
+      }
+      {
+        userPalettes &&
+        (
+          userPalettes.some(palette => palette.id === id) ?
+          <button onClick={() => setStar(false)}>
+            <StarIcon />
+          </button> :
+          <button onClick={() => setStar(true)}>
+            <StarBorderIcon />
+          </button>
+        )
       }
     </div>
   );

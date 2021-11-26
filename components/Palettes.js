@@ -6,7 +6,9 @@ import firebase from 'firebase/app';
 
 import styles from '../styles/components/Grid.module.css';
 
-export default function Palettes() {
+export default function Palettes(props) {
+  const { userPalettes } = props;
+
   const [palettes, setPalettes] = useState(undefined);
 
   // retrieves palettes from firebase
@@ -29,7 +31,11 @@ export default function Palettes() {
     <div className={styles.container}>
       {
         palettes.map(palette =>
-          <Palette {...palette} key={palette.id} />
+          <Palette
+            {...palette}
+            userPalettes={userPalettes}
+            key={palette.id}
+          />
         )
       }
     </div>
