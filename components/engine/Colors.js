@@ -12,6 +12,7 @@ export default function Colors(props) {
 
   const [palette, setPalette] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
+  const [name, setName] = useState('');
 
   // updates current color with given value
   function updateColor(val) {
@@ -78,6 +79,18 @@ export default function Colors(props) {
             )
           }
         </div>
+        <form onSubmit={e => {
+          e.preventDefault();
+          savePalette();
+        }}>
+          <input
+            placeholder="palette name"
+            value={name}
+            onChange={e => setName(e.target.value)}
+            required
+          />
+          <button>Save Palette</button>
+        </form>
       </Modal>
     </div>
   );
