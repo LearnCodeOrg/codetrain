@@ -1,6 +1,7 @@
 .container {
   text-align: center;
   margin-top: 20px;
+  position: relative;
 }
 
 .tilegrid {
@@ -8,7 +9,7 @@
   flex-wrap: wrap;
   width: 128px;
   outline: 4px solid #000;
-  margin-bottom: 10px;
+  margin: 0 auto 10px auto;
 }
 
 .tile {
@@ -24,13 +25,13 @@
   z-index: 1;
 }
 
-.modify {
+.toolbar {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.modify > select {
+.toolbar > select {
   cursor: pointer;
 }
 
@@ -53,5 +54,20 @@
 }
 
 .colorinput:hover {
+  color: var(--blue);
+}
+
+.toolbar > button {
+  margin-left: 8px;
+  height: 24px;
+  width: 24px;
+  background: transparent;
+  border: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toolbar > button:hover {
   color: var(--blue);
 }

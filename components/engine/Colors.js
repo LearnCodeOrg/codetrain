@@ -1,4 +1,5 @@
 import ColorizeIcon from '@mui/icons-material/Colorize';
+import SaveIcon from '@mui/icons-material/Save';
 
 import { palettes } from '../../data/palettes.js';
 import { useState } from 'react';
@@ -36,7 +37,7 @@ export default function Colors(props) {
           )
         }
       </div>
-      <div className={styles.modify}>
+      <div className={styles.toolbar}>
         <label className={styles.colorinput}>
           <ColorizeIcon />
           <input
@@ -60,6 +61,9 @@ export default function Colors(props) {
           )
         }
         </select>
+        <button onClick={() => setModalOpen(true)}>
+          <SaveIcon />
+        </button>
       </div>
     </div>
   );
