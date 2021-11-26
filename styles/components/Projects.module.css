@@ -1,0 +1,47 @@
+.container {
+  display: flex;
+  margin: 10px 20px 20px 20px;
+  flex-wrap: wrap;
+}
+
+@media (min-width: calc(188px * 1 + 40px)) {
+  .container {
+    width: calc(188px * 1);
+  }
+}
+
+@media (min-width: calc(188px * 2 + 40px)) {
+  .container {
+    width: calc(188px * 2);
+  }
+}
+
+@media (min-width: calc(188px * 3 + 40px)) {
+  .container {
+    width: calc(188px * 3);
+  }
+}
+
+@media (min-width: calc(188px * 4 + 40px)) {
+  .container {
+    width: calc(188px * 4);
+  }
+}
+
+@media (min-width: calc(188px * 5 + 40px)) {
+  .container {
+    width: calc(188px * 5);
+  }
+}
+
+@media (min-width: calc(188px * 6 + 40px)) {
+  .container {
+    width: calc(188px * 6);
+  }
+}
+
+@media (min-width: calc(188px * 7 + 40px)) {
+  .container {
+    width: calc(188px * 7);
+  }
+}
