@@ -1,6 +1,7 @@
 import DeleteIcon from '@mui/icons-material/Delete';
 import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
+import Tooltip from '@mui/material/Tooltip';
 
 import firebase from 'firebase/app';
 
@@ -41,18 +42,14 @@ export default function Palette(props) {
       <div className={styles.palette}>
         {
           colors.map((color, i) =>
-            <div
-              style={{ background: color }}
-              key={i}
-            />
+            <Tooltip title={color} arrow key={i}>
+              <div
+                style={{ background: color }}
+              />
+            </Tooltip>
           )
         }
       </div>
-      {
-        colors.map((color, i) =>
-          <p className={styles.color} style={{ color }}>{color}</p>
-        )
-      }
       <div className={styles.buttons}>
         {
           userPalettes &&
