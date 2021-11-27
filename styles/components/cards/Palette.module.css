@@ -22,3 +22,25 @@
   width: 32px;
   height: 32px;
 }
+
+.buttons {
+  display: flex;
+  margin-top: 10px;
+}
+
+.buttons > button {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+}
+
+.starbutton:hover {
+  color: goldenrod;
+}
+
+.deletebutton:hover {
+  color: firebrick;
+}

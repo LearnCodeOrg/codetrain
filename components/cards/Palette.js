@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import DeleteIcon from '@mui/icons-material/Delete';
 import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
@@ -9,7 +10,7 @@ import styles from '../../styles/components/cards/Palette.module.css';
 
 export default function Palette(props) {
   const { palette, userPalettes } = props;
-  const { name, colors, created, uid, id } = palette;
+  const { name, colors, created, uid, username, id } = palette;
 
   const currentUser = firebase.auth().currentUser;
   const usersRef = firebase.firestore().collection('users');
@@ -39,6 +40,9 @@ export default function Palette(props) {
   return (
     <div className={styles.container}>
       <p>{name}</p>
+      <Link href={`/users/${username}`}>
+        <a className="bluelink">{username}</a>
+      </Link>
       <div className={styles.palette}>
         {
           colors.map((color, i) =>
@@ -55,17 +59,26 @@ export default function Palette(props) {
           userPalettes &&
           (
             userPalettes.some(palette => palette.id === id) ?
-            <button onClick={() => setStar(false)}>
+            <button
+              className={styles.starbutton}
+              onClick={() => setStar(false)}
+            >
               <StarIcon />
             </button> :
-            <button onClick={() => setStar(true)}>
+            <button
+              className={styles.starbutton}
+              onClick={() => setStar(true)}
+            >
               <StarBorderIcon />
             </button>
           )
         }
         {
           currentUser?.uid === uid &&
-          <button onClick={deletePalette}>
+          <button
+            className={styles.deletebutton}
+            onClick={deletePalette}
+          >
             <DeleteIcon />
           </button>
         }
