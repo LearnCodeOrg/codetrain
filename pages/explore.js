@@ -17,12 +17,11 @@ export default function Explore(props) {
 
   // get current tab
   const router = useRouter();
-  const queryTab = router.query.tab;
 
   // set tab when query changed
   useEffect(() => {
-    setTab(queryTab);
-  }, [queryTab]);
+    if (router.isReady) setTab(router.query.tab ?? 'projects');
+  }, [router.isReady]);
 
   return (
     <div className={styles.container}>

@@ -9,7 +9,7 @@ import firebase from 'firebase/app';
 import styles from '../../styles/components/engine/Colors.module.css';
 
 export default function Colors(props) {
-  const { colors, setColors, currColor, setCurrColor, userPalettes } = props;
+  const { colors, setColors, currColor, setCurrColor, userData } = props;
 
   const [palette, setPalette] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
@@ -17,7 +17,7 @@ export default function Colors(props) {
 
   const uid = firebase.auth().currentUser?.uid;
   const palettesRef = firebase.firestore().collection('palettes');
-  const palettes = userPalettes ?? defaultPalettes;
+  const palettes = userData?.palettes ?? defaultPalettes;
 
   // updates current color with given value
   function updateColor(val) {
@@ -31,6 +31,7 @@ export default function Colors(props) {
     setModalOpen(false);
     await palettesRef.add({
       uid, colors, name,
+      username: userData.username,
       created: new Date().getTime()
     });
   }
@@ -85,7 +86,7 @@ export default function Colors(props) {
           }
         </select>
         {
-          firebase.auth().currentUser &&
+          userData &&
           <button onClick={() => {
             resetModal();
             setModalOpen(true);

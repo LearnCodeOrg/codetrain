@@ -47,7 +47,7 @@ export default function Engine(props) {
           <div className={styles.draw}>
             <div className={styles.drawtiles}>
               <Colors
-                userPalettes={userData?.palettes}
+                userData={userData}
                 colors={colors} setColors={setColors}
                 currColor={currColor} setCurrColor={setCurrColor}
               />
