@@ -4,7 +4,8 @@ import Users from '../components/Users';
 import Palettes from '../components/Palettes';
 import ExploreIcon from '@mui/icons-material/Explore';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 
 import styles from '../styles/pages/Explore.module.css';
 
@@ -16,6 +17,11 @@ export default function Explore(props) {
   // get current tab
   const router = useRouter();
   const queryTab = router.query.tab;
+
+  // set tab when query changed
+  useEffect(() => {
+    setTab(queryTab);
+  }, [queryTab]);
 
   return (
     <div className={styles.container}>
@@ -36,9 +42,9 @@ export default function Explore(props) {
         </select>
       </div>
       <div className={styles.content}>
-        {mode === 'projects' && <Projects />}
-        {mode === 'users' && <Users />}
-        {mode === 'palettes' && <Palettes userPalettes={userData?.palettes} />}
+        {(!tab || tab === 'projects') && <Projects />}
+        {tab === 'users' && <Users />}
+        {tab === 'palettes' && <Palettes userPalettes={userData?.palettes} />}
       </div>
     </div>
   );
