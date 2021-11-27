@@ -11,14 +11,25 @@ import styles from '../styles/pages/Explore.module.css';
 export default function Explore(props) {
   const { userData } = props;
 
-  const [mode, setMode] = useState('projects');
+  const [tab, setTab] = useState(undefined);
+
+  // get current tab
+  const router = useRouter();
+  const queryTab = router.query.tab;
 
   return (
     <div className={styles.container}>
       <Header {...props} />
       <h1><ExploreIcon fontSize="large" />Explore</h1>
       <div className={styles.options}>
-        <select value={mode} onChange={e => setMode(e.target.value)}>
+        <select
+          value={tab}
+          onChange={e => {
+            const newTab = e.target.value;
+            setTab(newTab);
+            router.push(`/explore?tab=${newTab}`);
+          }}
+        >
           <option value="projects">Projects</option>
           <option value="users">Users</option>
           <option value="palettes">Palettes</option>
