@@ -7,7 +7,8 @@ import firebase from 'firebase/app';
 import styles from '../../styles/components/cards/Palette.module.css';
 
 export default function Palette(props) {
-  const { name, colors, created, uid, id, userPalettes } = props;
+  const { palette, userPalettes } = props;
+  const { name, colors, created, uid, id } = palette;
 
   const currentUser = firebase.auth().currentUser;
   const usersRef = firebase.firestore().collection('users');
@@ -18,6 +19,7 @@ export default function Palette(props) {
   // deletes palette from firebase
   async function deletePalette() {
     if (!window.confirm(`Delete palette "${name}"?`)) return;
+    props.deletePalette(palette);
     await paletteRef.delete();
   }
 

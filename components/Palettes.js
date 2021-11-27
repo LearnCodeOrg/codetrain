@@ -19,6 +19,11 @@ export default function Palettes(props) {
     setPalettes(palettesDocs.map(doc => ({ id: doc.id, ...doc.data() })));
   }
 
+  // deletes given palette from local display
+  function deletePalette(palette) {
+    setPalettes(old => old.filter(pal => pal !== palette));
+  }
+
   // get palettes on start
   useEffect(() => {
     getPalettes();
@@ -32,7 +37,8 @@ export default function Palettes(props) {
       {
         palettes.map(palette =>
           <Palette
-            {...palette}
+            palette={palette}
+            deletePalette={deletePalette}
             userPalettes={userPalettes}
             key={palette.id}
           />
