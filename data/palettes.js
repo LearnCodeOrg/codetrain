@@ -1,8 +1,11 @@
-export const palettes = [
-  {
-    name: "Grayscale",
-    colors: ['#dfdfdf', '#9f9f9f', '#606060', '#202020']
-  },
+export const defaultColors = [
+  "#dfdfdf",
+  "#9f9f9f",
+  "#606060",
+  "#202020"
+];
+
+export const defaultPalettes = [
   {
     name: "Gameboy",
     colors: ['#e0f8d0', '#88c070', '#346856', '#081820']

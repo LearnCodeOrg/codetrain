@@ -1,4 +1,4 @@
-import { palettes } from './palettes';
+import { defaultColors } from './palettes';
 
 // units
 export const tileCount = 16;
@@ -62,7 +62,7 @@ const objectNames = Array(objectCount).fill(0).map((val, i) => (
 const tileNames = Array(objectCount).fill(0).map((val, i) => (
   i === 0 ? 'empty' : i === 1 ? 'grass' : `tile ${i}`
 ));
-const colors = palettes[0].colors;
+const colors = defaultColors;
 const tiles = Array(tileCount).fill(0).map((val, i) => (
   i === 1 ? grassTile : defaultSprite
 ));

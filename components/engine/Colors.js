@@ -2,8 +2,8 @@ import Modal from '../Modal';
 import ColorizeIcon from '@mui/icons-material/Colorize';
 import SaveIcon from '@mui/icons-material/Save';
 
-import { palettes } from '../../data/palettes.js';
 import { useState } from 'react';
+import { defaultColors, defaultPalettes } from '../../data/palettes';
 import firebase from 'firebase/app';
 
 import styles from '../../styles/components/engine/Colors.module.css';
@@ -75,11 +75,7 @@ export default function Colors(props) {
             setColors(palettes[newPalette].colors);
           }}
         >
-        {
-          palettes.map((pal, i) =>
-            <option value={i} key={i}>{pal.name}</option>
-          )
-        }
+          <option value="">Default</option>
         </select>
         {
           firebase.auth().currentUser &&
