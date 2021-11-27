@@ -49,23 +49,30 @@ export default function Palette(props) {
         }
       </div>
       {
-        currentUser?.uid === uid &&
-        <button onClick={deletePalette}>
-          <DeleteIcon />
-        </button>
-      }
-      {
-        userPalettes &&
-        (
-          userPalettes.some(palette => palette.id === id) ?
-          <button onClick={() => setStar(false)}>
-            <StarIcon />
-          </button> :
-          <button onClick={() => setStar(true)}>
-            <StarBorderIcon />
-          </button>
+        colors.map((color, i) =>
+          <p className={styles.color} style={{ color }}>{color}</p>
         )
       }
+      <div className={styles.buttons}>
+        {
+          userPalettes &&
+          (
+            userPalettes.some(palette => palette.id === id) ?
+            <button onClick={() => setStar(false)}>
+              <StarIcon />
+            </button> :
+            <button onClick={() => setStar(true)}>
+              <StarBorderIcon />
+            </button>
+          )
+        }
+        {
+          currentUser?.uid === uid &&
+          <button onClick={deletePalette}>
+            <DeleteIcon />
+          </button>
+        }
+      </div>
     </div>
   );
 }
