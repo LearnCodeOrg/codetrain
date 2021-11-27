@@ -23,6 +23,12 @@ export default function Explore(props) {
     if (router.isReady) setTab(router.query.tab ?? 'projects');
   }, [router.isReady]);
 
+  // selects given tab
+  function selectTab(newTab) {
+    setTab(newTab);
+    router.push(`/explore?tab=${newTab}`);
+  }
+
   return (
     <div className={styles.container}>
       <Header {...props} />
@@ -31,19 +37,16 @@ export default function Explore(props) {
         tab === undefined ?
         <Loading /> :
         <>
-          <div className={styles.options}>
-            <select
-              value={tab}
-              onChange={e => {
-                const newTab = e.target.value;
-                setTab(newTab);
-                router.push(`/explore?tab=${newTab}`);
-              }}
-            >
-              <option value="projects">Projects</option>
-              <option value="users">Users</option>
-              <option value="palettes">Palettes</option>
-            </select>
+          <div className={styles.tabs}>
+            <button onClick={() => selectTab('projects')}>
+              Projects
+            </button>
+            <button onClick={() => selectTab('users')}>
+              Users
+            </button>
+            <button onClick={() => selectTab('palettes')}>
+              Palettes
+            </button>
           </div>
           <div className={styles.content}>
             {(!tab || tab === 'projects') && <Projects />}
