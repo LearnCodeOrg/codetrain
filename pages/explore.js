@@ -38,15 +38,17 @@ export default function Explore(props) {
         <Loading /> :
         <>
           <div className={styles.tabs}>
-            <button onClick={() => selectTab('projects')}>
-              Projects
-            </button>
-            <button onClick={() => selectTab('users')}>
-              Users
-            </button>
-            <button onClick={() => selectTab('palettes')}>
-              Palettes
-            </button>
+            {
+              ['projects', 'users', 'palettes'].map((name, i) =>
+                <button
+                  className={tab === name ? styles.selected : null}
+                  onClick={() => selectTab(name)}
+                  key={i}
+                >
+                  {name[0].toUpperCase() + name.slice(1)}
+                </button>
+              )
+            }
           </div>
           <div className={styles.content}>
             {(!tab || tab === 'projects') && <Projects />}

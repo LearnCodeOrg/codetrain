@@ -21,6 +21,21 @@
   margin-top: 20px;
 }
 
+.tabs > button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-size: 16px;
+}
+
+.tabs > button.selected {
+  text-decoration: underline;
+}
+
+.tabs > button:hover {
+  color: var(--blue);
+}
+
 .tabs > button:nth-of-type(2) {
   margin: 0 10px;
 }
