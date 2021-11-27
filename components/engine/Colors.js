@@ -9,14 +9,15 @@ import firebase from 'firebase/app';
 import styles from '../../styles/components/engine/Colors.module.css';
 
 export default function Colors(props) {
-  const { colors, setColors, currColor, setCurrColor } = props;
+  const { colors, setColors, currColor, setCurrColor, userPalettes } = props;
 
-  const [palette, setPalette] = useState(0);
+  const [palette, setPalette] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
   const [name, setName] = useState('');
 
   const uid = firebase.auth().currentUser?.uid;
   const palettesRef = firebase.firestore().collection('palettes');
+  const palettes = userPalettes ?? defaultPalettes;
 
   // updates current color with given value
   function updateColor(val) {
@@ -70,12 +71,18 @@ export default function Colors(props) {
           className="grayinput"
           value={palette}
           onChange={e => {
-            const newPalette = e.target.value;
-            setPalette(newPalette);
-            setColors(palettes[newPalette].colors);
+            const palId = e.target.value;
+            setPalette(palId);
+            const pal = palettes.find(pal => pal.id === palId);
+            setColors(pal ? pal.colors : defaultColors);
           }}
         >
           <option value="">Default</option>
+          {
+            palettes.map(pal =>
+              <option value={pal.id} key={pal.id}>{pal.name}</option>
+            )
+          }
         </select>
         {
           firebase.auth().currentUser &&

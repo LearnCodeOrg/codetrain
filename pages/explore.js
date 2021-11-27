@@ -5,7 +5,6 @@ import Palettes from '../components/Palettes';
 import ExploreIcon from '@mui/icons-material/Explore';
 
 import { useState } from 'react';
-import firebase from 'firebase/app';
 
 import styles from '../styles/pages/Explore.module.css';
 

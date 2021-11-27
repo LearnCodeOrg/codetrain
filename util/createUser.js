@@ -1,3 +1,4 @@
+import { defaultPalettes } from '../data/palettes';
 import firebase from 'firebase/app';
 
 // attempts to create user with given username
@@ -33,6 +34,7 @@ export default async function createUser(username) {
     joined: new Date().getTime(),
     photo: photoURL,
     username: username,
-    usernameLower: username.toLowerCase()
+    usernameLower: username.toLowerCase(),
+    palettes: defaultPalettes
   });
 }
