@@ -7,8 +7,26 @@
   border-radius: 8px;
 }
 
-.container > p {
+.container > h1 {
   margin: 0;
+  font-size: 24px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0 5px;
+}
+
+.container > a > p {
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0 5px;
+}
+
+.container > a:hover {
+  color: var(--blue);
+  text-decoration: underline;
 }
 
 .palette {
@@ -25,7 +43,7 @@
 
 .buttons {
   display: flex;
-  margin-top: 10px;
+  margin-top: 4px;
 }
 
 .buttons > button {

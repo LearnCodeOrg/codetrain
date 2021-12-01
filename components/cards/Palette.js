@@ -39,10 +39,6 @@ export default function Palette(props) {
 
   return (
     <div className={styles.container}>
-      <p>{name}</p>
-      <Link href={`/users/${username}`}>
-        <a className="bluelink">{username}</a>
-      </Link>
       <div className={styles.palette}>
         {
           colors.map((color, i) =>
@@ -54,6 +50,12 @@ export default function Palette(props) {
           )
         }
       </div>
+      <h1>{name}</h1>
+      <Link href={`/users/${username}`}>
+        <a>
+          <p>{username}</p>
+        </a>
+      </Link>
       <div className={styles.buttons}>
         {
           userPalettes &&
