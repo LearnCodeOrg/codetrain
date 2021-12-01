@@ -26,14 +26,19 @@
   border: 0;
   background: transparent;
   font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .tabs > button.selected {
-  text-decoration: underline;
+  font-weight: bold;
+  border-bottom: 2px solid #000;
 }
 
 .tabs > button:hover {
   color: var(--blue);
+  border-color: var(--blue);
 }
 
 .tabs > button:nth-of-type(2) {

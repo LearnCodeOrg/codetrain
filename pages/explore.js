@@ -4,6 +4,9 @@ import Projects from '../components/Projects';
 import Users from '../components/Users';
 import Palettes from '../components/Palettes';
 import ExploreIcon from '@mui/icons-material/Explore';
+import PersonIcon from '@mui/icons-material/Person';
+import PaletteIcon from '@mui/icons-material/Palette';
+import VideogameAssetIcon from '@mui/icons-material/VideogameAsset';
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
@@ -38,17 +41,27 @@ export default function Explore(props) {
         <Loading /> :
         <>
           <div className={styles.tabs}>
-            {
-              ['projects', 'users', 'palettes'].map((name, i) =>
-                <button
-                  className={tab === name ? styles.selected : null}
-                  onClick={() => selectTab(name)}
-                  key={i}
-                >
-                  {name[0].toUpperCase() + name.slice(1)}
-                </button>
-              )
-            }
+            <button
+              className={tab === 'projects' ? styles.selected : null}
+              onClick={() => selectTab('projects')}
+            >
+              <VideogameAssetIcon />
+              <span>Projects</span>
+            </button>
+            <button
+              className={tab === 'users' ? styles.selected : null}
+              onClick={() => selectTab('users')}
+            >
+              <PersonIcon />
+              <span>Users</span>
+            </button>
+            <button
+              className={tab === 'palettes' ? styles.selected : null}
+              onClick={() => selectTab('palettes')}
+            >
+              <PaletteIcon />
+              <span>Palettes</span>
+            </button>
           </div>
           <div className={styles.content}>
             {(!tab || tab === 'projects') && <Projects />}
