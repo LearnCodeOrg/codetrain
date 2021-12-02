@@ -19,6 +19,8 @@ import styles from '../styles/components/Header.module.css';
 export default function Header(props) {
   const { userData, reload, setupUser } = props;
 
+  const username = userData?.username;
+
   function HeaderLink(props) {
     const { href, className } = props;
 
@@ -47,17 +49,29 @@ export default function Header(props) {
       </HeaderLink>
       <span className="flexfill" />
       <div className={styles.bigscreen}>
-        <HeaderLink href="/" className={styles.link}>Home</HeaderLink>
+        {
+          username ?
+          <HeaderLink href={`/users/${username}`} className={styles.link}>Profile</HeaderLink> :
+          <HeaderLink href="/" className={styles.link}>Home</HeaderLink>
+        }
         <HeaderLink href="/create" className={styles.link}>Create</HeaderLink>
         <HeaderLink href="/explore" className={styles.link}>Explore</HeaderLink>
         <HeaderLink href="/docs" className={styles.link}>Docs</HeaderLink>
       </div>
       <div className={styles.smallscreen}>
-        <Tooltip title="Home" arrow>
-          <IconButton onClick={() => Router.push('/')}>
-            <HomeIcon />
-          </IconButton>
-        </Tooltip>
+        {
+          username ?
+          <Tooltip title="Profile" arrow>
+            <IconButton onClick={() => Router.push(`/users/${username}`)}>
+              <HomeIcon />
+            </IconButton>
+          </Tooltip> :
+          <Tooltip title="Home" arrow>
+            <IconButton onClick={() => Router.push('/')}>
+              <HomeIcon />
+            </IconButton>
+          </Tooltip>
+        }
         <Tooltip title="Create" arrow>
           <IconButton onClick={() => Router.push('/create')}>
             <AddCircleIcon />
