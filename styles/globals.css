@@ -90,7 +90,7 @@ button, .SnackbarItem-message, .MuiPaper-root * {
   min-height: 48px;
 }
 
-@media (max-width: 576px) {
+@media (max-width: 768px) {
   .MuiDrawer-root, .MuiDrawer-root .MuiPaper-root {
     width: 56px;
   }

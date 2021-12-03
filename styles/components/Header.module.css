@@ -50,7 +50,7 @@
   align-items: center;
 }
 
-@media (max-width: 576px) {
+@media (max-width: 768px) {
   .smallscreen {
     display: flex;
   }
