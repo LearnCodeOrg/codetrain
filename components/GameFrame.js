@@ -36,7 +36,8 @@ export default function GameFrame(props) {
       top: 0;
       color: red;
       font-family:
-        'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+        'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro',
+        monospace;
     }
   </style>
   <script>
@@ -59,27 +60,40 @@ export default function GameFrame(props) {
       gameObjects: ${JSON.stringify(gameObjects)},
       lastPressedKeys: {},
       pressedKeys: {},
+      clampInbounds: (index) => {
+        // clamps given object index inbounds
+        const { x, y } = $$.gameObjects[index];
+        $$.gameObjects[index].x =
+          Math.min($$.mapPixels - $$.spritePixels, Math.max(0, x));
+        $$.gameObjects[index].y =
+          Math.min($$.mapPixels - $$.spritePixels, Math.max(0, y));
+      },
       move: (index, dir) => {
         if (dir === 'up') $$.gameObjects[index].y -= $$.spritePixels;
         else if (dir === 'down') $$.gameObjects[index].y += $$.spritePixels;
         else if (dir === 'left') $$.gameObjects[index].x -= $$.spritePixels;
         else if (dir === 'right') $$.gameObjects[index].x += $$.spritePixels;
+        $$.clampInbounds(index);
       },
       movePixels: (index, x, y) => {
         $$.gameObjects[index].x += x * $$.pixelPixels;
         $$.gameObjects[index].y += y * $$.pixelPixels;
+        $$.clampInbounds(index);
       },
       moveTiles: (index, x, y) => {
         $$.gameObjects[index].x += x * $$.spritePixels;
         $$.gameObjects[index].y += y * $$.spritePixels;
+        $$.clampInbounds(index);
       },
       setPixelPos: (index, x, y) => {
         $$.gameObjects[index].x = x * $$.pixelPixels;
         $$.gameObjects[index].y = y * $$.pixelPixels;
+        $$.clampInbounds(index);
       },
       setTilePos: (index, x, y) => {
         $$.gameObjects[index].x = x * $$.spritePixels;
         $$.gameObjects[index].y = y * $$.spritePixels;
+        $$.clampInbounds(index);
       },
       getPixelPos: (index) => {
         return {
@@ -131,7 +145,7 @@ export default function GameFrame(props) {
           throw \`ReferenceError: No object found with ID \${id}\`;
         }
         // splice object
-        $$.gameObjects.splice(index, 1);
+        $$.gameObjects.splice(objectIndex, 1);
         // regenerate sprite codes
         $$.spriteCodes = $$.gameObjects.map((gameObject, index) =>
           $$.getCodeFunction(gameObject, index)
