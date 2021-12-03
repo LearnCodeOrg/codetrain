@@ -286,6 +286,20 @@ const player = getObject('player');
 // move player right
 player.move('right');`}
           </Code>
+          Objects can be created with <code>createObject</code> and{' '}
+          <code>deleteObject</code>.<br /><br />
+          <code>createObject(object, x, y, id)</code> creates{' '}
+          <code>object</code> with given <code>id</code> at <code>x</code>,
+          {' '}<code>y</code> in tiles.<br />
+          <code>deleteObject(id)</code> deletes <code>object</code> with given
+          {' '}<code>id</code>.
+          <Code>
+{`// create a new player object
+const player2 = createObject('player', 0, 0, 'player2');
+
+// delete new player
+deleteObject('player2');`}
+          </Code>
         </div>
       </div>
     </div>
