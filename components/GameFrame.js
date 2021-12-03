@@ -126,8 +126,8 @@ export default function GameFrame(props) {
       },
       deleteObject: (id) => {
         // get object index
-        const index = $$.gameObjects.findIndex(obj => obj.id === id);
-        if (index === -1) {
+        const objectIndex = $$.gameObjects.findIndex(obj => obj.id === id);
+        if (objectIndex === -1) {
           throw \`ReferenceError: No object found with ID \${id}\`;
         }
         // splice object
@@ -136,6 +136,20 @@ export default function GameFrame(props) {
         $$.spriteCodes = $$.gameObjects.map((gameObject, index) =>
           $$.getCodeFunction(gameObject, index)
         );
+      },
+      createObject: (object, x, y, id) => {
+        // get sprite
+        const sprite = $$.objectNames.indexOf(object);
+        // push object
+        $$.gameObjects.push({
+          id, x: x * $$.spritePixels, y: y * $$.spritePixels, sprite
+        });
+        // regenerate sprite codes
+        $$.spriteCodes = $$.gameObjects.map((gameObject, index) =>
+          $$.getCodeFunction(gameObject, index)
+        );
+        // return created object
+        return $$.spriteCodes[$$.spriteCodes.length - 1];
       },
       throwError: (message) => {
         // clear canvas
@@ -160,11 +174,12 @@ export default function GameFrame(props) {
             const getTilePos = () => $$.getTilePos($$index);
             const getTile = () => $$.getTile($$index);
             const setTile = tile => $$.setTile($$index, tile);
-            const getTileAt = (x, y) => $$.getTileAt(x, y);
-            const setTileAt = (x, y, tile) => $$.setTileAt(x, y, tile);
+            const getTileAt = $$.getTileAt;
+            const setTileAt = $$.setTileAt;
             const say = text => { $$.dialogue = \`\${text}\`; }
-            const getObject = id => $$.getObject(id);
-            const deleteObject = id => $$.deleteObject(id);
+            const getObject = $$.getObject;
+            const deleteObject = $$.deleteObject;
+            const createObject = $$.createObject;
             eval($$.codes[gameObject.sprite]);
             return {
               id: gameObject.id,
