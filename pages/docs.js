@@ -275,13 +275,13 @@ if (tile === 'empty') setTile('grass');`}
               <LinkIcon />
             </a>
           </h2>
-          Objects can be retrieved with <code>getObjectById(id)</code>.
+          Objects can be retrieved with <code>getObject(id)</code>.
           <br /><br />
-          <code>getObjectById(id)</code> returns the first reference of an{' '}
+          <code>getObject(id)</code> returns the first reference of an{' '}
           object with given <code>id</code>.
           <Code>
 {`// get object with ID 'player'
-const player = getObjectById('player');
+const player = getObject('player');
 
 // move player right
 player.move('right');`}

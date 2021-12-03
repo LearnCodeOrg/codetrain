@@ -121,7 +121,7 @@ export default function GameFrame(props) {
         }
         $$.background[mapIndex] = nameIndex;
       },
-      getObjectById: (id) => {
+      getObject: (id) => {
         return $$.spriteCodes.find(obj => obj.id === id) ?? null;
       },
       deleteObject: (id) => {
@@ -163,7 +163,7 @@ export default function GameFrame(props) {
             const getTileAt = (x, y) => $$.getTileAt(x, y);
             const setTileAt = (x, y, tile) => $$.setTileAt(x, y, tile);
             const say = text => { $$.dialogue = \`\${text}\`; }
-            const getObjectById = id => $$.getObjectById(id);
+            const getObject = id => $$.getObject(id);
             const deleteObject = id => $$.deleteObject(id);
             eval($$.codes[gameObject.sprite]);
             return {
