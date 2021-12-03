@@ -12,6 +12,7 @@ export default function User(props) {
         <a>
           <div className={styles.content}>
             <div className={styles.top}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={photo} />
               <span>{username}</span>
             </div>

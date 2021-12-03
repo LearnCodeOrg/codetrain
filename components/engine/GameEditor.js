@@ -465,6 +465,7 @@ export default function GameEditor(props) {
           mapPixels={mapPixels}
           spritePixels={spritePixels}
           pixelPixels={pixelPixels}
+          objectNames={objectNames}
           tileNames={tileNames}
           codes={codes}
           colors={colors}

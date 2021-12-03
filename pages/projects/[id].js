@@ -103,6 +103,7 @@ export default function Project(props) {
               mapPixels={mapPixels}
               spritePixels={spritePixels}
               pixelPixels={pixelPixels}
+              objectNames={data.objectNames}
               tileNames={data.tileNames}
               codes={data.codes}
               colors={data.colors}

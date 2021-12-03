@@ -46,7 +46,7 @@ export default function Explore(props) {
               onClick={() => selectTab('projects')}
             >
               <VideogameAssetIcon />
-              <span>Projects</span>
+              <span>Featured Projects</span>
             </button>
             <button
               className={tab === 'users' ? styles.selected : null}
@@ -60,7 +60,7 @@ export default function Explore(props) {
               onClick={() => selectTab('palettes')}
             >
               <PaletteIcon />
-              <span>Palettes</span>
+              <span>Engine Palettes</span>
             </button>
           </div>
           <div className={styles.content}>

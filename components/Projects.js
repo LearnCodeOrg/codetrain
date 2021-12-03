@@ -12,7 +12,9 @@ export default function Projects() {
   // retrieves projects from firebase
   async function getProjects() {
     const projectsRef = firebase.firestore().collection('projects');
-    const projectsQuery = projectsRef.orderBy('modified', 'desc');
+    const projectsQuery = projectsRef
+      .orderBy('modified', 'desc')
+      .where('featured', '==', true);
     const projectsDocs = (await projectsQuery.get()).docs;
     setProjects(projectsDocs.map(doc => ({ id: doc.id, ...doc.data() })));
   }

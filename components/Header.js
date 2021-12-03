@@ -51,7 +51,9 @@ export default function Header(props) {
       <div className={styles.bigscreen}>
         {
           username ?
-          <HeaderLink href={`/users/${username}`} className={styles.link}>Profile</HeaderLink> :
+          <HeaderLink href={`/users/${username}`} className={styles.link}>
+            Profile
+          </HeaderLink> :
           <HeaderLink href="/" className={styles.link}>Home</HeaderLink>
         }
         <HeaderLink href="/create" className={styles.link}>Create</HeaderLink>
