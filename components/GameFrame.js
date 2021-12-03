@@ -15,36 +15,6 @@ export default function GameFrame(props) {
 
   const screenRef = useRef();
 
-  // returns function definition for given object
-  function getCodeFunction(gameObject, index) {
-    const { id, x, y, sprite } = gameObject;
-    return (
-`(function() {
-  const $$index = ${index};
-  const move = dir => $$.move($$index, dir);
-  const movePixels = (x, y) => $$.movePixels($$index, x, y);
-  const moveTiles = (x, y) => $$.moveTiles($$index, x, y);
-  const setPixelPos = (x, y) => $$.setPixelPos($$index, x, y);
-  const setTilePos = (x, y) => $$.setTilePos($$index, x, y);
-  const getPixelPos = () => $$.getPixelPos($$index);
-  const getTilePos = () => $$.getTilePos($$index);
-  const getTile = () => $$.getTile($$index);
-  const setTile = tile => $$.setTile($$index, tile);
-  const getTileAt = (x, y) => $$.getTileAt(x, y);
-  const setTileAt = (x, y, tile) => $$.setTileAt(x, y, tile);
-  const say = text => { $$.dialogue = \`\${text}\`; }
-  const getObjectById = id => $$.getObjectById(id);
-  ${codes[sprite]}
-  return {
-    id: '${id}',
-    move, movePixels, moveTiles, getTile, setTile,
-    setPixelPos, setTilePos, getPixelPos, getTilePos,
-    start: typeof start === 'function' ? start : () => {},
-    update: typeof update === 'function' ? update : () => {}
-  };
-})()`);
-  }
-
   const gameSrc =
 `<html>
   <body onload="__start__()">
@@ -83,6 +53,7 @@ export default function GameFrame(props) {
       colors: ${JSON.stringify(colors)},
       tiles: ${JSON.stringify(tiles)},
       objects: ${JSON.stringify(objects)},
+      codes: ${JSON.stringify(codes)},
       background: ${JSON.stringify(background)},
       gameObjects: ${JSON.stringify(gameObjects)},
       lastPressedKeys: {},
@@ -161,6 +132,34 @@ export default function GameFrame(props) {
         p.className = 'error';
         p.innerText = message;
         document.body.appendChild(p);
+      },
+      getCodeFunction: (gameObject, index) => {
+        return (
+          (function() {
+            const $$index = index;
+            const move = dir => $$.move($$index, dir);
+            const movePixels = (x, y) => $$.movePixels($$index, x, y);
+            const moveTiles = (x, y) => $$.moveTiles($$index, x, y);
+            const setPixelPos = (x, y) => $$.setPixelPos($$index, x, y);
+            const setTilePos = (x, y) => $$.setTilePos($$index, x, y);
+            const getPixelPos = () => $$.getPixelPos($$index);
+            const getTilePos = () => $$.getTilePos($$index);
+            const getTile = () => $$.getTile($$index);
+            const setTile = tile => $$.setTile($$index, tile);
+            const getTileAt = (x, y) => $$.getTileAt(x, y);
+            const setTileAt = (x, y, tile) => $$.setTileAt(x, y, tile);
+            const say = text => { $$.dialogue = \`\${text}\`; }
+            const getObjectById = id => $$.getObjectById(id);
+            eval($$.codes[gameObject.sprite]);
+            return {
+              id: gameObject.id,
+              move, movePixels, moveTiles, getTile, setTile,
+              setPixelPos, setTilePos, getPixelPos, getTilePos,
+              start: typeof start === 'function' ? start : () => {},
+              update: typeof update === 'function' ? update : () => {}
+            };
+          })()
+        );
       }
     }
     // set up input listeners
@@ -265,11 +264,9 @@ export default function GameFrame(props) {
       // try starting game
       try {
         // initialize user code
-        $$.spriteCodes = [
-          ${gameObjects.map((gameObject, index) =>
-            getCodeFunction(gameObject, index)
-          ).join(',\n')}
-        ];
+        $$.spriteCodes = $$.gameObjects.map((gameObject, index) =>
+          $$.getCodeFunction(gameObject, index)
+        );
         // start game loop
         $$.spriteCodes.forEach(code => code.start());
         requestAnimationFrame(gameLoop);
