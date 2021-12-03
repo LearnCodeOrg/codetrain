@@ -112,8 +112,8 @@ export default function Docs(props) {
               <LinkIcon />
             </a>
           </h2>
-          There are two built-in game loop functions, <code>start()</code> and
-          {' '}<code>update()</code>.<br /><br />
+          There are two built-in game loop functions, <code>start</code> and
+          {' '}<code>update</code>.<br /><br />
           <code>start()</code> runs once at the start of the game.<br />
           <code>update()</code> runs once a frame.
           <Code>
@@ -137,7 +137,7 @@ function update() {
               <LinkIcon />
             </a>
           </h2>
-          Text can be displayed with <code>say(text)</code>.<br /><br />
+          Text can be displayed with <code>say</code>.<br /><br />
           <code>say(text)</code> opens a dialogue box with given{' '}
           <code>text</code>.
           <Code>
@@ -153,8 +153,8 @@ say('Hello World!');`}
               <LinkIcon />
             </a>
           </h2>
-          Keyboard input can be taken with <code>isKeyDown(key)</code> and{' '}
-          <code>isKey(key)</code>.<br /><br />
+          Keyboard input can be taken with <code>isKeyDown</code> and{' '}
+          <code>isKey</code>.<br /><br />
           <code>isKeyDown(key)</code> returns whether given <code>key</code> is
           {' '}down.<br />
           <code>isKey(key)</code> returns whether given <code>key</code> was
@@ -177,8 +177,8 @@ say('Hello World!');`}
               <LinkIcon />
             </a>
           </h2>
-          Objects can be moved with <code>move(dir)</code>,
-          {' '}<code>moveTiles(x, y)</code>, and <code>movePixels(x, y)</code>.
+          Objects can be moved with <code>move</code>, <code>moveTiles</code>,
+          {' '}and <code>movePixels</code>.
           <br /><br />
           <code>move(dir)</code> moves object one tile <code>up</code>,{' '}
           <code>down</code>, <code>left</code>, or <code>right</code>.<br />
@@ -204,8 +204,8 @@ function update() {
   if (isKeyDown('d')) movePixels(1, 0);
 }`}
           </Code>
-          Object position can be retrieved with <code>getTilePos()</code> and
-          {' '}<code>getPixelPos()</code>.<br /><br />
+          Object position can be retrieved with <code>getTilePos</code> and
+          {' '}<code>getPixelPos</code>.<br /><br />
           <code>getTilePos()</code> returns <code>x</code>, <code>y</code>
           {' '}position in tiles.<br />
           <code>getPixelPos()</code> returns <code>x</code>, <code>y</code>
@@ -217,8 +217,8 @@ const pos = getTilePos();
 // if at 0, 0, open dialogue box
 if (pos.x === 0 && pos.y === 0) say('At 0, 0');`}
           </Code>
-          Object position can be set with <code>setTilePos(x, y)</code> and{' '}
-          <code>setPixelPos(x, y)</code>.
+          Object position can be set with <code>setTilePos</code> and{' '}
+          <code>setPixelPos</code>.
           <br /><br />
           <code>setTilePos(x, y)</code> moves object to <code>x</code>,{' '}
           <code>y</code>, in tiles.<br />
@@ -242,9 +242,10 @@ if (pos.x === 0 && pos.y === 0) say('At 0, 0');`}
               <LinkIcon />
             </a>
           </h2>
-          Tiles can be retrieved with <code>getTile()</code> and
-          {' '}<code>getTileAt(x, y, tile)</code>.<br /><br />
-          <code>getTile()</code> returns index of tile at current position.<br />
+          Tiles can be retrieved with <code>getTile</code> and
+          {' '}<code>getTileAt</code>.<br /><br />
+          <code>getTile()</code> returns index of tile at current position.
+          <br />
           <code>getTileAt(x, y)</code> returns index of tile at <code>x</code>,
           {' '}<code>y</code>.
           <Code>
@@ -254,9 +255,10 @@ const tile = getTile();
 // if on coin, open dialogue box
 if (tile === 'coin') say('You found the coin!');`}
           </Code>
-          Tiles can be modified with <code>setTile(tile)</code> and
-          {' '}<code>setTileAt(x, y, tile)</code>.<br /><br />
-          <code>setTile(tile)</code> returns index of tile at current position.<br />
+          Tiles can be modified with <code>setTile</code> and
+          {' '}<code>setTileAt</code>.<br /><br />
+          <code>setTile(tile)</code> returns index of tile at current position.
+          <br />
           <code>setTileAt(x, y, tile)</code> sets tile at <code>x</code>,
           {' '}<code>y</code> to index <code>tile</code>.
           <Code>
@@ -275,7 +277,7 @@ if (tile === 'empty') setTile('grass');`}
               <LinkIcon />
             </a>
           </h2>
-          Objects can be retrieved with <code>getObject(id)</code>.
+          Objects can be retrieved with <code>getObject</code>.
           <br /><br />
           <code>getObject(id)</code> returns the first reference of an{' '}
           object with given <code>id</code>.
