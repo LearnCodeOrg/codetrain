@@ -9,7 +9,7 @@ import styles from '../styles/components/GameFrame.module.css';
 
 export default function GameFrame(props) {
   const {
-    mapPixels, spritePixels, pixelPixels, tileNames,
+    mapPixels, spritePixels, pixelPixels, objectNames, tileNames,
     codes, colors, tiles, objects, background, gameObjects
   } = props;
 
@@ -49,6 +49,7 @@ export default function GameFrame(props) {
       spriteSize: ${spriteSize},
       spritePixels: ${spritePixels},
       pixelPixels: ${pixelPixels},
+      objectNames: ${JSON.stringify(objectNames)},
       tileNames: ${JSON.stringify(tileNames)},
       colors: ${JSON.stringify(colors)},
       tiles: ${JSON.stringify(tiles)},
@@ -123,6 +124,19 @@ export default function GameFrame(props) {
       getObjectById: (id) => {
         return $$.spriteCodes.find(obj => obj.id === id) ?? null;
       },
+      deleteObject: (id) => {
+        // get object index
+        const index = $$.gameObjects.findIndex(obj => obj.id === id);
+        if (index === -1) {
+          throw \`ReferenceError: No object found with ID \${id}\`;
+        }
+        // splice object
+        $$.gameObjects.splice(index, 1);
+        // regenerate sprite codes
+        $$.spriteCodes = $$.gameObjects.map((gameObject, index) =>
+          $$.getCodeFunction(gameObject, index)
+        );
+      },
       throwError: (message) => {
         // clear canvas
         $$.ctx.fillStyle = '#fff';
@@ -150,6 +164,7 @@ export default function GameFrame(props) {
             const setTileAt = (x, y, tile) => $$.setTileAt(x, y, tile);
             const say = text => { $$.dialogue = \`\${text}\`; }
             const getObjectById = id => $$.getObjectById(id);
+            const deleteObject = id => $$.deleteObject(id);
             eval($$.codes[gameObject.sprite]);
             return {
               id: gameObject.id,
