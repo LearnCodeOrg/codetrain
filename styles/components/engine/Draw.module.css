@@ -4,6 +4,11 @@
   flex-direction: column;
 }
 
+.container > canvas {
+  width: 256px;
+  margin: 0 auto;
+}
+
 .spritedraw {
   border: 4px solid #000;
 }
@@ -18,9 +23,11 @@
   display: flex;
   align-items: center;
   padding: 0 12px;
+  width: 256px;
 }
 
 .toolbar > input {
-  flex-grow: 1;
-  margin-left: 5px;
+  flex: 1;
+  min-width: 0;
+  margin: 0 8px 0 5px;
 }

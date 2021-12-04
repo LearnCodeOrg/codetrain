@@ -1,5 +1,6 @@
 import BrushIcon from '@mui/icons-material/Brush';
 import ClearIcon from '@mui/icons-material/Clear';
+import Button from '@mui/material/Button';
 
 import { clamp } from '../../util/math';
 import { spriteSize } from '../../data/engine';
@@ -158,13 +159,17 @@ export default function Draw(props) {
               value={objectNames[currObject]}
               onChange={e => updateObjectName(e.target.value)}
             />
-            <button onClick={() => setErasing(!erasing)}>
+            <Button
+              className="circlebutton"
+              variant="contained"
+              onClick={() => setErasing(!erasing)}
+            >
               {
                 erasing ?
                 <ClearIcon /> :
                 <BrushIcon />
               }
-            </button>
+            </Button>
           </>
         }
       </div>
