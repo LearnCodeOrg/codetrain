@@ -33,14 +33,24 @@ function update() {
 }
 `;
 const playerObject = [
-  0, 0, 2, 2, 2, 0, 2, 0,
-  0, 2, 2, 2, 2, 0, 2, 0,
-  0, 1, 3, 1, 3, 0, 2, 0,
-  0, 1, 1, 1, 1, 0, 2, 0,
+  -1, 0, 2, 2, 2, -1, 2, -1,
+  -1, 2, 2, 2, 2, -1, 2, -1,
+  -1, 1, 3, 1, 3, -1, 2, -1,
+  -1, 1, 1, 1, 1, -1, 2, -1,
   2, 2, 2, 2, 2, 3, 3, 3,
-  1, 2, 2, 2, 2, 1, 1, 0,
-  1, 2, 2, 2, 2, 0, 2, 0,
-  0, 3, 0, 0, 3, 0, 0, 0
+  1, 2, 2, 2, 2, 1, 1, -1,
+  1, 2, 2, 2, 2, -1, 2, -1,
+  -1, 3, -1, -1, 3, -1, -1, -1
+];
+const defaultObject = [
+  -1, -1, -1, -1, -1, -1, -1, -1,
+  -1, -1, -1, -1, -1, -1, -1, -1,
+  -1, -1, 3, 3, 3, 3, -1, -1,
+  -1, -1, 3, 3, 3, 3, -1, -1,
+  -1, -1, 3, 3, 3, 3, -1, -1,
+  -1, -1, 3, 3, 3, 3, -1, -1,
+  -1, -1, -1, -1, -1, -1, -1, -1,
+  -1, -1, -1, -1, -1, -1, -1, -1
 ];
 const grassTile = [
   0, 0, 0, 0, 0, 0, 0, 0,
@@ -52,7 +62,7 @@ const grassTile = [
   0, 1, 0, 1, 0, 1, 0, 1,
   0, 0, 0, 0, 0, 0, 0, 0
 ];
-const defaultSprite = Array(spriteSize * spriteSize).fill(0);
+const defaultTile = Array(spriteSize * spriteSize).fill(0);
 const codes = Array(objectCount).fill(0).map((val, i) => (
   i === 0 ? playerCode : defaultCode
 ));
@@ -64,10 +74,10 @@ const tileNames = Array(objectCount).fill(0).map((val, i) => (
 ));
 const colors = defaultColors;
 const tiles = Array(tileCount).fill(0).map((val, i) => (
-  i === 1 ? grassTile : defaultSprite
+  i === 1 ? grassTile : defaultTile
 ));
 const objects = Array(objectCount).fill(0).map((val, i) => (
-  i === 0 ? playerObject : defaultSprite
+  i === 0 ? playerObject : defaultObject
 ));
 const background = [
   0, 0, 1, 1, 1, 1, 0, 0,
