@@ -1,4 +1,3 @@
-import GetAppIcon from '@mui/icons-material/GetApp';
 import ReplayIcon from '@mui/icons-material/Replay';
 import Button from '@mui/material/Button';
 
@@ -15,14 +14,6 @@ export default function GameFrame(props) {
   // get game source
   const gameSrc = getGameSrc(props);
   const [source, setSource] = useState(gameSrc);
-
-  // downloads game as an html file
-  function downloadGame() {
-    const link = document.createElement('a');
-    link.download = 'game.html';
-    link.href = `data:text/html;charset=utf-8,${encodeURIComponent(source)}`;
-    link.click();
-  }
 
   // focuses on screen
   function focus() {
@@ -62,16 +53,6 @@ export default function GameFrame(props) {
         >
           <ReplayIcon />
         </Button>
-        {
-          props.download &&
-          <Button
-            className="circlebutton"
-            variant="contained"
-            onClick={downloadGame}
-          >
-            <GetAppIcon />
-          </Button>
-        }
       </div>
     </div>
   );

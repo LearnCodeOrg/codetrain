@@ -14,6 +14,7 @@ import { useSnackbar } from 'notistack';
 import { shortid } from '../../util/uuid';
 import signInWithGoogle from '../../util/signInWithGoogle';
 import compileCode from '../../util/compileCode';
+import getGameSrc from '../../util/getGameSrc';
 import firebase from 'firebase/app';
 
 import styles from '../../styles/components/engine/GameEditor.module.css';
@@ -429,6 +430,15 @@ export default function GameEditor(props) {
     title, description
   ]);
 
+  // downloads game as an html file
+  function downloadGame() {
+    const gameSrc = getGameSrc(gameData);
+    const link = document.createElement('a');
+    link.download = 'game.html';
+    link.href = `data:text/html;charset=utf-8,${encodeURIComponent(gameSrc)}`;
+    link.click();
+  }
+
   return (
     <div className={styles.container}>
       <div
@@ -548,7 +558,17 @@ export default function GameEditor(props) {
             }
           </>
         }
-        <span className="flexfill" />
+        {
+          (playing || !isActiveObject) &&
+          <span className="flexfill" />
+        }
+        <Button
+          className="circlebutton"
+          variant="contained"
+          onClick={downloadGame}
+        >
+          <GetAppIcon />
+        </Button>
         <Button
           className="circlebutton"
           variant="contained"
