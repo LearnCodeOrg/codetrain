@@ -9,6 +9,7 @@ let sketching = false;
 let canvas, ctx;
 
 const pixelPixels = 32;
+const emptyColor = '#fff';
 
 export default function Draw(props) {
   const {
@@ -64,8 +65,9 @@ export default function Draw(props) {
     for (let x = 0; x < spriteSize; x++) {
       for (let y = 0; y < spriteSize; y++) {
         // set fill color
-        const colorIndex = y * spriteSize + x;
-        const color = colors[sprite[colorIndex]];
+        const spriteIndex = y * spriteSize + x;
+        const colorIndex = sprite[spriteIndex];
+        const color = colorIndex === -1 ? emptyColor : colors[colorIndex];
         ctx.fillStyle = color;
         // set fill position and size
         const xPos = x * pixelPixels;

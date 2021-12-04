@@ -235,8 +235,10 @@ export default function GameFrame(props) {
         for (let yp = 0; yp < $$.spriteSize; yp++) {
           for (let xp = 0; xp < $$.spriteSize; xp++) {
             // set fill color
-            const colorIndex = yp * $$.spriteSize + xp;
-            const color = $$.colors[sprite[colorIndex]];
+            const spriteIndex = yp * $$.spriteSize + xp;
+            const colorIndex = sprite[spriteIndex];
+            if (colorIndex === -1) continue;
+            const color = $$.colors[colorIndex];
             $$.ctx.fillStyle = color;
             // get fill position
             let xm = x + xp * $$.pixelPixels;

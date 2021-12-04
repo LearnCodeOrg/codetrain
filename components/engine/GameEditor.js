@@ -38,6 +38,7 @@ let holding = false;
 let editorDirty = false;
 
 const keys = {};
+const emptyColor = '#fff';
 
 export default function GameEditor(props) {
   const {
@@ -123,8 +124,10 @@ export default function GameEditor(props) {
     for (let yPix = 0; yPix < spriteSize; yPix++) {
       for (let xPix = 0; xPix < spriteSize; xPix++) {
         // set fill color
-        const colorIndex = yPix * spriteSize + xPix;
-        const color = colors[sprite[colorIndex]];
+        const spriteIndex = yPix * spriteSize + xPix;
+        const colorIndex = sprite[spriteIndex];
+        if (colorIndex === -1) continue;
+        const color = colors[colorIndex];
         ctx.fillStyle = color;
         // get fill position
         let xMap = x + xPix * pixelPixels;

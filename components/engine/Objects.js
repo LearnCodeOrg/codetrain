@@ -10,6 +10,7 @@ const selectBorder = 4;
 let canvas, ctx;
 
 let sketching = false;
+const emptyColor = '#fff';
 
 export default function Objects(props) {
   const {
@@ -37,8 +38,9 @@ export default function Objects(props) {
         for (let xp = 0; xp < spriteSize; xp++) {
           for (let yp = 0; yp < spriteSize; yp++) {
             // set fill color
-            const colorIndex = yp * spriteSize + xp;
-            const color = colors[sprite[colorIndex]];
+            const spriteIndex = yp * spriteSize + xp;
+            const colorIndex = sprite[spriteIndex];
+            const color = colorIndex === -1 ? emptyColor : colors[colorIndex];
             ctx.fillStyle = color;
             // set fill position and size
             const xPos = x * selectSpritePixels + xp * selectPixelPixels;
