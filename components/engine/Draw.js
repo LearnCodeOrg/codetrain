@@ -1,3 +1,6 @@
+import BrushIcon from '@mui/icons-material/Brush';
+import ClearIcon from '@mui/icons-material/Clear';
+
 import { clamp } from '../../util/math';
 import { spriteSize } from '../../data/engine';
 import { useEffect, useState } from 'react';
@@ -22,6 +25,7 @@ export default function Draw(props) {
   const spritePixels = spriteSize * pixelPixels;
 
   const [showGrid, setShowGrid] = useState(true);
+  const [erasing, setErasing] = useState(false);
 
   // sketches sprite with given mouse event data
   function sketch(e) {
@@ -50,8 +54,10 @@ export default function Draw(props) {
     } else {
       const newObjects = objects.slice();
       const newSprite = objects[currObject].slice();
+      const color = erasing ? -1 : currColor;
+      // return if unchanged
+      if (newSprite[spriteIndex] === color) return;
       // set sprite
-      const color = newSprite[spriteIndex] === currColor ? -1 : currColor;
       newSprite[spriteIndex] = color;
       newObjects[currObject] = newSprite;
       setObjects(newObjects);
@@ -145,12 +151,21 @@ export default function Draw(props) {
             value={tileNames[currTile]}
             onChange={e => updateTileName(e.target.value)}
           /> :
-          <input
-            placeholder="object name"
-            className="grayinput"
-            value={objectNames[currObject]}
-            onChange={e => updateObjectName(e.target.value)}
-          />
+          <>
+            <input
+              placeholder="object name"
+              className="grayinput"
+              value={objectNames[currObject]}
+              onChange={e => updateObjectName(e.target.value)}
+            />
+            <button onClick={() => setErasing(!erasing)}>
+              {
+                erasing ?
+                <ClearIcon /> :
+                <BrushIcon />
+              }
+            </button>
+          </>
         }
       </div>
     </div>
