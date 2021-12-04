@@ -1,6 +1,6 @@
 export const firebaseConfig = {
   apiKey: "AIzaSyDu_VbW1bzdLlY_aFsQnVQ_TXtczrW1unc",
-  authDomain: "codetrain-org.firebaseapp.com",
+  authDomain: "app.codetrain.org",
   projectId: "codetrain-org",
   storageBucket: "codetrain-org.appspot.com",
   messagingSenderId: "755030431905",
