@@ -7,6 +7,7 @@ import styles from '../../styles/components/engine/Draw.module.css';
 let sketching = false;
 
 let canvas, ctx;
+let lastX, lastY;
 
 const pixelPixels = 32;
 const emptyColor = '#fff';
@@ -30,6 +31,11 @@ export default function Draw(props) {
     // get x and y in pixel units
     const pixelX = clamp(Math.floor(currX / pixelPixels), 0, spriteSize - 1);
     const pixelY = clamp(Math.floor(currY / pixelPixels), 0, spriteSize - 1);
+    // return if same as last
+    if (pixelX === lastX && pixelY === lastY) return;
+    // set new last position
+    lastX = pixelX;
+    lastY = pixelY;
     // get sprite
     const spriteIndex = pixelY * spriteSize + pixelX;
     if (currTile !== -1) {
@@ -44,10 +50,9 @@ export default function Draw(props) {
     } else {
       const newObjects = objects.slice();
       const newSprite = objects[currObject].slice();
-      // return if unchanged
-      if (newSprite[spriteIndex] === currColor) return;
       // set sprite
-      newSprite[spriteIndex] = currColor;
+      const color = newSprite[spriteIndex] === currColor ? -1 : currColor;
+      newSprite[spriteIndex] = color;
       newObjects[currObject] = newSprite;
       setObjects(newObjects);
     }
@@ -113,7 +118,12 @@ export default function Draw(props) {
         id="sprite-draw"
         width={spritePixels}
         height={spritePixels}
-        onMouseDown={e => { sketching = true; sketch(e); }}
+        onMouseDown={e => {
+          lastX = undefined;
+          lastY = undefined;
+          sketching = true;
+          sketch(e);
+        }}
         onMouseMove={e => { if (sketching) sketch(e); }}
         onMouseUp={e => { sketching = false; }}
         onMouseLeave={e => { sketching = false; }}
