@@ -105,7 +105,7 @@ export default function GameFrame(props) {
         const mapIndex = pos.y * $$.mapSize + pos.x;
         const nameIndex = $$.tileNames.indexOf(tile);
         if (nameIndex === -1) {
-          throw \`ReferenceError: \${tile} is not a valid tile\`;
+          throw new ReferenceError(\`\${tile} is not a valid tile\`);
         }
         $$.background[mapIndex] = nameIndex;
       },
@@ -118,7 +118,7 @@ export default function GameFrame(props) {
         const mapIndex = y * $$.mapSize + x;
         const nameIndex = $$.tileNames.indexOf(tile);
         if (nameIndex === -1) {
-          throw \`ReferenceError: \${tile} is not a valid tile\`;
+          throw new ReferenceError(\`\${tile} is not a valid tile\`);
         }
         $$.background[mapIndex] = nameIndex;
       },
@@ -129,7 +129,7 @@ export default function GameFrame(props) {
         // get object index
         const objectIndex = $$.gameObjects.findIndex(obj => obj.id === id);
         if (objectIndex === -1) {
-          throw \`ReferenceError: No object found with ID \${id}\`;
+          throw new ReferenceError(\`No object found with ID \${id}\`);
         }
         // splice object
         $$.gameObjects.splice(objectIndex, 1);
@@ -141,6 +141,9 @@ export default function GameFrame(props) {
       createObject: (object, x, y, id) => {
         // get sprite
         const sprite = $$.objectNames.indexOf(object);
+        if (sprite === -1) {
+          throw new ReferenceError(\`No sprite found with name \${object}\`);
+        }
         // push object
         $$.gameObjects.push({
           id, x: x * $$.spritePixels, y: y * $$.spritePixels, sprite
@@ -152,14 +155,14 @@ export default function GameFrame(props) {
         // return created object
         return $$.spriteCodes[$$.spriteCodes.length - 1];
       },
-      throwError: (message) => {
+      throwError: (error) => {
         // clear canvas
         $$.ctx.fillStyle = '#fff';
         $$.ctx.fillRect(0, 0, $$.mapPixels, $$.mapPixels);
         // create error text
         const p = document.createElement('p');
         p.className = 'error';
-        p.innerText = message;
+        p.innerText = error.stack;
         document.body.appendChild(p);
       },
       getCodeFunction: (gameObject, index) => {
