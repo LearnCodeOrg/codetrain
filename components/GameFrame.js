@@ -60,40 +60,27 @@ export default function GameFrame(props) {
       gameObjects: ${JSON.stringify(gameObjects)},
       lastPressedKeys: {},
       pressedKeys: {},
-      clampInbounds: (index) => {
-        // clamps given object index inbounds
-        const { x, y } = $$.gameObjects[index];
-        $$.gameObjects[index].x =
-          Math.min($$.mapPixels - $$.spritePixels, Math.max(0, x));
-        $$.gameObjects[index].y =
-          Math.min($$.mapPixels - $$.spritePixels, Math.max(0, y));
-      },
       move: (index, dir) => {
         if (dir === 'up') $$.gameObjects[index].y -= $$.spritePixels;
         else if (dir === 'down') $$.gameObjects[index].y += $$.spritePixels;
         else if (dir === 'left') $$.gameObjects[index].x -= $$.spritePixels;
         else if (dir === 'right') $$.gameObjects[index].x += $$.spritePixels;
-        $$.clampInbounds(index);
       },
       movePixels: (index, x, y) => {
         $$.gameObjects[index].x += x * $$.pixelPixels;
         $$.gameObjects[index].y += y * $$.pixelPixels;
-        $$.clampInbounds(index);
       },
       moveTiles: (index, x, y) => {
         $$.gameObjects[index].x += x * $$.spritePixels;
         $$.gameObjects[index].y += y * $$.spritePixels;
-        $$.clampInbounds(index);
       },
       setPixelPos: (index, x, y) => {
         $$.gameObjects[index].x = x * $$.pixelPixels;
         $$.gameObjects[index].y = y * $$.pixelPixels;
-        $$.clampInbounds(index);
       },
       setTilePos: (index, x, y) => {
         $$.gameObjects[index].x = x * $$.spritePixels;
         $$.gameObjects[index].y = y * $$.spritePixels;
-        $$.clampInbounds(index);
       },
       getPixelPos: (index) => {
         return {
