@@ -188,10 +188,15 @@ export default function GameEditor(props) {
       const top = y - highlightWidth;
       const bottom = y + spritePixels + highlightWidth - highlightLength;
       // draw highlight
-      ctx.fillRect(left, top, size, size);
-      ctx.fillRect(right, top, size, size);
-      ctx.fillRect(left, bottom, size, size);
-      ctx.fillRect(right, bottom, size, size);
+      ctx.fillRect(left, top, size / 2, size);
+      ctx.fillRect(left, top, size, size / 2);
+      ctx.fillRect(right, top, size, size / 2);
+      ctx.fillRect(right + highlightLength / 2, top, size / 2, size);
+      ctx.fillRect(left, bottom, size / 2, size);
+      ctx.fillRect(left, bottom + highlightLength / 2, size, size / 2);
+      ctx.fillRect(right + highlightLength / 2, bottom, size / 2, size);
+      ctx.fillRect(right, bottom + highlightLength / 2, size, size / 2);
+      // draw sprite
       drawSprite(sprite, x, y);
     }
   }
