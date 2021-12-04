@@ -145,15 +145,17 @@ export default function GameFrame(props) {
           throw new ReferenceError(\`No sprite found with name \${object}\`);
         }
         // push object
-        $$.gameObjects.push({
+        const gameObject = {
           id, x: x * $$.spritePixels, y: y * $$.spritePixels, sprite
-        });
-        // regenerate sprite codes
-        $$.spriteCodes = $$.gameObjects.map((gameObject, index) =>
-          $$.getCodeFunction(gameObject, index)
-        );
+        };
+        $$.gameObjects.push(gameObject);
+        // initialize object code
+        const index = $$.gameObjects.length - 1;
+        const code = $$.getCodeFunction(gameObject, index);
+        code.start();
+        $$.spriteCodes.push(code);
         // return created object
-        return $$.spriteCodes[$$.spriteCodes.length - 1];
+        return code;
       },
       throwError: (error) => {
         // clear canvas
