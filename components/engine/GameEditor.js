@@ -77,6 +77,13 @@ export default function GameEditor(props) {
   // whether any gameobject is currently selected
   const isActiveObject = showObjects && showHighlight && !!gameObjects.length;
 
+  // current game data
+  const gameData = {
+    mapSize, spriteSize, mapPixels, spritePixels, pixelPixels,
+    objectNames, tileNames, objects, tiles,
+    codes, colors, gameObjects, background
+  };
+
   // called before page unloads
   function beforeUnload(e) {
     // return if editor not dirty
@@ -469,20 +476,7 @@ export default function GameEditor(props) {
       </div>
       {
         playing &&
-        <GameFrame
-          mapPixels={mapPixels}
-          spritePixels={spritePixels}
-          pixelPixels={pixelPixels}
-          objectNames={objectNames}
-          tileNames={tileNames}
-          codes={codes}
-          colors={colors}
-          tiles={tiles}
-          objects={objects}
-          background={background}
-          gameObjects={gameObjects}
-          download
-        />
+        <GameFrame {...gameData} />
       }
       <canvas
         style={ playing ? { display: 'none' } : {}}

@@ -3,18 +3,17 @@ import ReplayIcon from '@mui/icons-material/Replay';
 import Button from '@mui/material/Button';
 
 import { useEffect, useRef, useState } from 'react';
-import { spriteSize, mapSize } from '../data/engine';
+import getGameSrc from '../util/getGameSrc';
 
 import styles from '../styles/components/GameFrame.module.css';
 
 export default function GameFrame(props) {
-  const {
-    mapPixels, spritePixels, pixelPixels, objectNames, tileNames,
-    codes, colors, tiles, objects, background, gameObjects
-  } = props;
+  const { mapPixels } = props;
 
   const screenRef = useRef();
 
+  // get game source
+  const gameSrc = getGameSrc(props);
   const [source, setSource] = useState(gameSrc);
 
   // downloads game as an html file
