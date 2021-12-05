@@ -37,6 +37,7 @@ let sketching = false;
 let holding = false;
 
 let editorDirty = false;
+let remixing = false;
 
 const keys = {};
 const emptyColor = '#fff';
@@ -109,12 +110,12 @@ export default function GameEditor(props) {
       objects: JSON.stringify(objects),
       modified: time
     };
-    // if own project and existing, save
-    if (props.creator && uid === props.creator && projectId) {
+    // if own project, existing, and not remixing, save
+    if (props.creator && uid === props.creator && projectId && !remixing) {
       await projectsRef.doc(projectId).update(projectObj);
       editorDirty = false;
       enqueueSnackbar('Saved successfully.', { variant: 'success' });
-    // if no existing project, publish new project
+    // if creating or remixing, publish new project
     } else {
       const docRef = await projectsRef.add(
         projectId ?
@@ -468,12 +469,20 @@ export default function GameEditor(props) {
               value={description}
               onChange={e => setDescription(e.target.value)}
             />
-            <button className="graybutton">
-              {
-                !creator ? 'Create' :
-                uid === creator ? 'Save' :
-                'Remix'
-              }
+            {
+              uid === creator &&
+              <button
+                className={`${styles.savebutton} graybutton`}
+                onClick={() => { remixing = false; }}
+              >
+                Save
+              </button>
+            }
+            <button
+              className="graybutton"
+              onClick={() => { remixing = true; }}
+            >
+              {!creator ? 'Create' : 'Remix'}
             </button>
           </form> :
           <button
