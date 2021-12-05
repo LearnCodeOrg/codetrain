@@ -190,24 +190,32 @@ export default function getGameSrc(props) {
   }
   // set up input listeners
   window.onkeydown = e => {
-    $$.pressedKeys[e.keyCode] = true;
+    const keyName = e.key.toLowerCase();
+    $$.pressedKeys[keyName] = true;
     $$.dialogue = undefined;
   }
-  window.onkeyup = e => $$.pressedKeys[e.keyCode] = false;
+  window.onkeyup = e => {
+    const keyName = e.key.toLowerCase();
+    $$.pressedKeys[keyName] = false;
+  }
   window.onmousedown = e => { $$.dialogue = undefined; }
   function isKeyDown(key) {
     // handle invalid key
-    if (typeof key !== 'string' || !key.length) return undefined;
-    // handle key code
-    const keyCode = key.toUpperCase().charCodeAt(0);
-    return $$.pressedKeys[keyCode];
+    if (typeof key !== 'string' || !key.length) {
+      throw new TypeError(\`Invalid key \${key}\`);
+    }
+    // handle key name
+    const keyName = key.toLowerCase();
+    return $$.pressedKeys[keyName];
   }
   function isKey(key) {
     // handle invalid key
-    if (typeof key !== 'string' || !key.length) return undefined;
-    // handle key code
-    const keyCode = key.toUpperCase().charCodeAt(0);
-    return $$.pressedKeys[keyCode] && !$$.lastPressedKeys[keyCode];
+    if (typeof key !== 'string' || !key.length) {
+      throw new TypeError(\`Invalid key \${key}\`);
+    }
+    // handle key name
+    const keyName = key.toLowerCase();
+    return $$.pressedKeys[keyName] && !$$.lastPressedKeys[keyName];
   }
   // runs after body has loaded
   function __start__() {
