@@ -137,7 +137,10 @@ export default function getGameSrc(props) {
       }
       // push object
       const gameObject = {
-        id, x: x * $$.spritePixels, y: y * $$.spritePixels, sprite
+        id: id ?? $$.shortid(),
+        x: x * $$.pixelPixels,
+        y: y * $$.pixelPixels,
+        sprite
       };
       $$.gameObjects.push(gameObject);
       // initialize object code
@@ -159,6 +162,18 @@ export default function getGameSrc(props) {
         throw new ReferenceError(\`No sound found with name \${name}\`);
       }
       sound.play();
+    },
+    shortid: () => {
+      if (!crypto || !crypto.randomUUID) {
+        const chars = '0123456789abcdefghijklmnopqrstuvwxyz';
+        let id = '';
+        for (let i = 0; i < 6; i++) {
+          const randIndex = Math.floor(Math.random() * chars.length);
+          id += chars[randIndex];
+        }
+        return id;
+      }
+      return crypto.randomUUID().slice(0, 6);
     },
     throwError: (error) => {
       // clear canvas
