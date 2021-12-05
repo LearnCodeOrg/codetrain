@@ -49,6 +49,11 @@
 }
 
 .tools > input {
+  margin: 0 8px;
+  flex: 1 1;
+  min-width: 0;
+}
+
+.tools > button:last-of-type {
   margin-left: 8px;
-  flex-grow: 1;
 }

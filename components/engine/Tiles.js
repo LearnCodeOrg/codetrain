@@ -37,8 +37,9 @@ export default function Tiles(props) {
         for (let xp = 0; xp < spriteSize; xp++) {
           for (let yp = 0; yp < spriteSize; yp++) {
             // set fill color
-            const colorIndex = yp * spriteSize + xp;
-            const color = colors[sprite[colorIndex]];
+            const spriteIndex = yp * spriteSize + xp;
+            const colorIndex = sprite[spriteIndex];
+            const color = colors[colorIndex];
             ctx.fillStyle = color;
             // set fill position and size
             const xPos = x * selectSpritePixels + xp * selectPixelPixels;

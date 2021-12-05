@@ -111,6 +111,8 @@ export default function Project(props) {
               objects={JSON.parse(data.objects)}
               background={data.background}
               gameObjects={insertObjectUnits(data.gameObjects, pixelPixels)}
+              spriteSize={spriteSize}
+              mapSize={mapSize}
             />
           </div>
         </div>
