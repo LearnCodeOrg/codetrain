@@ -19,6 +19,10 @@
   justify-content: center;
 }
 
+.savebutton {
+  margin-right: 10px;
+}
+
 .saveform > input {
   margin-right: 10px;
 }

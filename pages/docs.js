@@ -334,5 +334,5 @@ playSound('powerup');`}
         </div>
       </div>
     </div>
-  )
+  );
 }

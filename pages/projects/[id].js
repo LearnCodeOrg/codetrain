@@ -83,11 +83,7 @@ export default function Project(props) {
             </Link>
             <p className={styles.actions}>
               <button onClick={() => Router.push(`/edit/${id}`)}>
-                {
-                  data.uid === uid ?
-                  'Edit Project' :
-                  'Remix Project'
-                }
+                Edit Project
               </button>
               {
                 data.uid === uid &&
