@@ -50,6 +50,7 @@ export default function getGameSrc(props) {
     gameObjects: ${JSON.stringify(gameObjects)},
     lastPressedKeys: {},
     pressedKeys: {},
+    sounds: {},
     move: (index, dir) => {
       if (dir === 'up') $$.gameObjects[index].y -= $$.spritePixels;
       else if (dir === 'down') $$.gameObjects[index].y += $$.spritePixels;
@@ -147,6 +148,18 @@ export default function getGameSrc(props) {
       // return created object
       return code;
     },
+    addSound: (name, url) => {
+      const audio = document.createElement('audio');
+      audio.src = url;
+      $$.sounds[name] = audio;
+    },
+    playSound: (name) => {
+      const sound = $$.sounds[name];
+      if (!sound) {
+        throw new ReferenceError(\`No sound found with name \${name}\`);
+      }
+      sound.play();
+    },
     throwError: (error) => {
       // clear canvas
       $$.ctx.fillStyle = '#fff';
@@ -176,6 +189,8 @@ export default function getGameSrc(props) {
           const getObject = $$.getObject;
           const deleteObject = $$.deleteObject;
           const createObject = $$.createObject;
+          const addSound = $$.addSound;
+          const playSound = $$.playSound;
           eval($$.codes[gameObject.sprite]);
           return {
             id: gameObject.id,
