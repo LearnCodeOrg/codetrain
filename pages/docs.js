@@ -318,6 +318,19 @@ deleteObject('player2');`}
               <LinkIcon />
             </a>
           </h2>
+          Sounds can be added and played with <code>addSound</code> and {' '}
+          <code>playSound</code>.<br /><br />
+          <code>addSound(name, url)</code> registers sound with source{' '}
+          <code>url</code> and given <code>name</code>.<br />
+          <code>playSound(name)</code> plays sound with given{' '}
+          <code>name</code>.
+          <Code>
+{`// add powerup sound
+addSound('powerup', 'https://codetrain.org/sounds/powerup.mp3');
+
+// play powerup sound
+playSound('powerup');`}
+          </Code>
         </div>
       </div>
     </div>
