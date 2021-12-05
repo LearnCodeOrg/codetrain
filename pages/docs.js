@@ -11,6 +11,7 @@ import KeyboardIcon from '@mui/icons-material/Keyboard';
 import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
 import GridOnIcon from '@mui/icons-material/GridOn';
 import AccessibilityIcon from '@mui/icons-material/Accessibility';
+import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import LinkIcon from '@mui/icons-material/Link';
 
 import { useEffect } from 'react';
@@ -96,6 +97,12 @@ export default function Docs(props) {
               <ListItem button>
                 <AccessibilityIcon sx={{ marginRight: 2 }} />
                 <ListItemText primary="Objects" />
+              </ListItem>
+            </a>
+            <a href="#audio">
+              <ListItem button>
+                <VolumeUpIcon sx={{ marginRight: 2 }} />
+                <ListItemText primary="Audio" />
               </ListItem>
             </a>
           </List>
@@ -302,6 +309,15 @@ const player2 = createObject('player', 0, 0, 'player2');
 // delete new player
 deleteObject('player2');`}
           </Code>
+          <hr />
+          <div id="audio" className={styles.bookmark} />
+          <h2>
+            <VolumeUpIcon />
+            Audio
+            <a href="#audio">
+              <LinkIcon />
+            </a>
+          </h2>
         </div>
       </div>
     </div>
