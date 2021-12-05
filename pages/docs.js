@@ -295,19 +295,24 @@ const player = getObject('player');
 // move player right
 player.move('right');`}
           </Code>
-          Objects can be created with <code>createObject</code> and{' '}
-          <code>deleteObject</code>.<br /><br />
+          Objects can be created and deleted with <code>createObject</code>
+          {' '}and <code>deleteObject</code>.<br /><br />
+          <code>createObject(object, x, y)</code> creates{' '}
+          <code>object</code> with random <code>id</code> at <code>x</code>,
+          {' '}<code>y</code> pixels.<br />
           <code>createObject(object, x, y, id)</code> creates{' '}
           <code>object</code> with given <code>id</code> at <code>x</code>,
-          {' '}<code>y</code> in tiles.<br />
-          <code>deleteObject(id)</code> deletes <code>object</code> with given
-          {' '}<code>id</code>.
+          {' '}<code>y</code> pixels.<br />
+          <code>deleteObject(id)</code> deletes object with given{' '}
+          <code>id</code>.
           <Code>
-{`// create a new player object
-const player2 = createObject('player', 0, 0, 'player2');
+{`// create new player objects
+const player2 = createObject('player', 0, 0); // random id
+const player3 = createObject('player', 0, 0, 'p3'); // given id
 
-// delete new player
-deleteObject('player2');`}
+// delete new players
+deleteObject(player2.id);
+deleteObject('p3');`}
           </Code>
           <hr />
           <div id="audio" className={styles.bookmark} />
