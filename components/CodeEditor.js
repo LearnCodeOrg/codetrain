@@ -19,6 +19,7 @@ export default function CodeEditor(props) {
       }}
       width="500px"
       height="100%"
+      style={{ minHeight: '590px' }}
       {...props}
     />
   );

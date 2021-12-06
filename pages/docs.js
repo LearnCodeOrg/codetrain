@@ -144,7 +144,7 @@ function update() {
               <LinkIcon />
             </a>
           </h2>
-          Text can be displayed with <code>say</code>.<br /><br />
+          Dialogue can be displayed with <code>say</code>.<br /><br />
           <code>say(text)</code> opens a dialogue box with given{' '}
           <code>text</code>.
           <Code>

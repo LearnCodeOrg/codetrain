@@ -128,7 +128,6 @@ export default function getGameSrc(props) {
       $$.spriteCodes.splice(objectIndex, 1);
       // update object indices
       $$.spriteCodes.forEach((code, i) => $$.spriteCodes[i].$$setIndex(i));
-      console.log($$.spriteCodes);
     },
     createObject: (object, x, y, id) => {
       // get sprite
@@ -315,6 +314,7 @@ export default function getGameSrc(props) {
       }
       // if dialogue
       if ($$.dialogue) {
+        // draw dialogue box
         const left = $$.mapPixels / 8;
         const top = $$.mapPixels * 3 / 8;
         const offset = 8;
@@ -325,11 +325,13 @@ export default function getGameSrc(props) {
         $$.ctx.fillStyle = '#000';
         const fontSize = 16;
         const lineSize = 20;
-        $$.ctx.font = \`\${fontSize}px monospace\`;
+        // get dialogue lines
         const line1 = $$.dialogue.slice(0, lineSize);
         const line2 = $$.dialogue.slice(lineSize, lineSize * 2);
         const line3 = $$.dialogue.slice(lineSize * 2, lineSize * 3);
         const line4 = $$.dialogue.slice(lineSize * 3, lineSize * 4);
+        // draw dialogue text
+        $$.ctx.font = \`\${fontSize}px monospace\`;
         $$.ctx.fillText(line1, left, top + fontSize);
         $$.ctx.fillText(line2, left, top + fontSize * 2);
         $$.ctx.fillText(line3, left, top + fontSize * 3);
