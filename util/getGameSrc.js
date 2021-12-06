@@ -169,6 +169,12 @@ export default function getGameSrc(props) {
       $$.texts[textId] = { text, x, y, id: textId };
       return $$.texts[textId];
     },
+    removeText: (id) => {
+      if (!$$.texts[id]) {
+        throw new ReferenceError(\`No text found with ID \${id}\`);
+      }
+      delete $$.texts[id];
+    },
     shortid: () => {
       if (!crypto || !crypto.randomUUID) {
         const chars = '0123456789abcdefghijklmnopqrstuvwxyz';
@@ -213,6 +219,7 @@ export default function getGameSrc(props) {
           const addSound = $$.addSound;
           const playSound = $$.playSound;
           const addText = $$.addText;
+          const removeText = $$.removeText;
           eval($$.codes[gameObject.sprite]);
           return {
             id: gameObject.id,
