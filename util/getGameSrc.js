@@ -52,6 +52,9 @@ export default function getGameSrc(props) {
     pressedKeys: {},
     sounds: {},
     texts: {},
+    time: 0,
+    lastTime: 0,
+    deltaTime: 0,
     move: (index, dir) => {
       if (dir === 'up') $$.gameObjects[index].y -= $$.spritePixels;
       else if (dir === 'down') $$.gameObjects[index].y += $$.spritePixels;
@@ -219,6 +222,8 @@ export default function getGameSrc(props) {
           const playSound = $$.playSound;
           const addText = $$.addText;
           const removeText = $$.removeText;
+          const getTime = () => $$.time;
+          const getDeltaTime = () => $$.deltaTime;
           eval($$.codes[gameObject.sprite]);
           return {
             id: gameObject.id,
@@ -340,6 +345,10 @@ export default function getGameSrc(props) {
     }
     // game loop
     function gameLoop(time) {
+      // calculate delta
+      $$.lastTime = $$.time;
+      $$.time = time;
+      $$.deltaTime = $$.time - $$.lastTime;
       try {
         // run update functions
         $$.spriteCodes.forEach(code => code.update());
