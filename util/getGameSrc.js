@@ -51,6 +51,7 @@ export default function getGameSrc(props) {
     lastPressedKeys: {},
     pressedKeys: {},
     sounds: {},
+    texts: {},
     move: (index, dir) => {
       if (dir === 'up') $$.gameObjects[index].y -= $$.spritePixels;
       else if (dir === 'down') $$.gameObjects[index].y += $$.spritePixels;
@@ -163,6 +164,11 @@ export default function getGameSrc(props) {
       }
       sound.play();
     },
+    addText: (text, x, y, id) => {
+      const textId = id ?? $$.shortid();
+      $$.texts[textId] = { text, x, y, id: textId };
+      return $$.texts[textId];
+    },
     shortid: () => {
       if (!crypto || !crypto.randomUUID) {
         const chars = '0123456789abcdefghijklmnopqrstuvwxyz';
@@ -206,6 +212,7 @@ export default function getGameSrc(props) {
           const createObject = $$.createObject;
           const addSound = $$.addSound;
           const playSound = $$.playSound;
+          const addText = $$.addText;
           eval($$.codes[gameObject.sprite]);
           return {
             id: gameObject.id,
