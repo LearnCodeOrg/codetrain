@@ -302,7 +302,18 @@ export default function getGameSrc(props) {
         const sprite = $$.objects[object.sprite];
         drawSprite(sprite, x, y);
       }
-      // draw dialogue text
+      // for each text
+      for (const id in $$.texts) {
+        // get text
+        const { x, y, text } = $$.texts[id];
+        const fontSize = 16;
+        const textX = x * $$.pixelPixels;
+        const textY = y * $$.pixelPixels + fontSize;
+        // draw text
+        $$.ctx.font = \`\${fontSize}px monospace\`;
+        $$.ctx.fillText(text, textX, textY);
+      }
+      // if dialogue
       if ($$.dialogue) {
         const left = $$.mapPixels / 8;
         const top = $$.mapPixels * 3 / 8;
