@@ -114,17 +114,20 @@ export default function getGameSrc(props) {
       $$.background[mapIndex] = nameIndex;
     },
     getObject: (id) => {
-      return $$.spriteCodes.find(obj => obj?.id === id) ?? null;
+      return $$.spriteCodes.find(obj => obj.id === id) ?? null;
     },
     deleteObject: (id) => {
       // get object index
-      const objectIndex = $$.gameObjects.findIndex(obj => obj?.id === id);
+      const objectIndex = $$.gameObjects.findIndex(obj => obj.id === id);
       if (objectIndex === -1) {
         throw new ReferenceError(\`No object found with ID \${id}\`);
       }
-      // set object to null
-      $$.gameObjects[objectIndex] = null;
-      $$.spriteCodes[objectIndex] = null;
+      // splice object
+      $$.gameObjects.splice(objectIndex, 1);
+      $$.spriteCodes.splice(objectIndex, 1);
+      // update object indices
+      $$.spriteCodes.forEach((code, i) => $$.spriteCodes[i].$$setIndex(i));
+      console.log($$.spriteCodes);
     },
     createObject: (object, x, y, id) => {
       // get sprite
@@ -185,7 +188,7 @@ export default function getGameSrc(props) {
     getCodeFunction: (gameObject, index) => {
       return (
         (function() {
-          const $$index = index;
+          let $$index = index;
           const move = dir => $$.move($$index, dir);
           const movePixels = (x, y) => $$.movePixels($$index, x, y);
           const moveTiles = (x, y) => $$.moveTiles($$index, x, y);
@@ -209,7 +212,8 @@ export default function getGameSrc(props) {
             move, movePixels, moveTiles, getTile, setTile,
             setPixelPos, setTilePos, getPixelPos, getTilePos,
             start: typeof start === 'function' ? start : () => {},
-            update: typeof update === 'function' ? update : () => {}
+            update: typeof update === 'function' ? update : () => {},
+            $$setIndex: (newIndex) => { $$index = newIndex; }
           };
         })()
       );
@@ -279,7 +283,6 @@ export default function getGameSrc(props) {
       }
       // for each object
       for (const object of $$.gameObjects) {
-        if (!object) continue;
         // draw object
         const { x, y } = object;
         const sprite = $$.objects[object.sprite];
@@ -312,9 +315,7 @@ export default function getGameSrc(props) {
     function gameLoop(time) {
       try {
         // run update functions
-        $$.spriteCodes.forEach(code => {
-          if (code) code.update();
-        });
+        $$.spriteCodes.forEach(code => code.update());
       // throw error
       } catch (e) {
         $$.throwError(e);
