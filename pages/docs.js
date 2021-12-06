@@ -151,6 +151,26 @@ function update() {
 {`// open dialogue box saying 'Hello World!'
 say('Hello World!');`}
           </Code>
+          Text can be added and removed with <code>addText</code> and{' '}
+          <code>removeText</code>.<br /><br />
+          <code>addText(text, x, y)</code> creates <code>text</code>{' '}
+          with random <code>id</code> at <code>x</code>, <code>y</code>{' '}
+          pixels.<br />
+          <code>addText(text, x, y, id)</code> creates <code>text</code>{' '}
+          with given <code>id</code> at <code>x</code>, <code>y</code>{' '}
+          pixels.<br />
+          <code>removeText(id)</code> removes text with given <code>id</code>.
+          <Code>
+{`// create score text
+addText('Score: 0', 0, 0, 'score');
+
+// update score text
+addText('Score: 1', 0, 0, 'score');
+
+// remove score text
+removeText('score');
+`}
+          </Code>
           <hr />
           <div id="input" className={styles.bookmark} />
           <h2>
