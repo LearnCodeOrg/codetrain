@@ -135,6 +135,21 @@ function update() {
   // code here runs every frame
 }`}
           </Code>
+          Elapsed time can be tracked with <code>getTime</code> and{' '}
+          <code>getDeltaTime</code>.<br /><br />
+          <code>getTime()</code> returns the milliseconds since{' '}
+          <code>start</code> was first called.<br />
+          <code>getDeltaTime()</code> returns the milliseconds since
+          {' '}<code>update</code> was last called.
+          <Code>
+{`function update() {
+  // time milliseconds have passed since first start
+  const time = getTime();
+  
+  // deltaTime milliseconds have passed since last update
+  const deltaTime = getDeltaTime();
+}`}
+          </Code>
           <hr />
           <div id="output" className={styles.bookmark} />
           <h2>
