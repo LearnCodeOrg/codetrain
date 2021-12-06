@@ -114,20 +114,17 @@ export default function getGameSrc(props) {
       $$.background[mapIndex] = nameIndex;
     },
     getObject: (id) => {
-      return $$.spriteCodes.find(obj => obj.id === id) ?? null;
+      return $$.spriteCodes.find(obj => obj?.id === id) ?? null;
     },
     deleteObject: (id) => {
       // get object index
-      const objectIndex = $$.gameObjects.findIndex(obj => obj.id === id);
+      const objectIndex = $$.gameObjects.findIndex(obj => obj?.id === id);
       if (objectIndex === -1) {
         throw new ReferenceError(\`No object found with ID \${id}\`);
       }
-      // splice object
-      $$.gameObjects.splice(objectIndex, 1);
-      // regenerate sprite codes
-      $$.spriteCodes = $$.gameObjects.map((gameObject, index) =>
-        $$.getCodeFunction(gameObject, index)
-      );
+      // set object to null
+      $$.gameObjects[objectIndex] = null;
+      $$.spriteCodes[objectIndex] = null;
     },
     createObject: (object, x, y, id) => {
       // get sprite
@@ -282,6 +279,7 @@ export default function getGameSrc(props) {
       }
       // for each object
       for (const object of $$.gameObjects) {
+        if (!object) continue;
         // draw object
         const { x, y } = object;
         const sprite = $$.objects[object.sprite];
@@ -314,7 +312,9 @@ export default function getGameSrc(props) {
     function gameLoop(time) {
       try {
         // run update functions
-        $$.spriteCodes.forEach(code => code.update());
+        $$.spriteCodes.forEach(code => {
+          if (code) code.update();
+        });
       // throw error
       } catch (e) {
         $$.throwError(e);
