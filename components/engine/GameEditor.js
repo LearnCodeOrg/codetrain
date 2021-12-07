@@ -566,7 +566,14 @@ export default function GameEditor(props) {
       {
         isActiveObject &&
         <div className={styles.objectbar}>
-          <p>{getHeldPosition()}</p>
+          <input
+            placeholder="object id"
+            className="grayinput"
+            value={gameObjects[gameObjects.length - 1].id}
+            onChange={e => updateObjectId(e.target.value)}
+          />
+          <p>Position: {getHeldPosition()}</p>
+          <span className="flexfill" />
           <Button
             className="circlebutton"
             onClick={deleteObject}
@@ -575,12 +582,6 @@ export default function GameEditor(props) {
           >
             <DeleteIcon />
           </Button>
-          <input
-            placeholder="object id"
-            className="grayinput"
-            value={gameObjects[gameObjects.length - 1].id}
-            onChange={e => updateObjectId(e.target.value)}
-          />
         </div>
       }
     </div>

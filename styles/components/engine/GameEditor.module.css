@@ -34,22 +34,16 @@
   margin-right: 4px;
 }
 
-.tools > p {
-  width: 60px;
-}
-
-.tools > input {
-  margin: 0 8px;
-  flex: 1 1;
-  min-width: 0;
-}
-
 .tools > button:last-of-type {
   margin-left: 8px;
 }
 
 .objectbar {
   margin-top: 10px;
+}
+
+.objectbar > p {
+  margin: 0 10px;
 }
 
 .tools, .objectbar, .databar {
