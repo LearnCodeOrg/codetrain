@@ -13,6 +13,7 @@ import GridOnIcon from '@mui/icons-material/GridOn';
 import AccessibilityIcon from '@mui/icons-material/Accessibility';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import LinkIcon from '@mui/icons-material/Link';
+import BuildIcon from '@mui/icons-material/Build';
 
 import { useEffect } from 'react';
 import hljs from 'highlight.js/lib/core';
@@ -105,6 +106,12 @@ export default function Docs(props) {
                 <ListItemText primary="Audio" />
               </ListItem>
             </a>
+            <a href="#utility">
+              <ListItem button>
+                <BuildIcon sx={{ marginRight: 2 }} />
+                <ListItemText primary="Utility" />
+              </ListItem>
+            </a>
           </List>
         </Drawer>
         <div className={styles.content}>
@@ -145,7 +152,7 @@ function update() {
 {`function update() {
   // time milliseconds have passed since first start
   const time = getTime();
-  
+
   // deltaTime milliseconds have passed since last update
   const deltaTime = getDeltaTime();
 }`}
@@ -371,6 +378,15 @@ addSound('powerup', 'https://codetrain.org/sounds/powerup.mp3');
 // play powerup sound
 playSound('powerup');`}
           </Code>
+          <hr />
+          <div id="utility" className={styles.bookmark} />
+          <h2>
+            <BuildIcon />
+            Utility
+            <a href="#utility">
+              <LinkIcon />
+            </a>
+          </h2>
         </div>
       </div>
     </div>
