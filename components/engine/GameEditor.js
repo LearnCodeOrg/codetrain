@@ -300,13 +300,22 @@ export default function GameEditor(props) {
   }
 
   // returns position of current held object
-  function getHeldPosition() {
+  function getHeldPosition(unit) {
     // return if no objects
     if (!gameObjects.length) return undefined;
     const { x, y } = gameObjects[gameObjects.length - 1];
-    const pixelX = Math.floor(x / pixelPixels).toString().padStart(2, '0');
-    const pixelY = Math.floor(y / pixelPixels).toString().padStart(2, '0');
-    return `(${pixelX}, ${pixelY})`;
+    // return pixels
+    if (unit === 'pixels') {
+      const pixelX = Math.floor(x / pixelPixels).toString().padStart(2, '0');
+      const pixelY = Math.floor(y / pixelPixels).toString().padStart(2, '0');
+      return `(${pixelX}, ${pixelY})`;
+    }
+    // return tiles
+    if (unit === 'tiles') {
+      const tileX = Math.floor(x / spritePixels).toString();
+      const tileY = Math.floor(y / spritePixels).toString();
+      return `(${tileX}, ${tileY})`;
+    }
   }
 
   // deletes last selected object
@@ -572,7 +581,8 @@ export default function GameEditor(props) {
             value={gameObjects[gameObjects.length - 1].id}
             onChange={e => updateObjectId(e.target.value)}
           />
-          <p>Position: {getHeldPosition()}</p>
+          <p>Tiles: <span>{getHeldPosition('tiles')}</span></p>
+          <p>Pixels: <span>{getHeldPosition('pixels')}</span></p>
           <span className="flexfill" />
           <Button
             className="circlebutton"

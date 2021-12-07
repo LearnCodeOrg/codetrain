@@ -43,7 +43,11 @@
 }
 
 .objectbar > p {
-  margin: 0 10px;
+  margin-left: 10px;
+}
+
+.objectbar > p > span {
+  font-weight: bold;
 }
 
 .tools, .objectbar, .databar {
