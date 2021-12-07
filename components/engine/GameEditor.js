@@ -545,32 +545,9 @@ export default function GameEditor(props) {
                 onChange={e => setShowObjects(e.target.checked)}
               />
             </label>
-            {
-              isActiveObject &&
-              <>
-                <p>{getHeldPosition()}</p>
-                <Button
-                  className="circlebutton"
-                  onClick={deleteObject}
-                  disabled={!gameObjects.length}
-                  variant="contained"
-                >
-                  <DeleteIcon />
-                </Button>
-                <input
-                  placeholder="object id"
-                  className="grayinput"
-                  value={gameObjects[gameObjects.length - 1].id}
-                  onChange={e => updateObjectId(e.target.value)}
-                />
-              </>
-            }
           </>
         }
-        {
-          (playing || !isActiveObject) &&
-          <span className="flexfill" />
-        }
+        <span className="flexfill" />
         <Button
           className="circlebutton"
           variant="contained"
@@ -586,6 +563,26 @@ export default function GameEditor(props) {
           {playing ? <StopIcon /> : <PlayArrowIcon />}
         </Button>
       </div>
+      {
+        isActiveObject &&
+        <div className={styles.objectbar}>
+          <p>{getHeldPosition()}</p>
+          <Button
+            className="circlebutton"
+            onClick={deleteObject}
+            disabled={!gameObjects.length}
+            variant="contained"
+          >
+            <DeleteIcon />
+          </Button>
+          <input
+            placeholder="object id"
+            className="grayinput"
+            value={gameObjects[gameObjects.length - 1].id}
+            onChange={e => updateObjectId(e.target.value)}
+          />
+        </div>
+      }
     </div>
   );
 }
