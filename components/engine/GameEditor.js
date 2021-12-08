@@ -42,6 +42,8 @@ let remixing = false;
 const keys = {};
 const emptyColor = '#fff';
 
+const layers = ['Back', 'Main', 'Front'];
+
 export default function GameEditor(props) {
   const {
     containerRef,
@@ -581,8 +583,28 @@ export default function GameEditor(props) {
             value={gameObjects[gameObjects.length - 1].id}
             onChange={e => updateObjectId(e.target.value)}
           />
-          <p>Tiles: <span>{getHeldPosition('tiles')}</span></p>
-          <p>Pixels: <span>{getHeldPosition('pixels')}</span></p>
+          <p>Tile: <span>{getHeldPosition('tiles')}</span></p>
+          <p>Pixel: <span>{getHeldPosition('pixels')}</span></p>
+          <label>
+            Layer:
+            <select
+              value={
+                gameObjects[gameObjects.length - 1].layer ?? 'main'
+              }
+              onChange={e => updateObjectLayer(e.target.value)}
+            >
+              {
+                layers.map((layer, i) =>
+                  <option
+                    value={layer.toLowerCase()}
+                    key={i}
+                  >
+                    {layer}
+                  </option>
+                )
+              }
+            </select>
+          </label>
           <span className="flexfill" />
           <Button
             className="circlebutton"
