@@ -132,7 +132,7 @@ export default function getGameSrc(props) {
       // update object indices
       $$.spriteCodes.forEach((code, i) => $$.spriteCodes[i].$$setIndex(i));
     },
-    createObject: (object, x, y, id) => {
+    createObject: (object, x, y, options) => {
       // get sprite
       const sprite = $$.objectNames.indexOf(object);
       if (sprite === -1) {
@@ -140,7 +140,7 @@ export default function getGameSrc(props) {
       }
       // push object
       const gameObject = {
-        id: id ?? $$.shortid(),
+        id: options?.id ?? $$.shortid(),
         x: x * $$.pixelPixels,
         y: y * $$.pixelPixels,
         sprite
@@ -240,6 +240,7 @@ export default function getGameSrc(props) {
             id: gameObject.id,
             move, movePixels, moveTiles, getTile, setTile,
             setPixelPos, setTilePos, getPixelPos, getTilePos,
+            awake: typeof awake === 'function' ? awake : () => {},
             start: typeof start === 'function' ? start : () => {},
             update: typeof update === 'function' ? update : () => {},
             $$setIndex: (newIndex) => { $$index = newIndex; }
@@ -389,6 +390,7 @@ export default function getGameSrc(props) {
         $$.getCodeFunction(gameObject, index)
       );
       // start game loop
+      $$.spriteCodes.forEach(code => code.awake());
       $$.spriteCodes.forEach(code => code.start());
       requestAnimationFrame(gameLoop);
     // throw error
