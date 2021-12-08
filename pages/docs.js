@@ -126,21 +126,22 @@ export default function Docs(props) {
               <LinkIcon />
             </a>
           </h2>
-          There are two built-in game loop functions, <code>start</code> and
-          {' '}<code>update</code>.<br /><br />
+          There three built-in game loop functions, <code>awake</code>,{' '}
+          <code>start</code> and <code>update</code>.<br /><br />
+          <code>awake()</code> runs once at the start of the game.<br />
           <code>start()</code> runs once at the start of the game.<br />
           <code>update()</code> runs once a frame.
           <Code>
-{`// code here runs first
+{`// runs before initialization
 
-function start() {
-  // code here runs second
-}
+// runs after initialization
+function awake() { }
 
-function update() {
-  // code here runs last
-  // code here runs every frame
-}`}
+// runs after awake
+function start() { }
+
+// runs every frame after start
+function update() { }`}
           </Code>
           Elapsed time can be tracked with <code>getTime</code> and{' '}
           <code>getDeltaTime</code>.<br /><br />
