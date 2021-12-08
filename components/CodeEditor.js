@@ -18,8 +18,7 @@ export default function CodeEditor(props) {
         enableLiveAutocompletion: true
       }}
       width="500px"
-      height="100%"
-      style={{ minHeight: '590px' }}
+      height="590px"
       {...props}
     />
   );
