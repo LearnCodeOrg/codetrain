@@ -290,15 +290,24 @@ export default function GameEditor(props) {
   // updates current object id with given value
   function updateObjectId(value) {
     // get held object
-    const heldObject = gameObjects[gameObjects.length - 1];
+    const { id, ...heldObject } = gameObjects[gameObjects.length - 1];
     const newGameObjects = gameObjects.slice();
-    const heldIndex = newGameObjects.indexOf(heldObject);
     // splice new object
-    newGameObjects.splice(heldIndex, 1);
-    newGameObjects.push({
-      id: value, x: heldObject.x, y: heldObject.y, sprite: heldObject.sprite
-    });
+    newGameObjects.pop();
+    newGameObjects.push({ id: value, ...heldObject });
     setGameObjects(newGameObjects);
+  }
+
+  // updates current object layer with given value
+  function updateObjectLayer(value) {
+    // get held object
+    const { layer, ...heldObject } = gameObjects[gameObjects.length - 1];
+    const newGameObjects = gameObjects.slice();
+    // splice new object
+    newGameObjects.pop();
+    newGameObjects.push({ layer: value, ...heldObject });
+    setGameObjects(newGameObjects);
+    console.log(newGameObjects);
   }
 
   // returns position of current held object
