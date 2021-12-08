@@ -89,6 +89,9 @@ const background = [
   1, 1, 1, 0, 0, 0, 0, 1,
   1, 1, 1, 1, 1, 1, 1, 0
 ];
+const gameObjects = [
+  { id: objectNames[0].toLowerCase(), sprite: 0, x: 0, y: 0, layer: 'main' }
+];
 
 // default tile names if none given
 export const defaultTileNames = Array(objectCount)
@@ -96,8 +99,7 @@ export const defaultTileNames = Array(objectCount)
 
 // default data
 export const defaultData = {
-  codes, colors, background, objectNames, tileNames,
-  gameObjects: [{ id: objectNames[0].toLowerCase(), sprite: 0, x: 0, y: 0 }],
+  codes, colors, background, objectNames, tileNames, gameObjects,
   title: 'My First Project', description: 'WASD to move.',
   tiles: JSON.stringify(tiles), objects: JSON.stringify(objects)
 };

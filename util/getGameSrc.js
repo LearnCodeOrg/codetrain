@@ -183,7 +183,6 @@ export default function getGameSrc(props) {
     setLayer: (index, newLayer) => {
       const { layer, ...object } = $$.gameObjects[index];
       $$.gameObjects[index] = { layer: newLayer, ...object };
-      console.log($$.gameObjects);
     },
     shortid: () => {
       if (!crypto || !crypto.randomUUID) {
@@ -219,10 +218,10 @@ export default function getGameSrc(props) {
           const getPixelPos = () => $$.getPixelPos($$index);
           const getTilePos = () => $$.getTilePos($$index);
           const getTile = () => $$.getTile($$index);
-          const setTile = tile => $$.setTile($$index, tile);
+          const setTile = (tile) => $$.setTile($$index, tile);
           const getTileAt = $$.getTileAt;
           const setTileAt = $$.setTileAt;
-          const say = text => { $$.dialogue = \`\${text}\`; }
+          const say = (text) => { $$.dialogue = \`\${text}\`; }
           const getObject = $$.getObject;
           const deleteObject = $$.deleteObject;
           const createObject = $$.createObject;

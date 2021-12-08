@@ -305,7 +305,6 @@ export default function GameEditor(props) {
     newGameObjects.pop();
     newGameObjects.push({ layer: value, ...heldObject });
     setGameObjects(newGameObjects);
-    console.log(newGameObjects);
   }
 
   // returns position of current held object
