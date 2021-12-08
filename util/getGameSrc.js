@@ -177,6 +177,14 @@ export default function getGameSrc(props) {
       }
       delete $$.texts[id];
     },
+    getLayer: (index) => {
+      return $$.gameObjects[index].layer;
+    },
+    setLayer: (index, newLayer) => {
+      const { layer, ...object } = $$.gameObjects[index];
+      $$.gameObjects[index] = { layer: newLayer, ...object };
+      console.log($$.gameObjects);
+    },
     shortid: () => {
       if (!crypto || !crypto.randomUUID) {
         const chars = '0123456789abcdefghijklmnopqrstuvwxyz';
@@ -224,6 +232,8 @@ export default function getGameSrc(props) {
           const removeText = $$.removeText;
           const getTime = () => $$.time;
           const getDeltaTime = () => $$.deltaTime;
+          const getLayer = () => $$.getLayer($$index);
+          const setLayer = (layer) => $$.setLayer($$index, layer);
           eval($$.codes[gameObject.sprite]);
           return {
             id: gameObject.id,
