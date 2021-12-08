@@ -356,6 +356,19 @@ const player3 = createObject('player', 0, 0, 'p3'); // given id
 deleteObject(player2.id);
 deleteObject('p3');`}
           </Code>
+          Object layers can be retrieved and set with <code>getLayer</code>
+          {' '}and <code>setLayer</code>.<br /><br />
+          <code>getLayer()</code> returns the object layer.<br />
+          <code>setLayer(layer)</code> sets the object layer to{' '}
+          <code>layer</code>.
+          <Code>
+{`// send object to background
+setLayer('back');
+
+// returns 'back'
+getLayer();
+`}
+          </Code>
           <hr />
           <div id="audio" className={styles.bookmark} />
           <h2>
