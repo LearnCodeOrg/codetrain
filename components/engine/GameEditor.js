@@ -183,7 +183,8 @@ export default function GameEditor(props) {
       // for each object
       for (const object of gameObjects) {
         // skip if incorrect layer
-        if (object.layer !== layer) continue;
+        const freePass = !object.layer && layer === 'main';
+        if (object.layer !== layer && !freePass) continue;
         // draw objects
         const { x, y } = object;
         const sprite = objects[object.sprite];
