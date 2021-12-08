@@ -42,7 +42,7 @@ let remixing = false;
 const keys = {};
 const emptyColor = '#fff';
 
-const layers = ['Back', 'Main', 'Front'];
+const layers = ['back', 'main', 'front'];
 
 export default function GameEditor(props) {
   const {
@@ -178,12 +178,17 @@ export default function GameEditor(props) {
     }
     // return if not showing objects
     if (!showObjects) return;
-    // for each object
-    for (const object of gameObjects) {
-      // draw objects
-      const { x, y } = object;
-      const sprite = objects[object.sprite];
-      drawSprite(sprite, x, y);
+    // for each layer
+    for (const layer of layers) {
+      // for each object
+      for (const object of gameObjects) {
+        // skip if incorrect layer
+        if (object.layer !== layer) continue;
+        // draw objects
+        const { x, y } = object;
+        const sprite = objects[object.sprite];
+        drawSprite(sprite, x, y);
+      }
     }
     // draw object highlight
     if (showHighlight && gameObjects.length) {
@@ -207,8 +212,6 @@ export default function GameEditor(props) {
       ctx.fillRect(left, bottom + highlightLength / 2, size, size / 2);
       ctx.fillRect(right + highlightLength / 2, bottom, size / 2, size);
       ctx.fillRect(right, bottom + highlightLength / 2, size, size / 2);
-      // draw sprite
-      drawSprite(sprite, x, y);
     }
   }
 
