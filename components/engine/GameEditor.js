@@ -239,45 +239,43 @@ export default function GameEditor(props) {
       const pixeledY = Math.floor(currY / pixelPixels) * pixelPixels;
       const centerX = clamp(pixeledX, halfSprite, mapPixels - halfSprite);
       const centerY = clamp(pixeledY, halfSprite, mapPixels - halfSprite);
-      const x = centerX - halfSprite;
-      const y = centerY - halfSprite;
+      const newX = centerX - halfSprite;
+      const newY = centerY - halfSprite;
       const newGameObjects = gameObjects.slice();
       // if already holding object
       if (holding) {
         // get held object
         const heldIndex = gameObjects.length - 1;
-        const heldObject = gameObjects[heldIndex];
+        const { x, y, ...heldObject } = gameObjects[heldIndex];
         // if held object moved
-        if (heldObject.x !== x || heldObject.y !== y) {
+        if (x !== newX || y !== newY) {
           // update held object
-          newGameObjects[heldIndex] = {
-            id: heldObject.id, x, y, sprite: heldObject.sprite
-          };
+          newGameObjects[heldIndex] = { x: newX, y: newY, ...heldObject };
           setGameObjects(newGameObjects);
         }
       // if not holding object
       } else {
         // get clicked objects
         const clicked = gameObjects.filter(obj => (
-          between(obj.x, x - halfSprite, x + halfSprite) &&
-          between(obj.y, y - halfSprite, y + halfSprite)
+          between(obj.x, newX - halfSprite, newX + halfSprite) &&
+          between(obj.y, newY - halfSprite, newY + halfSprite)
         )).reverse();
         // if object clicked
         if (clicked.length) {
           // get held object
           holding = true;
-          const heldObject = clicked[0];
+          const { x, y, ...heldObject } = clicked[0];
           // update held object position
-          const heldIndex = newGameObjects.indexOf(heldObject);
+          const heldIndex = newGameObjects.indexOf(clicked[0]);
           newGameObjects.splice(heldIndex, 1);
-          newGameObjects.push({
-            id: heldObject.id, x, y, sprite: heldObject.sprite
-          });
+          newGameObjects.push({ x: newX, y: newY, ...heldObject });
           setGameObjects(newGameObjects);
         // if empty space
         } else {
           // create object
-          const object = { id: shortid(), x, y, sprite: currObject };
+          const object = {
+            id: shortid(), x: newX, y: newY, sprite: currObject, layer: 'main'
+          };
           newGameObjects.push(object);
           // start holding and update objects
           holding = true;
