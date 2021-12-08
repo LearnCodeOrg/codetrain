@@ -344,22 +344,18 @@ player.move('right');`}
           </Code>
           Objects can be created and deleted with <code>createObject</code>
           {' '}and <code>deleteObject</code>.<br /><br />
-          <code>createObject(object, x, y)</code> creates{' '}
-          <code>object</code> with random <code>id</code> at <code>x</code>,
-          {' '}<code>y</code> pixels.<br />
-          <code>createObject(object, x, y, id)</code> creates{' '}
-          <code>object</code> with given <code>id</code> at <code>x</code>,
-          {' '}<code>y</code> pixels.<br />
+          <code>createObject(object, x, y, options?)</code> creates{' '}
+          <code>object</code> at <code>x</code>, <code>y</code> pixels.<br />
+          - <code>options</code> is an optional object containing an{' '}
+          <code>id</code> field.<br />
           <code>deleteObject(id)</code> deletes object with given{' '}
           <code>id</code>.
           <Code>
-{`// create new player objects
-const player2 = createObject('player', 0, 0); // random id
-const player3 = createObject('player', 0, 0, 'p3'); // given id
+{`// create new player
+const player2 = createObject('player', 0, 0, { id: 'player2' });
 
-// delete new players
-deleteObject(player2.id);
-deleteObject('p3');`}
+// delete new player
+deleteObject('player2');`}
           </Code>
           Object layers can be retrieved and set with <code>getLayer</code>
           {' '}and <code>setLayer</code>.<br /><br />
