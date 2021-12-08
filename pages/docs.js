@@ -175,21 +175,26 @@ say('Hello World!');`}
           </Code>
           Text can be added and removed with <code>addText</code> and{' '}
           <code>removeText</code>.<br /><br />
-          <code>addText(text, x, y)</code> creates <code>text</code>{' '}
-          with random <code>id</code> at <code>x</code>, <code>y</code>{' '}
-          pixels.<br />
-          <code>addText(text, x, y, id)</code> creates <code>text</code>{' '}
-          with given <code>id</code> at <code>x</code>, <code>y</code>{' '}
-          pixels.<br />
+          <code>addText(text, x, y, options?)</code> creates and returns text
+          {' '}<code>text</code> at <code>x</code>, <code>y</code> pixels.
+          <br />
+          - <code>options</code> is an optional object containing{' '}
+          <code>size</code>, <code>color</code>, and <code>id</code> fields.
+          <br />
           <code>removeText(id)</code> removes text with given <code>id</code>.
           <Code>
 {`// create score text
-addText('Score: 0', 0, 0, 'score');
+addText('Score: 0', 0, 0);
 
 // update score text
-addText('Score: 1', 0, 0, 'score');
+addText('Score: 1', 0, 0);
 
-// remove score text
+// make score text big, red, and id 'score'
+addText('Score: 1', 0, 0,
+  { size: 32, color: 'red', id: 'score' }
+);
+
+// remove score text by id
 removeText('score');
 `}
           </Code>
