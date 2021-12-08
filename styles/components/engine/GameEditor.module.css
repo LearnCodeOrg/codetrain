@@ -42,12 +42,27 @@
   margin-top: 10px;
 }
 
+.objectbar > input {
+  width: 128px;
+}
+
 .objectbar > p {
-  margin-left: 10px;
+  margin-left: 5px;
+  font-size: 12px;
 }
 
 .objectbar > p > span {
   font-weight: bold;
+  font-size: 16px;
+}
+
+.objectbar > label {
+  margin-left: 8px;
+  font-size: 12px;
+}
+
+.objectbar > label > select {
+  margin-left: 4px;
 }
 
 .tools, .objectbar, .databar {
