@@ -308,12 +308,18 @@ export default function getGameSrc(props) {
           drawSprite(sprite, x * $$.spritePixels, y * $$.spritePixels);
         }
       }
-      // for each object
-      for (const object of $$.gameObjects) {
-        // draw object
-        const { x, y } = object;
-        const sprite = $$.objects[object.sprite];
-        drawSprite(sprite, x, y);
+      // for each layer
+      const layers = ['back', 'main', 'front'];
+      for (const layer of layers) {
+        // for each object
+        for (const object of $$.gameObjects) {
+          // skip if incorrect layer
+          if (object.layer !== layer) continue;
+          // draw object
+          const { x, y } = object;
+          const sprite = $$.objects[object.sprite];
+          drawSprite(sprite, x, y);
+        }
       }
       // for each text
       for (const id in $$.texts) {
