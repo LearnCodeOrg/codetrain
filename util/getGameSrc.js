@@ -166,10 +166,12 @@ export default function getGameSrc(props) {
       }
       sound.play();
     },
-    addText: (text, x, y, id) => {
-      const textId = id ?? $$.shortid();
-      $$.texts[textId] = { text, x, y, id: textId };
-      return $$.texts[textId];
+    addText: (text, x, y, options) => {
+      const id = options?.id ?? $$.shortid();
+      const color = options?.color ?? 'black';
+      const size = options?.size ?? 16;
+      $$.texts[id] = { text, x, y, color, size };
+      return $$.texts[id];
     },
     removeText: (id) => {
       if (!$$.texts[id]) {
@@ -325,12 +327,12 @@ export default function getGameSrc(props) {
       // for each text
       for (const id in $$.texts) {
         // get text
-        const { x, y, text } = $$.texts[id];
-        const fontSize = 16;
+        const { x, y, text, color, size } = $$.texts[id];
         const textX = x * $$.pixelPixels;
-        const textY = y * $$.pixelPixels + fontSize;
+        const textY = y * $$.pixelPixels + size;
         // draw text
-        $$.ctx.font = \`\${fontSize}px monospace\`;
+        $$.ctx.fillStyle = color;
+        $$.ctx.font = \`\${size}px monospace\`;
         $$.ctx.fillText(text, textX, textY);
       }
       // if dialogue
