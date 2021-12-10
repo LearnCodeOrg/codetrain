@@ -41,9 +41,9 @@ export default function User(props) {
     if (!userDocs.length) setUserData(null);
     // if user data, set data and retrieve projects
     else {
-      const data = { id: userDocs[0].id, ...userDocs[0].data() };
+      const data = { uid: userDocs[0].id, ...userDocs[0].data() };
       setUserData(data);
-      const projectsQuery = projectsRef.where('uid', '==', data.id)
+      const projectsQuery = projectsRef.where('uid', '==', data.uid)
         .orderBy('modified', 'desc').limit(maxProjects);
       const projectDocs = (await projectsQuery.get()).docs;
       setProjects(projectDocs.map(doc => ({ id: doc.id, ...doc.data() })));
@@ -103,7 +103,7 @@ export default function User(props) {
                 <p>{description ?? userData.description}</p>
               }
               {
-                uid === userData.id &&
+                uid === userData.uid &&
                 (
                   editing ?
                   <button onClick={() => {
@@ -129,25 +129,30 @@ export default function User(props) {
             <Loading /> :
             !projects.length ?
             <p>No projects yet</p> :
-            <div className={styles.projects}>
-              <select>
-                {
-                  projects.map(project =>
-                    <option value={project.id}>
-                      {project.title}
-                    </option>
-                  )
-                }
-              </select>
+            <div className={styles.main}>
               {
-                projects ?
-                !projects.length ?
-                <p>No projects yet</p> :
-                projects.map(project =>
-                  <Project {...project} key={project.id} />
-                ) :
-                <Loading />
+                uid === userData.uid &&
+                <select>
+                  {
+                    projects.map(project =>
+                      <option value={project.id} key={project.id}>
+                        {project.title}
+                      </option>
+                    )
+                  }
+                </select>
               }
+              <div className={styles.projects}>
+                {
+                  projects ?
+                  !projects.length ?
+                  <p>No projects yet</p> :
+                  projects.map(project =>
+                    <Project {...project} key={project.id} />
+                  ) :
+                  <Loading />
+                }
+              </div>
             </div>
           }
         </div>
