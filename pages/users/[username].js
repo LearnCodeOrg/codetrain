@@ -57,7 +57,37 @@ export default function User(props) {
             <a className="bluelink">Return home</a>
           </Link>
         </div> :
-        <div>
+        <div className={styles.content}>
+          <div className={styles.head}>
+            <div className={styles.title}>
+              {
+                ownPage ?
+                <label>
+                  <img src={user.photo} />
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={e => updatePhoto(e.target.files[0])}
+                    hidden={true}
+                  />
+                </label> :
+                <img src={user.photo} />
+              }
+              <div>
+                <h1>{user.username}</h1>
+                <p>
+                  Joined
+                  {' '}
+                  {
+                    new Date(user.joined)
+                    .toLocaleDateString(undefined, { month: 'long' })
+                  }
+                  {' '}
+                  {new Date(user.joined).getFullYear()}
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       }
     </div>
