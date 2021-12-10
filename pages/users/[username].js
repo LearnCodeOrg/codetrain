@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import Header from '../../components/Header';
 import Project from '../../components/cards/Project';
@@ -74,8 +75,24 @@ export default function User(props) {
         </div> :
         <div className={styles.content}>
           <div className={styles.head}>
-            <h1>{userData.username}</h1>
-            <p>Joined {new Date(userData.joined).toLocaleDateString()}</p>
+            <div>
+              <img
+                src={userData.photo}
+                width="48"
+                height="48"
+              />
+              <h1>{userData.username}</h1>
+              <p>
+                Joined
+                {' '}
+                {
+                  new Date(userData.joined)
+                  .toLocaleDateString(undefined, { month: 'long' })
+                }
+                {' '}
+                {new Date(userData.joined).getFullYear()}
+              </p>
+            </div>
             <div className={styles.description}>
               {
                 editing ?
