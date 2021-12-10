@@ -48,7 +48,7 @@ export default function User(props) {
             <a className="bluelink">Return home</a>
           </Link>
         </div> :
-        <UserPage user={userd} />
+        <UserPage user={user} />
       }
     </div>
   );

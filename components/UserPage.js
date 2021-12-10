@@ -11,6 +11,12 @@ import styles from '../styles/components/UserPage.module.css';
 export default function UserPage(props) {
   const { user } = props;
 
+  const [editing, setEditing] = useState(false);
+
+  const uid = firebase.auth().currentUser?.uid;
+
+  const ownPage = uid === user;
+
   // listen for user data
   const userRef = firebase.firestore().collection('users').doc(user);
   const [userData] = useDocumentData(userRef);
@@ -21,11 +27,19 @@ export default function UserPage(props) {
   .orderBy('modified', 'desc');
   const [projects] = useCollectionData(projectsQuery, { idField: 'id' });
 
+  // updates photo in firebase
+  async function updatePhoto(photo) {
+    const photoRef = firebase.storage().ref(`/photos/${uid}`);
+    await photoRef.put(photo);
+    const url = await photoRef.getDownloadURL();
+    await usersRef.doc(uid).update({ photo: url });
+  }
+
   // return if loading
   if (!userData) return <Loading />;
 
   return (
-    <div className={styles.content}>
+    <div className={styles.container}>
       <div className={styles.head}>
         <div className={styles.title}>
           {
@@ -64,7 +78,7 @@ export default function UserPage(props) {
               onChange={e => setDescription(e.target.value)}
               maxLength="2048"
             /> :
-            <p>{description ?? userData.description}</p>
+            <p>{userData.description}</p>
           }
           {
             ownPage &&
