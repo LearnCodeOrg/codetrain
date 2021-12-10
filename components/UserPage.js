@@ -1,7 +1,10 @@
 import Loading from './Loading';
+import Project from './cards/Project';
 
 import firebase from 'firebase/app';
-import { useDocumentData } from 'react-firebase-hooks/firestore';
+import { useDocumentData, useCollectionData
+} from 'react-firebase-hooks/firestore';
+import { useState } from 'react';
 
 import styles from '../styles/components/UserPage.module.css';
 
@@ -11,6 +14,12 @@ export default function UserPage(props) {
   // listen for user data
   const userRef = firebase.firestore().collection('users').doc(user);
   const [userData] = useDocumentData(userRef);
+
+  // listen for user projects
+  const projectsRef = firebase.firestore().collection('projects');
+  const projectsQuery = projectsRef.where('uid', '==', user)
+  .orderBy('modified', 'desc');
+  const [projects] = useCollectionData(projectsQuery, { idField: 'id' });
 
   // return if loading
   if (!userData) return <Loading />;
@@ -110,10 +119,10 @@ export default function UserPage(props) {
             </select>
           }
           {
-            !feat ?
+            !userData.featured ?
             <p>No project featured</p> :
             projects
-            .filter(project => project.id === feat)
+            .filter(project => project.id === userData.featured)
             .map(project =>
               <Project {...project} key={project.id} />
             )
