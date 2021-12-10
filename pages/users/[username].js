@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import Header from '../../components/Header';
 import Loading from '../../components/Loading';
-import UserPage from '../../components/UserPage';
 
 import firebase from 'firebase/app';
 import { useEffect, useState } from 'react';
@@ -23,11 +22,21 @@ export default function User(props) {
     // return if no username
     if (!username) return;
     // get and set user data
-    const userQuery = usersRef
-    .where('usernameLower', '==', username.toLowerCase());
+    const usernameLower = username.toLowerCase();
+    const userQuery = usersRef.where('usernameLower', '==', usernameLower);
     const userDocs = (await userQuery.get()).docs;
     // set user
-    setUser(userDocs.length ? userDocs[0].id : null);
+    const userDoc = userDocs[0];
+    setUser(userDoc ? { id: userDoc.id, ...userDoc.data() } : null);
+  }
+
+  // refreshes user data
+  async function refreshData() {
+    // return if no current user
+    if (!user) return;
+    // retrieve user data
+    const userDoc = await userRef.get();
+    setUser({ id: userDoc.id, ...userDoc.data() });
   }
 
   // get user data on start
@@ -48,7 +57,8 @@ export default function User(props) {
             <a className="bluelink">Return home</a>
           </Link>
         </div> :
-        <UserPage user={user} />
+        <div>
+        </div>
       }
     </div>
   );
