@@ -138,32 +138,30 @@ export default function User(props) {
             !projects.length ?
             <p>No projects yet</p> :
             <div className={styles.main}>
-              <label>
-                Featured Project
-                {
-                  uid === userData.uid &&
-                  <select
-                    value={feat}
-                    onChange={e => {
-                      const project = e.target.value;
-                      setFeatured(project);
-                      updateFeatured(project);
-                    }}
-                  >
-                    <option value=""></option>
-                    {
-                      projects.map(project =>
-                        <option
-                          value={project.id}
-                          key={project.id}
-                        >
-                          {project.title}
-                        </option>
-                      )
-                    }
-                  </select>
-                }
-              </label>
+              <p>Featured Project</p>
+              {
+                uid === userData.uid &&
+                <select
+                  value={feat}
+                  onChange={e => {
+                    const project = e.target.value;
+                    setFeatured(project);
+                    updateFeatured(project);
+                  }}
+                >
+                  <option value=""></option>
+                  {
+                    projects.map(project =>
+                      <option
+                        value={project.id}
+                        key={project.id}
+                      >
+                        {project.title}
+                      </option>
+                    )
+                  }
+                </select>
+              }
               {
                 !feat ?
                 <p>No project featured</p> :
