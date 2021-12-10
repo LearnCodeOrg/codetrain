@@ -19,6 +19,7 @@
   width: 48px;
   height: 48px;
   margin-right: 8px;
+  object-fit: cover;
 }
 
 .title h1 {

@@ -27,6 +27,7 @@ export default function User(props) {
   const uid = firebase.auth().currentUser?.uid;
 
   const feat = featured ?? userData?.featured;
+  const ownPage = uid === userData?.uid;
 
   // get username
   const router = useRouter();
@@ -92,15 +93,19 @@ export default function User(props) {
         <div className={styles.content}>
           <div className={styles.head}>
             <div className={styles.title}>
-              <label>
+              {
+                ownPage ?
+                <label>
+                  <img src={userData.photo} />
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={e => updatePhoto(e.target.files[0])}
+                    hidden={true}
+                  />
+                </label> :
                 <img src={userData.photo} />
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={e => updatePhoto(e.target.files[0])}
-                  hidden={true}
-                />
-              </label>
+              }
               <div>
                 <h1>{userData.username}</h1>
                 <p>
@@ -127,7 +132,7 @@ export default function User(props) {
                 <p>{description ?? userData.description}</p>
               }
               {
-                uid === userData.uid &&
+                ownPage &&
                 (
                   editing ?
                   <button onClick={() => {
@@ -156,7 +161,7 @@ export default function User(props) {
             <div className={styles.main}>
               <p>Featured Project</p>
               {
-                uid === userData.uid &&
+                ownPage &&
                 <select
                   value={feat}
                   onChange={e => {
