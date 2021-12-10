@@ -1,6 +1,20 @@
+import Loading from './Loading';
+
+import firebase from 'firebase/app';
+import { useDocumentData } from 'react-firebase-hooks/firestore';
+
 import styles from '../styles/components/UserPage.module.css';
 
-export default function UserPage() {
+export default function UserPage(props) {
+  const { user } = props;
+
+  // listen for user data
+  const userRef = firebase.firestore().collection('users').doc(user);
+  const [userData] = useDocumentData(userRef);
+
+  // return if loading
+  if (!userData) return <Loading />;
+
   return (
     <div className={styles.content}>
       <div className={styles.head}>
