@@ -124,17 +124,32 @@ export default function User(props) {
               }
             </div>
           </div>
-          <div className={styles.projects}>
-            {
-              projects ?
-              !projects.length ?
-              <p>No projects yet</p> :
-              projects.map(project =>
-                <Project {...project} key={project.id} />
-              ) :
-              <Loading />
-            }
-          </div>
+          {
+            !projects ?
+            <Loading /> :
+            !projects.length ?
+            <p>No projects yet</p> :
+            <div className={styles.projects}>
+              <select>
+                {
+                  projects.map(project =>
+                    <option value={project.id}>
+                      {project.title}
+                    </option>
+                  )
+                }
+              </select>
+              {
+                projects ?
+                !projects.length ?
+                <p>No projects yet</p> :
+                projects.map(project =>
+                  <Project {...project} key={project.id} />
+                ) :
+                <Loading />
+              }
+            </div>
+          }
         </div>
       }
     </div>
