@@ -60,6 +60,11 @@ export default function User(props) {
     await usersRef.doc(uid).update({ description });
   }
 
+  // updates user featured project in firebase
+  async function updateFeatured(val) {
+    await usersRef.doc(uid).update({ featured: val });
+  }
+
   return (
     <div className={styles.container}>
       <Header {...props} />
@@ -134,7 +139,10 @@ export default function User(props) {
                 Featured Project
                 {
                   uid === userData.uid &&
-                  <select>
+                  <select
+                    value={userData.featured}
+                    onChange={e => updateFeatured(e.target.value)}
+                  >
                     <option value=""></option>
                     {
                       projects.map(project =>
