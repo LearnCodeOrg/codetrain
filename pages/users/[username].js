@@ -18,12 +18,15 @@ export default function User(props) {
   const [userData, setUserData] = useState(undefined);
   const [editing, setEditing] = useState(false);
   const [description, setDescription] = useState(undefined);
+  const [featured, setFeatured] = useState(undefined);
   const [projects, setProjects] = useState(undefined);
 
   const usersRef = firebase.firestore().collection('users');
   const projectsRef = firebase.firestore().collection('projects');
 
   const uid = firebase.auth().currentUser?.uid;
+
+  const feat = featured ?? userData?.featured;
 
   // get username
   const router = useRouter();
@@ -140,8 +143,12 @@ export default function User(props) {
                 {
                   uid === userData.uid &&
                   <select
-                    value={userData.featured}
-                    onChange={e => updateFeatured(e.target.value)}
+                    value={feat}
+                    onChange={e => {
+                      const project = e.target.value;
+                      setFeatured(project);
+                      updateFeatured(project);
+                    }}
                   >
                     <option value=""></option>
                     {
