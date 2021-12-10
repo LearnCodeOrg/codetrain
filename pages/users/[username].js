@@ -13,17 +13,10 @@ import { useRouter } from 'next/router';
 
 import styles from '../../styles/pages/User.module.css';
 
-const maxProjects = 16;
-
 export default function User(props) {
-  const [userData, setUserData] = useState(undefined);
-  const [editing, setEditing] = useState(false);
-  const [description, setDescription] = useState(undefined);
-  const [featured, setFeatured] = useState(undefined);
-  const [projects, setProjects] = useState(undefined);
+  const [user, setUser] = useState(undefined);
 
   const usersRef = firebase.firestore().collection('users');
-  const projectsRef = firebase.firestore().collection('projects');
 
   const uid = firebase.auth().currentUser?.uid;
 
@@ -40,19 +33,10 @@ export default function User(props) {
     if (!username) return;
     // get and set user data
     const userQuery = usersRef
-      .where('usernameLower', '==', username.toLowerCase());
+    .where('usernameLower', '==', username.toLowerCase());
     const userDocs = (await userQuery.get()).docs;
-    // if no user doc, set data to null
-    if (!userDocs.length) setUserData(null);
-    // if user data, set data and retrieve projects
-    else {
-      const data = { uid: userDocs[0].id, ...userDocs[0].data() };
-      setUserData(data);
-      const projectsQuery = projectsRef.where('uid', '==', data.uid)
-        .orderBy('modified', 'desc').limit(maxProjects);
-      const projectDocs = (await projectsQuery.get()).docs;
-      setProjects(projectDocs.map(doc => ({ id: doc.id, ...doc.data() })));
-    }
+    // set user
+    setUser(userDocs.length ? userDocs[0].id : null);
   }
 
   // get user data on start
