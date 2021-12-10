@@ -68,6 +68,14 @@ export default function User(props) {
     await usersRef.doc(uid).update({ featured: val });
   }
 
+  // updates photo in firebase
+  async function updatePhoto(photo) {
+    const photoRef = firebase.storage().ref(`/photos/${uid}`);
+    await photoRef.put(photo);
+    const url = await photoRef.getDownloadURL();
+    await usersRef.doc(uid).update({ photo: url });
+  }
+
   return (
     <div className={styles.container}>
       <Header {...props} />
@@ -84,7 +92,15 @@ export default function User(props) {
         <div className={styles.content}>
           <div className={styles.head}>
             <div className={styles.title}>
-              <img src={userData.photo} />
+              <label>
+                <img src={userData.photo} />
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={e => updatePhoto(e.target.files[0])}
+                  hidden={true}
+                />
+              </label>
               <div>
                 <h1>{userData.username}</h1>
                 <p>
