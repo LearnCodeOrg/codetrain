@@ -157,6 +157,15 @@ export default function User(props) {
                   </select>
                 }
               </label>
+              {
+                !feat ?
+                <p>No project featured</p> :
+                projects
+                .filter(project => project.id === feat)
+                .map(project =>
+                  <Project {...project} key={project.id} />
+                )
+              }
               <div className={styles.projects}>
                 {
                   projects ?
