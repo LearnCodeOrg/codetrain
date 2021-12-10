@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import Header from '../../components/Header';
 import Loading from '../../components/Loading';
+import EditIcon from '@mui/icons-material/Edit';
+import SaveIcon from '@mui/icons-material/Save';
 
 import firebase from 'firebase/app';
 import { useEffect, useState } from 'react';
@@ -10,8 +12,14 @@ import styles from '../../styles/pages/User.module.css';
 
 export default function User(props) {
   const [user, setUser] = useState(undefined);
+  const [editing, setEditing] = useState(false);
+  const [description, setDescription] = useState('');
 
+  // get user references
   const usersRef = firebase.firestore().collection('users');
+  const userRef = user ? usersRef.doc(user.id) : undefined;
+  const uid = firebase.auth().currentUser?.uid;
+  const ownPage = uid === user?.id;
 
   // get username
   const router = useRouter();
@@ -30,6 +38,11 @@ export default function User(props) {
     setUser(userDoc ? { id: userDoc.id, ...userDoc.data() } : null);
   }
 
+  // get user data on start
+  useEffect(() => {
+    getUser();
+  }, [username]);
+
   // refreshes user data
   async function refreshData() {
     // return if no current user
@@ -39,10 +52,11 @@ export default function User(props) {
     setUser({ id: userDoc.id, ...userDoc.data() });
   }
 
-  // get user data on start
-  useEffect(() => {
-    getUser();
-  }, [username]);
+  // updates description in firebase
+  async function updateDescription() {
+    await userRef.update({ description });
+    refreshData();
+  }
 
   return (
     <div className={styles.container}>
