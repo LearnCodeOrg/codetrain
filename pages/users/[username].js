@@ -87,6 +87,36 @@ export default function User(props) {
                 </p>
               </div>
             </div>
+            <div className={styles.description}>
+              {
+                editing ?
+                <input
+                  placeholder="Description"
+                  value={description}
+                  onChange={e => setDescription(e.target.value)}
+                  maxLength="2048"
+                /> :
+                <p>{user.description}</p>
+              }
+              {
+                ownPage &&
+                (
+                  editing ?
+                  <button onClick={() => {
+                    updateDescription();
+                    setEditing(false);
+                  }}>
+                    <SaveIcon />
+                  </button> :
+                  <button onClick={() => {
+                    setDescription(user.description);
+                    setEditing(true);
+                  }}>
+                    <EditIcon />
+                  </button>
+                )
+              }
+            </div>
           </div>
         </div>
       }
