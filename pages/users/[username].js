@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Header from '../../components/Header';
 import Loading from '../../components/Loading';
+import Project from '../../components/cards/Project';
 import EditIcon from '@mui/icons-material/Edit';
 import SaveIcon from '@mui/icons-material/Save';
 
@@ -15,6 +16,7 @@ export default function User(props) {
   const [editing, setEditing] = useState(false);
   const [descAbout, setDescAbout] = useState('');
   const [descWork, setDescWork] = useState('');
+  const [projects, setProjects] = useState(undefined);
 
   // get user references
   const usersRef = firebase.firestore().collection('users');
@@ -37,6 +39,12 @@ export default function User(props) {
     // set user
     const userDoc = userDocs[0];
     setUser(userDoc ? { id: userDoc.id, ...userDoc.data() } : null);
+    if (!userDoc) return;
+    // get user projects
+    const projectsRef = firebase.firestore().collection('projects');
+    const projectsQuery = projectsRef.where('uid', '==', userDoc.id);
+    const projectsDocs = await projectsQuery.get();
+    setProjects(projectsDocs.docs.map(doc => ({ id: doc.id, ...doc.data() })));
   }
 
   // get user data on start
@@ -146,6 +154,17 @@ export default function User(props) {
                     <EditIcon />
                   </button>
                 )
+              }
+            </div>
+            <div className={styles.projects}>
+              {
+                projects ?
+                !projects.length ?
+                <p>No projects yet</p> :
+                projects.map(project =>
+                  <Project {...project} key={project.id} />
+                ) :
+                <Loading />
               }
             </div>
           </div>
