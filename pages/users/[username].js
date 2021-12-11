@@ -67,6 +67,12 @@ export default function User(props) {
     refreshData();
   }
 
+  // updates features project in firebase
+  async function updateFeatured(featured) {
+    await usersRef.doc(uid).update({ featured });
+    refreshData();
+  }
+
   return (
     <div className={styles.container}>
       <Header {...props} />
@@ -162,6 +168,34 @@ export default function User(props) {
               !projects.length ?
               <p>No projects yet</p> :
               <div className={styles.main}>
+                {
+                  ownPage &&
+                  <select
+                    value={user.featured}
+                    onChange={e => updateFeatured(e.target.value)}
+                  >
+                    <option value=""></option>
+                    {
+                      projects.map(project =>
+                        <option
+                          value={project.id}
+                          key={project.id}
+                        >
+                          {project.title}
+                        </option>
+                      )
+                    }
+                  </select>
+                }
+                {
+                  !user.featured ?
+                  <p>No project featured</p> :
+                  projects
+                  .filter(project => project.id === user.featured)
+                  .map(project =>
+                    <Project {...project} key={project.id} />
+                  )
+                }
                 <div className={styles.projects}>
                   {
                     projects ?
