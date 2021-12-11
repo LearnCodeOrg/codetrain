@@ -1,3 +1,4 @@
+import EditIcon from '@mui/icons-material/Edit';
 import Loading from './Loading';
 import Project from './cards/Project';
 
@@ -18,7 +19,8 @@ export default function UserPage(props) {
   const ownPage = uid === user;
 
   // listen for user data
-  const userRef = firebase.firestore().collection('users').doc(user);
+  const usersRef = firebase.firestore().collection('users');
+  const userRef = usersRef.doc(user);
   const [userData] = useDocumentData(userRef);
 
   // listen for user projects
@@ -33,6 +35,10 @@ export default function UserPage(props) {
     await photoRef.put(photo);
     const url = await photoRef.getDownloadURL();
     await usersRef.doc(uid).update({ photo: url });
+  }
+
+  async function updateFeatured(featured) {
+    await usersRef.doc(uid).update({ featured });
   }
 
   // return if loading
@@ -74,7 +80,7 @@ export default function UserPage(props) {
             editing ?
             <input
               placeholder="Description"
-              value={description}
+              value={userData.description}
               onChange={e => setDescription(e.target.value)}
               maxLength="2048"
             /> :
@@ -112,12 +118,8 @@ export default function UserPage(props) {
           {
             ownPage &&
             <select
-              value={feat}
-              onChange={e => {
-                const project = e.target.value;
-                setFeatured(project);
-                updateFeatured(project);
-              }}
+              value={userData.featured}
+              onChange={e => updateFeatured(e.target.value)}
             >
               <option value=""></option>
               {
