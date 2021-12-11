@@ -13,7 +13,8 @@ import styles from '../../styles/pages/User.module.css';
 export default function User(props) {
   const [user, setUser] = useState(undefined);
   const [editing, setEditing] = useState(false);
-  const [description, setDescription] = useState('');
+  const [descAbout, setDescAbout] = useState('');
+  const [descWork, setDescWork] = useState('');
 
   // get user references
   const usersRef = firebase.firestore().collection('users');
@@ -52,9 +53,9 @@ export default function User(props) {
     setUser({ id: userDoc.id, ...userDoc.data() });
   }
 
-  // updates description in firebase
-  async function updateDescription() {
-    await userRef.update({ description });
+  // updates descriptions in firebase
+  async function updateDescriptions() {
+    await userRef.update({ descAbout, descWork });
     refreshData();
   }
 
@@ -104,26 +105,42 @@ export default function User(props) {
             <div className={styles.description}>
               {
                 editing ?
-                <input
-                  placeholder="Description"
-                  value={description}
-                  onChange={e => setDescription(e.target.value)}
-                  maxLength="2048"
-                /> :
-                <p>{user.description}</p>
+                <>
+                  <label>
+                    About Me
+                    <input
+                      value={descAbout}
+                      onChange={e => setDescAbout(e.target.value)}
+                      maxLength="2048"
+                    />
+                  </label>
+                  <label>
+                    What I&apos;m working on
+                    <input
+                      value={descWork}
+                      onChange={e => setDescWork(e.target.value)}
+                      maxLength="2048"
+                    />
+                  </label>
+                </> :
+                <>
+                  <p>About me: {user.descAbout}</p>
+                  <p>What I&apos;m working on: {user.descWork}</p>
+                </>
               }
               {
                 ownPage &&
                 (
                   editing ?
                   <button onClick={() => {
-                    updateDescription();
+                    updateDescriptions();
                     setEditing(false);
                   }}>
                     <SaveIcon />
                   </button> :
                   <button onClick={() => {
-                    setDescription(user.description);
+                    setDescAbout(user.descAbout ?? '');
+                    setDescWork(user.descWork ?? '');
                     setEditing(true);
                   }}>
                     <EditIcon />
