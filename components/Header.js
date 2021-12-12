@@ -26,6 +26,13 @@ export default function Header(props) {
 
   const username = userData?.username;
 
+  const authReady = userData === null || userData;
+
+  // called when menu closes
+  function closeMenu() {
+    setAnchor(undefined);
+  }
+
   function HeaderLink(props) {
     const { href, className } = props;
 
@@ -107,38 +114,10 @@ export default function Header(props) {
         open={!!anchor}
         onClose={closeMenu}
       >
-        {
-          (userData === null || userData) &&
-          <MenuItem onClick={() => setAnchor(undefined)}>
-            Profile
-          </MenuItem>
-        }
-        {
-          (userData === null || userData) &&
-          <MenuItem onClick={() => setAnchor(undefined)}>
-            Sign Out
-          </MenuItem>
-        }
-        {
-          !(userData === null || userData) &&
-          <MenuItem onClick={() => setAnchor(undefined)}>
-            Sign In
-          </MenuItem>
-        }
+        {authReady && <MenuItem onClick={closeMenu}>Profile </MenuItem>}
+        {authReady && <MenuItem onClick={closeMenu}>Sign Out</MenuItem>}
+        {!authReady &&<MenuItem onClick={closeMenu}>Sign In</MenuItem>}
       </Menu>
-      {
-        (userData === null || userData) ?
-        <Tooltip title="Sign Out" arrow>
-          <IconButton onClick={() => firebase.auth().signOut()}>
-            <ExitToAppIcon />
-          </IconButton>
-        </Tooltip> :
-        <Tooltip title="Sign In" arrow>
-          <IconButton onClick={() => signInWithGoogle(setupUser)}>
-            <PersonOutlineIcon />
-          </IconButton>
-        </Tooltip>
-      }
     </div>
   );
 }
