@@ -10,14 +10,19 @@ import HomeIcon from '@mui/icons-material/Home';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import ExploreIcon from '@mui/icons-material/Explore';
 import DescriptionIcon from '@mui/icons-material/Description';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
 import firebase from 'firebase/app';
 import signInWithGoogle from '../util/signInWithGoogle.js';
+import { useState } from 'react';
 
 import styles from '../styles/components/Header.module.css';
 
 export default function Header(props) {
   const { userData, reload, setupUser } = props;
+
+  const [anchor, setAnchor] = useState(undefined);
 
   const username = userData?.username;
 
@@ -90,6 +95,22 @@ export default function Header(props) {
           </IconButton>
         </Tooltip>
       </div>
+      <IconButton onClick={e => setAnchor(e.currentTarget)}>
+        {
+          (userData === null || userData) ?
+          <PersonOutlineIcon /> :
+          <PersonIcon />
+        }
+      </IconButton>
+      <Menu
+        anchorEl={anchor}
+        open={!!anchor}
+        onClose={() => setAnchor(undefined)}
+      >
+        <MenuItem onClick={() => setAnchor(undefined)}>Profile</MenuItem>
+        <MenuItem onClick={() => setAnchor(undefined)}>My account</MenuItem>
+        <MenuItem onClick={() => setAnchor(undefined)}>Logout</MenuItem>
+      </Menu>
       {
         (userData === null || userData) ?
         <Tooltip title="Sign Out" arrow>
