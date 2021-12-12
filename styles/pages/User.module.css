@@ -4,10 +4,17 @@
 
 .content {
   padding: 20px;
+  margin: 0 auto;
+  width: fit-content;
 }
 
 .head {
   margin: 0 10px 20px 10px;
+  display: flex;
+}
+
+.head > div {
+  width: 50%;
 }
 
 .title {
@@ -41,11 +48,6 @@
   margin: 16px 0 0 0;
 }
 
-.description > input {
-  margin: 16px 0 0 0;
-  height: 19px;
-}
-
 .description > button {
   border: 0;
   box-shadow: 0 0 3px #000;
@@ -63,11 +65,21 @@
   background: #ddd;
 }
 
+.featured > p {
+  margin: 10px;
+}
+
+.featured > select {
+  margin: 0 0 10px 10px;
+  border: 2px solid #999;
+  background: #efefef;
+}
+
 .projects {
   display: flex;
   flex-wrap: wrap;
 }
 
-.projects > p {
-  margin: 0 10px;
+.main > p {
+  margin: 10px;
 }
