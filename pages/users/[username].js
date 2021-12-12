@@ -132,7 +132,7 @@ export default function User(props) {
                     editing ?
                     <>
                       <div>
-                        About me
+                        <h1>About me</h1>
                         <input
                           value={descAbout}
                           onChange={e => setDescAbout(e.target.value)}
@@ -140,7 +140,7 @@ export default function User(props) {
                         />
                       </div>
                       <div>
-                        What I&apos;m working on
+                        <h1>What I&apos;m working on</h1>
                         <input
                           value={descWork}
                           onChange={e => setDescWork(e.target.value)}
@@ -150,11 +150,11 @@ export default function User(props) {
                     </> :
                     <>
                       <div>
-                        About me
+                        <h1>About me</h1>
                         <p>{user.descAbout}</p>
                       </div>
                       <div>
-                        What I&apos;m working on
+                        <h1>What I&apos;m working on</h1>
                         <p>{user.descWork}</p>
                       </div>
                     </>
@@ -185,7 +185,7 @@ export default function User(props) {
               !projects ?
               <Loading /> :
               <div className={styles.featured}>
-                <p>Featured Project</p>
+                <p><b>Featured Project</b></p>
                 {
                   ownPage &&
                   <select

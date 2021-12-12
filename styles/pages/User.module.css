@@ -43,9 +43,21 @@
   margin: 0;
 }
 
-.description > p {
-  font-style: italic;
-  margin: 16px 0 0 0;
+.fields {
+  display: flex;
+}
+
+.fields > div {
+  width: 50%;
+}
+
+.fields h1 {
+  font-size: 16px;
+  margin: 8px 0;
+}
+
+.fields > div > p {
+  margin: 0;
 }
 
 .description > button {
