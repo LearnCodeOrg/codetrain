@@ -105,11 +105,26 @@ export default function Header(props) {
       <Menu
         anchorEl={anchor}
         open={!!anchor}
-        onClose={() => setAnchor(undefined)}
+        onClose={closeMenu}
       >
-        <MenuItem onClick={() => setAnchor(undefined)}>Profile</MenuItem>
-        <MenuItem onClick={() => setAnchor(undefined)}>My account</MenuItem>
-        <MenuItem onClick={() => setAnchor(undefined)}>Logout</MenuItem>
+        {
+          (userData === null || userData) &&
+          <MenuItem onClick={() => setAnchor(undefined)}>
+            Profile
+          </MenuItem>
+        }
+        {
+          (userData === null || userData) &&
+          <MenuItem onClick={() => setAnchor(undefined)}>
+            Sign Out
+          </MenuItem>
+        }
+        {
+          !(userData === null || userData) &&
+          <MenuItem onClick={() => setAnchor(undefined)}>
+            Sign In
+          </MenuItem>
+        }
       </Menu>
       {
         (userData === null || userData) ?
