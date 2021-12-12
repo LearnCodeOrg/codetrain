@@ -97,114 +97,122 @@ export default function User(props) {
         </div> :
         <div className={styles.content}>
           <div className={styles.head}>
-            <div className={styles.title}>
-              {
-                ownPage ?
-                <label>
+            <div>
+              <div className={styles.title}>
+                {
+                  ownPage ?
+                  <label>
+                    <img src={user.photo} />
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={e => updatePhoto(e.target.files[0])}
+                      hidden={true}
+                    />
+                  </label> :
                   <img src={user.photo} />
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={e => updatePhoto(e.target.files[0])}
-                    hidden={true}
-                  />
-                </label> :
-                <img src={user.photo} />
-              }
-              <div>
-                <h1>{user.username}</h1>
-                <p>
-                  Joined
-                  {' '}
-                  {
-                    new Date(user.joined)
-                    .toLocaleDateString(undefined, { month: 'long' })
-                  }
-                  {' '}
-                  {new Date(user.joined).getFullYear()}
-                </p>
+                }
+                <div>
+                  <h1>{user.username}</h1>
+                  <p>
+                    Joined
+                    {' '}
+                    {
+                      new Date(user.joined)
+                      .toLocaleDateString(undefined, { month: 'long' })
+                    }
+                    {' '}
+                    {new Date(user.joined).getFullYear()}
+                  </p>
+                </div>
+              </div>
+              <div className={styles.description}>
+                {
+                  editing ?
+                  <>
+                    <label>
+                      About Me
+                      <input
+                        value={descAbout}
+                        onChange={e => setDescAbout(e.target.value)}
+                        maxLength="2048"
+                      />
+                    </label>
+                    <label>
+                      What I&apos;m working on
+                      <input
+                        value={descWork}
+                        onChange={e => setDescWork(e.target.value)}
+                        maxLength="2048"
+                      />
+                    </label>
+                  </> :
+                  <>
+                    <p>About me: {user.descAbout}</p>
+                    <p>What I&apos;m working on: {user.descWork}</p>
+                  </>
+                }
+                {
+                  ownPage &&
+                  (
+                    editing ?
+                    <button onClick={() => {
+                      updateDescriptions();
+                      setEditing(false);
+                    }}>
+                      <SaveIcon />
+                    </button> :
+                    <button onClick={() => {
+                      setDescAbout(user.descAbout ?? '');
+                      setDescWork(user.descWork ?? '');
+                      setEditing(true);
+                    }}>
+                      <EditIcon />
+                    </button>
+                  )
+                }
               </div>
             </div>
-            <div className={styles.description}>
-              {
-                editing ?
-                <>
-                  <label>
-                    About Me
-                    <input
-                      value={descAbout}
-                      onChange={e => setDescAbout(e.target.value)}
-                      maxLength="2048"
-                    />
-                  </label>
-                  <label>
-                    What I&apos;m working on
-                    <input
-                      value={descWork}
-                      onChange={e => setDescWork(e.target.value)}
-                      maxLength="2048"
-                    />
-                  </label>
-                </> :
-                <>
-                  <p>About me: {user.descAbout}</p>
-                  <p>What I&apos;m working on: {user.descWork}</p>
-                </>
-              }
+            <div>
+              <p>Featured Project</p>
               {
                 ownPage &&
-                (
-                  editing ?
-                  <button onClick={() => {
-                    updateDescriptions();
-                    setEditing(false);
-                  }}>
-                    <SaveIcon />
-                  </button> :
-                  <button onClick={() => {
-                    setDescAbout(user.descAbout ?? '');
-                    setDescWork(user.descWork ?? '');
-                    setEditing(true);
-                  }}>
-                    <EditIcon />
-                  </button>
+                <select
+                  value={user.featured}
+                  onChange={e => updateFeatured(e.target.value)}
+                >
+                  <option value=""></option>
+                  {
+                    projects.map(project =>
+                      <option
+                        value={project.id}
+                        key={project.id}
+                      >
+                        {project.title}
+                      </option>
+                    )
+                  }
+                </select>
+              }
+              {
+                !user.featured ?
+                <p>No project featured</p> :
+                projects
+                .filter(project => project.id === user.featured)
+                .map(project =>
+                  <Project {...project} key={project.id} />
                 )
               }
             </div>
+          </div>
+          <div className={styles.content}>
             {
               !projects ?
               <Loading /> :
               !projects.length ?
               <p>No projects yet</p> :
-              <div className={styles.main}>
-                {
-                  ownPage &&
-                  <select
-                    value={user.featured}
-                    onChange={e => updateFeatured(e.target.value)}
-                  >
-                    <option value=""></option>
-                    {
-                      projects.map(project =>
-                        <option
-                          value={project.id}
-                          key={project.id}
-                        >
-                          {project.title}
-                        </option>
-                      )
-                    }
-                  </select>
-                }
-                {
-                  !user.featured ?
-                  <p>No project featured</p> :
-                  projects
-                  .filter(project => project.id === user.featured)
-                  .map(project =>
-                    <Project {...project} key={project.id} />
-                  )
-                }
+              <>
+                <p>All projects ({projects.length})</p>
                 <div className={styles.projects}>
                   {
                     projects ?
@@ -216,7 +224,7 @@ export default function User(props) {
                     <Loading />
                   }
                 </div>
-              </div>
+              </>
             }
           </div>
         </div>
