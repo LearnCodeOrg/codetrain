@@ -127,31 +127,39 @@ export default function User(props) {
                 </div>
               </div>
               <div className={styles.description}>
-                {
-                  editing ?
-                  <>
-                    <label>
-                      About Me
-                      <input
-                        value={descAbout}
-                        onChange={e => setDescAbout(e.target.value)}
-                        maxLength="2048"
-                      />
-                    </label>
-                    <label>
-                      What I&apos;m working on
-                      <input
-                        value={descWork}
-                        onChange={e => setDescWork(e.target.value)}
-                        maxLength="2048"
-                      />
-                    </label>
-                  </> :
-                  <>
-                    <p>About me: {user.descAbout}</p>
-                    <p>What I&apos;m working on: {user.descWork}</p>
-                  </>
-                }
+                <div className={styles.fields}>
+                  {
+                    editing ?
+                    <>
+                      <div>
+                        About me
+                        <input
+                          value={descAbout}
+                          onChange={e => setDescAbout(e.target.value)}
+                          maxLength="2048"
+                        />
+                      </div>
+                      <div>
+                        What I&apos;m working on
+                        <input
+                          value={descWork}
+                          onChange={e => setDescWork(e.target.value)}
+                          maxLength="2048"
+                        />
+                      </div>
+                    </> :
+                    <>
+                      <div>
+                        About me
+                        <p>{user.descAbout}</p>
+                      </div>
+                      <div>
+                        What I&apos;m working on
+                        <p>{user.descWork}</p>
+                      </div>
+                    </>
+                  }
+                </div>
                 {
                   ownPage &&
                   (
