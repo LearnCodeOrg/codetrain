@@ -61,6 +61,15 @@ export default function User(props) {
     setUser({ id: userDoc.id, ...userDoc.data() });
   }
 
+  // updates photo in firebase
+  async function updatePhoto(photo) {
+    const photoRef = firebase.storage().ref(`/photos/${uid}`);
+    await photoRef.put(photo);
+    const url = await photoRef.getDownloadURL();
+    await usersRef.doc(uid).update({ photo: url });
+    refreshData();
+  }
+
   // updates descriptions in firebase
   async function updateDescriptions() {
     await userRef.update({ descAbout, descWork });
