@@ -61,31 +61,11 @@ export default function Header(props) {
       </HeaderLink>
       <span className="flexfill" />
       <div className={styles.bigscreen}>
-        {
-          username ?
-          <HeaderLink href={`/users/${username}`} className={styles.link}>
-            Profile
-          </HeaderLink> :
-          <HeaderLink href="/" className={styles.link}>Home</HeaderLink>
-        }
         <HeaderLink href="/create" className={styles.link}>Create</HeaderLink>
         <HeaderLink href="/explore" className={styles.link}>Explore</HeaderLink>
         <HeaderLink href="/docs" className={styles.link}>Docs</HeaderLink>
       </div>
       <div className={styles.smallscreen}>
-        {
-          username ?
-          <Tooltip title="Profile" arrow>
-            <IconButton onClick={() => Router.push(`/users/${username}`)}>
-              <HomeIcon />
-            </IconButton>
-          </Tooltip> :
-          <Tooltip title="Home" arrow>
-            <IconButton onClick={() => Router.push('/')}>
-              <HomeIcon />
-            </IconButton>
-          </Tooltip>
-        }
         <Tooltip title="Create" arrow>
           <IconButton onClick={() => Router.push('/create')}>
             <AddCircleIcon />
@@ -105,8 +85,8 @@ export default function Header(props) {
       <IconButton onClick={e => setAnchor(e.currentTarget)}>
         {
           (userData === null || userData) ?
-          <PersonOutlineIcon /> :
-          <PersonIcon />
+          <PersonIcon /> :
+          <PersonOutlineIcon />
         }
       </IconButton>
       <Menu
@@ -114,9 +94,26 @@ export default function Header(props) {
         open={!!anchor}
         onClose={closeMenu}
       >
-        {authReady && <MenuItem onClick={closeMenu}>Profile </MenuItem>}
-        {authReady && <MenuItem onClick={closeMenu}>Sign Out</MenuItem>}
-        {!authReady &&<MenuItem onClick={closeMenu}>Sign In</MenuItem>}
+        {
+          username &&
+          <MenuItem onClick={() => {
+            closeMenu();
+            Router.push(`/users/${username}`);
+          }}>Profile </MenuItem>
+        }
+        {
+          authReady &&
+          <MenuItem onClick={() => {
+            closeMenu();
+            firebase.auth().signOut();
+          }}>Sign Out</MenuItem>
+        }
+        {
+          !authReady &&
+          <MenuItem onClick={() => {
+            closeMenu();
+            signInWithGoogle(setupUser);
+          }}>Sign In</MenuItem>}
       </Menu>
     </div>
   );
