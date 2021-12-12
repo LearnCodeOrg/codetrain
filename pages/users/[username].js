@@ -133,7 +133,7 @@ export default function User(props) {
                     <>
                       <div>
                         <h1>About me</h1>
-                        <input
+                        <textarea
                           value={descAbout}
                           onChange={e => setDescAbout(e.target.value)}
                           maxLength="2048"
@@ -141,7 +141,7 @@ export default function User(props) {
                       </div>
                       <div>
                         <h1>What I&apos;m working on</h1>
-                        <input
+                        <textarea
                           value={descWork}
                           onChange={e => setDescWork(e.target.value)}
                           maxLength="2048"

@@ -56,8 +56,14 @@
   margin: 8px 0;
 }
 
+.fields textarea {
+  width: calc(100% - 10px);
+  height: 128px;
+  font-size: 16px;
+}
+
 .fields > div > p {
-  margin: 0;
+  margin: 0 16px 0 0;
 }
 
 .description > button {

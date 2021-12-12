@@ -27,6 +27,11 @@ button, .SnackbarItem-message, .MuiPaper-root * {
   font-family: 'Lato', sans-serif;
 }
 
+textarea {
+  resize: none;
+  font-family: 'Lato', sans-serif;
+}
+
 .bluelink {
   color: var(--blue);
 }
