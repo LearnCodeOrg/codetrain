@@ -173,39 +173,43 @@ export default function User(props) {
                 }
               </div>
             </div>
-            <div>
-              <p>Featured Project</p>
-              {
-                ownPage &&
-                <select
-                  value={user.featured}
-                  onChange={e => updateFeatured(e.target.value)}
-                >
-                  <option value=""></option>
-                  {
-                    projects.map(project =>
-                      <option
-                        value={project.id}
-                        key={project.id}
-                      >
-                        {project.title}
-                      </option>
-                    )
-                  }
-                </select>
-              }
-              {
-                !user.featured ?
-                <p>No project featured</p> :
-                projects
-                .filter(project => project.id === user.featured)
-                .map(project =>
-                  <Project {...project} key={project.id} />
-                )
-              }
-            </div>
+            {
+              !projects ?
+              <Loading /> :
+              <div className={styles.featured}>
+                <p>Featured Project</p>
+                {
+                  ownPage &&
+                  <select
+                    value={user.featured}
+                    onChange={e => updateFeatured(e.target.value)}
+                  >
+                    <option value=""></option>
+                    {
+                      projects.map(project =>
+                        <option
+                          value={project.id}
+                          key={project.id}
+                        >
+                          {project.title}
+                        </option>
+                      )
+                    }
+                  </select>
+                }
+                {
+                  !user.featured ?
+                  <p>No project featured</p> :
+                  projects
+                  .filter(project => project.id === user.featured)
+                  .map(project =>
+                    <Project {...project} key={project.id} />
+                  )
+                }
+              </div>
+            }
           </div>
-          <div className={styles.content}>
+          <div className={styles.main}>
             {
               !projects ?
               <Loading /> :
