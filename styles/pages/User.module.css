@@ -43,6 +43,21 @@
   margin: 0;
 }
 
+.private {
+  margin: 10px 0;
+}
+
+.private > h1 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.private > p {
+  font-style: italic;
+  margin: 8px 0;
+  font-size: 12px;
+}
+
 .fields {
   display: flex;
 }

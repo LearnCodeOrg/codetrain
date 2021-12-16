@@ -145,14 +145,21 @@ export default function User(props) {
               </div>
               {
                 ownPage &&
-                <div>
-                  <label>
-                    Private profile
+                <div className={styles.private}>
+                  <h1>{user.private ? 'Private' : 'Public'}</h1>
+                  <p className={styles.subtext}>
+                    {
+                      user.private ? 'Your profile is visible to only you.' :
+                      'Your profile is visible to anyone.'
+                    }
+                  </p>
+                  <label className="switch">
                     <input
                       type="checkbox"
                       checked={user.private}
                       onChange={e => updatePrivate(e.target.checked)}
                     />
+                    <span className="slider" />
                   </label>
                 </div>
               }
