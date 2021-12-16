@@ -36,10 +36,14 @@ export default function User(props) {
     const usernameLower = username.toLowerCase();
     const userQuery = usersRef.where('usernameLower', '==', usernameLower);
     const userDocs = (await userQuery.get()).docs;
-    // set user
+    // return if no user
     const userDoc = userDocs[0];
-    setUser(userDoc ? { id: userDoc.id, ...userDoc.data() } : null);
-    if (!userDoc) return;
+    if (!userDoc) {
+      setUser(null);
+      return;
+    }
+    // set user
+    setUser({ id: userDoc.id, ...userDoc.data() });
     // get user projects
     const projectsRef = firebase.firestore().collection('projects');
     const projectsQuery = projectsRef.where('uid', '==', userDoc.id);
@@ -97,6 +101,13 @@ export default function User(props) {
         !user ?
         <div className="notfound">
           <h1>User not found</h1>
+          <Link href="/">
+            <a className="bluelink">Return home</a>
+          </Link>
+        </div> :
+        (user.private && !ownPage) ?
+        <div className="notfound">
+          <h1>This profile is private</h1>
           <Link href="/">
             <a className="bluelink">Return home</a>
           </Link>
