@@ -82,6 +82,12 @@ export default function User(props) {
     refreshData();
   }
 
+  // updates private status in firebase
+  async function updatePrivate(priv) {
+    await usersRef.doc(uid).update({ private: priv });
+    refreshData();
+  }
+
   return (
     <div className={styles.container}>
       <Header {...props} />
@@ -126,6 +132,19 @@ export default function User(props) {
                   </p>
                 </div>
               </div>
+              {
+                ownPage &&
+                <div>
+                  <label>
+                    Private profile
+                    <input
+                      type="checkbox"
+                      checked={user.private}
+                      onChange={e => updatePrivate(e.target.checked)}
+                    />
+                  </label>
+                </div>
+              }
               <div className={styles.description}>
                 <div className={styles.fields}>
                   {
