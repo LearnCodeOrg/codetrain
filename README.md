@@ -1,5 +1,7 @@
 # Codetrain
 
+***Codetrain 2.0 in progress at [codeconvoy/codetrain-two](https://github.com/codeconvoy/codetrain-two)***
+
 <p>
   <a href="https://codetrain.org">
     <img src="https://user-images.githubusercontent.com/27871609/140627181-e80eeab8-6ccb-4c74-b5dd-5cc3e1c4f389.png" height="96px">
