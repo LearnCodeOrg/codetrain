@@ -4,7 +4,6 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import dynamic from 'next/dynamic';
 import compileCode from '../../util/compileCode';
 import { useSnackbar } from 'notistack';
-import { useState } from 'react';
 
 import styles from '../../styles/components/engine/Code.module.css';
 
@@ -18,8 +17,6 @@ export default function Code(props) {
   } = props;
 
   const { enqueueSnackbar } = useSnackbar();
-
-  const [compileSuccess, setCompileSuccess] = useState(false);
 
   // updates current color with given value
   function updateCode(val) {

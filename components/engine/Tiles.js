@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { clamp } from '../../util/math';
 import { tileCount, spriteSize } from '../../data/engine';
 
@@ -8,8 +8,6 @@ const selectPixels = 128;
 const selectBorder = 4;
 
 let canvas, ctx;
-
-let sketching = false;
 
 export default function Tiles(props) {
   const {

@@ -5,7 +5,7 @@ import Objects from './Objects.js';
 import Draw from './Draw.js';
 import Code from './Code.js';
 
-import { SnackbarProvider, useSnackbar } from 'notistack';
+import { SnackbarProvider } from 'notistack';
 import { useEffect, useRef, useState } from 'react';
 import { defaultTileNames } from '../../data/engine';
 

@@ -19,11 +19,6 @@ import firebase from 'firebase/app';
 
 import styles from '../../styles/components/engine/GameEditor.module.css';
 
-const buttonProps = {
-  className: styles.button,
-  variant: 'contained'
-};
-
 // units
 const mapPixels = 512;
 const spritePixels = Math.floor(mapPixels / mapSize);
@@ -38,9 +33,6 @@ let holding = false;
 
 let editorDirty = false;
 let remixing = false;
-
-const keys = {};
-const emptyColor = '#fff';
 
 const layers = ['back', 'main', 'front'];
 
@@ -69,8 +61,6 @@ export default function GameEditor(props) {
 
   const [title, setTitle] = useState(props.title);
   const [description, setDescription] = useState(props.description);
-
-  const [saveSuccess, setSaveSuccess] = useState(false);
 
   const canvasRef = useRef();
   const didMountRef = useRef(false);
@@ -196,7 +186,6 @@ export default function GameEditor(props) {
       // get selected object
       const selectedObj = gameObjects[gameObjects.length - 1];
       const { x, y } = selectedObj;
-      const sprite = objects[selectedObj.sprite];
       ctx.fillStyle = '#fff';
       // calculate highlight units
       const size = highlightLength;

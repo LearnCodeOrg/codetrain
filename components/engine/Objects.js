@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { spriteSize, objectCount } from '../../data/engine';
 import { clamp } from '../../util/math';
 
@@ -9,7 +9,6 @@ const selectBorder = 4;
 
 let canvas, ctx;
 
-let sketching = false;
 const emptyColor = '#fff';
 
 export default function Objects(props) {
