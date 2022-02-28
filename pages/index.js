@@ -5,8 +5,6 @@ import Header from '../components/Header';
 import Accordion from '../components/Accordion';
 import GitHubIcon from '@mui/icons-material/GitHub';
 
-import firebase from 'firebase/app';
-
 import styles from '../styles/pages/Index.module.css';
 
 export default function Index(props) {

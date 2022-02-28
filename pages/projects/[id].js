@@ -4,11 +4,9 @@ import Header from '../../components/Header';
 import Loading from '../../components/Loading';
 import GameFrame from '../../components/GameFrame';
 
-import dynamic from 'next/dynamic';
 import firebase from 'firebase/app';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { palettes } from '../../data/palettes';
 import { spriteSize, mapSize } from '../../data/engine';
 import { insertObjectUnits } from '../../util/objectUnits';
 
