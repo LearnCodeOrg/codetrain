@@ -10,7 +10,7 @@ import styles from '../../styles/components/cards/Palette.module.css';
 
 export default function Palette(props) {
   const { palette, userPalettes } = props;
-  const { name, colors, created, uid, username, id } = palette;
+  const { name, colors, uid, username, id } = palette;
 
   const currentUser = firebase.auth().currentUser;
   const usersRef = firebase.firestore().collection('users');

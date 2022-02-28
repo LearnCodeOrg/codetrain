@@ -1,5 +1,4 @@
 import Modal from './Modal';
-import Router from 'next/router';
 
 import firebase from 'firebase/app';
 import { useEffect, useState } from 'react';

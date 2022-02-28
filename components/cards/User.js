@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 
 import styles from '../../styles/components/cards/User.module.css';
@@ -13,7 +12,7 @@ export default function User(props) {
           <div className={styles.content}>
             <div className={styles.top}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={photo} />
+              <img src={photo} alt="" />
               <span>{username}</span>
             </div>
             <p>{`Joined ${new Date(joined).toLocaleDateString()}`}</p>
