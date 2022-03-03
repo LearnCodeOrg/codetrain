@@ -14,8 +14,8 @@ import styles from '../../styles/pages/User.module.css';
 export default function User(props) {
   const [user, setUser] = useState(undefined);
   const [editing, setEditing] = useState(false);
-  const [descAbout, setDescAbout] = useState('');
-  const [descWork, setDescWork] = useState('');
+  const [description, setDescription] = useState('');
+  const [workingOn, setWorkingOn] = useState('');
   const [projects, setProjects] = useState(undefined);
 
   // get user references
@@ -76,7 +76,7 @@ export default function User(props) {
 
   // updates descriptions in firebase
   async function updateDescriptions() {
-    await userRef.update({ descAbout, descWork });
+    await userRef.update({ description, workingOn });
     refreshData();
   }
 
@@ -119,7 +119,7 @@ export default function User(props) {
                 {
                   ownPage ?
                   <label>
-                    <img src={user.photo} />
+                    <img src={user.photo} alt="" />
                     <input
                       type="file"
                       accept="image/*"
@@ -127,7 +127,7 @@ export default function User(props) {
                       hidden={true}
                     />
                   </label> :
-                  <img src={user.photo} />
+                  <img src={user.photo} alt="" />
                 }
                 <div>
                   <h1>{user.username}</h1>
@@ -171,16 +171,16 @@ export default function User(props) {
                       <div>
                         <h1>About me</h1>
                         <textarea
-                          value={descAbout}
-                          onChange={e => setDescAbout(e.target.value)}
+                          value={description}
+                          onChange={e => setDescription(e.target.value)}
                           maxLength="2048"
                         />
                       </div>
                       <div>
                         <h1>What I&apos;m working on</h1>
                         <textarea
-                          value={descWork}
-                          onChange={e => setDescWork(e.target.value)}
+                          value={workingOn}
+                          onChange={e => setWorkingOn(e.target.value)}
                           maxLength="2048"
                         />
                       </div>
@@ -188,11 +188,11 @@ export default function User(props) {
                     <>
                       <div>
                         <h1>About me</h1>
-                        <p>{user.descAbout}</p>
+                        <p>{user.description}</p>
                       </div>
                       <div>
                         <h1>What I&apos;m working on</h1>
-                        <p>{user.descWork}</p>
+                        <p>{user.workingOn}</p>
                       </div>
                     </>
                   }
@@ -208,8 +208,8 @@ export default function User(props) {
                       <SaveIcon />
                     </button> :
                     <button onClick={() => {
-                      setDescAbout(user.descAbout ?? '');
-                      setDescWork(user.descWork ?? '');
+                      setDescription(user.description ?? '');
+                      setWorkingOn(user.workingOn ?? '');
                       setEditing(true);
                     }}>
                       <EditIcon />
