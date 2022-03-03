@@ -4,13 +4,14 @@
 
 .content {
   padding: 20px;
+  max-width: 1356px;
   margin: 0 auto;
-  width: fit-content;
 }
 
 .head {
-  margin: 0 10px 20px 10px;
+  margin: 0 10px 10px 10px;
   display: flex;
+  min-height: 200px;
 }
 
 .head > div {
@@ -25,6 +26,7 @@
 .title > label {
   border-radius: 50%;
   margin-right: 8px;
+  display: flex;
 }
 
 .title img {
@@ -32,6 +34,10 @@
   height: 48px;
   object-fit: cover;
   border-radius: 50%;
+}
+
+.title > img {
+  margin-right: 8px;
 }
 
 .title h1 {
