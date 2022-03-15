@@ -1,6 +1,6 @@
 # Codetrain
 
-***Codetrain 2.0 in progress at [codeconvoy/codetrain-two](https://github.com/codeconvoy/codetrain-two)***
+***Also see Codetrain 2: [codeconvoy/codetrain-two](https://github.com/codeconvoy/codetrain-two)***
 
 <p>
   <a href="https://codetrain.org">
