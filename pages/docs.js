@@ -120,9 +120,9 @@ export default function Docs(props) {
           </h2>
           There three built-in game loop functions, <code>awake</code>,{' '}
           <code>start</code> and <code>update</code>.<br /><br />
-          <code>awake()</code> runs once at the start of the game.<br />
+          <code>awake()</code> runs once on initialization.<br />
           <code>start()</code> runs once at the start of the game.<br />
-          <code>update()</code> runs once a frame.
+          <code>update()</code> runs once a frame after <code>start</code>.
           <Code>
 {`// runs before initialization
 
@@ -304,7 +304,8 @@ if (tile === 'coin') say('You found the coin!');`}
           </Code>
           Tiles can be modified with <code>setTile</code> and
           {' '}<code>setTileAt</code>.<br /><br />
-          <code>setTile(tile)</code> returns index of tile at current position.
+          <code>setTile(tile)</code> sets tile at current position to
+          {' '}<code>tile</code>.
           <br />
           <code>setTileAt(x, y, tile)</code> sets tile at <code>x</code>,
           {' '}<code>y</code> to index <code>tile</code>.
