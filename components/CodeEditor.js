@@ -50,6 +50,11 @@ export default function CodeEditor(props) {
           onClick={() => setFontSize(val => Math.max(val - 1, minFontSize))}
           Icon={RemoveIcon}
         />
+        <MatButton
+          className={styles.togglebutton}
+          onClick={() => setMode(mode === 'dark' ? 'light' : 'dark')}
+          Icon={mode === 'dark' ? ModeNightIcon : LightModeIcon}
+        />
       </div>
     </div>
   );
