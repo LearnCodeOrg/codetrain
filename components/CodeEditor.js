@@ -23,20 +23,22 @@ export default function CodeEditor(props) {
   const [fontSize, setFontSize] = useState(12);
 
   return (
-    <AceEditor
-      mode="javascript"
-      theme={mode === 'dark' ? 'monokai' : 'tomorrow'}
-      wrapEnabled={true}
-      showPrintMargin={false}
-      tabSize={2}
-      setOptions={{
-        useWorker: false,
-        enableLiveAutocompletion: true
-      }}
-      width="500px"
-      height="590px"
-      fontSize={fontSize}
-      {...props}
-    />
+    <div className={styles.container}>
+      <AceEditor
+        mode="javascript"
+        theme={mode === 'dark' ? 'monokai' : 'tomorrow'}
+        wrapEnabled={true}
+        showPrintMargin={false}
+        tabSize={2}
+        setOptions={{
+          useWorker: false,
+          enableLiveAutocompletion: true
+        }}
+        width="500px"
+        height="590px"
+        fontSize={fontSize}
+        {...props}
+      />
+    </div>
   );
 }
