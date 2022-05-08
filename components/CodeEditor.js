@@ -40,6 +40,11 @@ export default function CodeEditor(props) {
         {...props}
       />
       <div className={mode === 'dark' ? styles.darkbuttons : styles.lightbuttons}>
+        <MatButton
+          className={styles.addbutton}
+          onClick={() => setFontSize(val => Math.min(val + 1, maxFontSize))}
+          Icon={AddIcon}
+        />
       </div>
     </div>
   );
