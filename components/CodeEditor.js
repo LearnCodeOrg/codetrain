@@ -45,6 +45,11 @@ export default function CodeEditor(props) {
           onClick={() => setFontSize(val => Math.min(val + 1, maxFontSize))}
           Icon={AddIcon}
         />
+        <MatButton
+          className={styles.minusbutton}
+          onClick={() => setFontSize(val => Math.max(val - 1, minFontSize))}
+          Icon={RemoveIcon}
+        />
       </div>
     </div>
   );
