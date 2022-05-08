@@ -39,6 +39,8 @@ export default function CodeEditor(props) {
         fontSize={fontSize}
         {...props}
       />
+      <div className={mode === 'dark' ? styles.darkbuttons : styles.lightbuttons}>
+      </div>
     </div>
   );
 }
