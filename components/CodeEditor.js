@@ -19,6 +19,9 @@ const maxFontSize = 48;
 const minFontSize = 6;
 
 export default function CodeEditor(props) {
+  const [mode, setMode] = useState('dark');
+  const [fontSize, setFontSize] = useState(12);
+
   return (
     <AceEditor
       mode="javascript"
