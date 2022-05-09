@@ -57,7 +57,7 @@ export default function Code(props) {
             New to Codetrain? See the <a href="/docs">docs.</a>
           </p>
         }
-        <div style={{ height: '100%', opacity: currObject === -1 ? 0 : 1 }}>
+        <div style={{ opacity: currObject === -1 ? 0 : 1 }}>
           <CodeEditor
             value={currObject === -1 ? '' : codes[currObject]}
             readOnly={currObject === -1}
