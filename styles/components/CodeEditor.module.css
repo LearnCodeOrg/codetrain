@@ -17,3 +17,13 @@
 .lightbuttons button {
   color: #000;
 }
+
+.addbutton {
+  width: 24px;
+}
+
+.togglebutton {
+  padding: 4px;
+  width: 36px;
+  height: 36px;
+}
