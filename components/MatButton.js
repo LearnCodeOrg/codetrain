@@ -8,6 +8,12 @@ export default function MatButton(props) {
   return (
     tooltip ?
     <Tooltip title={tooltip}>
+      <button
+        onClick={onClick}
+        className={`${className} ${styles.button}`}
+      >
+        <Icon fontSize="large" />
+      </button>
     </Tooltip> :
   );
 }
