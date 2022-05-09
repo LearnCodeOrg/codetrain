@@ -9,3 +9,11 @@
   display: flex;
   align-items: center;
 }
+
+.darkbuttons button {
+  color: #fff;
+}
+
+.lightbuttons button {
+  color: #000;
+}
